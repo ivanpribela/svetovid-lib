@@ -35,6 +35,9 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
 
     @Override
     public void doWrite(String value) throws IOException {
+        if (value == null) {
+            value = "null";
+        }
         writer.write(value, 0, value.length());
     }
 
