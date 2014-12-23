@@ -9,7 +9,7 @@
         <mkdir dir="${bin.dir}"/>
     </target>
 
-    <target name='build' depends="init">
+    <target name='build' depends="init,update-version-string">
         <javac srcdir="${src.dir}" destdir="${bin.dir}"
         includeAntRuntime="no" />
     </target>
@@ -22,10 +22,10 @@
               <attribute name="Built-By" value="${user.name}"/>
               <!-- Information about the program itself -->
               <attribute name="Implementation-Vendor" 
-              value="Ivan Pribela"/>
+              value="Svetovid dev team"/>
               <attribute name="Implementation-Title"
                value="Svetovid helper library for input and output operations"/>
-              <attribute name="Implementation-Version" value="1.0.0"/>
+              <attribute name="Implementation-Version" value="${version}"/>
             </manifest>  
         </jar>
     </target>
