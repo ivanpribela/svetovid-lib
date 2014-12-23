@@ -1,0 +1,31 @@
+<project name="svetovid-lib" default='build'>
+	<property name="bin.dir" value="bin"/>
+	<property name="src.dir" value="src"/>
+	<property name="dist.dir" value='dist'/>
+
+	<target name='init'>
+		<mkdir dir="${bin.dir}"/>
+	</target>
+
+	<target name='build' depends="init">
+		<javac srcdir="${src.dir}" destdir="${bin.dir}"
+		includeAntRuntime="no" />
+	</target>
+	
+	<target name='jar' depends="build">
+		<jar destfile="${dist.dir}/svetovid-lib.jar" basedir="${bin.dir}/"
+		includes="**" >
+		    <manifest>
+		      <!-- Who is building this jar? -->
+		      <attribute name="Built-By" value="${user.name}"/>
+		      <!-- Information about the program itself -->
+		      <attribute name="Implementation-Vendor" 
+		      value="Ivan Pribela"/>
+		      <attribute name="Implementation-Title"
+		       value="Svetovid helper library for input and output operations"/>
+		      <attribute name="Implementation-Version" value="1.0.0"/>
+		    </manifest>	 
+		</jar>
+	</target>
+
+</project>
