@@ -2,6 +2,7 @@
     <property name="bin.dir" value="bin"/>
     <property name="src.dir" value="src"/>
     <property name="dist.dir" value='dist'/>
+    <property name="javadoc.dir" value='doc/api'/>
 
     <target name='init'>
         <mkdir dir="${bin.dir}"/>
@@ -26,6 +27,10 @@
               <attribute name="Implementation-Version" value="1.0.0"/>
             </manifest>  
         </jar>
+    </target>
+    
+    <target name="javadoc">
+        <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
     </target>
 
     <!-- jedit specific flags; needs to be the first or the last 10 lines
