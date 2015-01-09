@@ -1,0 +1,70 @@
+<project name="svetovid-lib" default='build'>
+    <property name="bin.dir" value="bin"/>
+    <property name="src.dir" value="src"/>
+    <property name="dist.dir" value='dist'/>
+    <property name="javadoc.dir" value='doc/api'/>
+    <property name="res.dir" value="res" />
+
+    <target name='init'>
+        <mkdir dir="${bin.dir}"/>
+    </target>
+
+    <target name='build' depends="init,update-version-string">
+        <javac srcdir="${src.dir}" destdir="${bin.dir}"
+        includeAntRuntime="no" />
+    </target>
+    
+    <target name='jar' depends="build">
+        <jar destfile="${dist.dir}/svetovid-lib.jar" basedir="${bin.dir}/"
+        includes="**" >
+            <manifest>
+              <!-- Who is building this jar? -->
+              <attribute name="Built-By" value="${user.name}"/>
+              <!-- Information about the program itself -->
+              <attribute name="Implementation-Vendor" 
+              value="Svetovid dev team"/>
+              <attribute name="Implementation-Title"
+               value="Svetovid helper library for input and output operations"/>
+              <attribute name="Implementation-Version" value="${version}"/>
+            </manifest>  
+        </jar>
+    </target>
+    
+    <target name="javadoc">
+        <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
+    </target>
+    
+    <!-- version tasks
+    based on ideas by Jesper Öqvist http://llbit.se/?p=1876 -->
+    
+    <!-- this target is only run if the 'version' property is undefined -->
+    
+    <target name="update-version-string" unless="version">
+            <!-- get a new version string using git describe if possible -->
+            <echo message="Updating version string..."/>
+            <exec executable="git" outputproperty="version"
+                    failifexecutionfails="false">
+                    <arg value="describe"/>
+            </exec>
+            <antcall target="-store-version-string"/>
+            <!-- ensure version is defined even if git was not available -->
+            <property file="${res.dir}/version.properties"/>
+    </target>
+    
+    <target name="-store-version-string" if="version">
+            <!-- store the new  version string in the correct property file -->
+            <echo message="version=${version}"/>
+            <propertyfile file="${res.dir}/version.properties">
+                    <entry key="version" value="${version}"/>
+            </propertyfile>
+            <exec executable="git" failifexecutionfails="false">
+                    <arg value="update-index"/>
+                    <arg value="--assume-unchanged"/>
+                    <arg value="${res.dir}/version.properties"/>
+            </exec>
+    </target>
+
+    <!-- jedit specific flags; needs to be the first or the last 10 lines
+    :noTabs=true:
+    -->
+</project>

@@ -1,1 +1,13 @@
 /bin
+/dist
+doc/api
+
+*.class
+*.zip
+*.tar.gz
+*.tgz
+
+#backups
+*~
+*.bak
+
