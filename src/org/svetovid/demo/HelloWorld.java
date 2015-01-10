@@ -1,6 +1,6 @@
 package org.svetovid.demo;
 
-import org.svetovid.io.Svetovid;
+import org.svetovid.Svetovid;
 
 public class HelloWorld {
 
