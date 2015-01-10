@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.svetovid.Svetovid;
+
 public abstract class AbstractSvetovidReader implements SvetovidReader {
 
     protected Pattern whitespace = Svetovid.WHITESPACE_PATTERN;
