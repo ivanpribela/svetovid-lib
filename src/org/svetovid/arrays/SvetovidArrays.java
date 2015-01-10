@@ -6,9 +6,89 @@ import java.util.Random;
 
 public class SvetovidArrays {
 
-    // TODO Add method variants for boolean, byte, short, int, float, double and char
+    // TODO add methods
+    // hashCode
+    // compare(comparator?)
+    // toString(nullstring?)
+    // toList
 
-    // TODO empty()
+    public static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
+    public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+    public static final short[] EMPTY_SHORT_ARRAY = new short[0];
+    public static final int[] EMPTY_INT_ARRAY = new int[0];
+    public static final long[] EMPTY_LONG_ARRAY = new long[0];
+    public static final float[] EMPTY_FLOAT_ARRAY = new float[0];
+    public static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
+    public static final char[] EMPTY_CHAR_ARRAY = new char[0];
+    public static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
+
+    @SuppressWarnings("unchecked")
+    public static <T> T[] empty() {
+        return (T[]) EMPTY_OBJECT_ARRAY;
+    }
+
+    public static boolean[] nullToEmpty(boolean[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_BOOLEAN_ARRAY;
+        }
+        return array;
+    }
+
+    public static byte[] nullToEmpty(byte[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_BYTE_ARRAY;
+        }
+        return array;
+    }
+
+    public static short[] nullToEmpty(short[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_SHORT_ARRAY;
+        }
+        return array;
+    }
+
+    public static int[] nullToEmpty(int[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_INT_ARRAY;
+        }
+        return array;
+    }
+
+    public static long[] nullToEmpty(long[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_LONG_ARRAY;
+        }
+        return array;
+    }
+
+    public static float[] nullToEmpty(float[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_FLOAT_ARRAY;
+        }
+        return array;
+    }
+
+    public static double[] nullToEmpty(double[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_DOUBLE_ARRAY;
+        }
+        return array;
+    }
+
+    public static char[] nullToEmpty(char[] array) {
+        if (array == null || array.length == 0) {
+            return EMPTY_CHAR_ARRAY;
+        }
+        return array;
+    }
+
+    public static <T> T[] nullToEmpty(T[] array) {
+        if (array == null || array.length == 0) {
+            return empty();
+        }
+        return array;
+    }
 
     public static boolean isEmpty(boolean[] array) {
         return (array == null) || (array.length == 0);
@@ -145,47 +225,81 @@ public class SvetovidArrays {
         return array.length;
     }
 
-    public static boolean isSameLength(boolean[] array1, boolean[] array2) {
+    public static boolean sameLength(boolean[] array1, boolean[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(byte[] array1, byte[] array2) {
+
+    public static boolean sameLength(byte[] array1, byte[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(short[] array1, boolean[] array2) {
+
+    public static boolean sameLength(short[] array1, short[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(int[] array1, boolean[] array2) {
+
+    public static boolean sameLength(int[] array1, int[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(long[] array1, long[] array2) {
+
+    public static boolean sameLength(long[] array1, long[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(float[] array1, float[] array2) {
+
+    public static boolean sameLength(float[] array1, float[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(double[] array1, double[] array2) {
+
+    public static boolean sameLength(double[] array1, double[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static boolean isSameLength(char[] array1, char[] array2) {
+
+    public static boolean sameLength(char[] array1, char[] array2) {
         return length(array1) == length(array2);
     }
-    
-    public static <T> boolean isSameLength(T[] array1, T[] array2) {
+
+    public static <T> boolean sameLength(T[] array1, T[] array2) {
         return length(array1) == length(array2);
+    }
+
+    public static boolean equals(boolean[] array1, boolean[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(byte[] array1, byte[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(short[] array1, short[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(int[] array1, int[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(long[] array1, long[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(float[] array1, float[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(double[] array1, double[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static boolean equals(char[] array1, char[] array2) {
+        return Arrays.equals(array1, array2);
+    }
+
+    public static <T> boolean equals(T[] array1, T[] array2) {
+        return Arrays.equals(array1, array2);
     }
 
     public static boolean[] toArray(boolean... items) {
         return items;
     }
-
-    // TODO equal
 
     public static byte[] toArray(byte... items) {
         return items;
@@ -1670,23 +1784,105 @@ public class SvetovidArrays {
         return result;
     }
 
+    public static void reverse(boolean[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            boolean tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
 
+    public static void reverse(byte[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            byte tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
 
+    public static void reverse(short[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            short tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public static void reverse(int[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            int tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
 
     public static void reverse(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
@@ -1713,6 +1909,175 @@ public class SvetovidArrays {
         }
     }
 
+    public static void reverse(float[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            float tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
+
+    public static void reverse(double[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            double tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
+
+    public static void reverse(char[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            char tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
+
+    public static <T> void reverse(T[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int i = beginIndex;
+        int j = endIndex - 1;
+        while (j > i) {
+            T tmp = array[i];
+            array[i] = array[j];
+            array[j] = tmp;
+            i++;
+            j--;
+        }
+    }
+
+    /* TODO There is no method for sorting booleans
+    public static void sort(boolean[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }*/
+
+    public static void sort(byte[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }
+
+    public static void sort(short[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }
+
+    public static void sort(int[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }
+
     public static void sort(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
             return;
@@ -1730,6 +2095,83 @@ public class SvetovidArrays {
         Arrays.parallelSort(array, beginIndex, endIndex);
     }
 
+    public static void sort(float[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }
+
+    public static void sort(double[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }
+
+    public static void sort(char[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }
+
+    /* TODO add generic array support
+    public static void sort(Object[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex);
+    }*/
+
+    
+    
+    
+    
+    
+    
+    
+    
     public static void randomize(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
             return;
@@ -1779,14 +2221,6 @@ public class SvetovidArrays {
     // TODO indexof(startindex?)
     // TODO lastindexof(startindex?) + tolerance for double
     // TODO allIndicesof() + tolerance for double
-
-    // TODO toString(nullstring?)
-    // TODO hashCode
-    // TODO equals
-    // TODO compare(comparator?)
-    // TODO issamelength
-
-    // TODO nulltoempty
 
     public static Boolean[] box(boolean[] array) {
         Boolean[] result = new Boolean[array.length];
