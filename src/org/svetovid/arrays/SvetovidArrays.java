@@ -7,14 +7,185 @@ import java.util.Random;
 public class SvetovidArrays {
 
     // TODO Add method variants for boolean, byte, short, int, float, double and char
+
     // TODO empty()
-    // TODO isEmpty()
-    // TODO isNonempty()
-    // TODO Length()
+
+    public static boolean isEmpty(boolean[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(byte[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(short[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(int[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(long[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(float[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(double[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isEmpty(char[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static <T> boolean isEmpty(T[] array) {
+        return (array == null) || (array.length == 0);
+    }
+
+    public static boolean isNonempty(boolean[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(byte[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(short[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(int[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(long[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(float[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(double[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static boolean isNonempty(char[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static <T> boolean isNonempty(T[] array) {
+        return (array != null) && (array.length > 0);
+    }
+
+    public static int length(boolean[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(byte[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(short[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(int[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(long[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(float[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(double[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static int length(char[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static <T> int length(T[] array) {
+        if (array == null) {
+            return 0;
+        }
+        return array.length;
+    }
+
+    public static boolean isSameLength(boolean[] array1, boolean[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(byte[] array1, byte[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(short[] array1, boolean[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(int[] array1, boolean[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(long[] array1, long[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(float[] array1, float[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(double[] array1, double[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static boolean isSameLength(char[] array1, char[] array2) {
+        return length(array1) == length(array2);
+    }
+    
+    public static <T> boolean isSameLength(T[] array1, T[] array2) {
+        return length(array1) == length(array2);
+    }
 
     public static boolean[] toArray(boolean... items) {
         return items;
     }
+
+    // TODO equal
 
     public static byte[] toArray(byte... items) {
         return items;
