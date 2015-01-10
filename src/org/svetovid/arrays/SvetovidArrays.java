@@ -2,6 +2,7 @@ package org.svetovid.arrays;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Random;
 
 public class SvetovidArrays {
@@ -1784,6 +1785,42 @@ public class SvetovidArrays {
         return result;
     }
 
+    public static void reverse(boolean[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(byte[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(short[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(int[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(long[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(float[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(double[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static void reverse(char[] array) {
+        reverse(array, 0, array.length);
+    }
+
+    public static <T> void reverse(T[] array) {
+        reverse(array, 0, array.length);
+    }
+
     public static void reverse(boolean[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
             return;
@@ -2009,7 +2046,46 @@ public class SvetovidArrays {
         }
     }
 
-    /* TODO There is no method for sorting booleans
+    public static void sort(boolean[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(byte[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(short[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(int[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(long[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(float[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(double[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static void sort(char[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static <T extends Comparable<? super T>> void sort(T[] array) {
+        sort(array, 0, array.length);
+    }
+
+    public static <T> void sort(T[] array, Comparator<T> comparator) {
+        sort(array, 0, array.length, comparator);
+    }
+
     public static void sort(boolean[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
             return;
@@ -2024,8 +2100,17 @@ public class SvetovidArrays {
         if (length < 0) {
             throw new ArrayIndexOutOfBoundsException(length);
         }
-        Arrays.parallelSort(array, beginIndex, endIndex);
-    }*/
+        int falseCount = 0;
+        for (int i = beginIndex; i < endIndex; i++) {
+            if (!array[i]) {
+                falseCount++;
+            }
+        }
+        if (falseCount > 0) {
+            Arrays.fill(array, beginIndex, beginIndex + falseCount, false);
+            Arrays.fill(array, beginIndex + falseCount, endIndex, false);
+        }
+    }
 
     public static void sort(byte[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
@@ -2146,8 +2231,7 @@ public class SvetovidArrays {
         Arrays.parallelSort(array, beginIndex, endIndex);
     }
 
-    /* TODO add generic array support
-    public static void sort(Object[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+    public static <T extends Comparable<? super T>> void sort(T[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
             return;
         }
@@ -2162,7 +2246,24 @@ public class SvetovidArrays {
             throw new ArrayIndexOutOfBoundsException(length);
         }
         Arrays.parallelSort(array, beginIndex, endIndex);
-    }*/
+    }
+
+    public static <T> void sort(T[] array, int beginIndex, int endIndex, Comparator<T> comparator) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        Arrays.parallelSort(array, beginIndex, endIndex, comparator);
+    }
 
     
     
