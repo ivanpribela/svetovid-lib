@@ -358,17 +358,17 @@ public final class Dialogs {
         }
     }
 
-    private Map<Key, AutoCloseDialogFactory> cache = new WeakHashMap<Key, AutoCloseDialogFactory>();
+    private static Map<Key, AutoCloseDialogFactory> cache = new WeakHashMap<Key, AutoCloseDialogFactory>();
 
-    public DialogFactory getFactory(Locale locale) {
+    public static AutoCloseDialogFactory getFactory(Locale locale) {
         return getFactory(locale, null);
     }
 
-    public DialogFactory getFactory(Locale locale, Clipboard clipboard) {
+    public static AutoCloseDialogFactory getFactory(Locale locale, Clipboard clipboard) {
         return getFactory(locale, clipboard, 0);
     }
 
-    public AutoCloseDialogFactory getFactory(Locale locale, Clipboard clipboard, int timeout) {
+    public static AutoCloseDialogFactory getFactory(Locale locale, Clipboard clipboard, int timeout) {
         Key key = new Key(locale, clipboard, timeout);
         AutoCloseDialogFactory factory = cache.get(key);
         if (factory == null) {

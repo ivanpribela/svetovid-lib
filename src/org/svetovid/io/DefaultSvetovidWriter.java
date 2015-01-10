@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
+import org.svetovid.Svetovid;
+
 public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
 
     protected BufferedWriter writer;

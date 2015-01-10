@@ -1,5 +1,7 @@
 package org.svetovid.io;
 
+import org.svetovid.Svetovid;
+
 public final class StandardSvetovidReader extends DefaultSvetovidReader {
 
     public StandardSvetovidReader() {

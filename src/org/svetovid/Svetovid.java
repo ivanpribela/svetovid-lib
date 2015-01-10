@@ -1,4 +1,4 @@
-package org.svetovid.io;
+package org.svetovid;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,6 +12,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import org.svetovid.dialogs.AutoCloseDialogFactory;
+import org.svetovid.dialogs.Dialogs;
+import org.svetovid.io.DefaultSvetovidReader;
+import org.svetovid.io.DefaultSvetovidWriter;
+import org.svetovid.io.StandardSvetovidErrorWriter;
+import org.svetovid.io.StandardSvetovidReader;
+import org.svetovid.io.StandardSvetovidWriter;
+import org.svetovid.io.SvetovidReader;
+import org.svetovid.io.SvetovidWriter;
 
 public final class Svetovid {
 
@@ -59,7 +69,7 @@ public final class Svetovid {
         }		
     }
 
-    protected static SvetovidReader removeIn(SvetovidReader reader) {
+    public static SvetovidReader removeIn(SvetovidReader reader) {
         synchronized (readers) {
             String source = null;
             Set<Entry<String, SvetovidReader>> entries = readers.entrySet();
@@ -110,7 +120,7 @@ public final class Svetovid {
         }		
     }
 
-    protected static SvetovidWriter removeOut(SvetovidWriter writer) {
+    public static SvetovidWriter removeOut(SvetovidWriter writer) {
         synchronized (writers) {
             String source = null;
             Set<Entry<String, SvetovidWriter>> entries = writers.entrySet();
@@ -123,6 +133,8 @@ public final class Svetovid {
             return removeOut(source);
         }		
     }
+
+    public static final AutoCloseDialogFactory gui = Dialogs.getFactory(LOCALE);
 
     static {
         Runtime.getRuntime().addShutdownHook(new ShutdownThread() {	});
@@ -146,12 +158,5 @@ public final class Svetovid {
                 }
             }
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        String[] v = in("http://www.oracle.com").readAllLines();
-        //System.out.println(Arrays.toString(v));
-        out.setWhitespace("\n");
-        out.writeln(v);
     }
 }

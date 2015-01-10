@@ -2,6 +2,8 @@ package org.svetovid.io;
 
 import java.io.IOException;
 
+import org.svetovid.Svetovid;
+
 public abstract class AbstractSvetovidWriter implements SvetovidWriter {
 
     protected String whitespace = Svetovid.WHITESPACE;
