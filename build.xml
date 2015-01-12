@@ -10,12 +10,14 @@
         <mkdir dir="${bin.dir}"/>
     </target>
 
-    <target name='build' depends="init,update-version-string">
+    <target name='build' depends="init,update-version-string"
+        description="build the library into ${bin.dir}">
         <javac srcdir="${src.dir}" destdir="${bin.dir}"
         includeAntRuntime="no" />
     </target>
     
-    <target name='jar' depends="build">
+    <target name='jar' depends="build"
+        description="make a jar file of the library in ${dist.dir}">
         <jar destfile="${dist.dir}/svetovid-lib.jar" basedir="${bin.dir}/"
         includes="**" >
             <manifest>
@@ -31,11 +33,11 @@
         </jar>
     </target>
     
-    <target name="javadoc">
+    <target name="javadoc" description="generate the javadoc into ${javadoc.dir}">
         <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
     </target>
     
-    <target name="docs-package">
+    <target name="docs-package" description="pack the documentation (including the generated javadoc) into a zip file for distribution">
         <zip destfile="${dist.dir}/svetovid-docs.zip"> 
              <zipfileset dir="${doc.dir}" prefix="svetovid-doc"/>
         </zip>
