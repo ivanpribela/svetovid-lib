@@ -2,6 +2,7 @@
     <property name="bin.dir" value="bin"/>
     <property name="src.dir" value="src"/>
     <property name="dist.dir" value='dist'/>
+    <property name="doc.dir" value='doc'/>
     <property name="javadoc.dir" value='doc/api'/>
     <property name="res.dir" value="res" />
 
@@ -32,6 +33,12 @@
     
     <target name="javadoc">
         <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
+    </target>
+    
+    <target name="docs-package">
+        <zip destfile="${dist.dir}/svetovid-docs.zip"> 
+             <zipfileset dir="${doc.dir}" prefix="svetovid-doc"/>
+        </zip>
     </target>
     
     <!-- version tasks
