@@ -11,8 +11,10 @@ public class SvetovidArrays {
     // hashCode
     // compare(comparator?)
     // toString(nullstring?)
-    // toList
-
+    // toList, fromList
+    
+    public static final int INDEX_NOT_FOUND = -1;
+    
     public static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
     public static final short[] EMPTY_SHORT_ARRAY = new short[0];
@@ -2265,14 +2267,8 @@ public class SvetovidArrays {
         Arrays.parallelSort(array, beginIndex, endIndex, comparator);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
+    // TODO Add more data types 
+
     public static void randomize(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
             return;
@@ -2296,6 +2292,8 @@ public class SvetovidArrays {
         }
     }
 
+    // TODO Add more data types 
+
     public static long pick(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
         if (array == null) {
             throw new IllegalArgumentException();
@@ -2316,12 +2314,501 @@ public class SvetovidArrays {
         return result;
     }
 
+    public static int indexOf(boolean[] array, boolean valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(byte[] array, byte valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(short[] array, short valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(int[] array, int valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(long[] array, long valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(float[] array, float valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(float[] array, float valueToFind, float tolerance) {
+        return indexOf(array, valueToFind, 0, tolerance);
+    }
+
+    public static int indexOf(double[] array, double valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(double[] array, double valueToFind, double tolerance) {
+        return indexOf(array, valueToFind, 0, tolerance);
+    }
+
+    public static int indexOf(char[] array, char valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static <T> int indexOf(T[] array, T valueToFind) {
+        return indexOf(array, valueToFind, 0);
+    }
+
+    public static int indexOf(boolean[] array, boolean valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(byte[] array, byte valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(short[] array, short valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(int[] array, int valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(long[] array, long valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(float[] array, float valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(float[] array, float valueToFind, int beginIndex, float tolerance) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        final double min = valueToFind - tolerance;
+        final double max = valueToFind + tolerance;
+        for (int i = beginIndex; i < array.length; i++) {
+            if ((min <= array[i]) && (max >= array[i])) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(double[] array, double valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(double[] array, double valueToFind, int beginIndex, double tolerance) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        final double min = valueToFind - tolerance;
+        final double max = valueToFind + tolerance;
+        for (int i = beginIndex; i < array.length; i++) {
+            if ((min <= array[i]) && (max >= array[i])) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int indexOf(char[] array, char valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static <T> int indexOf(T[] array, T valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(boolean[] array, boolean valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(byte[] array, byte valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(short[] array, short valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(int[] array, int valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(long[] array, long valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(float[] array, float valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(float[] array, float valueToFind, float tolerance) {
+        return lastIndexOf(array, valueToFind, array.length - 1, tolerance);
+    }
+
+    public static int lastIndexOf(double[] array, double valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(double[] array, double valueToFind, double tolerance) {
+        return lastIndexOf(array, valueToFind, array.length - 1, tolerance);
+    }
+
+    public static int lastIndexOf(char[] array, char valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static <T> int lastIndexOf(T[] array, T valueToFind) {
+        return lastIndexOf(array, valueToFind, array.length - 1);
+    }
+
+    public static int lastIndexOf(boolean[] array, boolean valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(byte[] array, byte valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(short[] array, short valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(int[] array, int valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(long[] array, long valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(float[] array, float valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(float[] array, float valueToFind, int beginIndex, float tolerance) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        double min = valueToFind - tolerance;
+        double max = valueToFind + tolerance;
+        for (int i = beginIndex; i >= 0; i--) {
+            if ((min <= array[i]) && (max >= array[i])) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(double[] array, double valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(double[] array, double valueToFind, int beginIndex, double tolerance) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        double min = valueToFind - tolerance;
+        double max = valueToFind + tolerance;
+        for (int i = beginIndex; i >= 0; i--) {
+            if ((min <= array[i]) && (max >= array[i])) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static int lastIndexOf(char[] array, char valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static <T> int lastIndexOf(T[] array, T valueToFind, int beginIndex) {
+        if (array == null) {
+            return INDEX_NOT_FOUND;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        } else if (beginIndex >= array.length) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        for (int i = beginIndex; i >= 0; i--) {
+            if (valueToFind == array[i]) {
+                return i;
+            }
+        }
+        return INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(boolean[] array, boolean valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(byte[] array, byte valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(short[] array, short valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(int[] array, int valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(long[] array, long valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(float[] array, float valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(float[] array, float valueToFind, float tolerance) {
+        return indexOf(array, valueToFind, tolerance) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(double[] array, double valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(double[] array, double valueToFind, double tolerance) {
+        return indexOf(array, valueToFind, tolerance) != INDEX_NOT_FOUND;
+    }
+
+    public static boolean contains(char[] array, char valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
+    public static <T> boolean contains(T[] array, T valueToFind) {
+        return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
+    }
+
     // TODO add methods like:
+    // TODO allIndicesOf() + tolerance for double
     // TODO fill
-    // TODO contains
-    // TODO indexof(startindex?)
-    // TODO lastindexof(startindex?) + tolerance for double
-    // TODO allIndicesof() + tolerance for double
 
     public static Boolean[] box(boolean[] array) {
         Boolean[] result = new Boolean[array.length];
