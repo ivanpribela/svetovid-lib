@@ -34,7 +34,9 @@
     </target>
     
     <target name="javadoc" description="generate the javadoc into ${javadoc.dir}">
-        <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"/>
+        <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}">
+        <link href="http://download.oracle.com/javase/8/docs/api/"/>
+        </javadoc>
     </target>
     
     <target name="docs-package" description="pack the documentation (including the generated javadoc) into a zip file for distribution">
