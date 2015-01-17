@@ -31,9 +31,31 @@ public final class Svetovid {
     public static final String WHITESPACE = " ";
     public static final boolean AUTO_FLUSH = false;
 
+    /** Don't let anyone instantiate this class */
+    private Svetovid() {
+    }
+
+    /**
+     * The "standard" input. This reader is already open and ready to supply
+     * input data. Typically this stream corresponds to keyboard input or
+     * another input source specified by the host environment or user.
+     */
     public static StandardSvetovidReader in = new StandardSvetovidReader();
+
     private static Map<String, SvetovidReader> readers = new HashMap<>();
 
+    /**
+     * The input reader for the given source. The returned stream is already
+     * open and ready to supply input data. If the supplied source string is a
+     * file name, the returned reader will correspond to that file. If the
+     * source is a url the reader will read the resource identified by that url.
+     *
+     * @param source
+     *            a string describing the source
+     *
+     * @return a {@link SvetovidReader} that can be used to read from the
+     *         desired source.
+     */
     public static SvetovidReader in(String source) {
         synchronized (readers) {
             SvetovidReader reader = readers.get(source);
@@ -56,7 +78,7 @@ public final class Svetovid {
                 }
             }
             return reader;
-        }		
+        }
     }
 
     protected static SvetovidReader removeIn(String source) {
@@ -66,7 +88,7 @@ public final class Svetovid {
                 readers.remove(source);
             }
             return reader;
-        }		
+        }
     }
 
     public static SvetovidReader removeIn(SvetovidReader reader) {
@@ -80,13 +102,35 @@ public final class Svetovid {
                 }
             }
             return removeIn(source);
-        }		
+        }
     }
 
+    /**
+     * The "standard" output. This writer is already open and ready to accept
+     * output data. Typically this stream corresponds to display output or
+     * another output destination specified by the host environment or user.
+     */
     public static StandardSvetovidWriter out = new StandardSvetovidWriter();
+
+    /**
+     * The "standard" error output. This writer is already open and ready to
+     * accept output data. Typically this stream corresponds to display output
+     * or another output destination specified by the host environment or user.
+     * By convention, this output stream is used to display error messages or
+     * other information that should come to the immediate attention of a user
+     * even if the principal output stream, the value of the variable
+     * {@link out}, has been redirected to a file or other destination that is
+     * typically not continuously monitored.
+     */
     public static StandardSvetovidErrorWriter err = new StandardSvetovidErrorWriter();
+
     private static Map<String, SvetovidWriter> writers = new HashMap<>();
 
+    /**
+     * The output writter for the given target. This stream is already open and ready to
+     * accept output data. Typically this stream corresponds to display output
+     * or another output destination specified by the host environment or user.
+     */
     public static SvetovidWriter out(String source) {
         return out(source, false);
     }
@@ -117,7 +161,7 @@ public final class Svetovid {
                 writers.remove(source);
             }
             return writer;
-        }		
+        }
     }
 
     public static SvetovidWriter removeOut(SvetovidWriter writer) {
@@ -131,7 +175,7 @@ public final class Svetovid {
                 }
             }
             return removeOut(source);
-        }		
+        }
     }
 
     public static final AutoCloseDialogFactory gui = Dialogs.getFactory(LOCALE);
