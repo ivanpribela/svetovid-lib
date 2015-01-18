@@ -128,7 +128,7 @@ public interface SvetovidReader {
     public double readDouble() throws NumberFormatException;
 
     /**
-     * Reads one token and converts it to a byte value.
+     * Reads one token and converts it to a character value.
      *
      * @return the {@code char} value read.
      *
@@ -213,7 +213,7 @@ public interface SvetovidReader {
     public Double readDoubleBoxed();
 
     /**
-     * Reads one token and converts it to a byte value.
+     * Reads one token and converts it to a character value.
      *
      * @return the {@code Character} value read.
      *
@@ -222,23 +222,185 @@ public interface SvetovidReader {
      */
     public Character readCharBoxed();
 
+    /**
+     * Reads one line, separates it into tokens and converts them to boolean
+     * values.
+     *
+     * @return an array of {@code boolean} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable boolean.
+     */
     public boolean[] readBoolLine();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to byte
+     * values.
+     *
+     * @return an array of {@code byte} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable byte.
+     */
     public byte[] readByteLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and converts them to short
+     * integer values.
+     *
+     * @return an array of {@code short} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable short.
+     */
     public short[] readShortLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and converts them to integer
+     * values.
+     *
+     * @return an array of {@code int} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable integer.
+     */
     public int[] readIntLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and converts them to long
+     * integer values.
+     *
+     * @return an array of {@code long} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable long.
+     */
     public long[] readLongLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * floating-point values.
+     *
+     * @return an array of {@code float} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable float.
+     */
     public float[] readFloatLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * double-precision floating-point values.
+     *
+     * @return an array of {@code double} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable double.
+     */
     public double[] readDoubleLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and converts them to character
+     * values.
+     *
+     * @return an array of {@code char} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable character.
+     */
     public char[] readCharLine() throws NumberFormatException;
+
+    /**
+     * Reads one line, separates it into tokens and returns them as string
+     * values.
+     *
+     * @return an array of {@code String} values read.
+     */
     public String[] readStringLine();
 
+    /**
+     * Reads one line, separates it into tokens and converts them to boolean
+     * values.
+     *
+     * @return an array of {@code Boolean} values read.
+     */
     public Boolean[] readBoolLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to byte
+     * values.
+     *
+     * @return an array of {@code Byte} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable byte.
+     */
     public Byte[] readByteLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to short
+     * integer values.
+     *
+     * @return an array of {@code Short} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable short.
+     */
     public Short[] readShortLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to integer
+     * values.
+     *
+     * @return an array of {@code Integer} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable integer.
+     */
     public Integer[] readIntLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to long
+     * integer values.
+     *
+     * @return an array of {@code Long} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable long.
+     */
     public Long[] readLongLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * floating-point values.
+     *
+     * @return an array of {@code Float} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable float.
+     */
     public Float[] readFloatLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * double-precision floating-point values.
+     *
+     * @return an array of {@code Double} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable double.
+     */
     public Double[] readDoubleLineBoxed();
+
+    /**
+     * Reads one line, separates it into tokens and converts them to character
+     * values.
+     *
+     * @return an array of {@code Character} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the tokens is not a parsable character.
+     */
     public Character[] readCharLineBoxed();
 
     /**
@@ -272,23 +434,178 @@ public interface SvetovidReader {
      */
     public String readAll();
 
+    /**
+     * Reads multiple lines and converts the data to a boolean matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code boolean} values read.
+     */
     public boolean[][] readBoolMatrix();
+
+    /**
+     * Reads multiple lines and converts the data to a byte matrix. The matrix
+     * is read row by row until an empty row is found or the end of input is
+     * reached.
+     *
+     * @return a matrix of {@code byte} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable byte.
+     */
     public byte[][] readByteMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to a shot integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code short} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable short.
+     */
     public short[][] readShortMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to an integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code int} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable integer.
+     */
     public int[][] readIntMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to a long integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code long} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable long.
+     */
     public long[][] readLongMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to a floating-point matrix.
+     * The matrix is read row by row until an empty row is found or the end of
+     * input is reached.
+     *
+     * @return a matrix of {@code float} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable float.
+     */
     public float[][] readFloatMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to a double-precision
+     * floating-point matrix. The matrix is read row by row until an empty row
+     * is found or the end of input is reached.
+     *
+     * @return a matrix of {@code double} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable double.
+     */
     public double[][] readDoubleMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to a character matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code char} values read.
+     *
+     * @exception NumberFormatException
+     *                if one of the read values is not a parsable character.
+     */
     public char[][] readCharMatrix() throws NumberFormatException;
+
+    /**
+     * Reads multiple lines and converts the data to a string matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code String} values read.
+     */
     public String[][] readStringMatrix();
 
+    /**
+     * Reads multiple lines and converts the data to a boolean matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code Boolean} values read.
+     */
     public Boolean[][] readBoolMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to a byte matrix. The matrix
+     * is read row by row until an empty row is found or the end of input is
+     * reached.
+     *
+     * @return a matrix of {@code Byte} values read.
+     */
     public Byte[][] readByteMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to a shot integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code Short} values read.
+     */
     public Short[][] readShortMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to an integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code Integer} values read.
+     */
     public Integer[][] readIntMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to a long integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code Long} values read.
+     */
     public Long[][] readLongMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to a floating-point matrix.
+     * The matrix is read row by row until an empty row is found or the end of
+     * input is reached.
+     *
+     * @return a matrix of {@code Float} values read.
+     */
     public Float[][] readFloatMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to a double-precision
+     * floating-point matrix. The matrix is read row by row until an empty row
+     * is found or the end of input is reached.
+     *
+     * @return a matrix of {@code Double} values read.
+     */
     public Double[][] readDoubleMatrixBoxed();
+
+    /**
+     * Reads multiple lines and converts the data to a character matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached.
+     *
+     * @return a matrix of {@code Character} values read.
+     */
     public Character[][] readCharMatrixBoxed();
 
 }
