@@ -182,7 +182,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
             if (split.length == 2) {
                 line = split[1];
             }
-        } while (token == null);
+        } while ((token == null) || ("".equals(token)));
         return token;
     }
 
