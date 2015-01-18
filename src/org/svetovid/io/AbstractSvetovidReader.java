@@ -584,8 +584,9 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public String readLine() {
         if (line != null) {
+            String oldLine = line;
             line = null;
-            return line;
+            return oldLine;
         }
         try {
             exception = null;
