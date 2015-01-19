@@ -45,4 +45,8 @@ public class Svetovid {
     }
     
     public static AutoCloseDialogFactory gui = Dialogs.getFactory(org.svetovid.Svetovid.LOCALE);
+
+    public static void main(String[] args) {
+        Svetovid.out.writeln("Svetovid: " + org.svetovid.Svetovid.getVersion());
+    }
 }
