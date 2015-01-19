@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -175,4 +176,25 @@ public final class Svetovid {
             }
         }
     }
+
+    private static String versionFile = "version.properties";
+    private static Properties versionData;
+
+    public static String getVersion() {
+        if (versionData == null) {
+            versionData = new Properties();
+            try {
+                versionData.load(Svetovid.class.getClassLoader().getResourceAsStream(versionFile));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        String ver = versionData.getProperty("version");
+        if (ver != null) {
+            return ver;
+        } else {
+            return "unknown";
+        }
+    }
+
 }

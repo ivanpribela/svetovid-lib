@@ -18,7 +18,7 @@
     
     <target name='jar' depends="build"
         description="make a jar file of the library in ${dist.dir}">
-        <jar destfile="${dist.dir}/svetovid-lib.jar" basedir="${bin.dir}/"
+        <jar destfile="${dist.dir}/svetovid-lib.jar"
         includes="**" >
             <manifest>
               <!-- Who is building this jar? -->
@@ -29,7 +29,9 @@
               <attribute name="Implementation-Title"
                value="Svetovid helper library for input and output operations"/>
               <attribute name="Implementation-Version" value="${version}"/>
-            </manifest>  
+            </manifest>
+            <fileset dir="${bin.dir}"/>
+            <fileset dir="${res.dir}"/>
         </jar>
     </target>
     
