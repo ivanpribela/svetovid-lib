@@ -39,4 +39,4 @@ The target directory Under Windows is:
 while Linux machines use: 
   `/usr/java/packages/lib/ext`
 
-[More details about the ext folder](http://docs.oracle.com/javase/tutorial/ext/basics/download.html)
+[More details about the ext folder](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)

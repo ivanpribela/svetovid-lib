@@ -35,4 +35,4 @@ Na Windows operativnom sistemu je to sledeći direktorijum:
 dok je na Linux operativnim sistemima to 
   `/usr/java/packages/lib/ext`
 
-[Više detalja o ext direktorijumu](http://docs.oracle.com/javase/tutorial/ext/basics/download.html)
+[Više detalja o ext direktorijumu](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
