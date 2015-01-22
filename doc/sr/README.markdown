@@ -16,3 +16,8 @@ Dokumentacija je podeljena na više malih fajlova koji se bave određenim temama
 [Učitavanje i ispisivanje](ucitavanje-i-ispisivanje.markdown)
 
 [Rad sa fajlovima](rad-sa-fajlovima.markdown)
+
+Primeri programa
+----------------
+
+Primeri programa se mogu naći u podfolderu [primeri](primeri)
