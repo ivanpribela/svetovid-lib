@@ -26,7 +26,7 @@ How to install and use
 The easiest way to use the library is to copy the jar file to the `lib/ext/`
 folder of the installed JRE or JDK. Another way is to add all the files to the
 working folder or to the classpath. For more details take a look at the
-`docs` folder.
+[documentation folder](doc).
 
-For usage information checkout the `docs` folder. Some usage examples
-are available in `org.svetovid.demo`.
+For usage information checkout the [documentation folder](doc). Some usage 
+examples are available in `org.svetovid.demo`.
