@@ -36,3 +36,16 @@ dok je na Linux operativnim sistemima to
   `/usr/java/packages/lib/ext`
 
 [Više detalja o ext direktorijumu](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
+
+## Testiranje instalacije
+
+Za jednostavno testiranje da li je bibloteka ispravno instalirana i da
+li se ispravno vidi od strane java kompajlera je napravljen glavni
+metod u klasi `Svetovid` koji ispisuje trenutnu instaliranu verziju.
+Najjednostavnije se može izvršiti sledećim pozivom: 
+
+`java Svetovid`
+
+Ako je jar dodat negde gde ga JVM vidi, biće ispisana poruka o verziji
+Svetovid biblioteke, a ako nije ispisaće se greška da klasa nije
+nađena.
