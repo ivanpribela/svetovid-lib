@@ -28,5 +28,5 @@ folder of the installed JRE or JDK. Another way is to add all the files to the
 working folder or to the classpath. For more details take a look at the
 [documentation folder](doc).
 
-For usage information checkout the [documentation folder](doc). Some usage 
+For usage information checkout the [documentation folder](doc). Some usage
 examples are available in `org.svetovid.demo`.

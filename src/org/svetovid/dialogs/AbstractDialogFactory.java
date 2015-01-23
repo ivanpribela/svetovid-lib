@@ -57,9 +57,9 @@ import javax.swing.Timer;
  * This is a default implementation of a dialog factory used for showing various
  * types of dialog boxes containing messages, information, questions, etc. For
  * documentation see {@link DialogFactory} interface.
- * 
+ *
  * @see DialogFactory
- * 
+ *
  * @author Ivan Pribela
  * @version 1.0
  */
@@ -346,7 +346,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
     public LoginData askLogin(Component component, String text) {
         return askLogin(component, text, null, defaultAutoCloseTimeout);
     }
-        
+
     protected LoginData askLogin(Component component, String text, int timeout) {
         return askLogin(component, text, null, timeout);
     }
@@ -595,7 +595,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
 
         /**
          * Creates a new {@code DialogFocuser}.
-         * 
+         *
          * @param component
          *            the component to focus
          */
@@ -678,7 +678,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
 
         /**
          * Creates a new {@code DialogCloser}.
-         * 
+         *
          * @param label
          *            the label used to show the remaining time
          * @param timeout
@@ -729,7 +729,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
                 }
                 break;
             default:
-            }           
+            }
         }
 
         private void abort() {

@@ -18,7 +18,7 @@ package org.svetovid.dialogs;
 
 /**
  * Class that holds user name and password.
- * 
+ *
  * @author Ivan Pribela
  * @version 1.3
  */

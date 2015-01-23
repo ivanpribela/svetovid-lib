@@ -97,13 +97,13 @@ public class Start {
             StringBuilder output = new StringBuilder();
             output.append(method.getName());
             output.append("(");
-            boolean placeDelimiter = false; 
+            boolean placeDelimiter = false;
             for (Object argument : methodArguments) {
                 if (placeDelimiter) {
                     output.append(", ");
                 }
                 output.append(argument);
-                placeDelimiter = true; 
+                placeDelimiter = true;
             }
             output.append(") = ");
             output.append(result);

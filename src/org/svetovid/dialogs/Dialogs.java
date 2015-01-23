@@ -28,7 +28,7 @@ import javax.swing.Icon;
 /**
  * This is helper class which contains static methods for showing various types
  * of dialog boxes containing messages, information, questions, etc.
- * 
+ *
  * @author Ivan Pribela
  * @version 1.5
  */
@@ -38,7 +38,7 @@ public final class Dialogs {
 
     /**
      * Sets locale which will be used to display messages.
-     * 
+     *
      * @param newValue
      *            locale which will be used to display messages.
      */
@@ -48,7 +48,7 @@ public final class Dialogs {
 
     /**
      * Sets clipboard which will be used by displayed messages.
-     * 
+     *
      * @param newValue
      *            clipboard which will be used by displayed messages.
      */
@@ -58,7 +58,7 @@ public final class Dialogs {
 
     /**
      * Sets the stack trace style which will be used by displayed messages.
-     * 
+     *
      * @param newValue
      *            stack trace style which will be used by displayed messages.
      */
@@ -69,7 +69,7 @@ public final class Dialogs {
 
     /**
      * Sets default time before automatically closing dialogs.
-     * 
+     *
      * @param newValue
      *            the auto close timeout; zero means don't auto close dialogs.
      */
@@ -79,7 +79,7 @@ public final class Dialogs {
 
     /**
      * Displays message box containing desired message.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -92,7 +92,7 @@ public final class Dialogs {
 
     /**
      * Displays informational message box containing desired message.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -105,7 +105,7 @@ public final class Dialogs {
 
     /**
      * Displays warning message box containing desired message.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -118,7 +118,7 @@ public final class Dialogs {
 
     /**
      * Displays error message box containing desired message.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -132,7 +132,7 @@ public final class Dialogs {
     /**
      * Displays error message box containing desired message and optionally
      * stack-trace of the supplied exception.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -149,7 +149,7 @@ public final class Dialogs {
     /**
      * Displays error message box containing stack-trace of the supplied
      * exception.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -164,13 +164,13 @@ public final class Dialogs {
     /**
      * Displays confirmation message box containing desired message, and asking
      * from the user to answer {code Yes} or {@code No}.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
      * @param text
      *            text which will be displayed in the message box.
-     * 
+     *
      * @return {@code true} if user answered {@code yes}; {@code false}
      *         otherwise.
      */
@@ -181,13 +181,13 @@ public final class Dialogs {
     /**
      * Displays confirmation message box containing desired message, and asking
      * from the user to answer Yes, No or Cancel.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
      * @param text
      *            text which will be displayed in the message box.
-     * 
+     *
      * @return {@code True} if user answered {@code yes}; {@code False}
      *         if user answered {@code no}; and {@code null} otherwise.
      */
@@ -198,13 +198,13 @@ public final class Dialogs {
     /**
      * Displays question message box containing desired question, and asking the
      * user to enter the answer.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
      * @param text
      *            text which will be displayed in the message box.
-     * 
+     *
      * @return {@code String} object containing text that user entered;
      *         {@code null} if user has chosen not to answer.
      */
@@ -215,7 +215,7 @@ public final class Dialogs {
     /**
      * Displays question message box containing desired question, and asking the
      * user to enter the answer.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -223,7 +223,7 @@ public final class Dialogs {
      *            text which will be displayed in the message box.
      * @param answer
      *            the initial answer for user to modify.
-     * 
+     *
      * @return {@code String} object containing text that user entered;
      *         {@code null} if user has chosen not to answer.
      */
@@ -234,7 +234,7 @@ public final class Dialogs {
     /**
      * Displays question message box containing desired question, and asking the
      * user to choose one of the provided options.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -244,7 +244,7 @@ public final class Dialogs {
      *            list of available options for the user to choose from.
      * @param defaultOption
      *            initial option that is to be selected.
-     * 
+     *
      * @return one of the options provided or {@code null} if user has chosen
      *         not to answer.
      */
@@ -255,13 +255,13 @@ public final class Dialogs {
     /**
      * Displays password dialog box containing desired message, and asking from
      * the user to enter password.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
      * @param text
      *            text which will be displayed in the dialog box.
-     * 
+     *
      * @return password entered by the user as an array of {@code char};
      *         {@code null} if user has chosen not to enter the password.
      */
@@ -272,13 +272,13 @@ public final class Dialogs {
     /**
      * Displays login dialog box containing desired message, and asking for user
      * name and password.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
      * @param text
      *            text which will be displayed in the dialog box.
-     * 
+     *
      * @return user data (user name and password) stored in {@code LoginData}
      *         object; {@code null} if user has chosen not to enter login data.
      */
@@ -289,7 +289,7 @@ public final class Dialogs {
     /**
      * Displays login dialog box containing desired message, and asking for user
      * name and password.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -297,7 +297,7 @@ public final class Dialogs {
      *            text which will be displayed in the dialog box.
      * @param username
      *            default user name.
-     * 
+     *
      * @return user data (user name and password) stored in {@code LoginData}
      *         object; {@code null} if user has chosen not to enter login
      *         information.
@@ -308,7 +308,7 @@ public final class Dialogs {
 
     /**
      * Displays a dialog with the given icon and title containing the supplied component.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -318,7 +318,7 @@ public final class Dialogs {
      *            title of the dialog
      * @param icon
      *            icon to display on the dialog
-     * 
+     *
      * @return {@code true} if user answered {@code ok}; {@code false}
      *         otherwise.
      */
@@ -329,7 +329,7 @@ public final class Dialogs {
     /**
      * Displays a dialog with the given icon and title containing the supplied
      * content.
-     * 
+     *
      * @param component
      *            determines the frame in which the dialog is displayed; if the
      *            parentComponent has no Frame, a default Frame is used.
@@ -339,7 +339,7 @@ public final class Dialogs {
      *            title of the dialog
      * @param icon
      *            icon to display on the dialog
-     * 
+     *
      * @return The object retrieved from the content component if user answered
      *         {@code ok}; {@code null} otherwise.
      */

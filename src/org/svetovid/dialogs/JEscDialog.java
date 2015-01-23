@@ -33,7 +33,7 @@ import javax.swing.KeyStroke;
  * Extends the dialog window as defined by Swing adding the possibility to close
  * the dialog using the ESC key. The ESC key can be associated with an action
  * that disposes the dialog or with an action that just hides the dialog.
- * 
+ *
  * @author Riccardo Govoni
  * @author Ivan Pribela
  * @version 1.1
@@ -44,12 +44,12 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param disposeOnEsc
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -61,14 +61,14 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param disposeOnEsc
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -80,7 +80,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param modal
@@ -90,7 +90,7 @@ public class JEscDialog extends JDialog {
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -102,14 +102,14 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param disposeOnEsc
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -121,7 +121,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param modal
@@ -131,7 +131,7 @@ public class JEscDialog extends JDialog {
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -143,7 +143,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param title
@@ -152,7 +152,7 @@ public class JEscDialog extends JDialog {
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -164,7 +164,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param title
@@ -176,7 +176,7 @@ public class JEscDialog extends JDialog {
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -188,7 +188,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param title
@@ -197,7 +197,7 @@ public class JEscDialog extends JDialog {
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -209,7 +209,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Creates a new dialog window.
-     * 
+     *
      * @param owner
      *            the dialog owner
      * @param title
@@ -221,7 +221,7 @@ public class JEscDialog extends JDialog {
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
      *            invisible.
-     * 
+     *
      * @throws java.awt.HeadlessException
      *             if {@code GraphicsEnvironment.isHeadless()} returns
      *             {@code true}.
@@ -233,7 +233,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * Attaches the correct action to the dialog, triggered when ESC is pressed.
-     * 
+     *
      * @param disposeOnEsc
      *            {@code true} if the dialog is to be disposed when ESC is
      *            pressed, {@code false} if the dialog should just become
@@ -264,7 +264,7 @@ public class JEscDialog extends JDialog {
 
         /**
          * Constructs a new {@code DisposeAction}.
-         * 
+         *
          * @param dialog
          *            the dialog to dispose
          */
@@ -279,7 +279,7 @@ public class JEscDialog extends JDialog {
 
     /**
      * An Action that hides the dialog when triggered.
-     */    
+     */
     public class HideAction extends AbstractAction {
 
         private static final long serialVersionUID = 8286747232328074129L;
@@ -288,7 +288,7 @@ public class JEscDialog extends JDialog {
 
         /**
          * Constructs a new {@code HideAction}.
-         * 
+         *
          * @param dialog
          *            the dialog to hide
          */

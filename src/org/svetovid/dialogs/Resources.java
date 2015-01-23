@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
 
 /**
  * This is helper class which contains methods to easily access resources.
- * 
+ *
  * @author Ivan Pribela
  * @version 1.0
  */
