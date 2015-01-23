@@ -38,6 +38,8 @@ public final class StandardSvetovidReader extends DefaultSvetovidReader {
         Svetovid.out.write(prompt);
         if (readln) {
             Svetovid.out.writeln();
+        } else {
+            Svetovid.out.write();
         }
         Svetovid.out.writebf();
     }
