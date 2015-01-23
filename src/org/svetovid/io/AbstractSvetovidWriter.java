@@ -178,6 +178,9 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     public void writeln(String value) {
         try {
             doWriteln(value);
+            if (autoFlush) {
+                writebf();
+            }
             exception = null;
         } catch (IOException e) {
             exception = e;

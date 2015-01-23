@@ -20,5 +20,6 @@ public class StandardSvetovidWriter extends DefaultSvetovidWriter {
 
     public StandardSvetovidWriter() {
         super(new StandardOutputStreamProxy());
+        autoFlush = true;
     }
 }
