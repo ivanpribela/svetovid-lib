@@ -12,9 +12,9 @@ public class SvetovidArrays {
     // compare(comparator?)
     // toString(nullstring?)
     // toList, fromList
-    
+
     public static final int INDEX_NOT_FOUND = -1;
-    
+
     public static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
     public static final short[] EMPTY_SHORT_ARRAY = new short[0];
@@ -2267,7 +2267,7 @@ public class SvetovidArrays {
         Arrays.parallelSort(array, beginIndex, endIndex, comparator);
     }
 
-    // TODO Add more data types 
+    // TODO Add more data types
 
     public static void randomize(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
         if (array == null) {
@@ -2292,7 +2292,7 @@ public class SvetovidArrays {
         }
     }
 
-    // TODO Add more data types 
+    // TODO Add more data types
 
     public static long pick(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
         if (array == null) {
