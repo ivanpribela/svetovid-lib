@@ -43,11 +43,14 @@
     </javadoc>
     </target>
 
-    <target name="docs-package" description="pack the documentation (including the generated javadoc) into a zip file for distribution">
+    <target name="docs-package" description="pack the documentation (a zip file for distribution)">
         <zip destfile="${dist.dir}/svetovid-docs.zip">
              <zipfileset dir="${doc.dir}" prefix="svetovid-doc"/>
         </zip>
     </target>
+
+    <target name="docs" description="generate and pack the documentation"
+	    depends="javadoc,docs-package"/>
 
     <!-- version tasks
     based on ideas by Jesper Öqvist http://llbit.se/?p=1876 -->
