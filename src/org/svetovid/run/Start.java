@@ -61,7 +61,9 @@ public class Start {
             if ((instance == null) && !Modifier.isStatic(method.getModifiers())) {
                 try {
                     instance = type.newInstance();
-                } catch (InstantiationException|IllegalAccessException e) {
+                } catch (InstantiationException e) {
+                    // Leave at null
+                } catch (IllegalAccessException e) {
                     // Leave at null
                 }
             }
@@ -71,7 +73,7 @@ public class Start {
             if (method.getName().equals(methodName)) {
                 argumentCount--;
             }
-            int actualArgumentCount = method.getParameterCount();
+            int actualArgumentCount = method.getParameterTypes().length;
             String[] stringArguments = new String[actualArgumentCount];
             System.arraycopy(arguments, arguments.length - argumentCount, stringArguments, 0, actualArgumentCount < argumentCount ? actualArgumentCount : argumentCount);
             Object[] methodArguments = new Object[actualArgumentCount];
