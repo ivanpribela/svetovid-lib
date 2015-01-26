@@ -172,6 +172,7 @@
             description="Fix line and file endings in all source files">
 
         <fixcrlf srcdir="${src.dir}"
+                 encoding="utf-8"
                  eol="lf"
                  includes="**/*"
                  tab="remove"
@@ -185,6 +186,7 @@
             description="Fix line and file endings in all resource sources">
 
         <fixcrlf srcdir="${ressrc.dir}"
+                 encoding="utf-8"
                  eol="lf"
                  includes="**/*"
                  tab="remove"
