@@ -4,8 +4,7 @@
 *.class
 
 # Generated documentation
-/doc/api
-/doc/html
+/gendoc/
 
 # Packed distributables
 /dist
