@@ -4,6 +4,9 @@
     <!-- Load the environment variables -->
     <property environment="env" />
 
+    <!-- link to use antcontrib -->
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
     <!-- Version of Java to use -->
     <property name="java.source.version" value="1.7" />
     <property name="java.target.version" value="1.7" />
@@ -123,10 +126,61 @@
             description="Compile markdown documentation into HTML">
 
         <mkdir dir="${htmldoc.dir}" />
-        <!-- TODO Implement -->
+        <!-- copy (almost) everything -->
+        <copy todir="${htmldoc.dir}" includeemptydirs="true">
+            <path>
+            <fileset dir='${docsrc.dir}'>
+                <exclude name="**/*.class"/>
+            </fileset>
+            </path>
+        </copy>
 
+        <copy tofile="${doc.dir}/index.html" file="fragments/html/index.html"/>
+
+        <!-- transform markdown to html -->
+        <foreach param="htmldoc.singlefile" target="generate.htmldoc.single">
+            <path>
+            <fileset dir='${htmldoc.dir}'>
+                <include name="**/*.md"/>
+                <include name="**/*.markdown"/>
+            </fileset>
+            </path>
+        </foreach>
+        <!-- remove markdown sources -->
+        <delete>
+            <path>
+            <fileset dir='${htmldoc.dir}'>
+                <include name="**/*.md"/>
+                <include name="**/*.markdown"/>
+            </fileset>
+            </path>
+        </delete>
+        <!-- fix links between files -->
+        <replaceregexp match='href="(.*)(md|markdown)"' replace='href="\1html"' byline="true">
+            <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
+        </replaceregexp>
     </target>
 
+    <target name="generate.htmldoc.single">
+    <!-- helper task for a single markdown file conversion -->
+        <property name="htmldoc.singlefile" value="README.md"/>
+        <propertyregex property="htmldoc.genname"
+            regexp="\.(md|markdown)$"
+            replace=".html"
+            input="${htmldoc.singlefile}"/>
+            <echo message="${htmldoc.genname}"/>
+        <exec executable="pandoc">
+            <arg value="--standalone"/>
+            <arg value="--include-in-header=fragments/html/htmldoc-headend.html"/>
+            <arg value="--include-before-body=fragments/html/htmldoc-start.html"/>
+            <arg value="--include-before-body=fragments/html/htmldoc-menu.html"/>
+            <arg value="--include-after-body=fragments/html/htmldoc-menu.html"/>
+            <arg value="--include-after-body=fragments/html/htmldoc-end.html"/>
+            <arg value="-o"/>
+            <arg value="${htmldoc.genname}"/>
+            <arg value="${htmldoc.singlefile}" />
+        </exec>
+    </target>
 
     <target name="pack.jar" depends="build"
             description="Packs the binaries in a jar and place it in ${dist.dir}">
