@@ -20,12 +20,14 @@ put stalo, odnosno biće učitan naredni podatak.
 Ako je potrebno pročitati sve podatke iz tekstualnog fajla, najjednostavniji
 način je pomoću `while` petlje i `isEmpty()` metoda:
 
+```java
     double suma = 0;
     while (!Svetovid.in("ulazni.txt").isEmpty()) {
         double broj = Svetovid.in("ulazni.txt").readDouble();
         suma = suma + broj;
     }
     Svetovid.out.writeln(suma);
+```
 
 Kada `isEmpty()` metod vrati `true` u fajlu više nema podataka. Ako je potrebno
 ponovo pročitati podatke, potrebno je prvo zatvoriti fajl:
