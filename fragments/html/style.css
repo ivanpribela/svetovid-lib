@@ -1,22 +1,43 @@
 body {
-		font-family:"Droid sans",Sans-serif;
-		background-color:#abc;
+	font-family:"Droid sans",Sans-serif;
+	background-color:#abc;
+	color:black;
 }
+
+a,a:active,a:visited {
+	color:#006;
+	text-decoration:underline;
+	
+	border:none;
+}
+
+a:hover {
+	color:#33a;
+	text-decoration:none;
+}
+
 #main{
-		margin:auto;
-		max-width:800px;
-		background:#eee;
-		padding:2ex;
+	margin:auto;
+	max-width:800px;
+	background:#eee;
+	padding:2ex;
+	border-radius: 15px;
 }
 #TOC{
-		float:right;
+	float:right;
+	border-radius: 15px;
+	border: solid #ccc;
+	padding: 0.5ex;
 }
 .nav {
-		border:solid 1pt black;
-		border-left:none;
-		border-right:none;
-		padding:1ex;
+	border:solid 1pt black;
+	border-left:none;
+	border-right:none;
+	padding:1ex;
+	background: #ddd;
 }
 h1 {
-		border-bottom:solid 1pt;
+	border-bottom:solid 1pt;
+	text-shadow:#bbb 0.1em 0.1em;
+	clear:both;
 }
