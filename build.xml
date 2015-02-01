@@ -147,8 +147,18 @@
             </fileset>
             </path>
         </foreach>
+        <!-- move README to be index -->
+        <move todir="${htmldoc.dir}" includeemptydirs="false">
+            <fileset dir="${htmldoc.dir}">
+                <include name="**/README.html"/>
+            </fileset>
+            <mapper type="glob" from="*README.html" to="*index.html"/>
+        </move>
         <!-- fix links between files -->
         <replaceregexp match='href="(.*)(md|markdown)"' replace='href="\1html"' byline="true">
+            <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
+        </replaceregexp>
+        <replaceregexp match='href="(.*)README.html"' replace='href="\1index.html"' byline="true">
             <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
         </replaceregexp>
     </target>
