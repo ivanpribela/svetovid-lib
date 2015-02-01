@@ -277,8 +277,8 @@
     </target>
 
 
-    <target name="-store-version-string" if="version"
-        description="Store the new version string in the correct property file">
+    <target name="-store-version-string" if="version">
+    <!-- Store the new version string in the correct property file -->
 
         <echo message="version=${version}"/>
         <propertyfile file="${version.file}">
