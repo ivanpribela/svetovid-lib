@@ -35,13 +35,13 @@ public final class StandardSvetovidReader extends DefaultSvetovidReader {
     }
 
     protected void prompt(String prompt) {
-        Svetovid.out.write(prompt);
+        Svetovid.out.print(prompt);
         if (readln) {
-            Svetovid.out.writeln();
+            Svetovid.out.println();
         } else {
-            Svetovid.out.write();
+            Svetovid.out.print();
         }
-        Svetovid.out.writebf();
+        Svetovid.out.printbf();
     }
 
     public boolean readBool(String prompt){
