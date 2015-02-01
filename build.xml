@@ -146,15 +146,6 @@
             </fileset>
             </path>
         </foreach>
-        <!-- remove markdown sources -->
-        <delete>
-            <path>
-            <fileset dir='${htmldoc.dir}'>
-                <include name="**/*.md"/>
-                <include name="**/*.markdown"/>
-            </fileset>
-            </path>
-        </delete>
         <!-- fix links between files -->
         <replaceregexp match='href="(.*)(md|markdown)"' replace='href="\1html"' byline="true">
             <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
