@@ -136,6 +136,7 @@
         </copy>
 
         <copy tofile="${doc.dir}/index.html" file="fragments/html/index.html"/>
+        <copy tofile="${doc.dir}/style.css" file="fragments/html/style.css"/>
 
         <!-- transform markdown to html -->
         <foreach param="htmldoc.singlefile" target="generate.htmldoc.single">
@@ -155,6 +156,9 @@
     <target name="generate.htmldoc.single">
     <!-- helper task for a single markdown file conversion -->
         <property name="htmldoc.singlefile" value="README.md"/>
+        <dirname property="htmldoc.currentdir" file="${htmldoc.singlefile}"/>
+        <property name="htmldoc.css" relative="true" 
+            location="${doc.dir}/style.css" basedir="${htmldoc.currentdir}"/>
         <propertyregex property="htmldoc.genname"
             regexp="\.(md|markdown)$"
             replace=".html"
@@ -167,6 +171,8 @@
             <arg value="--include-before-body=fragments/html/htmldoc-menu.html"/>
             <arg value="--include-after-body=fragments/html/htmldoc-menu.html"/>
             <arg value="--include-after-body=fragments/html/htmldoc-end.html"/>
+            <arg value="--css=${htmldoc.css}"/>
+            <arg value="--title-prefix=Svetovid-lib"/>
             <arg value="-o"/>
             <arg value="${htmldoc.genname}"/>
             <arg value="${htmldoc.singlefile}" />
