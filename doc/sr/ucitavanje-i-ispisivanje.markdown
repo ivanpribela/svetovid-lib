@@ -16,25 +16,25 @@ korisniku:
 Ispis osnovnih tipova na ekran, odnosno standardni izlaz, je takođe jednostavan
 uz korišćenje metoda iz `Svetovid.out`:
 
-    Svetovid.out.writeln(a + b);
+    Svetovid.out.println(a + b);
 
 Prilikom ispisivanja se takođe može proslediti prigodna poruka namenjena
 korisniku:
 
-    Svetovid.out.writeln("Zbir je:", a + b);
+    Svetovid.out.println("Zbir je:", a + b);
 
 Prilikom učitavanja podataka potrebno je koristiti `read` metod koji odgovara
 tipu podataka koji se traži od korisnika. Na primer `readLong` za long integer,
 `readBool` za boolean, i sl.
 
 
-Prilikom ispisivanja ovo nije potrebno, pošto postoji po jedan `write` metod za
+Prilikom ispisivanja ovo nije potrebno, pošto postoji po jedan `print` metod za
 svaki od osnovnih tipova podataka.
 
 Analogne komande za učitavanje i ispisivanje se mogu naći u okviru klase
 `System`, a mogu se koristiti naizmenično sa onima iz klase `Svetovid` bez
 ikakvih problema:
 
-    Svetovid.out.writeln("Prva poruka");
-	System.out.println("Druga poruka");
-    Svetovid.out.writeln("Treća poruka");
+    Svetovid.out.println("Prva poruka");
+    System.out.println("Druga poruka");
+    Svetovid.out.println("Treća poruka");
