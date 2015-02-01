@@ -1,85 +1,315 @@
-<project name="svetovid-lib" default='build'>
-    <property name="bin.dir" value="bin"/>
-    <property name="src.dir" value="src"/>
-    <property name="dist.dir" value='dist'/>
-    <property name="doc.dir" value='doc'/>
-    <property name="javadoc.dir" value='doc/api'/>
+<project name="svetovid-lib" default="help">
+
+
+    <!-- Load the environment variables -->
+    <property environment="env" />
+
+    <!-- link to use antcontrib -->
+    <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+    <!-- Version of Java to use -->
+    <property name="java.source.version" value="1.7" />
+    <property name="java.target.version" value="1.7" />
+    <property name="java.bootstrap.classpath" location="${env.JAVA_HOME}/lib/rt.jar" />
+    <property name="java.api.link" value="http://download.oracle.com/javase/8/docs/api/" />
+
+    <!-- Folders where the source files reside -->
+    <property name="src.dir" value="src" />
     <property name="res.dir" value="res" />
+    <property name="ressrc.dir" value="ressrc" />
+    <property name="docsrc.dir" value="doc" />
 
-    <target name='init'>
-        <mkdir dir="${bin.dir}"/>
+    <!-- Folder where the compiled binaries should be placed -->
+    <property name="bin.dir" value="bin" />
+
+    <!-- Folder where the documentation is collected -->
+    <property name="doc.dir" value="gendoc" />
+
+    <!-- Folder where the generated Java documentation should be placed -->
+    <property name="apidoc.dir" value="${doc.dir}/api" />
+
+    <!-- Folder where the generated Java documentation should be placed -->
+    <property name="htmldoc.dir" value="${doc.dir}/html" />
+
+    <!-- Folder to hold packed library and documantation ready to be distriuted to users -->
+    <property name="dist.dir" value="dist" />
+
+
+    <target name="help" depends=""
+            description="Shows the list of supported tasks">
+
+        <echo>You should specify the task to be executed:</echo>
+        <echo/>
+        <echo>  compile          - Compile the source code into '${bin.dir}'</echo>
+        <echo>  compile.res      - Compile the resources into '${res.dir}'</echo>
+        <echo>  build            - Build the library into '${bin.dir}'</echo>
+        <echo>  generate.apidoc  - Generate the API documentation into '${apidoc.dir}'</echo>
+        <echo>  generate.htmldoc - Compile the documentation into '${htmldoc.dir}'</echo>
+        <echo>  pack.jar         - Pack binaries in a jar file into '${dist.dir}'</echo>
+        <echo>  pack.doc         - Pack documentation in a zip file into '${dist.dir}'</echo>
+        <echo>  pack             - Pack binaries and documentation into '${dist.dir}'</echo>
+        <echo>  fix.src          - Fix tabs and line endings in source files</echo>
+        <echo>  fix.res          - Fix tabs and line endings in resource sources</echo>
+        <echo>  clean            - Delete all generated files and folders</echo>
+        <echo/>
+
+        <input message="Would you like to build and pack the project?"
+               validargs="y,n"
+               defaultvalue="y"
+               addproperty="choice" />
+        <condition property="abort">
+            <equals arg1="n" arg2="${choice}"/>
+        </condition>
+        <fail if="abort">Build aborted by user.</fail>
+        <antcall target="pack"/>
+
     </target>
 
-    <target name='build' depends="init,update-version-string"
-        description="build the library into ${bin.dir}">
-        <javac srcdir="${src.dir}" destdir="${bin.dir}"
-        includeAntRuntime="no" />
+
+    <target name="compile" depends=""
+            description="Compile the source code from ${src.dir} into ${bin.dir}">
+
+        <delete dir="${bin.dir}" />
+        <mkdir dir="${bin.dir}" />
+        <javac srcdir="${src.dir}"
+               destdir="${bin.dir}"
+               source="${java.source.version}"
+               target="${java.target.version}"
+               bootclasspath="${java.bootstrap.classpath}"
+               includeAntRuntime="no" />
+
     </target>
 
-    <target name='jar' depends="build"
-        description="make a jar file of the library in ${dist.dir}">
+
+    <target name="compile.res" depends=""
+            description="Compile the resources from ${ressrc.dir} into ${res.dir}">
+
+        <property name="restmp.dir" value="${res.dir}-tmp" />
+        <mkdir dir="${restmp.dir}" />
+        <native2ascii encoding="utf-8"
+                      src="${ressrc.dir}"
+                      dest="${restmp.dir}"
+                      includes="**/*" />
+        <fixcrlf srcdir="${restmp.dir}" eol="lf" />
+        <copy todir="${res.dir}">
+            <fileset dir="${restmp.dir}" />
+        </copy>
+        <delete dir="${restmp.dir}" />
+
+    </target>
+
+
+    <target name="build" depends="compile, compile.res, update-version-string"
+            description="Build the library into ${bin.dir}">
+
+        <copy todir="${bin.dir}">
+            <fileset dir="${res.dir}" />
+        </copy>
+
+    </target>
+
+
+    <target name="generate.apidoc" depends=""
+            description="Generate the api documentation into ${apidoc.dir}">
+
+        <mkdir dir="${apidoc.dir}" />
+        <javadoc sourcepath="${src.dir}" destdir="${apidoc.dir}"
+                 windowtitle="Svetovid-Lib API">
+            <link href="${java.api.link}"/>
+            <doctitle><![CDATA[<h1>Svetovid-Lib API</h1>]]></doctitle>
+        </javadoc>
+
+    </target>
+
+
+    <target name="generate.htmldoc" depends=""
+            description="Compile markdown documentation into HTML">
+
+        <mkdir dir="${htmldoc.dir}" />
+        <!-- copy (almost) everything -->
+        <copy todir="${htmldoc.dir}" includeemptydirs="true">
+            <path>
+            <fileset dir='${docsrc.dir}'>
+                <exclude name="**/*.class"/>
+            </fileset>
+            </path>
+        </copy>
+
+        <copy tofile="${doc.dir}/index.html" file="fragments/html/index.html"/>
+        <copy tofile="${doc.dir}/style.css" file="fragments/html/style.css"/>
+
+        <!-- transform markdown to html -->
+        <foreach param="htmldoc.singlefile" target="generate.htmldoc.single">
+            <path>
+            <fileset dir='${htmldoc.dir}'>
+                <include name="**/*.md"/>
+                <include name="**/*.markdown"/>
+            </fileset>
+            </path>
+        </foreach>
+        <!-- move README to be index -->
+        <move todir="${htmldoc.dir}" includeemptydirs="false">
+            <fileset dir="${htmldoc.dir}">
+                <include name="**/README.html"/>
+            </fileset>
+            <mapper type="glob" from="*README.html" to="*index.html"/>
+        </move>
+        <!-- fix links between files -->
+        <replaceregexp match='href="(.*)(md|markdown)"' replace='href="\1html"' byline="true">
+            <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
+        </replaceregexp>
+        <replaceregexp match='href="(.*)README.html"' replace='href="\1index.html"' byline="true">
+            <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
+        </replaceregexp>
+    </target>
+
+    <target name="generate.htmldoc.single">
+    <!-- helper task for a single markdown file conversion -->
+        <property name="htmldoc.singlefile" value="README.md"/>
+        <dirname property="htmldoc.currentdir" file="${htmldoc.singlefile}"/>
+        <property name="htmldoc.css" relative="true" 
+            location="${doc.dir}/style.css" basedir="${htmldoc.currentdir}"/>
+        <propertyregex property="htmldoc.genname"
+            regexp="\.(md|markdown)$"
+            replace=".html"
+            input="${htmldoc.singlefile}"/>
+            <echo message="${htmldoc.genname}"/>
+        <exec executable="pandoc" failifexecutionfails="false">
+            <arg value="--standalone"/>
+            <arg value="--include-in-header=fragments/html/htmldoc-headend.html"/>
+            <arg value="--include-before-body=fragments/html/htmldoc-start.html"/>
+            <arg value="--include-before-body=fragments/html/htmldoc-menu.html"/>
+            <arg value="--include-after-body=fragments/html/htmldoc-menu.html"/>
+            <arg value="--include-after-body=fragments/html/htmldoc-end.html"/>
+            <arg value="--css=${htmldoc.css}"/>
+            <arg value="--title-prefix=Svetovid-lib"/>
+            <arg value="-o"/>
+            <arg value="${htmldoc.genname}"/>
+            <arg value="${htmldoc.singlefile}" />
+        </exec>
+    </target>
+
+    <target name="pack.jar" depends="build"
+            description="Packs the binaries in a jar and place it in ${dist.dir}">
+
+        <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/svetovid-lib.jar"
-        includes="**" >
-            <manifest>
-              <!-- Who is building this jar? -->
-              <attribute name="Built-By" value="${user.name}"/>
-              <!-- Information about the program itself -->
-              <attribute name="Implementation-Vendor"
-              value="Svetovid dev team"/>
-              <attribute name="Implementation-Title"
-               value="Svetovid helper library for input and output operations"/>
-              <attribute name="Implementation-Version" value="${version}"/>
-            </manifest>
+             includes="**" >
             <fileset dir="${bin.dir}"/>
             <fileset dir="${res.dir}"/>
+            <manifest>
+                <!-- Who is building this jar? -->
+                <attribute name="Built-By" value="${user.name}"/>
+                <!-- Information about the program itself -->
+                <attribute name="Implementation-Vendor"
+                           value="Svetovid dev team"/>
+                <attribute name="Implementation-Title"
+                           value="Svetovid helper library for input and output operations"/>
+                <attribute name="Implementation-Version"
+                           value="${version}"/>
+            </manifest>
         </jar>
+
     </target>
 
-    <target name="javadoc" description="generate the javadoc into ${javadoc.dir}">
-        <javadoc sourcepath="${src.dir}" destdir="${javadoc.dir}"
-        windowtitle="Svetovid-lib API" >
-      <link href="http://download.oracle.com/javase/8/docs/api/"/>
-          <doctitle><![CDATA[<h1>Svetovid-Lib API</h1>]]></doctitle>
-    </javadoc>
-    </target>
 
-    <target name="docs-package" description="pack the documentation (including the generated javadoc) into a zip file for distribution">
+    <target name="pack.doc" depends="generate.apidoc, generate.htmldoc"
+            description="Pack the documentation in a zip file and place it in ${dist.dir}">
+
+        <mkdir dir="${dist.dir}"/>
         <zip destfile="${dist.dir}/svetovid-docs.zip">
-             <zipfileset dir="${doc.dir}" prefix="svetovid-doc"/>
+            <zipfileset dir="${doc.dir}" prefix="svetovid-doc"/>
         </zip>
+
     </target>
 
-    <!-- version tasks
-    based on ideas by Jesper Öqvist http://llbit.se/?p=1876 -->
+    <target name="pack" depends="pack.jar, pack.doc"
+            description="Pack the biraries and documentation into ${dist.dir}">
 
-    <!-- this target is only run if the 'version' property is undefined -->
-
-    <target name="update-version-string" unless="version">
-            <!-- get a new version string using git describe if possible -->
-            <echo message="Updating version string..."/>
-            <exec executable="git" outputproperty="version"
-                    failifexecutionfails="false">
-                    <arg value="describe"/>
-            </exec>
-            <antcall target="-store-version-string"/>
-            <!-- ensure version is defined even if git was not available -->
-            <property file="${res.dir}/version.properties"/>
     </target>
+
+
+    <target name="fix.src" depends=""
+            description="Fix line and file endings in all source files">
+
+        <fixcrlf srcdir="${src.dir}"
+                 encoding="utf-8"
+                 eol="lf"
+                 includes="**/*"
+                 tab="remove"
+                 tablength="4"
+                 eof="remove"
+                 fixlast="true" />
+
+    </target>
+
+    <target name="fix.res" depends=""
+            description="Fix line and file endings in all resource sources">
+
+        <fixcrlf srcdir="${ressrc.dir}"
+                 encoding="utf-8"
+                 eol="lf"
+                 includes="**/*"
+                 tab="remove"
+                 tablength="4"
+                 eof="remove"
+                 fixlast="true" />
+
+    </target>
+
+
+    <target name="clean" depends=""
+            description="Clean all build products">
+
+        <delete dir="${bin.dir}" />
+        <delete dir="${apidoc.dir}" />
+        <delete dir="${htmldoc.dir}" />
+        <delete dir="${dist.dir}" />
+
+    </target>
+
+
+    <!--
+        Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
+    -->
+
+    <!-- Location of the file holding the version information -->
+    <property name="version.file" value="${res.dir}/version.properties" />
+
+
+    <!-- This target is only run if the 'version' property is undefined -->
+    <target name="update-version-string" unless="version"
+            description="Get a new version string using git describe if possible">
+
+        <echo message="Updating version string..."/>
+        <exec executable="git" outputproperty="version"
+              failifexecutionfails="false">
+            <arg value="describe"/>
+        </exec>
+        <antcall target="-store-version-string"/>
+        <!-- Ensure version is defined even if git was not available -->
+        <property file="${version.file}"/>
+
+    </target>
+
 
     <target name="-store-version-string" if="version">
-            <!-- store the new  version string in the correct property file -->
-            <echo message="version=${version}"/>
-            <propertyfile file="${res.dir}/version.properties">
-                    <entry key="version" value="${version}"/>
-            </propertyfile>
-            <exec executable="git" failifexecutionfails="false">
-                    <arg value="update-index"/>
-                    <arg value="--assume-unchanged"/>
-                    <arg value="${res.dir}/version.properties"/>
-            </exec>
+    <!-- Store the new version string in the correct property file -->
+
+        <echo message="version=${version}"/>
+        <propertyfile file="${version.file}">
+            <entry key="version" value="${version}"/>
+        </propertyfile>
+        <exec executable="git" failifexecutionfails="false">
+            <arg value="update-index"/>
+            <arg value="--assume-unchanged"/>
+            <arg value="${version.file}"/>
+        </exec>
+
     </target>
 
     <!-- jedit specific flags; needs to be the first or the last 10 lines
     :noTabs=true:
     -->
+
 </project>

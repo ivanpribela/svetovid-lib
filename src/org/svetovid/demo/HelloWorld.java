@@ -26,7 +26,7 @@ public class HelloWorld {
         String name = Svetovid.in.readString("Please enter your name: ");
 
         // Greet the user
-        Svetovid.out.writeln("Hello " + name + "!");
+        Svetovid.out.println("Hello " + name + "!");
 
     }
 }

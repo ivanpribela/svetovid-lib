@@ -20,12 +20,14 @@ put stalo, odnosno biće učitan naredni podatak.
 Ako je potrebno pročitati sve podatke iz tekstualnog fajla, najjednostavniji
 način je pomoću `while` petlje i `isEmpty()` metoda:
 
+```java
     double suma = 0;
     while (!Svetovid.in("ulazni.txt").isEmpty()) {
         double broj = Svetovid.in("ulazni.txt").readDouble();
         suma = suma + broj;
     }
-    Svetovid.out.writeln(suma);
+    Svetovid.out.println(suma);
+```
 
 Kada `isEmpty()` metod vrati `true` u fajlu više nema podataka. Ako je potrebno
 ponovo pročitati podatke, potrebno je prvo zatvoriti fajl:
@@ -44,21 +46,21 @@ Upisivanje podataka u tekstualni fajl je vrlo slično ispisivanju podataka na
 standardni izlaz, odnosno ekran. Jedina razlika je u tome što se navodi ime
 fajla u koji se podaci upisuju:
 
-    Svetovid.out("izlazni.txt").writeln("Poruka");
+    Svetovid.out("izlazni.txt").println("Poruka");
 
 Ako navedeni fajl nije postojao, automatski će biti napravljen, a ako je fajl
 već postojao, sav njegov sadržaj će biti zamenjen ovim tekstom. Svako naredno
 pisanje u i isti fajl će zadržati njegov prethodni sadržaj, odnosno upisivaće
 naredni podatak u nastavku.
 
-    Svetovid.out("izlazni.txt").writeln("Malo duža poruka");
-    Svetovid.out("izlazni.txt").writeln("u dva reda");
+    Svetovid.out("izlazni.txt").println("Malo duža poruka");
+    Svetovid.out("izlazni.txt").println("u dva reda");
 
 Ukoliko želimo da u već postojećem fajlu zadržimo sadržaj koji je postojao pre
 pokretanja programa i samo dopišemo nove podatke na kraj, to možemo lako uraditi
 korišćenjem `append` umesto `out` na sledeći način:
 
-    Svetovid.append("izlazni.txt").writeln("Nastavak poruke");
+    Svetovid.append("izlazni.txt").println("Nastavak poruke");
 
 Ako se u fajl dalje neće upisivati, nije potrebno eksplicitno ga zatvoriti pošto
 se svi otvoreni fajlovi automatski zatvaraju na kraju rada programa.

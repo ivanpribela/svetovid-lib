@@ -37,8 +37,8 @@ public class Factorial {
 
         // Print the result
         double time = stopwatch.time();
-        Svetovid.out.writeln("The factorial is:", factorial);
-        Svetovid.out.writeln("It took", time, "seconds to calculate");
+        Svetovid.out.println("The factorial is:", factorial);
+        Svetovid.out.println("It took", time, "seconds to calculate");
 
     }
 }

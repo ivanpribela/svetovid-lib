@@ -52,7 +52,7 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
     }
 
     @Override
-    public void doWrite(String value) throws IOException {
+    public void doPrint(String value) throws IOException {
         if (value == null) {
             value = "null";
         }
@@ -66,7 +66,7 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
 
     @Override
     public void doWriteln(String value) throws IOException {
-        doWrite(value);
+        doPrint(value);
         writer.newLine();
     }
 }

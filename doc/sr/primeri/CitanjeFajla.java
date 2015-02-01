@@ -21,7 +21,7 @@ public class CitanjeFajla {
             String red = Svetovid.in(imeFajla).readLine();
 
             /* Ispisujemo procitani red */
-            Svetovid.out.writeln(red);
+            Svetovid.out.println(red);
 
         }
 
@@ -31,7 +31,7 @@ public class CitanjeFajla {
     static void citajSveRedoveAlt(String imeFajla) {
 
         /* Koriste se pogodnosti biblioteke za citanje svih redova odjednom */
-        Svetovid.out.writeln(Svetovid.in(imeFajla).readAll());
+        Svetovid.out.println(Svetovid.in(imeFajla).readAll());
 
     }
 

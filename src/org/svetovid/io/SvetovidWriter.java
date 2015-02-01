@@ -79,551 +79,551 @@ public interface SvetovidWriter {
     public void close();
 
     /**
-     * Writes a boolean value as a human readable string.
+     * Prints a boolean value as a human readable string.
      *
      * @param value
      *            The {@code boolean} value to be written
      */
-    public void write(boolean value);
+    public void print(boolean value);
 
     /**
-     * Writes a byte value as a human readable string.
+     * Prints a byte value as a human readable string.
      *
      * @param value
      *            The {@code byte} value to be written
      */
-    public void write(byte value);
+    public void print(byte value);
 
     /**
-     * Writes a short integer value as a human readable string.
+     * Prints a short integer value as a human readable string.
      *
      * @param value
      *            The {@code short} value to be written
      */
-    public void write(short value);
+    public void print(short value);
 
     /**
-     * Writes an integer value as a human readable string.
+     * Prints an integer value as a human readable string.
      *
      * @param value
      *            The {@code integer} value to be written
      */
-    public void write(int value);
+    public void print(int value);
 
     /**
-     * Writes a long integer value as a human readable string.
+     * Prints a long integer value as a human readable string.
      *
      * @param value
      *            The {@code long} value to be written
      */
-    public void write(long value);
+    public void print(long value);
 
     /**
-     * Writes a floating-point value as a human readable string.
+     * Prints a floating-point value as a human readable string.
      *
      * @param value
      *            The {@code float} value to be written
      */
-    public void write(float value);
+    public void print(float value);
 
     /**
-     * Writes a double-precision floating-point value as a human readable
+     * Prints a double-precision floating-point value as a human readable
      * string.
      *
      * @param value
      *            The {@code double} value to be written
      */
-    public void write(double value);
+    public void print(double value);
 
     /**
-     * Writes a character value as a human readable string.
+     * Prints a character value as a human readable string.
      *
      * @param value
      *            The {@code character} value to be written
      */
-    public void write(char value);
+    public void print(char value);
 
     /**
-     * Writes a string. If the argument is {@code null} then the string
+     * Prints a string. If the argument is {@code null} then the string
      * {@code "null"} is printed.
      *
      * @param value
      *            The {@code String} value to be written
      */
-    public void write(String value);
+    public void print(String value);
 
     /**
-     * Writes an object as a human readable string.
+     * Prints an object as a human readable string.
      *
      * @param value
      *            The {@code Object} to be written
      */
-    public void write(Object value);
+    public void print(Object value);
 
     /**
-     * Writes a whitespace.
+     * Prints a whitespace.
      */
-    public void write();
+    public void print();
 
     /**
-     * Writes any buffered data to the underlying output stream and then flushes
+     * Prints any buffered data to the underlying output stream and then flushes
      * that stream.
      */
-    public void writebf();
+    public void printbf();
 
     /**
-     * Writes a boolean value and then terminates the line. This method behaves
-     * as though it invokes {@link #write(boolean)} and then {@link #writeln()}.
+     * Prints a boolean value and then terminates the line. This method behaves
+     * as though it invokes {@link #print(boolean)} and then {@link #println()}.
      *
      * @param value
      *            The {@code boolean} value to be written
      */
-    public void writeln(boolean value);
+    public void println(boolean value);
 
     /**
-     * Writes a byte value and then terminates the line. This method behaves as
-     * though it invokes {@link #write(byte)} and then {@link #writeln()}.
+     * Prints a byte value and then terminates the line. This method behaves as
+     * though it invokes {@link #print(byte)} and then {@link #println()}.
      *
      * @param value
      *            The {@code byte} value to be written
      */
-    public void writeln(byte value);
+    public void println(byte value);
 
     /**
-     * Writes a short integer value and then terminates the line. This method
-     * behaves as though it invokes {@link #write(short)} and then
-     * {@link #writeln()}.
+     * Prints a short integer value and then terminates the line. This method
+     * behaves as though it invokes {@link #print(short)} and then
+     * {@link #println()}.
      *
      * @param value
      *            The {@code short} value to be written
      */
-    public void writeln(short value);
+    public void println(short value);
 
     /**
-     * Writes an integer value and then terminates the line. This method behaves
-     * as though it invokes {@link #write(int)} and then {@link #writeln()}.
+     * Prints an integer value and then terminates the line. This method behaves
+     * as though it invokes {@link #print(int)} and then {@link #println()}.
      *
      * @param value
      *            The {@code integer} value to be written
      */
-    public void writeln(int value);
+    public void println(int value);
 
     /**
-     * Writes a long integer value and then terminates the line. This method
-     * behaves as though it invokes {@link #write(long)} and then
-     * {@link #writeln()}.
+     * Prints a long integer value and then terminates the line. This method
+     * behaves as though it invokes {@link #print(long)} and then
+     * {@link #println()}.
      *
      * @param value
      *            The {@code long} value to be written
      */
-    public void writeln(long value);
+    public void println(long value);
 
     /**
-     * Writes a floating-point value and then terminates the line. This method
-     * behaves as though it invokes {@link #write(float)} and then
-     * {@link #writeln()}. {@link #writeln()}.
+     * Prints a floating-point value and then terminates the line. This method
+     * behaves as though it invokes {@link #print(float)} and then
+     * {@link #println()}. {@link #println()}.
      *
      * @param value
      *            The {@code float} value to be written
      */
-    public void writeln(float value);
+    public void println(float value);
 
     /**
-     * Writes a double-precision floating-point value and then terminates the
-     * line. This method behaves as though it invokes {@link #write(double)} and
-     * then {@link #writeln()}.
+     * Prints a double-precision floating-point value and then terminates the
+     * line. This method behaves as though it invokes {@link #print(double)} and
+     * then {@link #println()}.
      *
      * @param value
      *            The {@code double} value to be written
      */
-    public void writeln(double value);
+    public void println(double value);
 
     /**
-     * Writes a character value and then terminates the line. This method
-     * behaves as though it invokes {@link #write(char)} and then
-     * {@link #writeln()}.
+     * Prints a character value and then terminates the line. This method
+     * behaves as though it invokes {@link #print(char)} and then
+     * {@link #println()}.
      *
      * @param value
      *            The {@code character} value to be written
      */
-    public void writeln(char value);
+    public void println(char value);
 
     /**
-     * Writes a string and then terminates the line. This method behaves as
-     * though it invokes {@link #write(String)} and then {@link #writeln()}.
+     * Prints a string and then terminates the line. This method behaves as
+     * though it invokes {@link #print(String)} and then {@link #println()}.
      *
      * @param value
      *            The {@code String} value to be written
      */
-    public void writeln(String value);
+    public void println(String value);
 
     /**
-     * Writes an object and then terminates the line. This method behaves as
-     * though it invokes {@link #write(Object)} and then {@link #writeln()}.
+     * Prints an object and then terminates the line. This method behaves as
+     * though it invokes {@link #print(Object)} and then {@link #println()}.
      *
      * @param value
      *            The {@code Object} to be written
      */
-    public void writeln(Object value);
+    public void println(Object value);
 
     /**
-     * Writes a line separator as defined by the {@code line.separator} system
+     * Prints a line separator as defined by the {@code line.separator} system
      * property.
      */
-    public void writeln();
+    public void println();
 
     /**
-     * Writes all given boolean values in sequence separated by whitespace and
+     * Prints all given boolean values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #write(boolean)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(boolean)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code boolean} values to be written
      */
-    public void writeln(boolean... values);
+    public void println(boolean... values);
 
     /**
-     * Writes all given byte values in sequence separated by whitespace and then
+     * Prints all given byte values in sequence separated by whitespace and then
      * terminates the line. This method behaves as though it invokes
-     * {@link #write(byte)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(byte)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code byte} values to be written
      */
-    public void writeln(byte... values);
+    public void println(byte... values);
 
     /**
-     * Writes all given short integer values in sequence separated by whitespace
+     * Prints all given short integer values in sequence separated by whitespace
      * and then terminates the line. This method behaves as though it invokes
-     * {@link #write(short)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(short)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code short} values to be written
      */
-    public void writeln(short... values);
+    public void println(short... values);
 
     /**
-     * Writes all given integer values in sequence separated by whitespace and
+     * Prints all given integer values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #write(int)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(int)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code int} values to be written
      */
-    public void writeln(int... values);
+    public void println(int... values);
 
     /**
-     * Writes all given long integer values in sequence separated by whitespace
+     * Prints all given long integer values in sequence separated by whitespace
      * and then terminates the line. This method behaves as though it invokes
-     * {@link #write(long)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(long)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code long} values to be written
      */
-    public void writeln(long... values);
+    public void println(long... values);
 
     /**
-     * Writes all given floating-point values in sequence separated by
+     * Prints all given floating-point values in sequence separated by
      * whitespace and then terminates the line. This method behaves as though it
-     * invokes {@link #write(float)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * invokes {@link #print(float)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code float} values to be written
      */
-    public void writeln(float... values);
+    public void println(float... values);
 
     /**
-     * Writes all given double-precision floating-point values in sequence
+     * Prints all given double-precision floating-point values in sequence
      * separated by whitespace and then terminates the line. This method behaves
-     * as though it invokes {@link #write(double)} for each of the given values
-     * invoking {@link #write()} inbetween and {@link #writeln()} at the end.
+     * as though it invokes {@link #print(double)} for each of the given values
+     * invoking {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code double} values to be written
      */
-    public void writeln(double... values);
+    public void println(double... values);
 
     /**
-     * Writes all given character values in sequence separated by whitespace and
+     * Prints all given character values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #write(char)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(char)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code char} values to be written
      */
-    public void writeln(char... values);
+    public void println(char... values);
 
     /**
-     * Writes all given boolean values in sequence separated by whitespace and
+     * Prints all given boolean values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #writeln(Object[])}.
+     * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Boolean} values to be written
      */
-    public void writeln(Boolean... values);
+    public void println(Boolean... values);
 
     /**
-     * Writes all given bute values in sequence separated by whitespace and then
+     * Prints all given bute values in sequence separated by whitespace and then
      * terminates the line. This method behaves as though it invokes
-     * {@link #writeln(Object[])}.
+     * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Byte} values to be written
      */
-    public void writeln(Byte... values);
+    public void println(Byte... values);
 
     /**
-     * Writes all given short integer values in sequence separated by whitespace
+     * Prints all given short integer values in sequence separated by whitespace
      * and then terminates the line. This method behaves as though it invokes
-     * {@link #writeln(Object[])}.
+     * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Short} values to be written
      */
-    public void writeln(Short... values);
+    public void println(Short... values);
 
     /**
-     * Writes all given integer values in sequence separated by whitespace and
+     * Prints all given integer values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #writeln(Object[])}.
+     * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Ineger} values to be written
      */
-    public void writeln(Integer... values);
+    public void println(Integer... values);
 
     /**
-     * Writes all given long integer values in sequence separated by whitespace
+     * Prints all given long integer values in sequence separated by whitespace
      * and then terminates the line. This method behaves as though it invokes
-     * {@link #writeln(Object[])}.
+     * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Long} values to be written
      */
-    public void writeln(Long... values);
+    public void println(Long... values);
 
     /**
-     * Writes all given floating-point values in sequence separated by
+     * Prints all given floating-point values in sequence separated by
      * whitespace and then terminates the line. This method behaves as though it
-     * invokes {@link #writeln(Object[])}.
+     * invokes {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Float} values to be written
      */
-    public void writeln(Float... values);
+    public void println(Float... values);
 
     /**
-     * Writes all given double-precision floating-point values in sequence
+     * Prints all given double-precision floating-point values in sequence
      * separated by whitespace and then terminates the line. This method behaves
-     * as though it invokes {@link #writeln(Object[])}.
+     * as though it invokes {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Double} values to be written
      */
-    public void writeln(Double... values);
+    public void println(Double... values);
 
     /**
-     * Writes all given character values in sequence separated by whitespace and
+     * Prints all given character values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #writeln(Object[])}.
+     * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Character} values to be written
      */
-    public void writeln(Character... values);
+    public void println(Character... values);
 
     /**
-     * Writes all given string values in sequence separated by whitespace and
+     * Prints all given string values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
-     * {@link #write(String)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(String)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code String} values to be written
      */
-    public void writeln(String... values);
+    public void println(String... values);
 
     /**
-     * Writes all given objects in sequence separated by whitespace and then
+     * Prints all given objects in sequence separated by whitespace and then
      * terminates the line. This method behaves as though it invokes
-     * {@link #write(Object)} for each of the given values invoking
-     * {@link #write()} inbetween and {@link #writeln()} at the end.
+     * {@link #print(Object)} for each of the given values invoking
+     * {@link #print()} inbetween and {@link #println()} at the end.
      *
      * @param values
      *            The {@code Object} values to be written
      */
-    public void writeln(Object... values);
+    public void println(Object... values);
 
     /**
-     * Writes the given boolean matrix row by row, each in the separate line,
+     * Prints the given boolean matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code boolean} matrix to be written
      */
-    public void writeln(boolean[][] values);
+    public void println(boolean[][] values);
 
     /**
-     * Writes the given byte matrix row by row, each in the separate line, with
+     * Prints the given byte matrix row by row, each in the separate line, with
      * the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code byte} matrix to be written
      */
-    public void writeln(byte[][] values);
+    public void println(byte[][] values);
 
     /**
-     * Writes the given short integer matrix row by row, each in the separate
+     * Prints the given short integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code short} matrix to be written
      */
-    public void writeln(short[][] values);
+    public void println(short[][] values);
 
     /**
-     * Writes the given integer matrix row by row, each in the separate line,
+     * Prints the given integer matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code int} matrix to be written
      */
-    public void writeln(int[][] values);
+    public void println(int[][] values);
 
     /**
-     * Writes the given long integer matrix row by row, each in the separate
+     * Prints the given long integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code long} matrix to be written
      */
-    public void writeln(long[][] values);
+    public void println(long[][] values);
 
     /**
-     * Writes the given floating-point matrix row by row, each in the separate
+     * Prints the given floating-point matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code float} matrix to be written
      */
-    public void writeln(float[][] values);
+    public void println(float[][] values);
 
     /**
-     * Writes the given double-precision floating-point matrix row by row, each
+     * Prints the given double-precision floating-point matrix row by row, each
      * in the separate line, with the individual elements separated by
      * whitespace.
      *
      * @param values
      *            The {@code double} matrix to be written
      */
-    public void writeln(double[][] values);
+    public void println(double[][] values);
 
     /**
-     * Writes the given character matrix row by row, each in the separate line,
+     * Prints the given character matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code char} matrix to be written
      */
-    public void writeln(char[][] values);
+    public void println(char[][] values);
 
     /**
-     * Writes the given boolean matrix row by row, each in the separate line,
+     * Prints the given boolean matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Boolean} matrix to be written
      */
-    public void writeln(Boolean[][] values);
+    public void println(Boolean[][] values);
 
     /**
-     * Writes the given byte matrix row by row, each in the separate line, with
+     * Prints the given byte matrix row by row, each in the separate line, with
      * the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Byte} matrix to be written
      */
-    public void writeln(Byte[][] value);
+    public void println(Byte[][] value);
 
     /**
-     * Writes the given short integer matrix row by row, each in the separate
+     * Prints the given short integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Short} matrix to be written
      */
-    public void writeln(Short[][] values);
+    public void println(Short[][] values);
 
     /**
-     * Writes the given integer matrix row by row, each in the separate line,
+     * Prints the given integer matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Integer} matrix to be written
      */
-    public void writeln(Integer[][] values);
+    public void println(Integer[][] values);
 
     /**
-     * Writes the given long integer matrix row by row, each in the separate
+     * Prints the given long integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Long} matrix to be written
      */
-    public void writeln(Long[][] values);
+    public void println(Long[][] values);
 
     /**
-     * Writes the given floating-point matrix row by row, each in the separate
+     * Prints the given floating-point matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Float} matrix to be written
      */
-    public void writeln(Float[][] values);
+    public void println(Float[][] values);
 
     /**
-     * Writes the given double-precision floating-point matrix row by row, each
+     * Prints the given double-precision floating-point matrix row by row, each
      * in the separate line, with the individual elements separated by
      * whitespace.
      *
      * @param values
      *            The {@code Double} matrix to be written
      */
-    public void writeln(Double[][] values);
+    public void println(Double[][] values);
 
     /**
-     * Writes the given character matrix row by row, each in the separate line,
+     * Prints the given character matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Character} matrix to be written
      */
-    public void writeln(Character[][] values);
+    public void println(Character[][] values);
 
     /**
-     * Writes the given string matrix row by row, each in the separate line,
+     * Prints the given string matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code String} matrix to be written
      */
-    public void writeln(String[][] values);
+    public void println(String[][] values);
 
     /**
-     * Writes the given object matrix row by row, each in the separate line,
+     * Prints the given object matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
      * @param values
      *            The {@code Object} matrix to be written
      */
-    public void writeln(Object[][] values);
+    public void println(Object[][] values);
 
 }

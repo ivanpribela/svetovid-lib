@@ -257,7 +257,7 @@ public final class Svetovid {
     public static final AutoCloseDialogFactory gui = Dialogs.getFactory(LOCALE);
 
     static {
-        Runtime.getRuntime().addShutdownHook(new ShutdownThread() {	});
+        Runtime.getRuntime().addShutdownHook(new ShutdownThread() { });
     }
 
     /* The thread that runs at the VM shutdown to close all opened streams. */

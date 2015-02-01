@@ -6,7 +6,7 @@
 public class DopisivanjeUFajl {
 
     public static void main(String[] args) {
-        Svetovid.append("novi.txt").writeln("Dodatni red");
-        Svetovid.append("novi.txt").writeln("Drugi dodatni red");
+        Svetovid.append("novi.txt").println("Dodatni red");
+        Svetovid.append("novi.txt").println("Drugi dodatni red");
     }
 }

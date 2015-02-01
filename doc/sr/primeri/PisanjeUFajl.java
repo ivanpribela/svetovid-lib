@@ -6,8 +6,8 @@
 public class PisanjeUFajl {
 
     public static void main(String[] args) {
-        Svetovid.out.writeln("Pisanje dva reda u fajl");
-        Svetovid.out("novi.txt").writeln("prvi red");
-        Svetovid.out("novi.txt").writeln("drugi red");
+        Svetovid.out.println("Pisanje dva reda u fajl");
+        Svetovid.out("novi.txt").println("prvi red");
+        Svetovid.out("novi.txt").println("drugi red");
     }
 }

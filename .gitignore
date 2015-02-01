@@ -1,12 +1,21 @@
-/bin
-/dist
-doc/api
 
+# Compiled binaries
+/bin
 *.class
+
+# Generated documentation
+/gendoc/
+
+# Packed distributables
+/dist
+*.jar
 *.zip
 *.tar.gz
 *.tgz
 
-#backups
+# Backups
 *~
 *.bak
+
+# Windows specific
+Thumbs.db
