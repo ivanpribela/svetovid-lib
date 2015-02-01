@@ -169,7 +169,7 @@
             replace=".html"
             input="${htmldoc.singlefile}"/>
             <echo message="${htmldoc.genname}"/>
-        <exec executable="pandoc">
+        <exec executable="pandoc" failifexecutionfails="false">
             <arg value="--standalone"/>
             <arg value="--include-in-header=fragments/html/htmldoc-headend.html"/>
             <arg value="--include-before-body=fragments/html/htmldoc-start.html"/>
