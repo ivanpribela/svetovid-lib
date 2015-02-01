@@ -35,11 +35,11 @@ public class Laps {
 
         // Print the statistics
         double[] times = stopwatch.getLapTimes();
-        Svetovid.out.writeln("Time it took to enter individual numbers:");
-        Svetovid.out.writeln(times);
+        Svetovid.out.println("Time it took to enter individual numbers:");
+        Svetovid.out.println(times);
         times = stopwatch.getTotalTimes();
-        Svetovid.out.writeln("Total time it took before entering each number:");
-        Svetovid.out.writeln(times);
+        Svetovid.out.println("Total time it took before entering each number:");
+        Svetovid.out.println(times);
 
     }
 }

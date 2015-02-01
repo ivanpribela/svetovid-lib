@@ -34,8 +34,8 @@ public class MaxArray {
         }
 
         // Print the result
-        Svetovid.out.writeln("Maximum number:", maximum);
-        Svetovid.out.writeln(numbers);
+        Svetovid.out.println("Maximum number:", maximum);
+        Svetovid.out.println(numbers);
 
     }
 }

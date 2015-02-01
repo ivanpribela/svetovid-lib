@@ -145,6 +145,6 @@ public class Svetovid {
      *            this argument is just ignored
      */
     public static void main(String[] args) {
-        Svetovid.out.writeln("Svetovid: " + org.svetovid.Svetovid.getVersion());
+        Svetovid.out.println("Svetovid: " + org.svetovid.Svetovid.getVersion());
     }
 }

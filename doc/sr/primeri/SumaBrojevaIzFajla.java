@@ -16,7 +16,7 @@ public class SumaBrojevaIzFajla {
     public static void main(String[] args) {
 
         // Ispisujemo prigodnu poruku
-        Svetovid.out.writeln("Ucitavamo brojeve iz fajla " + IME_FAJLA);
+        Svetovid.out.println("Ucitavamo brojeve iz fajla " + IME_FAJLA);
 
         // Suma je na pocetku nula
         double suma = 0;
@@ -36,7 +36,7 @@ public class SumaBrojevaIzFajla {
         }
 
         // Ispisemo ukupnu sumu na ekran
-        Svetovid.out.writeln(suma);
+        Svetovid.out.println(suma);
 
     }
 

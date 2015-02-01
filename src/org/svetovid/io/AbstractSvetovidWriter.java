@@ -59,71 +59,71 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void write(boolean value) {
-        write(Boolean.toString(value));
+    public void print(boolean value) {
+        print(Boolean.toString(value));
     }
 
     @Override
-    public void write(byte value) {
-        write(Byte.toString(value));
+    public void print(byte value) {
+        print(Byte.toString(value));
     }
 
     @Override
-    public void write(short value) {
-        write(Short.toString(value));
+    public void print(short value) {
+        print(Short.toString(value));
     }
 
     @Override
-    public void write(int value) {
-        write(Integer.toString(value));
+    public void print(int value) {
+        print(Integer.toString(value));
     }
 
     @Override
-    public void write(long value) {
-        write(Long.toString(value));
+    public void print(long value) {
+        print(Long.toString(value));
     }
 
     @Override
-    public void write(float value) {
-        write(Float.toString(value));
+    public void print(float value) {
+        print(Float.toString(value));
     }
 
     @Override
-    public void write(double value) {
-        write(Double.toString(value));
+    public void print(double value) {
+        print(Double.toString(value));
     }
 
     @Override
-    public void write(char value) {
-        write(Character.toString(value));
+    public void print(char value) {
+        print(Character.toString(value));
     }
 
     @Override
-    public void write(String value) {
+    public void print(String value) {
         try {
-            doWrite(value);
+            doPrint(value);
             if (autoFlush) {
-                writebf();
+                printbf();
             }
         } catch (IOException e) {
             exception = e;
         }
     }
 
-    protected abstract void doWrite(String value) throws IOException;
+    protected abstract void doPrint(String value) throws IOException;
 
     @Override
-    public void write(Object value) {
-        write(String.valueOf(value));
+    public void print(Object value) {
+        print(String.valueOf(value));
     }
 
     @Override
-    public void write() {
-        write(whitespace);
+    public void print() {
+        print(whitespace);
     }
 
     @Override
-    public void writebf() {
+    public void printbf() {
         try {
             doFlush();
             exception = null;
@@ -135,51 +135,51 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     protected abstract void doFlush() throws IOException;
 
     @Override
-    public void writeln(boolean value) {
-        writeln(Boolean.toString(value));
+    public void println(boolean value) {
+        println(Boolean.toString(value));
     }
 
     @Override
-    public void writeln(byte value) {
-        writeln(Byte.toString(value));
+    public void println(byte value) {
+        println(Byte.toString(value));
     }
 
     @Override
-    public void writeln(short value) {
-        writeln(Short.toString(value));
+    public void println(short value) {
+        println(Short.toString(value));
     }
 
     @Override
-    public void writeln(int value) {
-        writeln(Integer.toString(value));
+    public void println(int value) {
+        println(Integer.toString(value));
     }
 
     @Override
-    public void writeln(long value) {
-        writeln(Long.toString(value));
+    public void println(long value) {
+        println(Long.toString(value));
     }
 
     @Override
-    public void writeln(float value) {
-        writeln(Float.toString(value));
+    public void println(float value) {
+        println(Float.toString(value));
     }
 
     @Override
-    public void writeln(double value) {
-        writeln(Double.toString(value));
+    public void println(double value) {
+        println(Double.toString(value));
     }
 
     @Override
-    public void writeln(char value) {
-        writeln(Character.toString(value));
+    public void println(char value) {
+        println(Character.toString(value));
     }
 
     @Override
-    public void writeln(String value) {
+    public void println(String value) {
         try {
             doWriteln(value);
             if (autoFlush) {
-                writebf();
+                printbf();
             }
             exception = null;
         } catch (IOException e) {
@@ -190,23 +190,23 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     protected abstract void doWriteln(String value) throws IOException;
 
     @Override
-    public void writeln(Object value) {
-        writeln(String.valueOf(value));
+    public void println(Object value) {
+        println(String.valueOf(value));
     }
 
     @Override
-    public void writeln() {
-        writeln("");
+    public void println() {
+        println("");
     }
 
     @Override
-    public void writeln(boolean... value) {
+    public void println(boolean... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -215,17 +215,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(byte... value) {
+    public void println(byte... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -234,17 +234,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(short... value) {
+    public void println(short... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -253,17 +253,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(int... value) {
+    public void println(int... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -272,17 +272,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(long... value) {
+    public void println(long... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -291,17 +291,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(float... value) {
+    public void println(float... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -310,17 +310,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(double... value) {
+    public void println(double... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -329,17 +329,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(char... value) {
+    public void println(char... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -348,57 +348,57 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(Boolean... value) {
-        writeln((Object[]) value);
+    public void println(Boolean... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Byte... value) {
-        writeln((Object[]) value);
+    public void println(Byte... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Short... value) {
-        writeln((Object[]) value);
+    public void println(Short... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Integer... value) {
-        writeln((Object[]) value);
+    public void println(Integer... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Long... value) {
-        writeln((Object[]) value);
+    public void println(Long... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Float... value) {
-        writeln((Object[]) value);
+    public void println(Float... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Double... value) {
-        writeln((Object[]) value);
+    public void println(Double... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(Character... value) {
-        writeln((Object[]) value);
+    public void println(Character... value) {
+        println((Object[]) value);
     }
 
     @Override
-    public void writeln(String... value) {
+    public void println(String... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -407,17 +407,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(Object... value) {
+    public void println(Object... value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         StringBuilder builder = new StringBuilder();
@@ -426,276 +426,276 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             builder.append(whitespace);
             builder.append(value[i]);
         }
-        writeln(builder.toString());
+        println(builder.toString());
     }
 
     @Override
-    public void writeln(boolean[][] value) {
+    public void println(boolean[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
-        }
-    }
-
-    @Override
-    public void writeln(byte[][] value) {
-        if (value == null) {
-            writeln((String) null);
-            return;
-        }
-        if (value.length == 0) {
-            writeln();
-            return;
-        }
-        for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(short[][] value) {
+    public void println(byte[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(int[][] value) {
+    public void println(short[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(long[][] value) {
+    public void println(int[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(float[][] value) {
+    public void println(long[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(double[][] value) {
+    public void println(float[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(char[][] value) {
+    public void println(double[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Boolean[][] value) {
+    public void println(char[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Byte[][] value) {
+    public void println(Boolean[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Short[][] value) {
+    public void println(Byte[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Integer[][] value) {
+    public void println(Short[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Long[][] value) {
+    public void println(Integer[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Float[][] value) {
+    public void println(Long[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Double[][] value) {
+    public void println(Float[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Character[][] value) {
+    public void println(Double[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(String[][] value) {
+    public void println(Character[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
         }
     }
 
     @Override
-    public void writeln(Object[][] value) {
+    public void println(String[][] value) {
         if (value == null) {
-            writeln((String) null);
+            println((String) null);
             return;
         }
         if (value.length == 0) {
-            writeln();
+            println();
             return;
         }
         for (int i = 0; i < value.length; i++) {
-            writeln(value[i]);
+            println(value[i]);
+        }
+    }
+
+    @Override
+    public void println(Object[][] value) {
+        if (value == null) {
+            println((String) null);
+            return;
+        }
+        if (value.length == 0) {
+            println();
+            return;
+        }
+        for (int i = 0; i < value.length; i++) {
+            println(value[i]);
         }
     }
 }

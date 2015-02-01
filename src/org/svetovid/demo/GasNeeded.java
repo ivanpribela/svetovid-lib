@@ -28,7 +28,7 @@ public class GasNeeded {
 
         // Calculate the gas needed
         double needed = distance / usage;
-        Svetovid.out.writeln("You will need", needed, "liters of gas for your journey.");
+        Svetovid.out.println("You will need", needed, "liters of gas for your journey.");
 
     }
 }
