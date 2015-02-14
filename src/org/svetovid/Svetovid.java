@@ -257,7 +257,7 @@ public final class Svetovid {
     public static final AutoCloseDialogFactory gui = Dialogs.getFactory(LOCALE);
 
     static {
-        Runtime.getRuntime().addShutdownHook(new ShutdownThread() { });
+        Runtime.getRuntime().addShutdownHook(new ShutdownThread());
     }
 
     /* The thread that runs at the VM shutdown to close all opened streams. */
@@ -277,6 +277,30 @@ public final class Svetovid {
                 for (SvetovidWriter writer : writers.values()) {
                     writer.close();
                 }
+            }
+        }
+    }
+
+    static {
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(Thread.getDefaultUncaughtExceptionHandler()));
+    }
+
+    /* Exception handler that prints uncaught exceptions in all threads. */
+    private static class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
+
+        private java.lang.Thread.UncaughtExceptionHandler delegate;
+
+        public UncaughtExceptionHandler(Thread.UncaughtExceptionHandler delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public void uncaughtException(Thread t, Throwable e) {
+            if (delegate != null) {
+                delegate.uncaughtException(t, e);
+            } else {
+                System.err.print("Exception in thread \"" + t.getName() + "\" ");
+                e.printStackTrace(System.err);
             }
         }
     }
