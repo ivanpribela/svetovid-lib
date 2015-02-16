@@ -1,8 +1,11 @@
 package org.svetovid.io;
 
 import java.text.MessageFormat;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import org.svetovid.Svetovid;
 
@@ -82,5 +85,107 @@ public class SvetovidException extends RuntimeException {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n/exception", locale);
         String pattern = bundle.getString(getClass().getSimpleName() + "." + messageKey);
         return MessageFormat.format(pattern, messageArguments);
+    }
+
+    public static String getStackTraceString(Throwable throwable, Locale locale) {
+        return getStackTraceString(null, throwable, locale);
+    }
+
+    public static String getStackTraceString(Thread thread, Throwable throwable, Locale locale) {
+        StringBuilder builder = new StringBuilder();
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n/exception", locale);
+        if (thread != null) {
+            appendThreadInfo(builder, thread, "", bundle, locale);
+        }
+        Set<Throwable> dejaVu = Collections.newSetFromMap(new IdentityHashMap<Throwable, Boolean>());
+        appendStackTrace(builder, throwable, null, "Main", "", dejaVu, bundle, locale);
+        return builder.toString();
+    }
+
+    protected static void appendThreadInfo(StringBuilder builder, Thread thread, String prefix, ResourceBundle bundle, Locale locale) {
+        String pattern = "StackTrace.Thread";
+        pattern = bundle.getString(pattern);
+        String threadName = thread.getName();
+        pattern = MessageFormat.format(pattern, threadName);
+        builder.append(prefix);
+        builder.append(pattern);
+    }
+
+    protected static void appendStackTrace(StringBuilder builder, Throwable throwable, StackTraceElement[] originalStackTrace, String role, String prefix, Set<Throwable> dejaVu, ResourceBundle bundle, Locale locale) {
+        if (dejaVu.contains(throwable)) {
+            appendThrowable(builder, throwable, "Cycle", prefix, bundle, locale);
+            return;
+        }
+        dejaVu.add(throwable);
+        StackTraceElement[] stackTrace = throwable.getStackTrace();
+        int m = stackTrace.length - 1;
+        int common = 0;
+        if (originalStackTrace != null) {
+            int n = originalStackTrace.length - 1;
+            while (m >= 0 && n >=0 && stackTrace[m].equals(originalStackTrace[n])) {
+                m--;
+                n--;
+            }
+            common = stackTrace.length - 1 - m;
+        }
+        appendThrowable(builder, throwable, role, prefix, bundle, locale);
+        String indent = "StackTrace.Indent";
+        indent = prefix + bundle.getString(indent);
+        for (int i = 0; i <= m; i++) {
+            appendStackTraceElement(builder, stackTrace[i], indent, bundle, locale);
+        }
+        if (common != 0) {
+            String pattern = "StackTrace.More";
+            pattern = bundle.getString(pattern);
+            pattern = MessageFormat.format(pattern, common);
+            builder.append(indent);
+            builder.append(pattern);
+            builder.append('\n');
+        }
+        for (Throwable supressed : throwable.getSuppressed()) {
+            appendStackTrace(builder, supressed, stackTrace, "Supressed", indent, dejaVu, bundle, locale);
+        }
+        Throwable cause = throwable.getCause();
+        if (cause != null) {
+            appendStackTrace(builder, cause, stackTrace, "Cause", prefix, dejaVu, bundle, locale);
+        }
+    }
+
+    protected static void appendThrowable(StringBuilder builder, Throwable throwable, String role, String prefix, ResourceBundle bundle, Locale locale) {
+        String pattern = "StackTrace." + role;
+        pattern = bundle.getString(pattern);
+        String className = throwable.getClass().getName();
+        String message;
+        if (throwable instanceof SvetovidException) {
+            SvetovidException se = (SvetovidException) throwable;
+            message = se.getMessage(locale);
+        } else {
+            message = throwable.getLocalizedMessage();
+        }
+        pattern = MessageFormat.format(pattern, className, message);
+        builder.append(prefix);
+        builder.append(pattern);
+        builder.append('\n');
+    }
+
+    protected static void appendStackTraceElement(StringBuilder builder, StackTraceElement element, String prefix, ResourceBundle bundle, Locale locale) {
+        String pattern = "StackTrace.Element";
+        pattern = bundle.getString(pattern);
+        String className = element.getClassName();
+        String methodName = element.getMethodName();
+        String source = element.getFileName();
+        if (element.isNativeMethod()) {
+            source = bundle.getString("StackTrace.Native");
+        } else if (source == null) {
+            source = bundle.getString("StackTrace.Unknown");
+        } else {
+            if (element.getLineNumber() >= 0) {
+                source = source + ":" + element.getLineNumber();
+            }
+        }
+        pattern = MessageFormat.format(pattern, className, methodName, source);
+        builder.append(prefix);
+        builder.append(pattern);
+        builder.append('\n');
     }
 }
