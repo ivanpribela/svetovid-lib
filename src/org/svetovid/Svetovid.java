@@ -37,6 +37,7 @@ import org.svetovid.io.DefaultSvetovidWriter;
 import org.svetovid.io.StandardSvetovidErrorWriter;
 import org.svetovid.io.StandardSvetovidReader;
 import org.svetovid.io.StandardSvetovidWriter;
+import org.svetovid.io.SvetovidException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
 
@@ -295,12 +296,11 @@ public final class Svetovid {
         }
 
         @Override
-        public void uncaughtException(Thread t, Throwable e) {
+        public void uncaughtException(Thread thread, Throwable throwable) {
             if (delegate != null) {
-                delegate.uncaughtException(t, e);
+                delegate.uncaughtException(thread, throwable);
             } else {
-                System.err.print("Exception in thread \"" + t.getName() + "\" ");
-                e.printStackTrace(System.err);
+                SvetovidException.printStackTrace(thread, throwable, System.err, Svetovid.LOCALE);
             }
         }
     }
