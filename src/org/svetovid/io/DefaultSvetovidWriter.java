@@ -65,7 +65,7 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
     }
 
     @Override
-    public void doWriteln(String value) throws IOException {
+    public void doPrintln(String value) throws IOException {
         doPrint(value);
         writer.newLine();
     }

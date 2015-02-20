@@ -177,7 +177,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     @Override
     public void println(String value) {
         try {
-            doWriteln(value);
+            doPrintln(value);
             if (autoFlush) {
                 printbf();
             }
@@ -187,7 +187,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
         }
     }
 
-    protected abstract void doWriteln(String value) throws IOException;
+    protected abstract void doPrintln(String value) throws IOException;
 
     @Override
     public void println(Object value) {
