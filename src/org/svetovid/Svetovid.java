@@ -65,6 +65,9 @@ public final class Svetovid {
     /** Default token separator is a single space character. */
     public static final String WHITESPACE = " ";
 
+    /** String that is used to substitute null value. */
+    public static final String NULL_STRING = "null";
+
     /** By default, all writers will not flush automatically. */
     public static final boolean AUTO_FLUSH = false;
 

@@ -54,7 +54,7 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
     @Override
     public void doPrint(String value) throws IOException {
         if (value == null) {
-            value = "null";
+            value = Svetovid.NULL_STRING;
         }
         writer.write(value, 0, value.length());
     }
