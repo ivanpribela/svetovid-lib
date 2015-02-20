@@ -24,19 +24,19 @@ public final class StandardSvetovidReader extends DefaultSvetovidReader {
         super(new StandardInputStreamProxy());
     }
 
-    protected boolean readln = false;
+    protected boolean readFromNewLine = false;
 
     public boolean getReadFromNewLine() {
-        return readln;
+        return readFromNewLine;
     }
 
-    public void setReadFromNewLine(boolean readln) {
-        this.readln = readln;
+    public void setReadFromNewLine(boolean readFromNewLine) {
+        this.readFromNewLine = readFromNewLine;
     }
 
     protected void prompt(String prompt) {
         Svetovid.out.print(prompt);
-        if (readln) {
+        if (readFromNewLine) {
             Svetovid.out.println();
         } else {
             Svetovid.out.print();
