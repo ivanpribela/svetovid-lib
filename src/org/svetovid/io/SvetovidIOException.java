@@ -62,7 +62,8 @@ public class SvetovidIOException extends SvetovidException {
      * @param messageArguments
      *            Optional arguments for formatting of the detail message
      */
-    public SvetovidIOException(String messageKey, Throwable cause, Object... messageArguments) {
+    public SvetovidIOException(String messageKey, Throwable cause,
+            Object... messageArguments) {
         super(messageKey, cause, messageArguments);
     }
 
@@ -74,12 +75,15 @@ public class SvetovidIOException extends SvetovidException {
      * automatically incorporated into this exception's detail message, but a
      * generic one is used instead.
      *
+     * @param messageKey
+     *            The resource bundle key of the detail message, which is saved
+     *            for later retrieval by the {@link #getMessage()} method
      * @param cause
      *            The cause, which is saved for later retrieval by the
      *            {@link #getCause()} method. A null value is permitted, and
      *            indicates that the cause is nonexistent or unknown.
      */
-    public SvetovidIOException(IOException cause) {
-        super("Generic", cause);
+    public SvetovidIOException(String messageKey, IOException cause) {
+        super(messageKey, cause, cause.getMessage());
     }
 }
