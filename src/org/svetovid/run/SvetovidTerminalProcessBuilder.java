@@ -14,7 +14,7 @@ public class SvetovidTerminalProcessBuilder extends SvetovidProcessBuilder {
     private static final List<String> SHELL = new ArrayList<>(2);
     static {
         if (OperatingSystem.CURRENT.getFamily() == OperatingSystemFamily.WINDOWS) {
-            SHELL.add("cmd");
+            SHELL.add(System.getenv("ComSpec"));
             SHELL.add("/C");
         } else {
             SHELL.add("sh");
