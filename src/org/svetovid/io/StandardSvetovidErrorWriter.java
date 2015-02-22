@@ -16,8 +16,22 @@
 
 package org.svetovid.io;
 
+/**
+ * This class provides an implementation of the {@link SvetovidWriter} interface
+ * that writes all the output to the "standard" error output (see
+ * {@link System#err} ).
+ *
+ * @author Ivan Pribela
+ *
+ * @see System#err
+ * @see SvetovidWriter
+ */
 public class StandardSvetovidErrorWriter extends DefaultSvetovidWriter {
 
+    /**
+     * Creates a new writer that writes all the output to the "standard" error
+     * output.
+     */
     public StandardSvetovidErrorWriter() {
         super(new StandardErrorStreamProxy());
         autoFlush = true;
