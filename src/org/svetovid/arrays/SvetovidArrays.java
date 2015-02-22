@@ -300,6 +300,159 @@ public class SvetovidArrays {
         return Arrays.equals(array1, array2);
     }
 
+    public static <T> String toString(boolean[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(byte[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(short[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(int[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(long[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(float[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(double[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(char[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(array[0]);
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(array[i]);
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
+    public static <T> String toString(T[] array, String prefix, String suffix, String infix, String nullString) {
+        if (array == null) {
+            return nullString;
+        }
+        StringBuilder builder = new StringBuilder();
+        builder.append(prefix);
+        if (array.length > 0) {
+            builder.append(String.valueOf(array[0].toString()));
+            for (int i = 1; i < array.length; i++) {
+                builder.append(infix);
+                builder.append(String.valueOf(array[i].toString()));
+            }
+        }
+        builder.append(suffix);
+        return builder.toString();
+    }
+
     public static boolean[] toArray(boolean... items) {
         return items;
     }
