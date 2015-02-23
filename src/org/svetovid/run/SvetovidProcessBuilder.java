@@ -3,6 +3,7 @@ package org.svetovid.run;
 import java.io.IOException;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ import org.svetovid.io.SvetovidProcess;
 
 public class SvetovidProcessBuilder {
 
-    private ProcessBuilder builder;
+    protected ProcessBuilder builder;
 
     public SvetovidProcessBuilder() {
         builder = new ProcessBuilder();
@@ -130,6 +131,12 @@ public class SvetovidProcessBuilder {
     public SvetovidProcessBuilder redirectErrorStream(boolean redirectErrorStream) {
         builder.redirectErrorStream(redirectErrorStream);
         return this;
+    }
+
+    public List<String> effectiveCommand() {
+        List<String> cmd = builder.command();
+        cmd = new ArrayList<>(cmd);
+        return cmd;
     }
 
     public SvetovidProcess start() throws IOException {
