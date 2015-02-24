@@ -16,19 +16,18 @@
 
 package org.svetovid.io;
 
-import java.io.IOException;
-
 /**
  * This interface provides methods that simplify outputting data for beginner
- * programmers. Exception handling is not necessary as all operations are
- * returning default values on any errors. If necessary, the last raised
- * exception can be retrieved using {@link getLastException()} method.
+ * programmers. Exception handling is not necessary as it can be turned on or
+ * off by using {@link #setThrowingExceptions(boolean)}. Even when the exception
+ * throwing is turned off, if necessary, the last raised exception can be
+ * retrieved using {@link #getLastException()} method.
  */
 public interface SvetovidWriter {
 
     /**
      * Returns the currently used whitespace. This whitespace is written by
-     * methods like {@link write()} and {@link writeln(Object[])}.
+     * methods like {@link #print()} and {@link #println(Object[])}.
      *
      * @return the string currently used as whitespace.
      */
@@ -36,7 +35,7 @@ public interface SvetovidWriter {
 
     /**
      * Sets the string used as whitespace. This whitespace is written by methods
-     * like {@link write()} and {@link writeln(Object[])}.
+     * like {@link #print()} and {@link #println(Object[])}.
      *
      * @param whitespace
      *            the string to use as whitespace
@@ -46,20 +45,43 @@ public interface SvetovidWriter {
     /**
      * Returns whether this writer automatically flushes the underlying output
      * stream and forces any buffered output bytes to be written out after every
-     * operation by calling {@link writebf()}.
+     * operation by calling {@link #printbf()}.
+     *
+     * @return {@code true} if this writer automatically flushes the underlying
+     *         output stream; {@code false} otherwise.
      */
     public boolean getAutoFlush();
 
     /**
      * Configures whether this writer should automatically flush the underlying
      * output stream and force any buffered output bytes to be written out after
-     * every operation by calling {@link writebf()}.
+     * every operation by calling {@link #printbf()}.
      *
      * @param autoFlush
-     *            if {@code true} this writer will call {@link writebf()} after
+     *            if {@code true} this writer will call {@link #printbf()} after
      *            every operation
      */
     public void setAutoFlush(boolean autoFlush);
+
+    /**
+     * Returns the indicator whether this writer will throw exceptions on I/O
+     * operation errors or just return default values.
+     *
+     * @return {@code true} if this writer throws exceptions on failed I/O
+     *         operations; {@code false} otherwise.
+     */
+    public boolean isThrowingExceptions();
+
+    /**
+     * Configures whether this writer should throw exceptions on I/O operation
+     * errors or just return default values.
+     *
+     * @param shouldThrow
+     *            {@code true} if this writer should throw exceptions on failed
+     *            I/O operations in the future; {@code false} if it should
+     *            return default values.
+     */
+    public void setThrowingExceptions(boolean shouldThrow);
 
     /**
      * Returns the exception raised in the last operation; if the operation was
@@ -68,63 +90,84 @@ public interface SvetovidWriter {
      * @return the exception raised in the last operation or {@code null} it the
      *         operation was successful.
      */
-    public IOException getLastException();
+    public Throwable getLastException();
 
     /**
      * Closes this writer and releases any resources associated with the
      * underlying stream. The general contract of {@code close} is that it
      * closes the output stream. A closed stream cannot perform output
      * operations and cannot be reopened.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void close();
+    public void close() throws SvetovidIOException;
 
     /**
      * Prints a boolean value as a human readable string.
      *
      * @param value
      *            The {@code boolean} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(boolean value);
+    public void print(boolean value) throws SvetovidIOException;
 
     /**
      * Prints a byte value as a human readable string.
      *
      * @param value
      *            The {@code byte} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(byte value);
+    public void print(byte value) throws SvetovidIOException;
 
     /**
      * Prints a short integer value as a human readable string.
      *
      * @param value
      *            The {@code short} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(short value);
+    public void print(short value) throws SvetovidIOException;
 
     /**
      * Prints an integer value as a human readable string.
      *
      * @param value
      *            The {@code integer} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(int value);
+    public void print(int value) throws SvetovidIOException;
 
     /**
      * Prints a long integer value as a human readable string.
      *
      * @param value
      *            The {@code long} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(long value);
+    public void print(long value) throws SvetovidIOException;
 
     /**
      * Prints a floating-point value as a human readable string.
      *
      * @param value
      *            The {@code float} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(float value);
+    public void print(float value) throws SvetovidIOException;
 
     /**
      * Prints a double-precision floating-point value as a human readable
@@ -132,16 +175,22 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code double} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(double value);
+    public void print(double value) throws SvetovidIOException;
 
     /**
      * Prints a character value as a human readable string.
      *
      * @param value
      *            The {@code character} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(char value);
+    public void print(char value) throws SvetovidIOException;
 
     /**
      * Prints a string. If the argument is {@code null} then the string
@@ -149,27 +198,39 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code String} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(String value);
+    public void print(String value) throws SvetovidIOException;
 
     /**
      * Prints an object as a human readable string.
      *
      * @param value
      *            The {@code Object} to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print(Object value);
+    public void print(Object value) throws SvetovidIOException;
 
     /**
      * Prints a whitespace.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void print();
+    public void print() throws SvetovidIOException;
 
     /**
      * Prints any buffered data to the underlying output stream and then flushes
      * that stream.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void printbf();
+    public void printbf() throws SvetovidIOException;
 
     /**
      * Prints a boolean value and then terminates the line. This method behaves
@@ -177,8 +238,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code boolean} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(boolean value);
+    public void println(boolean value) throws SvetovidIOException;
 
     /**
      * Prints a byte value and then terminates the line. This method behaves as
@@ -186,8 +250,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code byte} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(byte value);
+    public void println(byte value) throws SvetovidIOException;
 
     /**
      * Prints a short integer value and then terminates the line. This method
@@ -196,8 +263,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code short} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(short value);
+    public void println(short value) throws SvetovidIOException;
 
     /**
      * Prints an integer value and then terminates the line. This method behaves
@@ -205,8 +275,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code integer} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(int value);
+    public void println(int value) throws SvetovidIOException;
 
     /**
      * Prints a long integer value and then terminates the line. This method
@@ -215,8 +288,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code long} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(long value);
+    public void println(long value) throws SvetovidIOException;
 
     /**
      * Prints a floating-point value and then terminates the line. This method
@@ -225,8 +301,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code float} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(float value);
+    public void println(float value) throws SvetovidIOException;
 
     /**
      * Prints a double-precision floating-point value and then terminates the
@@ -235,8 +314,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code double} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(double value);
+    public void println(double value) throws SvetovidIOException;
 
     /**
      * Prints a character value and then terminates the line. This method
@@ -245,8 +327,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code character} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(char value);
+    public void println(char value) throws SvetovidIOException;
 
     /**
      * Prints a string and then terminates the line. This method behaves as
@@ -254,8 +339,11 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code String} value to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(String value);
+    public void println(String value) throws SvetovidIOException;
 
     /**
      * Prints an object and then terminates the line. This method behaves as
@@ -263,102 +351,132 @@ public interface SvetovidWriter {
      *
      * @param value
      *            The {@code Object} to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Object value);
+    public void println(Object value) throws SvetovidIOException;
 
     /**
      * Prints a line separator as defined by the {@code line.separator} system
      * property.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println();
+    public void println() throws SvetovidIOException;
 
     /**
      * Prints all given boolean values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
      * {@link #print(boolean)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code boolean} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(boolean... values);
+    public void println(boolean... values) throws SvetovidIOException;
 
     /**
      * Prints all given byte values in sequence separated by whitespace and then
      * terminates the line. This method behaves as though it invokes
      * {@link #print(byte)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code byte} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(byte... values);
+    public void println(byte... values) throws SvetovidIOException;
 
     /**
      * Prints all given short integer values in sequence separated by whitespace
      * and then terminates the line. This method behaves as though it invokes
      * {@link #print(short)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code short} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(short... values);
+    public void println(short... values) throws SvetovidIOException;
 
     /**
      * Prints all given integer values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
      * {@link #print(int)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code int} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(int... values);
+    public void println(int... values) throws SvetovidIOException;
 
     /**
      * Prints all given long integer values in sequence separated by whitespace
      * and then terminates the line. This method behaves as though it invokes
      * {@link #print(long)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code long} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(long... values);
+    public void println(long... values) throws SvetovidIOException;
 
     /**
      * Prints all given floating-point values in sequence separated by
      * whitespace and then terminates the line. This method behaves as though it
      * invokes {@link #print(float)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code float} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(float... values);
+    public void println(float... values) throws SvetovidIOException;
 
     /**
      * Prints all given double-precision floating-point values in sequence
      * separated by whitespace and then terminates the line. This method behaves
      * as though it invokes {@link #print(double)} for each of the given values
-     * invoking {@link #print()} inbetween and {@link #println()} at the end.
+     * invoking {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code double} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(double... values);
+    public void println(double... values) throws SvetovidIOException;
 
     /**
      * Prints all given character values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
      * {@link #print(char)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code char} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(char... values);
+    public void println(char... values) throws SvetovidIOException;
 
     /**
      * Prints all given boolean values in sequence separated by whitespace and
@@ -367,18 +485,24 @@ public interface SvetovidWriter {
      *
      * @param values
      *            The {@code Boolean} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Boolean... values);
+    public void println(Boolean... values) throws SvetovidIOException;
 
     /**
-     * Prints all given bute values in sequence separated by whitespace and then
+     * Prints all given byte values in sequence separated by whitespace and then
      * terminates the line. This method behaves as though it invokes
      * {@link #println(Object[])}.
      *
      * @param values
      *            The {@code Byte} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Byte... values);
+    public void println(Byte... values) throws SvetovidIOException;
 
     /**
      * Prints all given short integer values in sequence separated by whitespace
@@ -387,8 +511,11 @@ public interface SvetovidWriter {
      *
      * @param values
      *            The {@code Short} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Short... values);
+    public void println(Short... values) throws SvetovidIOException;
 
     /**
      * Prints all given integer values in sequence separated by whitespace and
@@ -396,9 +523,12 @@ public interface SvetovidWriter {
      * {@link #println(Object[])}.
      *
      * @param values
-     *            The {@code Ineger} values to be written
+     *            The {@code Integer} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Integer... values);
+    public void println(Integer... values) throws SvetovidIOException;
 
     /**
      * Prints all given long integer values in sequence separated by whitespace
@@ -407,8 +537,11 @@ public interface SvetovidWriter {
      *
      * @param values
      *            The {@code Long} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Long... values);
+    public void println(Long... values) throws SvetovidIOException;
 
     /**
      * Prints all given floating-point values in sequence separated by
@@ -417,8 +550,11 @@ public interface SvetovidWriter {
      *
      * @param values
      *            The {@code Float} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Float... values);
+    public void println(Float... values) throws SvetovidIOException;
 
     /**
      * Prints all given double-precision floating-point values in sequence
@@ -427,8 +563,11 @@ public interface SvetovidWriter {
      *
      * @param values
      *            The {@code Double} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Double... values);
+    public void println(Double... values) throws SvetovidIOException;
 
     /**
      * Prints all given character values in sequence separated by whitespace and
@@ -437,193 +576,256 @@ public interface SvetovidWriter {
      *
      * @param values
      *            The {@code Character} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Character... values);
+    public void println(Character... values) throws SvetovidIOException;
 
     /**
      * Prints all given string values in sequence separated by whitespace and
      * then terminates the line. This method behaves as though it invokes
      * {@link #print(String)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code String} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(String... values);
+    public void println(String... values) throws SvetovidIOException;
 
     /**
      * Prints all given objects in sequence separated by whitespace and then
      * terminates the line. This method behaves as though it invokes
      * {@link #print(Object)} for each of the given values invoking
-     * {@link #print()} inbetween and {@link #println()} at the end.
+     * {@link #print()} in-between and {@link #println()} at the end.
      *
      * @param values
      *            The {@code Object} values to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Object... values);
+    public void println(Object... values) throws SvetovidIOException;
 
     /**
      * Prints the given boolean matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code boolean} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(boolean[][] values);
+    public void println(boolean[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given byte matrix row by row, each in the separate line, with
      * the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code byte} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(byte[][] values);
+    public void println(byte[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given short integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code short} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(short[][] values);
+    public void println(short[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given integer matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code int} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(int[][] values);
+    public void println(int[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given long integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code long} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(long[][] values);
+    public void println(long[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given floating-point matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code float} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(float[][] values);
+    public void println(float[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given double-precision floating-point matrix row by row, each
      * in the separate line, with the individual elements separated by
      * whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code double} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(double[][] values);
+    public void println(double[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given character matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code char} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(char[][] values);
+    public void println(char[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given boolean matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Boolean} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Boolean[][] values);
+    public void println(Boolean[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given byte matrix row by row, each in the separate line, with
      * the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Byte} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Byte[][] value);
+    public void println(Byte[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given short integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Short} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Short[][] values);
+    public void println(Short[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given integer matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Integer} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Integer[][] values);
+    public void println(Integer[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given long integer matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Long} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Long[][] values);
+    public void println(Long[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given floating-point matrix row by row, each in the separate
      * line, with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Float} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Float[][] values);
+    public void println(Float[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given double-precision floating-point matrix row by row, each
      * in the separate line, with the individual elements separated by
      * whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Double} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Double[][] values);
+    public void println(Double[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given character matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Character} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Character[][] values);
+    public void println(Character[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given string matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code String} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(String[][] values);
+    public void println(String[][] value) throws SvetovidIOException;
 
     /**
      * Prints the given object matrix row by row, each in the separate line,
      * with the individual elements separated by whitespace.
      *
-     * @param values
+     * @param value
      *            The {@code Object} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void println(Object[][] values);
+    public void println(Object[][] value) throws SvetovidIOException;
 
 }
