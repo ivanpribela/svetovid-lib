@@ -2,16 +2,12 @@ package org.svetovid.arrays;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 public class SvetovidArrays {
-
-    // TODO add methods
-    // hashCode
-    // compare(comparator?)
-    // toString(nullstring?)
-    // toList, fromList
 
     public static final int INDEX_NOT_FOUND = -1;
 
@@ -488,6 +484,58 @@ public class SvetovidArrays {
     @SafeVarargs
     public static <T> T[] toArray(T... items) {
         return items;
+    }
+
+    public static <T> T[] toArray(Collection<T> items) {
+        if (items == null) {
+            return null;
+        }
+        Object[] array = items.toArray();
+        return (T[]) array;
+    }
+
+    public static List<Boolean> toList(boolean... items) {
+        Boolean[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Byte> toList(byte... items) {
+        Byte[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Short> toList(short... items) {
+        Short[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Integer> toList(int... items) {
+        Integer[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Long> toList(long... items) {
+        Long[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Float> toList(float... items) {
+        Float[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Double> toList(double... items) {
+        Double[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static List<Character> toList(char... items) {
+        Character[] boxed = box(items);
+        return Arrays.asList(boxed);
+    }
+
+    public static <T> List<T> toList(T... items) {
+        return Arrays.asList(items);
     }
 
     public static boolean[] copy(boolean[] array) {
@@ -2962,6 +3010,8 @@ public class SvetovidArrays {
     // TODO add methods like:
     // TODO allIndicesOf() + tolerance for double
     // TODO fill
+    // TODO hashCode
+    // TODO compare(comparator?)
 
     public static Boolean[] box(boolean[] array) {
         Boolean[] result = new Boolean[array.length];
