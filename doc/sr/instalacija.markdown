@@ -37,6 +37,35 @@ dok je na Linux operativnim sistemima to
 
 [Više detalja o ext direktorijumu](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
 
+### Dodavanje u editor DrJava
+
+Da bi se u editoru DrJava omogućilo kompajliranje i pokretanje
+programa u panela Interactions, najjednostavnije je eksplicitno dodati
+`svetovid-lib.jar` u `Classpath` editora, ili otpakovati jar u
+trenutni direktorijum kao što je gore navedeno.
+
+U okviru editora se ovo postiže na sledeći način:
+
+ - Edit->Preferences->ResourceLocations->Extra Classpath->Add 
+
+Alternativno se radi istog efekta u fajl `.drjava` u korisničkom
+direktorijumu može dodati polje
+
+ ```
+ extra.classpath=putanja/svetovid-lib.jar
+ ```
+
+Jednom kad se ovo postavi u editoru, podešavanja će važiti za sve
+programe koji se pokreću u njemu. Ovo je vrlo pogodno rešenje pošto ne
+zahteva administrativne privilegije, jer jar fajl može biti bilo gde
+na sistemu.
+
+Ako se koriti metod za dodavanje na sistemskom nivou, programi koji
+koriste Svetovid-lib će se kompajlirati uspešno u editoru, ali panel
+Interactions će prijavljivati grešku, pošto DrJava nažalost ne uzima u
+obzir deljeni ext direktorijum pri pokretanju.
+
+
 ## Testiranje instalacije
 
 Za jednostavno testiranje da li je bibloteka ispravno instalirana i da
