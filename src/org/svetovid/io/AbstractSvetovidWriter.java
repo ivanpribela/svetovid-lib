@@ -46,11 +46,22 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
         this.autoFlush = autoFlush;
     }
 
-    protected IOException exception;
+    protected boolean throwingExceptions = Svetovid.THROW_EXCEPTIONS;
+    protected SvetovidIOException lastException;
 
     @Override
-    public IOException getLastException() {
-        return exception;
+    public boolean isThrowingExceptions() {
+        return throwingExceptions;
+    }
+
+    @Override
+    public void setThrowingExceptions(boolean shouldThrow) {
+        throwingExceptions = shouldThrow;
+    }
+
+    @Override
+    public Throwable getLastException() {
+        return lastException;
     }
 
     @Override

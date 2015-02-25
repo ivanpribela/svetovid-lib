@@ -37,11 +37,22 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         this.whitespace = whitespace;
     }
 
-    protected IOException exception;
+    protected boolean throwingExceptions = Svetovid.THROW_EXCEPTIONS;
+    protected Throwable lastException;
 
     @Override
-    public IOException getLastException() {
-        return exception;
+    public boolean isThrowingExceptions() {
+        return throwingExceptions;
+    }
+
+    @Override
+    public void setThrowingExceptions(boolean shouldThrow) {
+        throwingExceptions = shouldThrow;
+    }
+
+    @Override
+    public Throwable getLastException() {
+        return lastException;
     }
 
     @Override

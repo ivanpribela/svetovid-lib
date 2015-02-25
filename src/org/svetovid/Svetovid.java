@@ -71,6 +71,9 @@ public final class Svetovid {
     /** By default, all writers will not flush automatically. */
     public static final boolean AUTO_FLUSH = false;
 
+    /** By default, all readers and writers are not throwing exceptions. */
+    public static final boolean THROW_EXCEPTIONS = false;
+
     /** Don't let anyone instantiate this class. */
     private Svetovid() {
     }
