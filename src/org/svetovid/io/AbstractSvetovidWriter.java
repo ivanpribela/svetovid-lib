@@ -20,6 +20,20 @@ import java.io.IOException;
 
 import org.svetovid.Svetovid;
 
+/**
+ * This class provides default implementations for the {@link SvetovidWriter}
+ * interface. Standard behaviors of all methods are defined here. The developer
+ * need only subclass this abstract class and define the
+ * {@link #doPrint(String)}, {@link #doPrintln(String)} and {@link #doFlush()}
+ * methods.
+ *
+ * @author Ivan Pribela
+ *
+ * @see SvetovidWriter
+ * @see #doPrint(String)
+ * @see #doPrintln(String)
+ * @see #doFlush()
+ */
 public abstract class AbstractSvetovidWriter implements SvetovidWriter {
 
     protected String whitespace = Svetovid.WHITESPACE;
@@ -64,154 +78,164 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
         return lastException;
     }
 
+    protected void wrapUpIOException(IOException e) throws SvetovidException {
+        SvetovidIOException exception = new SvetovidIOException("Output", e);
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
+        }
+    }
+
     @Override
-    public void close() {
+    public void close() throws SvetovidIOException {
+        lastException = null;
         Svetovid.removeOut(this);
     }
 
     @Override
-    public void print(boolean value) {
+    public void print(boolean value) throws SvetovidIOException {
         print(Boolean.toString(value));
     }
 
     @Override
-    public void print(byte value) {
+    public void print(byte value) throws SvetovidIOException {
         print(Byte.toString(value));
     }
 
     @Override
-    public void print(short value) {
+    public void print(short value) throws SvetovidIOException {
         print(Short.toString(value));
     }
 
     @Override
-    public void print(int value) {
+    public void print(int value) throws SvetovidIOException {
         print(Integer.toString(value));
     }
 
     @Override
-    public void print(long value) {
+    public void print(long value) throws SvetovidIOException {
         print(Long.toString(value));
     }
 
     @Override
-    public void print(float value) {
+    public void print(float value) throws SvetovidIOException {
         print(Float.toString(value));
     }
 
     @Override
-    public void print(double value) {
+    public void print(double value) throws SvetovidIOException {
         print(Double.toString(value));
     }
 
     @Override
-    public void print(char value) {
+    public void print(char value) throws SvetovidIOException {
         print(Character.toString(value));
     }
 
     @Override
-    public void print(String value) {
+    public void print(String value) throws SvetovidIOException {
         try {
             doPrint(value);
+            lastException = null;
             if (autoFlush) {
                 printbf();
             }
         } catch (IOException e) {
-            exception = e;
+            wrapUpIOException(e);
         }
     }
 
     protected abstract void doPrint(String value) throws IOException;
 
     @Override
-    public void print(Object value) {
+    public void print(Object value) throws SvetovidIOException {
         print(String.valueOf(value));
     }
 
     @Override
-    public void print() {
+    public void print() throws SvetovidIOException {
         print(whitespace);
     }
 
     @Override
-    public void printbf() {
+    public void printbf() throws SvetovidIOException {
         try {
             doFlush();
-            exception = null;
+            lastException = null;
         } catch (IOException e) {
-            exception = e;
+            wrapUpIOException(e);
         }
     }
 
     protected abstract void doFlush() throws IOException;
 
     @Override
-    public void println(boolean value) {
+    public void println(boolean value) throws SvetovidIOException {
         println(Boolean.toString(value));
     }
 
     @Override
-    public void println(byte value) {
+    public void println(byte value) throws SvetovidIOException {
         println(Byte.toString(value));
     }
 
     @Override
-    public void println(short value) {
+    public void println(short value) throws SvetovidIOException {
         println(Short.toString(value));
     }
 
     @Override
-    public void println(int value) {
+    public void println(int value) throws SvetovidIOException {
         println(Integer.toString(value));
     }
 
     @Override
-    public void println(long value) {
+    public void println(long value) throws SvetovidIOException {
         println(Long.toString(value));
     }
 
     @Override
-    public void println(float value) {
+    public void println(float value) throws SvetovidIOException {
         println(Float.toString(value));
     }
 
     @Override
-    public void println(double value) {
+    public void println(double value) throws SvetovidIOException {
         println(Double.toString(value));
     }
 
     @Override
-    public void println(char value) {
+    public void println(char value) throws SvetovidIOException {
         println(Character.toString(value));
     }
 
     @Override
-    public void println(String value) {
+    public void println(String value) throws SvetovidIOException {
         try {
             doPrintln(value);
+            lastException = null;
             if (autoFlush) {
                 printbf();
             }
-            exception = null;
         } catch (IOException e) {
-            exception = e;
+            wrapUpIOException(e);
         }
     }
 
     protected abstract void doPrintln(String value) throws IOException;
 
     @Override
-    public void println(Object value) {
+    public void println(Object value) throws SvetovidIOException {
         println(String.valueOf(value));
     }
 
     @Override
-    public void println() {
+    public void println() throws SvetovidIOException {
         println("");
     }
 
     @Override
-    public void println(boolean... value) {
+    public void println(boolean... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -230,7 +254,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(byte... value) {
+    public void println(byte... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -249,7 +273,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(short... value) {
+    public void println(short... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -268,7 +292,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(int... value) {
+    public void println(int... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -287,7 +311,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(long... value) {
+    public void println(long... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -306,7 +330,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(float... value) {
+    public void println(float... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -325,7 +349,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(double... value) {
+    public void println(double... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -344,7 +368,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(char... value) {
+    public void println(char... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -363,47 +387,47 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Boolean... value) {
+    public void println(Boolean... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Byte... value) {
+    public void println(Byte... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Short... value) {
+    public void println(Short... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Integer... value) {
+    public void println(Integer... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Long... value) {
+    public void println(Long... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Float... value) {
+    public void println(Float... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Double... value) {
+    public void println(Double... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(Character... value) {
+    public void println(Character... value) throws SvetovidIOException {
         println((Object[]) value);
     }
 
     @Override
-    public void println(String... value) {
+    public void println(String... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -422,7 +446,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Object... value) {
+    public void println(Object... value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -441,7 +465,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(boolean[][] value) {
+    public void println(boolean[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -456,7 +480,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(byte[][] value) {
+    public void println(byte[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -471,7 +495,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(short[][] value) {
+    public void println(short[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -486,7 +510,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(int[][] value) {
+    public void println(int[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -501,7 +525,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(long[][] value) {
+    public void println(long[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -516,7 +540,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(float[][] value) {
+    public void println(float[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -531,7 +555,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(double[][] value) {
+    public void println(double[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -546,7 +570,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(char[][] value) {
+    public void println(char[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -561,7 +585,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Boolean[][] value) {
+    public void println(Boolean[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -576,7 +600,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Byte[][] value) {
+    public void println(Byte[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -591,7 +615,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Short[][] value) {
+    public void println(Short[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -606,7 +630,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Integer[][] value) {
+    public void println(Integer[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -621,7 +645,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Long[][] value) {
+    public void println(Long[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -636,7 +660,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Float[][] value) {
+    public void println(Float[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -651,7 +675,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Double[][] value) {
+    public void println(Double[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -666,7 +690,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Character[][] value) {
+    public void println(Character[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -681,7 +705,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(String[][] value) {
+    public void println(String[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
@@ -696,7 +720,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
-    public void println(Object[][] value) {
+    public void println(Object[][] value) throws SvetovidIOException {
         if (value == null) {
             println((String) null);
             return;
