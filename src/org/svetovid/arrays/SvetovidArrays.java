@@ -601,6 +601,150 @@ public class SvetovidArrays {
         return array.clone();
     }
 
+    public static boolean[] fill(boolean[] array, boolean value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static byte[] fill(byte[] array, byte value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static short[] fill(short[] array, short value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static int[] fill(int[] array, int value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static long[] fill(long[] array, long value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static float[] fill(float[] array, float value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static double[] fill(double[] array, double value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static char[] fill(char[] array, char value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static <T> T[] fill(T[] array, T value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, value);
+        return array;
+    }
+
+    public static boolean[] fill(boolean[] array, int beginIndex, int endIndex, boolean value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static byte[] fill(byte[] array, int beginIndex, int endIndex, byte value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static short[] fill(short[] array, int beginIndex, int endIndex, short value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static int[] fill(int[] array, int beginIndex, int endIndex, int value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static long[] fill(long[] array, int beginIndex, int endIndex, long value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static float[] fill(float[] array, int beginIndex, int endIndex, float value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static double[] fill(double[] array, int beginIndex, int endIndex, double value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static char[] fill(char[] array, int beginIndex, int endIndex, char value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
+    public static <T> T[] fill(T[] array, int beginIndex, int endIndex, T value) {
+        if (array == null) {
+            return null;
+        }
+        Arrays.fill(array, beginIndex, endIndex, value);
+        return array;
+    }
+
     public static boolean[] add(boolean[] array, boolean... elements) {
         if (array == null) {
             return copy(elements);
