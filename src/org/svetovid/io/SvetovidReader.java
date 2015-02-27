@@ -16,14 +16,14 @@
 
 package org.svetovid.io;
 
-import java.io.IOException;
 import java.util.regex.Pattern;
 
 /**
- * This interface provides methods that simplify inputing data for beginner
- * programmers. Exception handling is not necessary as all operations are
+ * This interface provides methods that simplify reading the program input data
+ * for beginner programmers. Exception handling is not necessary as when it is
+ * turned off by {@link #setThrowingExceptions(boolean)} many operations are
  * returning default values on any errors. If necessary, the last raised
- * exception can be retrieved using {@link getLastException()} method.
+ * exception can be retrieved using {@link #getLastException()} method.
  */
 public interface SvetovidReader {
 
@@ -39,9 +39,9 @@ public interface SvetovidReader {
     public Pattern getWhitespace();
 
     /**
-     * Sets the pattern used to recognize whitespace. This
-     * pattern is used to separate tokens when reading form the underlying
-     * source. For more on patterns see {@link java.util.regex.Pattern}.
+     * Sets the pattern used to recognize whitespace. This pattern is used to
+     * separate tokens when reading form the underlying source. For more on
+     * patterns see {@link java.util.regex.Pattern}.
      *
      * @param whitespace
      *            the pattern to use recognize whitespace
@@ -51,86 +51,135 @@ public interface SvetovidReader {
     public void setWhitespace(Pattern whitespace);
 
     /**
+     * Returns the indicator whether this reader will throw exceptions on I/O
+     * operation errors or just return default values.
+     *
+     * @return {@code true} if this reader throws exceptions on failed I/O
+     *         operations; {@code false} otherwise.
+     */
+    public boolean isThrowingExceptions();
+
+    /**
+     * Configures whether this reader should throw exceptions on I/O operation
+     * errors or just return default values.
+     *
+     * @param shouldThrow
+     *            {@code true} if this reader should throw exceptions on failed
+     *            I/O operations in the future; {@code false} if it should
+     *            return default values.
+     */
+    public void setThrowingExceptions(boolean shouldThrow);
+
+    /**
      * Returns the exception raised in the last operation; if the operation was
      * successful and no exception was raised, returns {@code null}.
      *
      * @return the exception raised in the last operation or {@code null} it the
      *         operation was successful.
      */
-    public IOException getLastException();
+    public Throwable getLastException();
+
+    /**
+     * Checks whether this reader has no more data to be read.
+     *
+     * @return {@code true} if this reader has no more data to be read;
+     *         {@code false} otherwise.
+     */
+    public boolean isEmpty();
 
     /**
      * Checks whether this reader has data to be read.
      *
-     * @return {@code true} if this reader has more data to be read;
-     *         {@code false} otherwise.
+     * @return {@code true} if this reader has data to be read; {@code false}
+     *         otherwise.
      */
-    public boolean isEmpty();
+    public boolean hasMore();
 
     /**
      * Closes this writer and releases any resources associated with the
      * underlying source. The general contract of {@code close} is that it
      * closes the input source. A closed source cannot perform input operations
      * and cannot be reopened.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public void close();
+    public void close() throws SvetovidIOException;
 
     /**
      * Reads one token and converts it to a boolean value.
      *
      * @return the {@code boolean} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public boolean readBool();
+    public boolean readBool() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a byte value.
      *
      * @return the {@code byte} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable byte.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public byte readByte() throws NumberFormatException;
+    public byte readByte() throws SvetovidFormatException, SvetovidIOException;
 
     /**
      * Reads one token and converts it to a short integer value.
      *
      * @return the {@code short} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable short.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public short readShort() throws NumberFormatException;
+    public short readShort() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to an integer value.
      *
      * @return the {@code int} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable int.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable int.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public int readInt() throws NumberFormatException;
+    public int readInt() throws SvetovidFormatException, SvetovidIOException;
 
     /**
      * Reads one token and converts it to a long integer value.
      *
      * @return the {@code long} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable long.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public long readLong() throws NumberFormatException;
+    public long readLong() throws SvetovidFormatException, SvetovidIOException;
 
     /**
      * Reads one token and converts it to a floating-point value.
      *
      * @return the {@code float} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable float.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public float readFloat() throws NumberFormatException;
+    public float readFloat() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a double-precision floating-point
@@ -138,84 +187,116 @@ public interface SvetovidReader {
      *
      * @return the {@code double} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable double.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public double readDouble() throws NumberFormatException;
+    public double readDouble() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a character value.
      *
      * @return the {@code char} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable character.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable char.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public char readChar() throws NumberFormatException;
+    public char readChar() throws SvetovidFormatException, SvetovidIOException;
 
     /**
      * Reads one token and returns it as a string value.
      *
      * @return the {@code String} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is {@code null}.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public String readString();
+    public String readString() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a boolean value.
      *
      * @return the {@code Boolean} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Boolean readBoolBoxed();
+    public Boolean readBoolBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a byte value.
      *
      * @return the {@code Byte} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable byte.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Byte readByteBoxed();
+    public Byte readByteBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a short integer value.
      *
      * @return the {@code Short} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable short.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Short readShortBoxed();
+    public Short readShortBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to an integer value.
      *
      * @return the {@code Integer} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable int.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable int.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Integer readIntBoxed();
+    public Integer readIntBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a long integer value.
      *
      * @return the {@code Long} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable long.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Long readLongBoxed();
+    public Long readLongBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a floating-point value.
      *
      * @return the {@code Float} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable float.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Float readFloatBoxed();
+    public Float readFloatBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a double-precision floating-point
@@ -223,20 +304,26 @@ public interface SvetovidReader {
      *
      * @return the {@code Double} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable double.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Double readDoubleBoxed();
+    public Double readDoubleBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one token and converts it to a character value.
      *
      * @return the {@code Character} value read.
      *
-     * @exception NumberFormatException
-     *                if the token is not a parsable character.
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Character readCharBoxed();
+    public Character readCharBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to boolean
@@ -244,10 +331,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code boolean} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable boolean.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public boolean[] readBoolLine();
+    public boolean[] readBoolArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to byte
@@ -255,10 +345,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code byte} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable byte.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public byte[] readByteLine() throws NumberFormatException;
+    public byte[] readByteArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to short
@@ -266,10 +359,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code short} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable short.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public short[] readShortLine() throws NumberFormatException;
+    public short[] readShortArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to integer
@@ -277,10 +373,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code int} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable integer.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public int[] readIntLine() throws NumberFormatException;
+    public int[] readIntArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to long
@@ -288,10 +387,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code long} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable long.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public long[] readLongLine() throws NumberFormatException;
+    public long[] readLongArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to
@@ -299,10 +401,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code float} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable float.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public float[] readFloatLine() throws NumberFormatException;
+    public float[] readFloatArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to
@@ -310,10 +415,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code double} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable double.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public double[] readDoubleLine() throws NumberFormatException;
+    public double[] readDoubleArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to character
@@ -321,26 +429,38 @@ public interface SvetovidReader {
      *
      * @return an array of {@code char} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable character.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public char[] readCharLine() throws NumberFormatException;
+    public char[] readCharArray() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and returns them as string
      * values.
      *
      * @return an array of {@code String} values read.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public String[] readStringLine();
+    public String[] readStringArray() throws SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to boolean
      * values.
      *
      * @return an array of {@code Boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Boolean[] readBoolLineBoxed();
+    public Boolean[] readBoolArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to byte
@@ -348,10 +468,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Byte} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable byte.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Byte[] readByteLineBoxed();
+    public Byte[] readByteArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to short
@@ -359,10 +482,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Short} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable short.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Short[] readShortLineBoxed();
+    public Short[] readShortArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to integer
@@ -370,10 +496,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Integer} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable integer.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Integer[] readIntLineBoxed();
+    public Integer[] readIntArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to long
@@ -381,10 +510,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Long} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable long.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Long[] readLongLineBoxed();
+    public Long[] readLongArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to
@@ -392,10 +524,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Float} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable float.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Float[] readFloatLineBoxed();
+    public Float[] readFloatArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to
@@ -403,10 +538,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Double} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable double.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Double[] readDoubleLineBoxed();
+    public Double[] readDoubleArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to character
@@ -414,10 +552,13 @@ public interface SvetovidReader {
      *
      * @return an array of {@code Character} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the tokens is not a parsable character.
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Character[] readCharLineBoxed();
+    public Character[] readCharArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads a line of text and returns it as a string. A line is considered to
@@ -427,8 +568,11 @@ public interface SvetovidReader {
      * @return A {@code String} containing the contents of the line, not
      *         including any line-termination characters, or null if the end of
      *         the source has been reached.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public String readLine();
+    public String readLine() throws SvetovidIOException;
 
     /**
      * Read all remaining lines and returns them as an array of strings. A line
@@ -439,16 +583,22 @@ public interface SvetovidReader {
      * @return A {@code String} array containing the contents of the remaining
      *         lines, not including any line-termination characters, or an empty
      *         array if the end of the source has been reached.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public String[] readAllLines();
+    public String[] readAllLines() throws SvetovidIOException;
 
     /**
      * Reads all remaining content and returns it as a string.
      *
      * @return A {@code String} containing all the remaining contents of the
      *         source, or null if the end of the source has been reached.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public String readAll();
+    public String readAll() throws SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a boolean matrix. The
@@ -456,8 +606,14 @@ public interface SvetovidReader {
      * is reached.
      *
      * @return a matrix of {@code boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public boolean[][] readBoolMatrix();
+    public boolean[][] readBoolMatrix() throws SvetovidFormatException,
+            SvetovidIOException;;
 
     /**
      * Reads multiple lines and converts the data to a byte matrix. The matrix
@@ -466,10 +622,13 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code byte} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable byte.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public byte[][] readByteMatrix() throws NumberFormatException;
+    public byte[][] readByteMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a shot integer matrix. The
@@ -478,10 +637,13 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code short} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable short.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public short[][] readShortMatrix() throws NumberFormatException;
+    public short[][] readShortMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to an integer matrix. The
@@ -490,10 +652,13 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code int} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable integer.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public int[][] readIntMatrix() throws NumberFormatException;
+    public int[][] readIntMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a long integer matrix. The
@@ -502,10 +667,13 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code long} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable long.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public long[][] readLongMatrix() throws NumberFormatException;
+    public long[][] readLongMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a floating-point matrix.
@@ -514,10 +682,13 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code float} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable float.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public float[][] readFloatMatrix() throws NumberFormatException;
+    public float[][] readFloatMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a double-precision
@@ -526,10 +697,13 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code double} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable double.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public double[][] readDoubleMatrix() throws NumberFormatException;
+    public double[][] readDoubleMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a character matrix. The
@@ -538,19 +712,25 @@ public interface SvetovidReader {
      *
      * @return a matrix of {@code char} values read.
      *
-     * @exception NumberFormatException
-     *                if one of the read values is not a parsable character.
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public char[][] readCharMatrix() throws NumberFormatException;
+    public char[][] readCharMatrix() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
-     * Reads multiple lines and converts the data to a string matrix. The
-     * matrix is read row by row until an empty row is found or the end of input
-     * is reached.
+     * Reads multiple lines and converts the data to a string matrix. The matrix
+     * is read row by row until an empty row is found or the end of input is
+     * reached.
      *
      * @return a matrix of {@code String} values read.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public String[][] readStringMatrix();
+    public String[][] readStringMatrix() throws SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a boolean matrix. The
@@ -558,8 +738,14 @@ public interface SvetovidReader {
      * is reached.
      *
      * @return a matrix of {@code Boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Boolean[][] readBoolMatrixBoxed();
+    public Boolean[][] readBoolMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a byte matrix. The matrix
@@ -567,8 +753,14 @@ public interface SvetovidReader {
      * reached.
      *
      * @return a matrix of {@code Byte} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Byte[][] readByteMatrixBoxed();
+    public Byte[][] readByteMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a shot integer matrix. The
@@ -576,8 +768,14 @@ public interface SvetovidReader {
      * is reached.
      *
      * @return a matrix of {@code Short} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Short[][] readShortMatrixBoxed();
+    public Short[][] readShortMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to an integer matrix. The
@@ -585,8 +783,14 @@ public interface SvetovidReader {
      * is reached.
      *
      * @return a matrix of {@code Integer} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Integer[][] readIntMatrixBoxed();
+    public Integer[][] readIntMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a long integer matrix. The
@@ -594,8 +798,14 @@ public interface SvetovidReader {
      * is reached.
      *
      * @return a matrix of {@code Long} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Long[][] readLongMatrixBoxed();
+    public Long[][] readLongMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a floating-point matrix.
@@ -603,8 +813,14 @@ public interface SvetovidReader {
      * input is reached.
      *
      * @return a matrix of {@code Float} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Float[][] readFloatMatrixBoxed();
+    public Float[][] readFloatMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a double-precision
@@ -612,8 +828,14 @@ public interface SvetovidReader {
      * is found or the end of input is reached.
      *
      * @return a matrix of {@code Double} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Double[][] readDoubleMatrixBoxed();
+    public Double[][] readDoubleMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a character matrix. The
@@ -621,7 +843,13 @@ public interface SvetovidReader {
      * is reached.
      *
      * @return a matrix of {@code Character} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
      */
-    public Character[][] readCharMatrixBoxed();
+    public Character[][] readCharMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException;
 
 }
