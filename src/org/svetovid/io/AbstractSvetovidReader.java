@@ -23,6 +23,17 @@ import java.util.regex.Pattern;
 
 import org.svetovid.Svetovid;
 
+/**
+ * This class provides default implementations for the {@link SvetovidReader}
+ * interface. Standard behaviors of all methods are defined here. The developer
+ * need only subclass this abstract class and define the {@link #doReadLine()}
+ * method.
+ *
+ * @author Ivan Pribela
+ *
+ * @see SvetovidReader
+ * @see #doReadLine()
+ */
 public abstract class AbstractSvetovidReader implements SvetovidReader {
 
     protected Pattern whitespace = Svetovid.WHITESPACE_PATTERN;
@@ -55,6 +66,14 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         return lastException;
     }
 
+    protected void wrapUpIOException(IOException e) throws SvetovidException {
+        SvetovidIOException exception = new SvetovidIOException("Input", e);
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
+        }
+    }
+
     @Override
     public boolean isEmpty() {
         line = readLine();
@@ -62,97 +81,227 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public void close() {
+    public boolean hasMore() {
+        return !isEmpty();
+    }
+
+    @Override
+    public void close() throws SvetovidIOException {
+        lastException = null;
         line = null;
         Svetovid.removeIn(this);
     }
 
     @Override
-    public boolean readBool() {
+    public boolean readBool() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
-        return Boolean.parseBoolean(token);
+        try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
+            return parseBool(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Boolean.class, token, e);
+            lastException = exception;
+            throw exception;
+        } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Boolean.class, token, e);
+            lastException = exception;
+            throw exception;
+        }
+    }
+
+    protected boolean parseBool(String string) throws NumberFormatException {
+        if (string == null) {
+            throw new NumberFormatException("null");
+        }
+        if (string.length() == 0) {
+            throw new NumberFormatException(
+                    "For input string: \"" + string + "\"");
+        }
+        if ("true".equals(string)) {
+            return true;
+        }
+        if ("t".equals(string)) {
+            return true;
+        }
+        if ("false".equals(string)) {
+            return false;
+        }
+        if ("f".equals(string)) {
+            return false;
+        }
+        throw new NumberFormatException("For input string: \"" + string + "\"");
     }
 
     @Override
-    public byte readByte() throws NumberFormatException {
+    public byte readByte() throws SvetovidFormatException, SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Byte.parseByte(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Byte.class, token, e);
+            lastException = exception;
+            throw exception;
         } catch (NumberFormatException e) {
-            throw e;
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Byte.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     @Override
-    public short readShort() throws NumberFormatException {
+    public short readShort() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Short.parseShort(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Short.class, token, e);
+            lastException = exception;
+            throw exception;
         } catch (NumberFormatException e) {
-            throw e;
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Short.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     @Override
-    public int readInt() throws NumberFormatException {
+    public int readInt() throws SvetovidFormatException, SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Integer.parseInt(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Integer.class, token, e);
+            lastException = exception;
+            throw exception;
         } catch (NumberFormatException e) {
-            throw e;
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Integer.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     @Override
-    public long readLong() throws NumberFormatException {
+    public long readLong() throws SvetovidFormatException, SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Long.parseLong(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Long.class, token, e);
+            lastException = exception;
+            throw exception;
         } catch (NumberFormatException e) {
-            throw e;
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Long.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     @Override
-    public float readFloat() throws NumberFormatException {
+    public float readFloat() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Float.parseFloat(token);
-        } catch (NumberFormatException e) {
-            throw e;
         } catch (NullPointerException e) {
-            throw new NumberFormatException("null");
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Float.class, token, e);
+            lastException = exception;
+            throw exception;
+        } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Float.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     @Override
-    public double readDouble() throws NumberFormatException {
+    public double readDouble() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Double.parseDouble(token);
-        } catch (NumberFormatException e) {
-            throw e;
         } catch (NullPointerException e) {
-            throw new NumberFormatException("null");
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Double.class, token, e);
+            lastException = exception;
+            throw exception;
+        } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Double.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     @Override
-    public char readChar() throws NumberFormatException {
+    public char readChar() throws SvetovidFormatException, SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return parseChar(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Character.class, token, e);
+            lastException = exception;
+            throw exception;
         } catch (NumberFormatException e) {
-            throw e;
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Character.class, token, e);
+            lastException = exception;
+            throw exception;
         }
     }
 
     protected char parseChar(String string) throws NumberFormatException {
         if (string == null) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("null");
         }
         if (string.length() == 0) {
-            throw new NumberFormatException();
+            throw new NumberFormatException(
+                    "For input string: \"" + string + "\"");
         }
         if (string.length() == 1) {
             return string.charAt(0);
@@ -189,12 +338,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
                 throw e;
             }
         }
-        throw new NumberFormatException();
+        throw new NumberFormatException("For input string: \"" + string + "\"");
     }
 
     @Override
-    public String readString() {
-        String token;
+    public String readString() throws SvetovidIOException {
+        String token = null;
         do {
             token = readLine();
             if (token == null) {
@@ -214,222 +363,544 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public Boolean readBoolBoxed() {
+    public Boolean readBoolBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
-        if (token == null) {
+        try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
+            return parseBool(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Boolean.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
+        } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Boolean.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
-        return Boolean.parseBoolean(token);
     }
 
     @Override
-    public Byte readByteBoxed() {
+    public Byte readByteBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Byte.parseByte(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Byte.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
         } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Byte.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public Short readShortBoxed() {
+    public Short readShortBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Short.parseShort(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Short.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
         } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Short.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public Integer readIntBoxed() {
+    public Integer readIntBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Integer.parseInt(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Integer.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
         } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Integer.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public Long readLongBoxed() {
+    public Long readLongBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Long.parseLong(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Long.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
         } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Long.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public Float readFloatBoxed() {
+    public Float readFloatBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Float.parseFloat(token);
-        } catch (NumberFormatException e) {
-            return null;
         } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Float.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
+        } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Float.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public Double readDoubleBoxed() {
+    public Double readDoubleBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return Double.parseDouble(token);
-        } catch (NumberFormatException e) {
-            return null;
         } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Double.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
+        } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Double.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public Character readCharBoxed() {
+    public Character readCharBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         String token = readString();
         try {
+            if (token == null) {
+                throw new NullPointerException();
+            }
+            lastException = null;
             return parseChar(token);
+        } catch (NullPointerException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Character.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
+            return null;
         } catch (NumberFormatException e) {
+            SvetovidFormatException exception =
+                    new SvetovidFormatException(Character.class, token, e);
+            lastException = exception;
+            if (throwingExceptions) {
+                throw exception;
+            }
             return null;
         }
     }
 
     @Override
-    public boolean[] readBoolLine() {
-        String[] tokens = readStringLine();
+    public boolean[] readBoolArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         boolean[] values = new boolean[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
-            values[i] = Boolean.parseBoolean(tokens[i]);
+            try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
+                values[i] = parseBool(tokens[i]);
+            } catch (NullPointerException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Boolean.class, tokens[i], e));
+            } catch (NumberFormatException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Boolean.class, tokens[i], e));
+            }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public byte[] readByteLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public byte[] readByteArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         byte[] values = new byte[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Byte.parseByte(tokens[i]);
+            } catch (NullPointerException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Byte.class, tokens[i], e));
             } catch (NumberFormatException e) {
-                throw e;
+                exceptions.add(new SvetovidFormatException(
+                        Byte.class, tokens[i], e));
             }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public short[] readShortLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public short[] readShortArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         short[] values = new short[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Short.parseShort(tokens[i]);
+            } catch (NullPointerException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Short.class, tokens[i], e));
             } catch (NumberFormatException e) {
-                throw e;
+                exceptions.add(new SvetovidFormatException(
+                        Short.class, tokens[i], e));
             }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public int[] readIntLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public int[] readIntArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         int[] values = new int[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Integer.parseInt(tokens[i]);
+            } catch (NullPointerException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Integer.class, tokens[i], e));
             } catch (NumberFormatException e) {
-                throw e;
+                exceptions.add(new SvetovidFormatException(
+                        Integer.class, tokens[i], e));
             }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public long[] readLongLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public long[] readLongArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         long[] values = new long[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Long.parseLong(tokens[i]);
+            } catch (NullPointerException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Long.class, tokens[i], e));
             } catch (NumberFormatException e) {
-                throw e;
+                exceptions.add(new SvetovidFormatException(
+                        Long.class, tokens[i], e));
             }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public float[] readFloatLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public float[] readFloatArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         float[] values = new float[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Float.parseFloat(tokens[i]);
-            } catch (NumberFormatException e) {
-                throw e;
             } catch (NullPointerException e) {
-                throw new NumberFormatException("null");
+                exceptions.add(new SvetovidFormatException(
+                        Float.class, tokens[i], e));
+            } catch (NumberFormatException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Float.class, tokens[i], e));
             }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public double[] readDoubleLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public double[] readDoubleArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         double[] values = new double[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Double.parseDouble(tokens[i]);
-            } catch (NumberFormatException e) {
-                throw e;
             } catch (NullPointerException e) {
-                throw new NumberFormatException("null");
+                exceptions.add(new SvetovidFormatException(
+                        Double.class, tokens[i], e));
+            } catch (NumberFormatException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Double.class, tokens[i], e));
             }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public char[] readCharLine() throws NumberFormatException {
-        String[] tokens = readStringLine();
+    public char[] readCharArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         char[] values = new char[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
-            values[i] = parseChar(tokens[i]);
+            try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
+                values[i] = parseChar(tokens[i]);
+            } catch (NullPointerException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Character.class, tokens[i], e));
+            } catch (NumberFormatException e) {
+                exceptions.add(new SvetovidFormatException(
+                        Character.class, tokens[i], e));
+            }
         }
-        return values;
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        throw exception;
     }
 
     @Override
-    public String[] readStringLine() {
+    public String[] readStringArray() throws SvetovidFormatException,
+            SvetovidIOException {
         String line = readLine();
         if (line == null) {
             return null;
@@ -451,157 +922,361 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public Boolean[] readBoolLineBoxed() {
-        String[] tokens = readStringLine();
+    public Boolean[] readBoolArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Boolean[] values = new Boolean[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Boolean.parseBoolean(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception = new SvetovidFormatException(
+                        Boolean.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception = new SvetovidFormatException(
+                        Boolean.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Byte[] readByteLineBoxed() {
-        String[] tokens = readStringLine();
+    public Byte[] readByteArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Byte[] values = new Byte[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Byte.parseByte(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Byte.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Byte.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Short[] readShortLineBoxed() {
-        String[] tokens = readStringLine();
+    public Short[] readShortArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Short[] values = new Short[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Short.parseShort(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Short.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Short.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Integer[] readIntLineBoxed() {
-        String[] tokens = readStringLine();
+    public Integer[] readIntArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Integer[] values = new Integer[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Integer.parseInt(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception = new SvetovidFormatException(
+                        Integer.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception = new SvetovidFormatException(
+                        Integer.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Long[] readLongLineBoxed() {
-        String[] tokens = readStringLine();
+    public Long[] readLongArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Long[] values = new Long[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Long.parseLong(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Long.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Long.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Float[] readFloatLineBoxed() {
-        String[] tokens = readStringLine();
+    public Float[] readFloatArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Float[] values = new Float[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Float.parseFloat(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Float.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Float.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Double[] readDoubleLineBoxed() {
-        String[] tokens = readStringLine();
+    public Double[] readDoubleArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Double[] values = new Double[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
+                }
                 values[i] = Double.parseDouble(tokens[i]);
-            } catch (NumberFormatException e) {
-                values[i] = null;
             } catch (NullPointerException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Double.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception =
+                        new SvetovidFormatException(Double.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
 
     @Override
-    public Character[] readCharLineBoxed() {
-        String[] tokens = readStringLine();
+    public Character[] readCharArrayBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
+        String[] tokens = readStringArray();
         if (tokens == null) {
             return null;
         }
         Character[] values = new Character[tokens.length];
+        List<SvetovidFormatException> exceptions = new ArrayList<>();
         for (int i = 0; i < tokens.length; i++) {
             try {
-                if (tokens[i].length() == 1) {
-                    values[i] = tokens[i].charAt(0);
-                } else {
-                    values[i] = null;
+                if (tokens[i] == null) {
+                    throw new NullPointerException();
                 }
-            } catch (NumberFormatException e) {
-                values[i] = null;
+                values[i] = parseChar(tokens[i]);
             } catch (NullPointerException e) {
+                SvetovidFormatException exception = new SvetovidFormatException(
+                        Character.class, tokens[i], e);
+                exceptions.add(exception);
+                values[i] = null;
+            } catch (NumberFormatException e) {
+                SvetovidFormatException exception = new SvetovidFormatException(
+                        Character.class, tokens[i], e);
+                exceptions.add(exception);
                 values[i] = null;
             }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            return values;
+        }
+        SvetovidFormatException exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
         }
         return values;
     }
@@ -609,17 +1284,18 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     protected String line = null;
 
     @Override
-    public String readLine() {
+    public String readLine() throws SvetovidIOException {
         if (line != null) {
             String oldLine = line;
             line = null;
+            lastException = null;
             return oldLine;
         }
         try {
-            exception = null;
+            lastException = null;
             return doReadLine();
         } catch (IOException e) {
-            exception = e;
+            wrapUpIOException(e);
             return null;
         }
     }
@@ -627,7 +1303,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     protected abstract String doReadLine() throws IOException;
 
     @Override
-    public String[] readAllLines() {
+    public String[] readAllLines() throws SvetovidIOException {
         List<String> lines = new ArrayList<>();
         String line = readLine();
         while (line != null) {
@@ -640,7 +1316,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public String readAll() {
+    public String readAll() throws SvetovidIOException {
         StringBuilder lines = new StringBuilder();
         String line = readLine();
         while (line != null) {
@@ -654,223 +1330,1238 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public boolean[][] readBoolMatrix() {
+    public boolean[][] readBoolMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<boolean[]> rows = new ArrayList<>();
-        boolean[] row = readBoolLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readBoolLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        boolean[] row;
+        try {
+            row = readBoolArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new boolean[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        boolean[][] result = new boolean[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readBoolArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new boolean[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            boolean[][] values = new boolean[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        boolean[][] values = new boolean[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public byte[][] readByteMatrix() throws NumberFormatException {
+    public byte[][] readByteMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<byte[]> rows = new ArrayList<>();
-        byte[] row = readByteLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readByteLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        byte[] row;
+        try {
+            row = readByteArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new byte[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        byte[][] result = new byte[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readByteArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new byte[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            byte[][] values = new byte[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        byte[][] values = new byte[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public short[][] readShortMatrix() throws NumberFormatException {
+    public short[][] readShortMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<short[]> rows = new ArrayList<>();
-        short[] row = readShortLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readShortLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        short[] row;
+        try {
+            row = readShortArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new short[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        short[][] result = new short[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readShortArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new short[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            short[][] values = new short[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        short[][] values = new short[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public int[][] readIntMatrix() throws NumberFormatException {
+    public int[][] readIntMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<int[]> rows = new ArrayList<>();
-        int[] row = readIntLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readIntLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        int[] row;
+        try {
+            row = readIntArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new int[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        int[][] result = new int[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readIntArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new int[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            int[][] values = new int[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        int[][] values = new int[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public long[][] readLongMatrix() throws NumberFormatException {
+    public long[][] readLongMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<long[]> rows = new ArrayList<>();
-        long[] row = readLongLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readLongLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        long[] row;
+        try {
+            row = readLongArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new long[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        long[][] result = new long[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readLongArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new long[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            long[][] values = new long[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        long[][] values = new long[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public float[][] readFloatMatrix() throws NumberFormatException {
+    public float[][] readFloatMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<float[]> rows = new ArrayList<>();
-        float[] row = readFloatLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readFloatLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        float[] row;
+        try {
+            row = readFloatArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new float[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        float[][] result = new float[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readFloatArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new float[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            float[][] values = new float[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        float[][] values = new float[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public double[][] readDoubleMatrix() throws NumberFormatException {
+    public double[][] readDoubleMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<double[]> rows = new ArrayList<>();
-        double[] row = readDoubleLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readDoubleLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        double[] row;
+        try {
+            row = readDoubleArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new double[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        double[][] result = new double[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readDoubleArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new double[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            double[][] values = new double[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        double[][] values = new double[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public char[][] readCharMatrix() throws NumberFormatException {
+    public char[][] readCharMatrix() throws SvetovidFormatException,
+            SvetovidIOException {
         List<char[]> rows = new ArrayList<>();
-        char[] row = readCharLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readCharLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        char[] row;
+        try {
+            row = readCharArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new char[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        char[][] result = new char[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readCharArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new char[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            char[][] values = new char[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        char[][] values = new char[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public String[][] readStringMatrix() {
+    public String[][] readStringMatrix() throws SvetovidIOException {
         List<String[]> rows = new ArrayList<>();
-        String[] row = readStringLine();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readStringLine();
+        List<Throwable> exceptions = new ArrayList<>();
+        String[] row;
+        try {
+            row = readStringArray();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        String[][] result = new String[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            exceptions.add(lastException);
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readStringArray();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                exceptions.add(lastException);
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            String[][] values = new String[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (exception instanceof RuntimeException) {
+            throw (RuntimeException) exception;
+        }
+        String[][] values = new String[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Boolean[][] readBoolMatrixBoxed() {
+    public Boolean[][] readBoolMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Boolean[]> rows = new ArrayList<>();
-        Boolean[] row = readBoolLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readBoolLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Boolean[] row;
+        try {
+            row = readBoolArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Boolean[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Boolean[][] result = new Boolean[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readBoolArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Boolean[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Boolean[][] values = new Boolean[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Boolean[][] values = new Boolean[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Byte[][] readByteMatrixBoxed() {
+    public Byte[][] readByteMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Byte[]> rows = new ArrayList<>();
-        Byte[] row = readByteLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readByteLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Byte[] row;
+        try {
+            row = readByteArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Byte[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Byte[][] result = new Byte[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readByteArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Byte[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Byte[][] values = new Byte[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Byte[][] values = new Byte[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Short[][] readShortMatrixBoxed() {
+    public Short[][] readShortMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Short[]> rows = new ArrayList<>();
-        Short[] row = readShortLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readShortLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Short[] row;
+        try {
+            row = readShortArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Short[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Short[][] result = new Short[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readShortArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Short[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Short[][] values = new Short[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Short[][] values = new Short[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Integer[][] readIntMatrixBoxed() {
+    public Integer[][] readIntMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Integer[]> rows = new ArrayList<>();
-        Integer[] row = readIntLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readIntLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Integer[] row;
+        try {
+            row = readIntArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Integer[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Integer[][] result = new Integer[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readIntArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Integer[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Integer[][] values = new Integer[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Integer[][] values = new Integer[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Long[][] readLongMatrixBoxed() {
+    public Long[][] readLongMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Long[]> rows = new ArrayList<>();
-        Long[] row = readLongLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readLongLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Long[] row;
+        try {
+            row = readLongArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Long[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Long[][] result = new Long[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readLongArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Long[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Long[][] values = new Long[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Long[][] values = new Long[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Float[][] readFloatMatrixBoxed() {
+    public Float[][] readFloatMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Float[]> rows = new ArrayList<>();
-        Float[] row = readFloatLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readFloatLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Float[] row;
+        try {
+            row = readFloatArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Float[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Float[][] result = new Float[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readFloatArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Float[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Float[][] values = new Float[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Float[][] values = new Float[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Double[][] readDoubleMatrixBoxed() {
+    public Double[][] readDoubleMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Double[]> rows = new ArrayList<>();
-        Double[] row = readDoubleLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readDoubleLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Double[] row;
+        try {
+            row = readDoubleArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Double[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Double[][] result = new Double[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readDoubleArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Double[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Double[][] values = new Double[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Double[][] values = new Double[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 
     @Override
-    public Character[][] readCharMatrixBoxed() {
+    public Character[][] readCharMatrixBoxed() throws SvetovidFormatException,
+            SvetovidIOException {
         List<Character[]> rows = new ArrayList<>();
-        Character[] row = readCharLineBoxed();
-        while ((row != null) && (row.length > 0)) {
-            rows.add(row);
-            row = readCharLineBoxed();
+        List<Throwable> exceptions = new ArrayList<>();
+        Character[] row;
+        try {
+            row = readCharArrayBoxed();
+            if (row.length == 0) {
+                row = null;
+            }
+        } catch (SvetovidFormatException e) {
+            row = new Character[0];
+        } catch (SvetovidIOException e) {
+            throw e;
         }
-        Character[][] result = new Character[rows.size()][];
-        result = rows.toArray(result);
-        return result;
+        if (lastException != null) {
+            Throwable[] suppressed = lastException.getSuppressed();
+            if ((lastException instanceof SvetovidFormatException)
+                    && (suppressed.length != 0)) {
+                for (Throwable s : suppressed) {
+                    exceptions.add(s);
+                }
+            } else {
+                exceptions.add(lastException);
+            }
+        }
+        while (row != null) {
+            rows.add(row);
+            try {
+                row = readCharArrayBoxed();
+                if (row.length == 0) {
+                    row = null;
+                }
+            } catch (SvetovidFormatException e) {
+                row = new Character[0];
+            } catch (SvetovidIOException e) {
+                throw e;
+            }
+            if (lastException != null) {
+                Throwable[] suppressed = lastException.getSuppressed();
+                if ((lastException instanceof SvetovidFormatException)
+                        && (suppressed.length != 0)) {
+                    for (Throwable s : suppressed) {
+                        exceptions.add(s);
+                    }
+                } else {
+                    exceptions.add(lastException);
+                }
+            }
+        }
+        int exceptionCount = exceptions.size();
+        if (exceptionCount == 0) {
+            lastException = null;
+            Character[][] values = new Character[rows.size()][];
+            values = rows.toArray(values);
+            return values;
+        }
+        Throwable exception;
+        if (exceptionCount == 1) {
+            exception = exceptions.get(0);
+        } else {
+            exception = new SvetovidFormatException(exceptions);
+        }
+        lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+        Character[][] values = new Character[rows.size()][];
+        values = rows.toArray(values);
+        return values;
     }
 }
