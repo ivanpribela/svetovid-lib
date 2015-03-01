@@ -3151,9 +3151,209 @@ public class SvetovidArrays {
         return indexOf(array, valueToFind) != INDEX_NOT_FOUND;
     }
 
+    public static int[] allIndicesOf(boolean[] array, boolean valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(byte[] array, byte valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(short[] array, short valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(int[] array, int valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(long[] array, long valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(float[] array, float valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(float[] array, float valueToFind, float tolerance) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        final double min = valueToFind - tolerance;
+        final double max = valueToFind + tolerance;
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if ((min <= array[i]) && (max >= array[i])) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(double[] array, double valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(double[] array, double valueToFind, double tolerance) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        final double min = valueToFind - tolerance;
+        final double max = valueToFind + tolerance;
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if ((min <= array[i]) && (max >= array[i])) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static int[] allIndicesOf(char[] array, char valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
+    public static <T> int[] allIndicesOf(T[] array, T valueToFind) {
+        if (array == null) {
+            return EMPTY_INT_ARRAY;
+        }
+        int[] indices = new int[array.length];
+        int j = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (valueToFind == array[i]) {
+                indices[j] = i;
+                j++;
+            }
+        }
+        if (j < indices.length) {
+            indices = resize(indices, j, 0);
+        }
+        return indices;
+    }
+
     // TODO add methods like:
-    // TODO allIndicesOf() + tolerance for double
-    // TODO fill
     // TODO hashCode
     // TODO compare(comparator?)
 
