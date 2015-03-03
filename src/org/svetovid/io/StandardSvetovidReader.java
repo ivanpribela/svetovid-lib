@@ -18,298 +18,1246 @@ package org.svetovid.io;
 
 import org.svetovid.Svetovid;
 
-public final class StandardSvetovidReader extends DefaultSvetovidReader {
+/**
+ * This class provides an implementation of the {@link SvetovidReader} interface
+ * that reads all input from the "standard" input (see {@link System#in}).
+ *
+ * <p>
+ * Besides the implementation of the methods in the {@link SvetovidReader}
+ * interface, this class provides additional overloaded methods that write the
+ * given prompt string to the "standard" output before reading the requested
+ * data form the "standard" input.
+ *
+ * @author Ivan Pribela
+ *
+ * @see System#in
+ * @see SvetovidReader
+ */
+public class StandardSvetovidReader extends DefaultSvetovidReader {
 
+    /**
+     * Creates a new reader that reads all the input from the "standard" input.
+     */
     public StandardSvetovidReader() {
         super(new StandardInputStreamProxy());
     }
 
     protected boolean readFromNewLine = false;
 
+    /**
+     * Returns the indicator whether this reader will read input data from a new
+     * line or immediately after the displayed prompt message.
+     *
+     * @return {@code true} if this reader reads data from a new line after the
+     *         displayed prompt message; {@code false} if the data is read
+     *         immediately after the prompt.
+     */
     public boolean getReadFromNewLine() {
         return readFromNewLine;
     }
 
+    /**
+     * Configures whether this reader should read input data from a new line or
+     * immediately after the displayed prompt.
+     *
+     * @param readFromNewLine
+     *            {@code true} if this reader should read input data from a new
+     *            line or {@code false} if it should do it immediately after the
+     *            displayed prompt.
+     */
     public void setReadFromNewLine(boolean readFromNewLine) {
         this.readFromNewLine = readFromNewLine;
     }
 
-    protected void prompt(String prompt) {
-        Svetovid.out.print(prompt);
-        if (readFromNewLine) {
-            Svetovid.out.println();
-        } else {
-            Svetovid.out.print();
+    protected void prompt(String prompt) throws SvetovidIOException {
+        try {
+            Svetovid.out.print(prompt);
+            if (Svetovid.out.lastException != null) {
+                throw Svetovid.out.lastException;
+            }
+            if (readFromNewLine) {
+                Svetovid.out.println();
+            } else {
+                Svetovid.out.print();
+            }
+            if (Svetovid.out.lastException != null) {
+                throw Svetovid.out.lastException;
+            }
+            Svetovid.out.printbf();
+            if (Svetovid.out.lastException != null) {
+                throw Svetovid.out.lastException;
+            }
+            lastException = null;
+        } catch (SvetovidIOException e) {
+            lastException = e;
+            if (throwingExceptions) {
+                throw e;
+            }
         }
-        Svetovid.out.printbf();
     }
 
-    public boolean readBool(String prompt){
+    /**
+     * Reads one token and converts it to a boolean value. Before reading any
+     * data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code boolean} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public boolean readBool(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readBool();
     }
 
-    public byte readByte(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to a byte value. Before reading any data
+     * the specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code byte} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public byte readByte(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readByte();
     }
 
-    public short readShort(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to a short integer value. Before reading
+     * any data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code short} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public short readShort(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readShort();
     }
 
-    public int readInt(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to an integer value. Before reading any
+     * data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code int} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable int.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public int readInt(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readInt();
     }
 
-    public long readLong(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to a long integer value. Before reading
+     * any data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code long} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public long readLong(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readLong();
     }
 
-    public float readFloat(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to a floating-point value. Before reading
+     * any data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code float} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public float readFloat(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readFloat();
     }
 
-    public double readDouble(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to a double-precision floating-point
+     * value. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code double} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public double readDouble(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readDouble();
     }
 
-    public char readChar(String prompt) throws NumberFormatException {
+    /**
+     * Reads one token and converts it to a character value. Before reading any
+     * data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code char} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable char.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public char readChar(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readChar();
     }
 
-    public String readString(String prompt) {
+    /**
+     * Reads one token and returns it as a string value. Before reading any data
+     * the specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code String} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is {@code null}.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public String readString(String prompt) throws SvetovidIOException {
         prompt(prompt);
         return readString();
     }
 
-    public Boolean readBoolBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a boolean value. Before reading any
+     * data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Boolean} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Boolean readBoolBoxed(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readBoolBoxed();
     }
 
-    public Byte readByteBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a byte value. Before reading any data
+     * the specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Byte} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Byte readByteBoxed(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readByteBoxed();
     }
 
-    public Short readShortBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a short integer value. Before reading
+     * any data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Short} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Short readShortBoxed(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readShortBoxed();
     }
 
-    public Integer readIntBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to an integer value. Before reading any
+     * data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Integer} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable int.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Integer readIntBoxed(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readIntBoxed();
     }
 
-    public Long readLongBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a long integer value. Before reading
+     * any data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Long} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Long readLongBoxed(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readLongBoxed();
     }
 
-    public Float readFloatBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a floating-point value. Before reading
+     * any data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Float} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Float readFloatBoxed(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readFloatBoxed();
     }
 
-    public Double readDoubleBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a double-precision floating-point
+     * value. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Double} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Double readDoubleBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readDoubleBoxed();
     }
 
-    public Character readCharBoxed(String prompt) {
+    /**
+     * Reads one token and converts it to a character value. Before reading any
+     * data the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return the {@code Character} value read.
+     *
+     * @throws SvetovidFormatException
+     *             if the token is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Character readCharBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readCharBoxed();
     }
 
-    public boolean[] readBoolLine(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to boolean
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public boolean[] readBoolArray(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readBoolLine();
+        return readBoolArray();
     }
 
-    public byte[] readByteLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to byte
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code byte} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public byte[] readByteArray(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
-        return readByteLine();
+        return readByteArray();
     }
 
-    public short[] readShortLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to short
+     * integer values. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code short} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public short[] readShortArray(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readShortLine();
+        return readShortArray();
     }
 
-    public int[] readIntLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to integer
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code int} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public int[] readIntArray(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
-        return readIntLine();
+        return readIntArray();
     }
 
-    public long[] readLongLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to long
+     * integer values. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code long} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public long[] readLongArray(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
-        return readLongLine();
+        return readLongArray();
     }
 
-    public float[] readFloatLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * floating-point values. Before reading any data the specified prompt
+     * message is displayed to the user on the "standard" output using
+     * {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code float} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public float[] readFloatArray(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readFloatLine();
+        return readFloatArray();
     }
 
-    public double[] readDoubleLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * double-precision floating-point values. Before reading any data the
+     * specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code double} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public double[] readDoubleArray(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readDoubleLine();
+        return readDoubleArray();
     }
 
-    public char[] readCharLine(String prompt) throws NumberFormatException {
+    /**
+     * Reads one line, separates it into tokens and converts them to character
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code char} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public char[] readCharArray(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
-        return readCharLine();
+        return readCharArray();
     }
 
-    public String[] readStringLine(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and returns them as string
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code String} values read.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public String[] readStringArray(String prompt) throws SvetovidIOException {
         prompt(prompt);
-        return readStringLine();
+        return readStringArray();
     }
 
-    public Boolean[] readBoolLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to boolean
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Boolean[] readBoolArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readBoolLineBoxed();
+        return readBoolArrayBoxed();
     }
 
-    public Byte[] readByteLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to byte
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Byte} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Byte[] readByteArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readByteLineBoxed();
+        return readByteArrayBoxed();
     }
 
-    public Short[] readShortLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to short
+     * integer values. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Short} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Short[] readShortArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readShortLineBoxed();
+        return readShortArrayBoxed();
     }
 
-    public Integer[] readIntLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to integer
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Integer} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Integer[] readIntArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readIntLineBoxed();
+        return readIntArrayBoxed();
     }
 
-    public Long[] readLongLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to long
+     * integer values. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Long} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Long[] readLongArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readLongLineBoxed();
+        return readLongArrayBoxed();
     }
 
-    public Float[] readFloatLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * floating-point values. Before reading any data the specified prompt
+     * message is displayed to the user on the "standard" output using
+     * {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Float} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Float[] readFloatArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readFloatLineBoxed();
+        return readFloatArrayBoxed();
     }
 
-    public Double[] readDoubleLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to
+     * double-precision floating-point values. Before reading any data the
+     * specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Double} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Double[] readDoubleArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readDoubleLineBoxed();
+        return readDoubleArrayBoxed();
     }
 
-    public Character[] readCharLineBoxed(String prompt) {
+    /**
+     * Reads one line, separates it into tokens and converts them to character
+     * values. Before reading any data the specified prompt message is displayed
+     * to the user on the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return an array of {@code Character} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the tokens is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Character[] readCharArrayBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
-        return readCharLineBoxed();
+        return readCharArrayBoxed();
     }
 
-    public String readLine(String prompt) {
+    /**
+     * Reads a line of text and returns it as a string. Before reading any data
+     * the specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return A {@code String} containing the contents of the line, not
+     *         including any line-termination characters, or null if the end of
+     *         the source has been reached.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public String readLine(String prompt) throws SvetovidIOException {
         prompt(prompt);
         return readLine();
     }
 
-    public String[] readAllLines(String prompt) {
+    /**
+     * Read all remaining lines and returns them as an array of strings. Before
+     * reading any data the specified prompt message is displayed to the user on
+     * the "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return A {@code String} array containing the contents of the remaining
+     *         lines, not including any line-termination characters, or an empty
+     *         array if the end of the source has been reached.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public String[] readAllLines(String prompt) throws SvetovidIOException {
         prompt(prompt);
         return readAllLines();
     }
 
-    public String readAll(String prompt) {
+    /**
+     * Reads all remaining content and returns it as a string. Before reading
+     * any content the specified prompt message is displayed to the user on the
+     * "standard" output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return A {@code String} containing all the remaining contents of the
+     *         source, or null if the end of the source has been reached.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public String readAll(String prompt) throws SvetovidIOException {
         prompt(prompt);
         return readAll();
     }
 
-    public boolean[][] readBoolMatrix(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a boolean matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public boolean[][] readBoolMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readBoolMatrix();
     }
 
-    public byte[][] readByteMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to a byte matrix. The matrix
+     * is read row by row until an empty row is found or the end of input is
+     * reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code byte} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public byte[][] readByteMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readByteMatrix();
     }
 
-    public short[][] readShortMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to a shot integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code short} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public short[][] readShortMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readShortMatrix();
     }
 
-    public int[][] readIntMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to an integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code int} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public int[][] readIntMatrix(String prompt) throws SvetovidFormatException,
+            SvetovidIOException {
         prompt(prompt);
         return readIntMatrix();
     }
 
-    public long[][] readLongMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to a long integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code long} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public long[][] readLongMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readLongMatrix();
     }
 
-    public float[][] readFloatMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to a floating-point matrix.
+     * The matrix is read row by row until an empty row is found or the end of
+     * input is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code float} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public float[][] readFloatMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readFloatMatrix();
     }
 
-    public double[][] readDoubleMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to a double-precision
+     * floating-point matrix. The matrix is read row by row until an empty row
+     * is found or the end of input is reached. Before reading any data the
+     * specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code double} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public double[][] readDoubleMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readDoubleMatrix();
     }
 
-    public char[][] readCharMatrix(String prompt) throws NumberFormatException {
+    /**
+     * Reads multiple lines and converts the data to a character matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code char} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public char[][] readCharMatrix(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readCharMatrix();
     }
 
-    public String[][] readStringMatrix(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a string matrix. The matrix
+     * is read row by row until an empty row is found or the end of input is
+     * reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code String} values read.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public String[][] readStringMatrix(String prompt)
+            throws SvetovidIOException {
         prompt(prompt);
         return readStringMatrix();
     }
 
-    public Boolean[][] readBoolMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a boolean matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Boolean} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable boolean.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Boolean[][] readBoolMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readBoolMatrixBoxed();
     }
 
-    public Byte[][] readByteMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a byte matrix. The matrix
+     * is read row by row until an empty row is found or the end of input is
+     * reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Byte} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable byte.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Byte[][] readByteMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readByteMatrixBoxed();
     }
 
-    public Short[][] readShortMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a shot integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Short} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable short.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Short[][] readShortMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readShortMatrixBoxed();
     }
 
-    public Integer[][] readIntMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to an integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Integer} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable integer.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Integer[][] readIntMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readIntMatrixBoxed();
     }
 
-    public Long[][] readLongMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a long integer matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Long} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable long.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Long[][] readLongMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readLongMatrixBoxed();
     }
 
-    public Float[][] readFloatMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a floating-point matrix.
+     * The matrix is read row by row until an empty row is found or the end of
+     * input is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Float} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable float.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Float[][] readFloatMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readFloatMatrixBoxed();
     }
 
-    public Double[][] readDoubleMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a double-precision
+     * floating-point matrix. The matrix is read row by row until an empty row
+     * is found or the end of input is reached. Before reading any data the
+     * specified prompt message is displayed to the user on the "standard"
+     * output using {@link Svetovid#out}.
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Double} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable double.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Double[][] readDoubleMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readDoubleMatrixBoxed();
     }
 
-    public Character[][] readCharMatrixBoxed(String prompt) {
+    /**
+     * Reads multiple lines and converts the data to a character matrix. The
+     * matrix is read row by row until an empty row is found or the end of input
+     * is reached. Before reading any data the specified prompt message is
+     * displayed to the user on the "standard" output using {@link Svetovid#out}
+     * .
+     *
+     * @param prompt
+     *            the message to prompt to the user
+     *
+     * @return a matrix of {@code Character} values read.
+     *
+     * @throws SvetovidFormatException
+     *             if one of the read values is not a parsable character.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Character[][] readCharMatrixBoxed(String prompt)
+            throws SvetovidFormatException, SvetovidIOException {
         prompt(prompt);
         return readCharMatrixBoxed();
     }
