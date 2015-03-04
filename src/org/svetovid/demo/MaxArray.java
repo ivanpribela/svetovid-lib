@@ -23,7 +23,7 @@ public class MaxArray {
     public static void main(String[] args) {
 
         // Ask for an array of numbers
-        double[] numbers = Svetovid.in.readDoubleLine("Please enter the numbers:");
+        double[] numbers = Svetovid.in.readDoubleArray("Please enter the numbers:");
 
         // Find the maximum
         double maximum = Double.NEGATIVE_INFINITY;
