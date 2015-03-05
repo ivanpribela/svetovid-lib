@@ -852,4 +852,44 @@ public interface SvetovidReader {
     public Character[][] readCharMatrixBoxed() throws SvetovidFormatException,
             SvetovidIOException;
 
+    /**
+     * Reads a JSON (JavaScript Object Notation) formatted object.
+     *
+     * <p>
+     * The object is converted to Java types using the following rules:
+     * <ul>
+     *
+     * <li>literal {@code null} is converted to Java {@code null},</li>
+     *
+     * <li>literals {@code true} and {@code false} are converted to
+     * {@link Boolean#TRUE} and {@link Boolean#FALSE} respectively,</li>
+     *
+     * <li>numbers are converted to an instance of the first numeric type from
+     * the following list that can hold the value read: {@link Byte},
+     * {@link Short}, {@link Integer}, {@link Long}, {@link Float},
+     * {@link Double}, {@link java.math.BigInteger},
+     * {@link java.math.BigDecimal},</li>
+     *
+     * <li>strings are converted to {@link String} values,
+     *
+     * <li>arrays are converted to {@link java.util.List}s containing the held
+     * values in the same order
+     *
+     * <li>and objects are converted to {@link java.util.Map}s that can be
+     * iterated in the order in which its members were defined. Each member's
+     * value is registered in the map under its name.
+     *
+     * </ul>
+     *
+     * @return a Java Object parsed form the JSON format according to the above
+     *         rules.
+     *
+     * @throws SvetovidFormatException
+     *             if the object to be read is not in the JSON format.
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public Object readObject() throws SvetovidFormatException,
+            SvetovidIOException;
+
 }

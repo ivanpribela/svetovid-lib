@@ -828,4 +828,39 @@ public interface SvetovidWriter {
      */
     public void println(Object[][] value) throws SvetovidIOException;
 
+    /**
+     * Prints the given object in JSON (JavaScript Object Notation) format.
+     *
+     * <p>
+     * The object is printed using the following rules:
+     * <ul>
+     * <li>{@code null} is printed as JSON {@code null} literal,</li>
+     *
+     * <li>Boxed {@code true} and {@code false} values are printed as JSON
+     * literals {@code true} and {@code false} respectively,</li>
+     *
+     * <li>{@link Number} instances are printed as JSON number literals,</li>
+     *
+     * <li>{@link String} values are printed as JSON string literals,
+     *
+     * <li>arrays and all {@link Iterable}s are printed as JSON arrays
+     * maintaining iteration order,
+     *
+     * <li>{@link java.util.Map}s are printed as JSON objects with each entry
+     * representing one member; map entries are printed in iteration order with
+     * the entry key as the member's name and entry value as the value,
+     *
+     * <li>All other objects are converted to strings using their {code
+     * toString()}.
+     *
+     * </ul>
+     *
+     * @param value
+     *            The {@code Object} matrix to be written
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public void printObject(Object value) throws SvetovidIOException;
+
 }
