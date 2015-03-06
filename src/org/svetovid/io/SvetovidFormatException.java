@@ -87,4 +87,21 @@ public class SvetovidFormatException extends SvetovidException {
             addSuppressed(cause);
         }
     }
+
+    /**
+     * Constructs a {@code SvetovidFormatException} with the specified detail
+     * message and cause.
+     *
+     * @param messageKey
+     *            The resource bundle key of the detail message, which is saved
+     *            for later retrieval by the {@link #getMessage()} method
+     * @param string
+     *            The string that could not be parsed
+     * @param cause
+     *            The cause, if any
+     */
+    public SvetovidFormatException(String messageKey, String string,
+            Throwable cause) {
+        super(messageKey, cause, string);
+    }
 }
