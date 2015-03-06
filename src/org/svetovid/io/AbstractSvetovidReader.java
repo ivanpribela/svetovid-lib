@@ -16,9 +16,16 @@
 
 package org.svetovid.io;
 
+import java.io.EOFException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import org.svetovid.Svetovid;
@@ -2563,5 +2570,359 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         Character[][] values = new Character[rows.size()][];
         values = rows.toArray(values);
         return values;
+    }
+
+    @Override
+    public Object readObject() throws SvetovidFormatException,
+            SvetovidIOException {
+        nextToken();
+        Object object = nextValue();
+        return object;
+    }
+
+    protected char nextChar() throws SvetovidIOException, EOFException {
+        String token = readLine();
+        if (token == null) {
+            throw new EOFException();
+        }
+        if (token.isEmpty()) {
+            return '\n';
+        }
+        line = token.substring(1);
+        return token.charAt(0);
+    }
+
+    protected void returnChar(char ch) {
+        if (line != null) {
+            line = ch + line;
+        }
+    }
+
+    protected boolean isCharWhitespace(char ch) {
+        switch (ch) {
+        case ' ':
+        case '\t':
+        case '\n':
+        case '\r':
+            return true;
+        default:
+            return false;
+        }
+    }
+
+    protected boolean isCharWhitespaceOrSymbol(char ch) {
+        switch (ch) {
+        case '{':
+        case '}':
+        case '[':
+        case ']':
+        case ':':
+        case ',':
+            return true;
+        default:
+            return isCharWhitespace(ch);
+        }
+    }
+
+    protected boolean isCharInNumber(char ch) {
+        switch (ch) {
+        case '+':
+        case '-':
+        case '.':
+        case 'e':
+        case 'E':
+            return true;
+        default:
+            return (ch >= '0') && (ch <= '9');
+        }
+    }
+
+    protected enum TokenType {
+        BEGIN_OBJECT, END_OBJECT,
+        BEGIN_ARRAY, END_ARRAY,
+        NAME_SEPARATOR, VALUE_SEPARATOR,
+        STRING, NUMBER, LITERAL,
+        EOF;
+    }
+
+    protected TokenType tokenType;
+    protected String tokenContent;
+
+    protected void nextToken() throws SvetovidIOException {
+        try {
+            char ch;
+            do {
+                ch = nextChar();
+            } while (isCharWhitespace(ch));
+            if (ch == '{') {
+                tokenType = TokenType.BEGIN_OBJECT;
+                tokenContent = "{";
+                return;
+            }
+            if (ch == '}') {
+                tokenType = TokenType.END_OBJECT;
+                tokenContent = "}";
+                return;
+            }
+            if (ch == '[') {
+                tokenType = TokenType.BEGIN_ARRAY;
+                tokenContent = "[";
+                return;
+            }
+            if (ch == ']') {
+                tokenType = TokenType.END_ARRAY;
+                tokenContent = "]";
+                return;
+            }
+            if (ch == ':') {
+                tokenType = TokenType.NAME_SEPARATOR;
+                tokenContent = ":";
+                return;
+            }
+            if (ch == ',') {
+                tokenType = TokenType.VALUE_SEPARATOR;
+                tokenContent = ",";
+                return;
+            }
+            if (ch == '"') {
+                char quote = ch;
+                tokenType = TokenType.STRING;
+                StringBuilder builder = new StringBuilder();
+                builder.append(ch);
+                do {
+                    ch = nextChar();
+                    if (ch == '\\') {
+                        ch = nextChar();
+                        switch (ch) {
+                        case '"':
+                            ch = '"';
+                            break;
+                        case '\'':
+                            ch = '\'';
+                            break;
+                        case '\\':
+                            ch = '\\';
+                            break;
+                        case '/':
+                            ch = '/';
+                            break;
+                        case 'b':
+                            ch = '\b';
+                            break;
+                        case 'f':
+                            ch = '\f';
+                            break;
+                        case 'n':
+                            ch = '\n';
+                            break;
+                        case 'r':
+                            ch = '\r';
+                            break;
+                        case 't':
+                            ch = '\t';
+                            break;
+                        case 'u':
+                            String codeString = "" + nextChar()
+                                                   + nextChar()
+                                                   + nextChar()
+                                                   + (ch = nextChar());
+                            try {
+                                int codeValue = Integer
+                                        .parseInt(codeString, 16);
+                                ch = (char) codeValue;
+                            } catch (NumberFormatException e) {
+                                codeString = codeString.substring(0, 3);
+                                builder.append("\\u");
+                                builder.append(codeString);
+                            }
+                            break;
+                        default:
+                            builder.append('\\');
+                        }
+                    }
+                    builder.append(ch);
+                } while (ch != quote);
+                tokenContent = builder.toString();
+                return;
+            }
+            boolean isNumber = true;
+            StringBuilder builder = new StringBuilder();
+            while (!isCharWhitespaceOrSymbol(ch)) {
+                builder.append(ch);
+                isNumber = isNumber && isCharInNumber(ch);
+                ch = nextChar();
+            }
+            returnChar(ch);
+            if (isNumber) {
+                tokenType = TokenType.NUMBER;
+            } else {
+                tokenType = TokenType.LITERAL;
+            }
+            tokenContent = builder.toString();
+        } catch (EOFException e) {
+            tokenType = TokenType.EOF;
+            tokenContent = null;
+        }
+    }
+
+    // true | false | null
+    protected Boolean nextLiteral() throws SvetovidFormatException {
+        if (tokenType != TokenType.LITERAL) {
+            throw new SvetovidFormatException("Json.Literal",
+                    tokenContent, null);
+        }
+        switch (tokenContent) {
+        case "true":
+            return true;
+        case "false":
+            return false;
+        case "null":
+            return null;
+        }
+        throw new SvetovidFormatException("Json.Literal", tokenContent, null);
+    }
+
+    // number
+    protected Number nextNumber() throws SvetovidFormatException {
+        if (tokenType != TokenType.NUMBER) {
+            throw new SvetovidFormatException("Json.Number",
+                    tokenContent, null);
+        }
+        try {
+            return Byte.parseByte(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return Short.parseShort(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return Integer.parseInt(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return Long.parseLong(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return Float.parseFloat(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return Double.parseDouble(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return new BigInteger(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        try {
+            return new BigDecimal(tokenContent);
+        } catch (NumberFormatException e) {
+            // Try next
+        }
+        throw new SvetovidFormatException("Json.Number",
+                tokenContent, null);
+    }
+
+    // "string"
+    protected String nextString() throws SvetovidFormatException {
+        if (tokenType != TokenType.STRING) {
+            throw new SvetovidFormatException("Json.String",
+                    tokenContent, null);
+        }
+        return tokenContent.substring(1, tokenContent.length() - 1);
+    }
+
+    // [value, value, value... ]
+    protected List<Object> nextArray() throws SvetovidFormatException,
+            SvetovidIOException {
+        if (tokenType != TokenType.BEGIN_ARRAY) {
+            throw new SvetovidFormatException("Json.Array",
+                    tokenContent, null);
+        }
+        nextToken();
+        List<Object> array = new ArrayList<>();
+        if (tokenType != TokenType.END_ARRAY) {
+            array.add(nextValue());
+            nextToken();
+            while (tokenType != TokenType.END_ARRAY) {
+                if (tokenType != TokenType.VALUE_SEPARATOR) {
+                    throw new SvetovidFormatException("Json.Value",
+                            tokenContent, null);
+                }
+                nextToken();
+                array.add(nextValue());
+                nextToken();
+            }
+        }
+        return array;
+    }
+
+    // {pair, pair, pair... }
+    protected Map<String, Object> readNextObject()
+            throws SvetovidFormatException, SvetovidIOException {
+        if (tokenType != TokenType.BEGIN_OBJECT) {
+            throw new SvetovidFormatException("Json.Object",
+                    tokenContent, null);
+        }
+        nextToken();
+        Map<String, Object> map = new LinkedHashMap<>();
+        if (tokenType != TokenType.END_OBJECT) {
+            Entry<String, Object> pair = nextPair();
+            map.put(pair.getKey(), pair.getValue());
+            nextToken();
+            while (tokenType != TokenType.END_OBJECT) {
+                if (tokenType != TokenType.VALUE_SEPARATOR) {
+                    throw new SvetovidFormatException("Json.Value",
+                            tokenContent, null);
+                }
+                nextToken();
+                pair = nextPair();
+                map.put(pair.getKey(), pair.getValue());
+                nextToken();
+            }
+        }
+        return map;
+    }
+
+    // name : value
+    protected Map.Entry<String, Object> nextPair()
+            throws SvetovidFormatException, SvetovidIOException {
+        String name = nextString();
+        nextToken();
+        if (tokenType != TokenType.NAME_SEPARATOR) {
+            throw new SvetovidFormatException("Json.Member",
+                    tokenContent, null);
+        }
+        nextToken();
+        Object value = nextValue();
+        return new AbstractMap.SimpleImmutableEntry<>(name, value);
+    }
+
+    // literal | number | string | array | object
+    protected Object nextValue() throws SvetovidFormatException,
+            SvetovidIOException {
+        switch (tokenType) {
+        case LITERAL:
+            return nextLiteral();
+        case NUMBER:
+            return nextNumber();
+        case STRING:
+            return nextString();
+        case BEGIN_ARRAY:
+            return nextArray();
+        case BEGIN_OBJECT:
+            return readNextObject();
+        default:
+            throw new SvetovidFormatException("Json.Any", tokenContent, null);
+        }
     }
 }
