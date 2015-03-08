@@ -38,6 +38,7 @@ import org.svetovid.io.StandardSvetovidErrorWriter;
 import org.svetovid.io.StandardSvetovidReader;
 import org.svetovid.io.StandardSvetovidWriter;
 import org.svetovid.io.SvetovidException;
+import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
 
@@ -101,27 +102,40 @@ public final class Svetovid {
      *
      * @return a {@link SvetovidReader} that can be used to read from the
      *         desired source.
+     *
+     * @throws SvetovidIOException
+     *             if the reader cannot be created for the given source or an
+     *             error occurred during the operation.
      */
-    public static SvetovidReader in(String source) {
+    public static SvetovidReader in(String source) throws SvetovidIOException {
+        if (source == null) {
+            return in;
+        }
         synchronized (readers) {
+            IOException ex = null;
             SvetovidReader reader = readers.get(source);
             if (reader == null) {
                 try {
                     URL url = new URL(source);
                     URLConnection connection = url.openConnection();
-                    reader = new DefaultSvetovidReader(connection.getInputStream());
+                    reader = new DefaultSvetovidReader(
+                            connection.getInputStream());
                     readers.put(source, reader);
                 } catch (IOException e) {
-                    // Do nothing
+                    ex = e;
                 }
             }
             if (reader == null) {
                 try {
-                    reader = new DefaultSvetovidReader(new FileInputStream(source));
+                    reader = new DefaultSvetovidReader(
+                            new FileInputStream(source));
                     readers.put(source, reader);
                 } catch (FileNotFoundException e) {
-                    // Do nothing
+                    ex = e;
                 }
+            }
+            if (reader == null) {
+                throw new SvetovidIOException("BadSource", ex, source);
             }
             return reader;
         }
@@ -214,21 +228,37 @@ public final class Svetovid {
      *
      * @param target
      *            a string describing the writter's target
+     * @param append
+     *            should the data be appended to the given target or not
      *
      * @return a {@link SvetovidWriter} that can be used to write to the desired
      *         target.
+     *
+     * @throws SvetovidIOException
+     *             if the writer cannot be created for the given target or an
+     *             error occurred during the operation.
      */
-    public static SvetovidWriter out(String source, boolean append) {
+    public static SvetovidWriter out(String target, boolean append)
+            throws SvetovidIOException {
+        if (target == null) {
+            return out;
+        }
         synchronized (writers) {
-            SvetovidWriter writer = writers.get(source);
+            IOException ex = null;
+            SvetovidWriter writer = writers.get(target);
             if (writer == null) {
                 try {
-                    writer = new DefaultSvetovidWriter(new FileOutputStream(source, append));
+                    writer = new DefaultSvetovidWriter(
+                            new FileOutputStream(target, append));
+                    writers.put(target, writer);
                 } catch (FileNotFoundException e) {
-                    // Do nothing
+                    ex = e;
                 }
-                writers.put(source, writer);
             }
+            if (writer == null) {
+                throw new SvetovidIOException("BadTarget", ex, target);
+            }
+
             return writer;
         }
     }
