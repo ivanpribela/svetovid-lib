@@ -96,7 +96,7 @@ public interface SvetovidReader {
     public boolean hasMore();
 
     /**
-     * Closes this writer and releases any resources associated with the
+     * Closes this reader and releases any resources associated with the
      * underlying source. The general contract of {@code close} is that it
      * closes the input source. A closed source cannot perform input operations
      * and cannot be reopened.

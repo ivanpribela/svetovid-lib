@@ -60,8 +60,12 @@ public final class Svetovid {
     /** Default locale is US English. */
     public static final Locale LOCALE = Locale.US;
 
-    /** Default pattern for matching whitespace is same as in Java programming language. */
-    public static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\p{javaWhitespace}+");
+    /**
+     * Default pattern for matching whitespace is same as in Java programming
+     * language.
+     */
+    public static final Pattern WHITESPACE_PATTERN = Pattern
+            .compile("\\p{javaWhitespace}+");
 
     /** Default token separator is a single space character. */
     public static final String WHITESPACE = " ";
@@ -179,10 +183,11 @@ public final class Svetovid {
      * By convention, this output stream is used to display error messages or
      * other information that should come to the immediate attention of a user
      * even if the principal output stream, the value of the variable
-     * {@link out}, has been redirected to a file or other destination that is
+     * {@link #out}, has been redirected to a file or other destination that is
      * typically not continuously monitored.
      */
-    public static StandardSvetovidErrorWriter err = new StandardSvetovidErrorWriter();
+    public static StandardSvetovidErrorWriter err =
+            new StandardSvetovidErrorWriter();
 
     /* Map of all open writers. */
     private static Map<String, SvetovidWriter> writers = new HashMap<>();
@@ -200,8 +205,8 @@ public final class Svetovid {
      * @return a {@link SvetovidWriter} that can be used to write to the desired
      *         target.
      */
-    public static SvetovidWriter out(String source) {
-        return out(source, false);
+    public static SvetovidWriter out(String target) {
+        return out(target, false);
     }
 
     /**
@@ -217,8 +222,8 @@ public final class Svetovid {
      * @return a {@link SvetovidWriter} that can be used to write to the desired
      *         target.
      */
-    public static SvetovidWriter append(String source) {
-        return out(source, true);
+    public static SvetovidWriter append(String target) {
+        return out(target, true);
     }
 
     /**
@@ -322,15 +327,18 @@ public final class Svetovid {
     }
 
     static {
-        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(Thread.getDefaultUncaughtExceptionHandler()));
+        Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler(
+                Thread.getDefaultUncaughtExceptionHandler()));
     }
 
     /* Exception handler that prints uncaught exceptions in all threads. */
-    private static class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler {
+    private static class UncaughtExceptionHandler implements
+            Thread.UncaughtExceptionHandler {
 
         private java.lang.Thread.UncaughtExceptionHandler delegate;
 
-        public UncaughtExceptionHandler(Thread.UncaughtExceptionHandler delegate) {
+        public UncaughtExceptionHandler(
+                Thread.UncaughtExceptionHandler delegate) {
             this.delegate = delegate;
         }
 
@@ -339,7 +347,8 @@ public final class Svetovid {
             if (delegate != null) {
                 delegate.uncaughtException(thread, throwable);
             } else {
-                SvetovidException.printStackTrace(thread, throwable, System.err, Svetovid.LOCALE);
+                SvetovidException.printStackTrace(thread, throwable,
+                        System.err, Svetovid.LOCALE);
             }
         }
     }
@@ -347,11 +356,17 @@ public final class Svetovid {
     private static String versionFile = "version.properties";
     private static Properties versionData;
 
+    /**
+     * Returns the version of this library.
+     *
+     * @return the version of this library.
+     */
     public static String getVersion() {
         if (versionData == null) {
             versionData = new Properties();
             try {
-                versionData.load(Svetovid.class.getClassLoader().getResourceAsStream(versionFile));
+                versionData.load(Svetovid.class.getClassLoader()
+                        .getResourceAsStream(versionFile));
             } catch (IOException e) {
                 e.printStackTrace();
             }

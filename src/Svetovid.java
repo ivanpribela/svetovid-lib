@@ -59,7 +59,7 @@ public class Svetovid {
      * By convention, this output stream is used to display error messages or
      * other information that should come to the immediate attention of a user
      * even if the principal output stream, the value of the variable
-     * {@link out}, has been redirected to a file or other destination that is
+     * {@link #out}, has been redirected to a file or other destination that is
      * typically not continuously monitored.
      */
     public static StandardSvetovidErrorWriter err = org.svetovid.Svetovid.err;
@@ -123,6 +123,8 @@ public class Svetovid {
      *
      * @param target
      *            a string describing the writter's target
+     * @param append
+     *            should the data be appended to the given target or not
      *
      * @return a {@link SvetovidWriter} that can be used to write to the desired
      *         target.
