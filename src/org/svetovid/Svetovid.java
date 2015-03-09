@@ -93,9 +93,9 @@ public final class Svetovid {
      * The input reader for the given source. The returned reader is already
      * open and ready to supply input data. If the supplied source string is a
      * file name, the returned reader will correspond to that file. If the
-     * source is a url the reader will read the resource identified by that url.
-     * Otherwise, the returned reader will correspond to the standard input
-     * stream.
+     * source is a URL the reader will read the resource identified by that URL.
+     * If the source is null, the returned reader will correspond to the
+     * standard input stream. Otherwise, an exception will be thrown.
      *
      * @param source
      *            a string describing the source
@@ -190,8 +190,9 @@ public final class Svetovid {
     /**
      * The output writer for the given target. The returned writer is already
      * open and ready to accept output data. If the supplied target string is a
-     * file name, the returned writer will correspond to that file; otherwise it
-     * will correspond to the standard output stream.
+     * file name, the returned writer will correspond to that file. If the
+     * target is null, the returned writer will correspond to the standard
+     * output stream. Otherwise, an exception will be thrown.
      *
      * @param target
      *            a string describing the writter's target
@@ -207,7 +208,8 @@ public final class Svetovid {
      * The output writer that will append data to the given target. The returned
      * writer is already open and ready to accept output data. If the supplied
      * target string is a file name, the returned writer will correspond to that
-     * file; otherwise it will correspond to the standard output stream.
+     * file. If the target is null, the returned writer will correspond to the
+     * standard output stream. Otherwise, an exception will be thrown.
      *
      * @param target
      *            a string describing the writter's target
@@ -223,8 +225,9 @@ public final class Svetovid {
      * The output writer that will optionally append data to the given target.
      * The returned writer is already open and ready to accept output data. If
      * the supplied target string is a file name, the returned writer will
-     * correspond to that file; otherwise it will correspond to the standard
-     * output stream.
+     * correspond to that file. If the target is null, the returned writer will
+     * correspond to the standard output stream. Otherwise, an exception will be
+     * thrown.
      *
      * @param target
      *            a string describing the writter's target
