@@ -93,7 +93,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     @Override
     public void close() throws SvetovidIOException {
         lastException = null;
-        Svetovid.removeOut(this);
+        Svetovid.close(this);
     }
 
     @Override

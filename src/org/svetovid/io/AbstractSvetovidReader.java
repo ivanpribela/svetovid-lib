@@ -96,7 +96,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     public void close() throws SvetovidIOException {
         lastException = null;
         line = null;
-        Svetovid.removeIn(this);
+        Svetovid.close(this);
     }
 
     @Override

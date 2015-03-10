@@ -145,17 +145,41 @@ public final class Svetovid {
         }
     }
 
-    protected static SvetovidReader removeIn(String source) {
+    /**
+     * Closes the reader (if any) and releases any resources associated with the
+     * given source.
+     *
+     * @param source
+     *            the source for which to close the reader
+     * @return the closed reader.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public static SvetovidReader closeIn(String source)
+            throws SvetovidIOException {
         synchronized (readers) {
-            SvetovidReader reader = readers.get(source);
+            SvetovidReader reader = readers.remove(source);
             if (reader != null) {
-                readers.remove(source);
+                reader.close();
             }
             return reader;
         }
     }
 
-    public static SvetovidReader removeIn(SvetovidReader reader) {
+    /**
+     * Closes the given reader and releases any resources associated with the
+     * underlying source. See {@link SvetovidReader#close} for details.
+     *
+     * @param reader
+     *            the reader to close
+     * @return the closed reader.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public static SvetovidReader close(SvetovidReader reader)
+            throws SvetovidIOException {
         synchronized (readers) {
             String source = null;
             Set<Entry<String, SvetovidReader>> entries = readers.entrySet();
@@ -165,7 +189,7 @@ public final class Svetovid {
                     break;
                 }
             }
-            return removeIn(source);
+            return closeIn(source);
         }
     }
 
@@ -271,27 +295,51 @@ public final class Svetovid {
         }
     }
 
-    protected static SvetovidWriter removeOut(String source) {
+    /**
+     * Closes the writer (if any) and releases any resources associated with the
+     * given target.
+     *
+     * @param target
+     *            the target for which to close the writer
+     * @return the closed writer.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public static SvetovidWriter closeOut(String target)
+            throws SvetovidIOException {
         synchronized (writers) {
-            SvetovidWriter writer = writers.get(source);
+            SvetovidWriter writer = writers.remove(target);
             if (writer != null) {
-                writers.remove(source);
+                writer.close();
             }
             return writer;
         }
     }
 
-    public static SvetovidWriter removeOut(SvetovidWriter writer) {
+    /**
+     * Closes the given writer and releases any resources associated with the
+     * underlying target. See {@link SvetovidWriter#close} for details.
+     *
+     * @param writer
+     *            the writer to close
+     * @return the closed writer.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public static SvetovidWriter close(SvetovidWriter writer)
+            throws SvetovidIOException {
         synchronized (writers) {
-            String source = null;
+            String target = null;
             Set<Entry<String, SvetovidWriter>> entries = writers.entrySet();
             for (Entry<String, SvetovidWriter> entry : entries) {
                 if (entry.getValue() == writer) {
-                    source = entry.getKey();
+                    target = entry.getKey();
                     break;
                 }
             }
-            return removeOut(source);
+            return closeOut(target);
         }
     }
 
