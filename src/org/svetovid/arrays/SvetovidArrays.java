@@ -2612,7 +2612,207 @@ public class SvetovidArrays {
         Arrays.parallelSort(array, beginIndex, endIndex, comparator);
     }
 
-    // TODO Add methods that use Math for random
+    private static int nextInt(int bound) {
+        return (int) (bound * Math.random());
+    }
+
+    public static void randomize(boolean[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            boolean tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(byte[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            byte tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(short[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            short tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(int[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            int tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            long tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(float[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            float tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(double[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            double tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static void randomize(char[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            char tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
+
+    public static <T> void randomize(T[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return;
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        for (int i = beginIndex; i < endIndex; i++) {
+            int index = nextInt(i + 1);
+            T tmp = array[index];
+            array[index] = array[i];
+            array[i] = tmp;
+        }
+    }
 
     public static void randomize(boolean[] array, int beginIndex, int endIndex, Random random) throws IndexOutOfBoundsException {
         if (array == null) {
