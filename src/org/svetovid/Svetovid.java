@@ -94,6 +94,24 @@ public final class Svetovid {
     private static Map<String, SvetovidReader> readers = new HashMap<>();
 
     /**
+     * Checks whether the given source can be used for input.
+     *
+     * @param source
+     *            a string describing the source
+     *
+     * @return {@code true} if the given source can be read; {@code false}
+     *         otherwise.
+     */
+    public static boolean testIn(String source) {
+        try {
+            in(source);
+            return true;
+        } catch (SvetovidIOException e) {
+            return false;
+        }
+    }
+
+    /**
      * The input reader for the given source. The returned reader is already
      * open and ready to supply input data. If the supplied source string is a
      * file name, the returned reader will correspond to that file. If the
@@ -215,6 +233,53 @@ public final class Svetovid {
 
     /* Map of all open writers. */
     private static Map<String, SvetovidWriter> writers = new HashMap<>();
+
+    /**
+     * Checks whether the given target can be used for output.
+     *
+     * @param target
+     *            a string describing the target
+     *
+     * @return {@code true} if it is possible to write to the given target;
+     *         {@code false} otherwise.
+     */
+    public static boolean testOut(String target) {
+        return testOut(target, false);
+    }
+
+    /**
+     * Checks whether the data can be appended to the given target.
+     *
+     * @param target
+     *            a string describing the target
+     *
+     * @return {@code true} if it is possible to append data to the given
+     *         target; {@code false} otherwise.
+     */
+    public static boolean testAppend(String target) {
+        return testOut(target, true);
+    }
+
+    /**
+     * Checks whether the given target can be used for output.
+     *
+     * @param target
+     *            a string describing the target
+     * @param append
+     *            {@code true} to check if the data can be appended to the
+     *            target; {@code false} to check if the data can be overwritten
+     *
+     * @return {@code true} if it is possible to write to the given target;
+     *         {@code false} otherwise.
+     */
+    public static boolean testOut(String target, boolean append) {
+        try {
+            out(target, append);
+            return true;
+        } catch (SvetovidIOException e) {
+            return false;
+        }
+    }
 
     /**
      * The output writer for the given target. The returned writer is already
