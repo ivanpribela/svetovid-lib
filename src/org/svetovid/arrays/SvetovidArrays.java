@@ -3012,7 +3012,176 @@ public class SvetovidArrays {
         }
     }
 
-    // TODO Add more method varieties
+    public static boolean pick(boolean[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        boolean result = array[index];
+        return result;
+    }
+
+    public static byte pick(byte[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        byte result = array[index];
+        return result;
+    }
+
+    public static short pick(short[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        short result = array[index];
+        return result;
+    }
+
+    public static int pick(int[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        int result = array[index];
+        return result;
+    }
+
+    public static long pick(long[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        long result = array[index];
+        return result;
+    }
+
+    public static float pick(float[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        float result = array[index];
+        return result;
+    }
+
+    public static double pick(double[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        double result = array[index];
+        return result;
+    }
+
+    public static char pick(char[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        char result = array[index];
+        return result;
+    }
+
+    public static <T> T pick(T[] array, int beginIndex, int endIndex) throws IndexOutOfBoundsException, IllegalArgumentException {
+        if (array == null) {
+            throw new IllegalArgumentException();
+        }
+        if (beginIndex < 0) {
+            throw new ArrayIndexOutOfBoundsException(beginIndex);
+        }
+        if (endIndex > array.length) {
+            throw new ArrayIndexOutOfBoundsException(endIndex);
+        }
+        int length = endIndex - beginIndex;
+        if (length < 0) {
+            throw new ArrayIndexOutOfBoundsException(length);
+        }
+        int index = nextInt(array.length);
+        T result = array[index];
+        return result;
+    }
 
     public static boolean pick(boolean[] array, int beginIndex, int endIndex, Random random) throws IndexOutOfBoundsException, IllegalArgumentException {
         if (array == null) {
