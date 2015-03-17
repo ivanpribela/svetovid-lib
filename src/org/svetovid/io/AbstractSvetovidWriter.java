@@ -18,7 +18,6 @@ package org.svetovid.io;
 
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -832,7 +831,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
                 builder.append(prefix);
             }
             builder.append(BEGIN_ARRAY);
-            Iterator<?> iterator = ((List<?>) value).iterator();
+            Iterator<?> iterator = ((Iterable<?>) value).iterator();
             if (iterator.hasNext()) {
                 Object object = iterator.next();
                 appendObject(builder, prefix + INDENT, true, object);
