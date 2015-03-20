@@ -9,6 +9,38 @@ import org.svetovid.io.SvetovidJsonPathException;
 
 public class JsonHelper {
 
+    private final JsonType type;
+    private final Object object;
+
+    public JsonHelper(Object object) {
+        this.object = object;
+        this.type = getType(object);
+    }
+
+    public JsonType getType() {
+        return type;
+    }
+
+    public Boolean asBoolean() {
+        return asBoolean(object);
+    }
+
+    public Number asNumber() {
+        return asNumber(object);
+    }
+
+    public String asString() {
+        return asString(object);
+    }
+
+    public Iterable<?> asArray() {
+        return asArray(object);
+    }
+
+    public Map<String, Object> asObject() {
+        return asObject(object);
+    }
+
     public static JsonType getType(Object object) {
         if (object == null) {
             return JsonType.NULL;
