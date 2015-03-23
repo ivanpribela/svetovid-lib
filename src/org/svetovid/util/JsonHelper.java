@@ -501,4 +501,164 @@ public class JsonHelper {
             return array[pos++];
         }
     }
+
+    public static Object get(Object object, String path) {
+        return get(object, path, "");
+    }
+
+    private static Object get(Object object, String path, String resolved) {
+
+        // No path
+        if (path == null) {
+            return object;
+        }
+
+        // Remove the leading dot
+        if (path.startsWith(".")) {
+            path = path.substring(1);
+        }
+
+        // This object
+        if (path.isEmpty()) {
+            return object;
+        }
+
+        // Parse the path
+        String[] pathSegments;
+
+        // Array notation
+        if (path.startsWith("[")) {
+            pathSegments = path.substring(1).split("\\]", 2); // TODO Escape ] and ' characters?
+            if (!pathSegments[0].startsWith("'")) {
+                try {
+                    int index = Integer.parseInt(pathSegments[0]);
+                    resolved = resolved + "[" + pathSegments[0] + "]";
+                    object = extractArrayElement(object, index, resolved);
+                    return continueGet(object, pathSegments, resolved);
+                } catch (NumberFormatException e) {
+                    throw new SvetovidFormatException("Json.Number", pathSegments[0], null);
+                }
+            }
+            if (!pathSegments[0].endsWith("'")) {
+                throw new SvetovidFormatException("Json.String", pathSegments[0], null);
+            }
+            pathSegments[0] = pathSegments[0].substring(1, pathSegments[0].length() - 1);
+        } else {
+            pathSegments = path.split("[\\.\\[]", 2);
+            if ((pathSegments.length > 1) && (path.charAt(pathSegments[0].length()) == '[')) {
+                pathSegments[1] = '[' + pathSegments[1];
+            }
+        }
+
+        // Object member
+        resolved = resolved + "." + pathSegments[0];
+        object = extractObjectMember(object, pathSegments[0], resolved);
+        return continueGet(object, pathSegments, resolved);
+
+    }
+
+    private static Object extractArrayElement(Object array, int index, String path) {
+        if (array instanceof List) {
+            List<?> l = (List<?>) array;
+            if ((index < 0) || (index >= l.size())) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return l.get(index);
+        }
+        if (array instanceof Iterable) {
+            if (index < 0) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            Iterator<?> iterator = ((Iterable<?>) array).iterator();
+            while (iterator.hasNext()) {
+                Object element = iterator.next();
+                if (index == 0) {
+                    return element;
+                }
+                index--;
+            }
+            throw new ArrayIndexOutOfBoundsException(index);
+        }
+        if (array instanceof boolean[]) {
+            boolean[] a = (boolean[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof byte[]) {
+            byte[] a = (byte[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof short[]) {
+            short[] a = (short[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof int[]) {
+            int[] a = (int[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof long[]) {
+            long[] a = (long[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof float[]) {
+            float[] a = (float[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof double[]) {
+            double[] a = (double[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof char[]) {
+            char[] a = (char[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        if (array instanceof Object[]) {
+            Object[] a = (Object[]) array;
+            if ((index < 0) || (index >= a.length)) {
+                throw new ArrayIndexOutOfBoundsException(index);
+            }
+            return a[index];
+        }
+        throw new SvetovidJsonPathException("Array", array.getClass(), path);
+    }
+
+    private static Object extractObjectMember(Object object, String member, String path) {
+        if (!(object instanceof Map)) {
+            throw new SvetovidJsonPathException("String", object.getClass(), path);
+        }
+        @SuppressWarnings("unchecked")
+        Map<String, Object> map = (Map<String, Object>) object;
+        return map.get(member);
+
+    }
+
+    private static Object continueGet(Object object, String[] pathSegments, String resolved) {
+        if (pathSegments.length == 1) {
+            return object;
+        }
+        return get(object, pathSegments[1], resolved);
+    }
 }
