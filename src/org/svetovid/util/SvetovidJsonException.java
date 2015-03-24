@@ -16,7 +16,7 @@
 
 package org.svetovid.util;
 
-import org.svetovid.io.SvetovidException;
+import org.svetovid.SvetovidException;
 
 /**
  * Signals that an error occurred while resolving a JSON path.

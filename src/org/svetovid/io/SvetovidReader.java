@@ -18,6 +18,8 @@ package org.svetovid.io;
 
 import java.util.regex.Pattern;
 
+import org.svetovid.SvetovidFormatException;
+
 /**
  * This interface provides methods that simplify reading the program input data
  * for beginner programmers. Exception handling is not necessary as when it is

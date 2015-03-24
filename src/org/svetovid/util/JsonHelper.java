@@ -4,8 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.svetovid.io.SvetovidFormatException;
-import org.svetovid.io.SvetovidJsonPathException;
+import org.svetovid.SvetovidFormatException;
 
 public class JsonHelper {
 

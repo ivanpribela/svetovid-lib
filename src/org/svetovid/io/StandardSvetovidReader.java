@@ -17,6 +17,7 @@
 package org.svetovid.io;
 
 import org.svetovid.Svetovid;
+import org.svetovid.SvetovidFormatException;
 
 /**
  * This class provides an implementation of the {@link SvetovidReader} interface

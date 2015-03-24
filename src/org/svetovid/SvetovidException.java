@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.svetovid.io;
+package org.svetovid;
 
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -24,8 +24,6 @@ import java.util.IdentityHashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
-
-import org.svetovid.Svetovid;
 
 /**
  * {@code SvetovidException} is the superclass of those exceptions that can be

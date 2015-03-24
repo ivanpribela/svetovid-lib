@@ -37,7 +37,6 @@ import org.svetovid.io.DefaultSvetovidWriter;
 import org.svetovid.io.StandardSvetovidErrorWriter;
 import org.svetovid.io.StandardSvetovidReader;
 import org.svetovid.io.StandardSvetovidWriter;
-import org.svetovid.io.SvetovidException;
 import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;

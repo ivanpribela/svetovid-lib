@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.svetovid.io;
+package org.svetovid;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ import java.util.List;
  *
  * @author Ivan Pribela
  *
- * @see SvetovidReader
- * @see SvetovidWriter
+ * @see org.svetovid.io.SvetovidReader
+ * @see org.svetovid.io.SvetovidWriter
  */
 public class SvetovidFormatException extends SvetovidException {
 

@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.svetovid.Svetovid;
+import org.svetovid.SvetovidException;
 
 /**
  * This class provides default implementations for the {@link SvetovidWriter}

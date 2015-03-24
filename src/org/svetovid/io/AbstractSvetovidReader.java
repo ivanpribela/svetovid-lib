@@ -29,6 +29,8 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import org.svetovid.Svetovid;
+import org.svetovid.SvetovidException;
+import org.svetovid.SvetovidFormatException;
 
 /**
  * This class provides default implementations for the {@link SvetovidReader}
