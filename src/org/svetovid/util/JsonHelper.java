@@ -1,3 +1,19 @@
+/*
+ * Copyright 2015 Ivan Pribela
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.svetovid.util;
 
 import java.util.Iterator;
@@ -6,40 +22,106 @@ import java.util.Map;
 
 import org.svetovid.SvetovidFormatException;
 
+/**
+ * Helper class with many useful methods for manipulating JSON compatible
+ * objects.
+ *
+ * @author Ivan Pribela
+ */
 public class JsonHelper {
 
     private final JsonType type;
     private final Object object;
 
+    /**
+     * Constructs a new {@code JsonHelper} wrapper for easier manipulation of
+     * the given JSON compatible object.
+     *
+     * @param object
+     *            the object to wrap
+     */
     public JsonHelper(Object object) {
         this.object = object;
         this.type = getType(object);
     }
 
+    /**
+     * Returns the JSON type of this object.
+     *
+     * @return the JSON type of this object.
+     */
     public JsonType getType() {
         return type;
     }
 
+    /**
+     * Returns a boolean value of this object.
+     *
+     * @return a boolean value of this object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
     public Boolean asBoolean() {
         return asBoolean(object);
     }
 
+    /**
+     * Returns a numeric value of this object.
+     *
+     * @return a numeric value of this object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
     public Number asNumber() {
         return asNumber(object);
     }
 
+    /**
+     * Returns a string value of this object.
+     *
+     * @return a string value of this object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
     public String asString() {
         return asString(object);
     }
 
+    /**
+     * Returns an array value of this object.
+     *
+     * @return an array value of this object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
     public Iterable<?> asArray() {
         return asArray(object);
     }
 
+    /**
+     * Returns an object value of this object.
+     *
+     * @return an object value of this object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
     public Map<String, Object> asObject() {
         return asObject(object);
     }
 
+    /**
+     * Returns the JSON type to which the given object can be converted.
+     *
+     * @param object
+     *            the object for which the type is determined
+     *
+     * @return JSON type of the given object.
+     */
     public static JsonType getType(Object object) {
         if (object == null) {
             return JsonType.NULL;
@@ -89,7 +171,19 @@ public class JsonHelper {
         return JsonType.UNKNOWN;
     }
 
-    public static Boolean asBoolean(Object object) {
+    /**
+     * Returns the given object converted to a boolean value.
+     *
+     * @param object
+     *            the object to convert
+     *
+     * @return a boolean value of the given object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Boolean asBoolean(Object object)
+            throws SvetovidJsonException {
         if (object == null) {
             return null;
         }
@@ -100,7 +194,18 @@ public class JsonHelper {
         }
     }
 
-    public static Number asNumber(Object object) {
+    /**
+     * Returns the given object converted to a number value.
+     *
+     * @param object
+     *            the object to convert
+     *
+     * @return a number value of the given object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Number asNumber(Object object) throws SvetovidJsonException {
         if (object == null) {
             return null;
         }
@@ -111,7 +216,18 @@ public class JsonHelper {
         }
     }
 
-    public static String asString(Object object) {
+    /**
+     * Returns the given object converted to a string value.
+     *
+     * @param object
+     *            the object to convert
+     *
+     * @return a string value of the given object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static String asString(Object object) throws SvetovidJsonException {
         if (object == null) {
             return null;
         }
@@ -122,7 +238,19 @@ public class JsonHelper {
         }
     }
 
-    public static Iterable<?> asArray(Object object) {
+    /**
+     * Returns the given object converted to a JSON array value.
+     *
+     * @param object
+     *            the object to convert
+     *
+     * @return an array value of the given object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Iterable<?> asArray(Object object)
+            throws SvetovidJsonException {
         if (object == null) {
             return null;
         }
@@ -173,7 +301,19 @@ public class JsonHelper {
         throw new SvetovidJsonException("Array", object.getClass(), ex);
     }
 
-    public static Map<String, Object> asObject(Object object) {
+    /**
+     * Returns the given object converted to an JSON object value.
+     *
+     * @param object
+     *            the object to convert
+     *
+     * @return an object value of the given object.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Map<String, Object> asObject(Object object)
+            throws SvetovidJsonException {
         if (object == null) {
             return null;
         }
