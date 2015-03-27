@@ -19,13 +19,13 @@ package org.svetovid.util;
 import org.svetovid.SvetovidException;
 
 /**
- * Signals that an error occurred while resolving a JSON path.
+ * Signals that an error occurred while working with JSON objects.
  *
  * @author Ivan Pribela
  */
 public class SvetovidJsonException extends SvetovidException {
 
-    private static final long serialVersionUID = -1773791765909101322L;
+    private static final long serialVersionUID = 7164424464583951740L;
 
     /**
      * Constructs a {@code SvetovidJsonException} with the specified message.
@@ -39,8 +39,22 @@ public class SvetovidJsonException extends SvetovidException {
      *            {@link #getCause()} method. A null value is permitted, and
      *            indicates that the cause is nonexistent or unknown.
      */
-    public SvetovidJsonException(String requestedType, Class<?> actualType,
+    public SvetovidJsonException(JsonType requestedType, Class<?> actualType,
             Throwable cause) {
-        super(requestedType, cause, actualType.toString());
+        super("Conversion", cause, requestedType.toString(),
+                actualType.getSimpleName());
+    }
+
+    /**
+     * Constructs a {@code SvetovidJsonException} with the specified message.
+     *
+     * @param requestedType
+     *            The JSON type to which the object could not be cast
+     * @param actualType
+     *            The type of the object found
+     */
+    public SvetovidJsonException(JsonType requestedType, Class<?> actualType) {
+        super("Conversion", requestedType.toString(),
+                actualType.getSimpleName());
     }
 }
