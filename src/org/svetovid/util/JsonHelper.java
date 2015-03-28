@@ -190,7 +190,8 @@ public class JsonHelper {
         try {
             return (Boolean) object;
         } catch (ClassCastException e) {
-            throw new SvetovidJsonException("Boolean", object.getClass(), e);
+            throw new SvetovidJsonException(JsonType.BOOLEAN,
+                    object.getClass(), e);
         }
     }
 
@@ -212,7 +213,8 @@ public class JsonHelper {
         try {
             return (Number) object;
         } catch (ClassCastException e) {
-            throw new SvetovidJsonException("Number", object.getClass(), e);
+            throw new SvetovidJsonException(JsonType.NULL,
+                    object.getClass(), e);
         }
     }
 
@@ -234,7 +236,8 @@ public class JsonHelper {
         try {
             return (String) object;
         } catch (ClassCastException e) {
-            throw new SvetovidJsonException("String", object.getClass(), e);
+            throw new SvetovidJsonException(JsonType.STRING,
+                    object.getClass(), e);
         }
     }
 
@@ -298,7 +301,7 @@ public class JsonHelper {
             Object[] array = (Object[]) object;
             return new IterableObjectArray(array);
         }
-        throw new SvetovidJsonException("Array", object.getClass(), ex);
+        throw new SvetovidJsonException(JsonType.ARRAY, object.getClass(), ex);
     }
 
     /**
@@ -322,7 +325,7 @@ public class JsonHelper {
             Map<String, Object> map = (Map<String, Object>) object;
             return map;
         } catch (ClassCastException e) {
-            throw new SvetovidJsonException("Object", object.getClass(), e);
+            throw new SvetovidJsonException(JsonType.OBJECT, object.getClass(), e);
         }
     }
 
