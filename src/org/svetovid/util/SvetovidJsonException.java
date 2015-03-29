@@ -25,7 +25,7 @@ import org.svetovid.SvetovidException;
  */
 public class SvetovidJsonException extends SvetovidException {
 
-    private static final long serialVersionUID = 7164424464583951740L;
+    private static final long serialVersionUID = 7914127454669473840L;
 
     /**
      * Constructs a {@code SvetovidJsonException} with the specified message.
@@ -41,7 +41,7 @@ public class SvetovidJsonException extends SvetovidException {
      */
     public SvetovidJsonException(JsonType requestedType, Class<?> actualType,
             Throwable cause) {
-        super("Conversion", cause, requestedType.toString(),
+        super("Cast", cause, requestedType.toString(),
                 actualType.getSimpleName());
     }
 
@@ -54,7 +54,42 @@ public class SvetovidJsonException extends SvetovidException {
      *            The type of the object found
      */
     public SvetovidJsonException(JsonType requestedType, Class<?> actualType) {
-        super("Conversion", requestedType.toString(),
+        super("Cast", requestedType.toString(),
                 actualType.getSimpleName());
+    }
+
+    /**
+     * Constructs a {@code SvetovidJsonException} with the specified message.
+     *
+     * @param requestedType
+     *            The JSON type to which the object could not be cast
+     * @param actualType
+     *            The type of the object found
+     * @param path
+     *            JSON path that was used
+     * @param cause
+     *            The cause, which is saved for later retrieval by the
+     *            {@link #getCause()} method. A null value is permitted, and
+     *            indicates that the cause is nonexistent or unknown.
+     */
+    public SvetovidJsonException(JsonType requestedType, Class<?> actualType,
+            String path, Throwable cause) {
+        super("Path", cause, requestedType.toString(),
+                actualType.getSimpleName(), path);
+    }
+
+    /**
+     * Constructs a {@code SvetovidJsonException} with the specified message.
+     *
+     * @param requestedType
+     *            The JSON type to which the object could not be cast
+     * @param actualType
+     *            The type of the object found
+     * @param path
+     *            JSON path that was used
+     */
+    public SvetovidJsonException(JsonType requestedType, Class<?> actualType, String path) {
+        super("Path", requestedType.toString(),
+                actualType.getSimpleName(), path);
     }
 }
