@@ -259,8 +259,7 @@ public class JsonHelper {
         }
         ClassCastException ex;
         try {
-            @SuppressWarnings("unchecked")
-            Iterable<Object> array = (Iterable<Object>) object;
+            Iterable<?> array = (Iterable<?>) object;
             return array;
         } catch (ClassCastException e) {
             ex = e;
