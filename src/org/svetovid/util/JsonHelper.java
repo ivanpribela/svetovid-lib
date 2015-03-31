@@ -324,7 +324,8 @@ public class JsonHelper {
             Map<String, Object> map = (Map<String, Object>) object;
             return map;
         } catch (ClassCastException e) {
-            throw new SvetovidJsonException(JsonType.OBJECT, object.getClass(), e);
+            throw new SvetovidJsonException(JsonType.OBJECT,
+                    object.getClass(), e);
         }
     }
 
@@ -647,7 +648,8 @@ public class JsonHelper {
         return get(object, path, "");
     }
 
-    private static Object get(Object object, String path, String resolved) {
+    private static Object get(Object object, String path, String resolved)
+            throws SvetovidFormatException, SvetovidJsonException {
 
         // No path
         if (path == null) {
@@ -677,16 +679,20 @@ public class JsonHelper {
                     object = extractArrayElement(object, index, resolved);
                     return continueGet(object, pathSegments, resolved);
                 } catch (NumberFormatException e) {
-                    throw new SvetovidFormatException("Json.Number", pathSegments[0], null);
+                    throw new SvetovidFormatException("Json.Number",
+                            pathSegments[0], null);
                 }
             }
             if (!pathSegments[0].endsWith("'")) {
-                throw new SvetovidFormatException("Json.String", pathSegments[0], null);
+                throw new SvetovidFormatException("Json.String",
+                        pathSegments[0], null);
             }
-            pathSegments[0] = pathSegments[0].substring(1, pathSegments[0].length() - 1);
+            pathSegments[0] = pathSegments[0].substring(1,
+                    pathSegments[0].length() - 1);
         } else {
             pathSegments = path.split("[\\.\\[]", 2);
-            if ((pathSegments.length > 1) && (path.charAt(pathSegments[0].length()) == '[')) {
+            if ((pathSegments.length > 1) &&
+                    (path.charAt(pathSegments[0].length()) == '[')) {
                 pathSegments[1] = '[' + pathSegments[1];
             }
         }
@@ -698,7 +704,8 @@ public class JsonHelper {
 
     }
 
-    private static Object extractArrayElement(Object array, int index, String path) {
+    private static Object extractArrayElement(Object array, int index,
+            String path) throws SvetovidJsonException {
         if (array instanceof List) {
             List<?> l = (List<?>) array;
             if ((index < 0) || (index >= l.size())) {
@@ -783,12 +790,14 @@ public class JsonHelper {
             }
             return a[index];
         }
-        throw new SvetovidJsonPathException("Array", array.getClass(), path);
+        throw new SvetovidJsonException(JsonType.ARRAY, array.getClass(), path);
     }
 
-    private static Object extractObjectMember(Object object, String member, String path) {
+    private static Object extractObjectMember(Object object, String member,
+            String path) throws SvetovidJsonException {
         if (!(object instanceof Map)) {
-            throw new SvetovidJsonPathException("String", object.getClass(), path);
+            throw new SvetovidJsonException(JsonType.OBJECT, object.getClass(),
+                    path);
         }
         @SuppressWarnings("unchecked")
         Map<String, Object> map = (Map<String, Object>) object;
@@ -796,7 +805,9 @@ public class JsonHelper {
 
     }
 
-    private static Object continueGet(Object object, String[] pathSegments, String resolved) {
+    private static Object continueGet(Object object, String[] pathSegments,
+            String resolved) throws SvetovidFormatException,
+            SvetovidJsonException {
         if (pathSegments.length == 1) {
             return object;
         }
