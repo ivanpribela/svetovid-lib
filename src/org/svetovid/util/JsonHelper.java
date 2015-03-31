@@ -644,6 +644,23 @@ public class JsonHelper {
         }
     }
 
+    /**
+     * Returns the raw object at the specified JSON path resolved on the given
+     * object.
+     *
+     * @param object
+     *            the object to apply the path to
+     * @param path
+     *            the path to follow
+     *
+     * @return the raw object extracted from the given object using the given
+     *         path.
+     *
+     * @throws SvetovidFormatException
+     *             if there was an error parsing the path.
+     * @throws SvetovidJsonException
+     *             if the array or object along the path cannot be converted.
+     */
     public static Object get(Object object, String path) {
         return get(object, path, "");
     }
