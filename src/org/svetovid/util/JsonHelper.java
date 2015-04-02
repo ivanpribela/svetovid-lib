@@ -674,6 +674,35 @@ public class JsonHelper {
     }
 
     /**
+     * Returns a numeric value at the specified JSON path resolved on the given
+     * object.
+     *
+     * @param object
+     *            the object to apply the path to
+     * @param path
+     *            the path to follow
+     *
+     * @return the numeric value extracted from the given object using the given
+     *         path.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Number getNumber(Object object, String path)
+            throws SvetovidJsonException {
+        object = get(object, path);
+        if (object == null) {
+            return null;
+        }
+        try {
+            return (Number) object;
+        } catch (ClassCastException e) {
+            throw new SvetovidJsonException(JsonType.NUMBER,
+                    object.getClass(), path);
+        }
+    }
+
+    /**
      * Returns the raw object at the specified JSON path resolved on the given
      * object.
      *
