@@ -732,6 +732,73 @@ public class JsonHelper {
     }
 
     /**
+     * Returns an array value at the specified JSON path resolved on the given
+     * object.
+     *
+     * @param object
+     *            the object to apply the path to
+     * @param path
+     *            the path to follow
+     *
+     * @return the array value extracted from the given object using the given
+     *         path.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Iterable<?> getArray(Object object, String path)
+            throws SvetovidJsonException {
+        object = get(object, path);
+        if (object == null) {
+            return null;
+        }
+        try {
+            Iterable<?>array = (Iterable<?>) object;
+            return array;
+        } catch (ClassCastException e) {
+            // Try to convert with the code bellow
+        }
+        if (object instanceof boolean[]) {
+            boolean[] array = (boolean[]) object;
+            return new IterableBooleanArray(array);
+        }
+        if (object instanceof byte[]) {
+            byte[] array = (byte[]) object;
+            return new IterableByteArray(array);
+        }
+        if (object instanceof short[]) {
+            short[] array = (short[]) object;
+            return new IterableShortArray(array);
+        }
+        if (object instanceof int[]) {
+            int[] array = (int[]) object;
+            return new IterableIntegerArray(array);
+        }
+        if (object instanceof long[]) {
+            long[] array = (long[]) object;
+            return new IterableLongArray(array);
+        }
+        if (object instanceof float[]) {
+            float[] array = (float[]) object;
+            return new IterableFloatArray(array);
+        }
+        if (object instanceof double[]) {
+            double[] array = (double[]) object;
+            return new IterableDoubleArray(array);
+        }
+        if (object instanceof char[]) {
+            char[] array = (char[]) object;
+            return new IterableCharacterArray(array);
+        }
+        if (object instanceof Object[]) {
+            Object[] array = (Object[]) object;
+            return new IterableObjectArray(array);
+        }
+        throw new SvetovidJsonException(JsonType.ARRAY,
+                object.getClass(), path);
+    }
+
+    /**
      * Returns the raw object at the specified JSON path resolved on the given
      * object.
      *
