@@ -799,6 +799,37 @@ public class JsonHelper {
     }
 
     /**
+     * Returns an object value at the specified JSON path resolved on the given
+     * object.
+     *
+     * @param object
+     *            the object to apply the path to
+     * @param path
+     *            the path to follow
+     *
+     * @return the object value extracted from the given object using the given
+     *         path.
+     *
+     * @throws SvetovidJsonException
+     *             if the object cannot be converted.
+     */
+    public static Map<String, Object> getObject(Object object, String path)
+            throws SvetovidJsonException {
+        object = get(object, path);
+        if (object == null) {
+            return null;
+        }
+        try {
+            @SuppressWarnings("unchecked")
+            Map<String, Object> map = (Map<String, Object>) object;
+            return map;
+        } catch (ClassCastException e) {
+            throw new SvetovidJsonException(JsonType.OBJECT,
+                    object.getClass(), path);
+        }
+    }
+
+    /**
      * Returns the raw object at the specified JSON path resolved on the given
      * object.
      *
