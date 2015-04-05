@@ -19,6 +19,8 @@ package org.svetovid.util;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.svetovid.SvetovidFormatException;
 
@@ -873,7 +875,7 @@ public class JsonHelper {
 
         // Array notation
         if (path.startsWith("[")) {
-            pathSegments = path.substring(1).split("\\]", 2); // TODO Escape ] and ' characters?
+            pathSegments = splitPath(path.substring(1));
             if (!pathSegments[0].startsWith("'")) {
                 try {
                     int index = Integer.parseInt(pathSegments[0]);
@@ -904,6 +906,17 @@ public class JsonHelper {
         object = extractObjectMember(object, pathSegments[0], resolved);
         return continueGet(object, pathSegments, resolved);
 
+    }
+
+    private static String[] splitPath(String path) {
+        Pattern pattern = Pattern.compile("[^\\\\]\\]");
+        Matcher matcher = pattern.matcher(path);
+        if (!matcher.find()) {
+            return new String[] { path };
+        }
+        String segment = path.substring(0, matcher.start() + 1);
+        path = path.substring(matcher.end());
+        return new String[] { segment, path };
     }
 
     private static Object extractArrayElement(Object array, int index,
