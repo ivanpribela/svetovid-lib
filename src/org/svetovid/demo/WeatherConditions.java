@@ -15,6 +15,13 @@ public class WeatherConditions {
                 + "units=metric&mode.json&q=" + location;
         Object data = Svetovid.in(uri).readObject();
 
+        // Were there errors?
+        String error = JsonHelper.getString(data, "message");
+        if (error != null) {
+            Svetovid.out.println(error);
+            return;
+        }
+
         // Extract the data
         String weather =     JsonHelper.getString(data, "weather[0].main");
         Number temperature = JsonHelper.getNumber(data, "main.temp");
