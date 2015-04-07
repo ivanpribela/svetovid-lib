@@ -23,15 +23,21 @@ public class WeatherConditions {
         }
 
         // Extract the data
+        String name =        JsonHelper.getString(data, "name");
         String weather =     JsonHelper.getString(data, "weather[0].main");
+        Number clouds =      JsonHelper.getNumber(data, "clouds.all");
         Number temperature = JsonHelper.getNumber(data, "main.temp");
         Number humidity =    JsonHelper.getNumber(data, "main.humidity");
+        Number pressure =    JsonHelper.getNumber(data, "main.pressure");
         Number wind =        JsonHelper.getNumber(data, "wind.speed");
 
         // Print the weather information
+        Svetovid.out.println("   Location:", name);
         Svetovid.out.println("    Weather:", weather);
+        Svetovid.out.println("     Clouds:", clouds + "%");
         Svetovid.out.println("Temperature:", temperature + "°C");
         Svetovid.out.println("   Humidity:", humidity + "%");
+        Svetovid.out.println("   Pressure:", pressure + " hPa");
         Svetovid.out.println("       Wind:", wind + " m/s");
 
     }
