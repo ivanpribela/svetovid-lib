@@ -35,7 +35,7 @@ public class WeatherConditions {
         Svetovid.out.println("   Location:", name);
         Svetovid.out.println("    Weather:", weather);
         Svetovid.out.println("     Clouds:", clouds + "%");
-        Svetovid.out.println("Temperature:", temperature + "°C");
+        Svetovid.out.println("Temperature:", temperature + "\u00b0C");
         Svetovid.out.println("   Humidity:", humidity + "%");
         Svetovid.out.println("   Pressure:", pressure + " hPa");
         Svetovid.out.println("       Wind:", wind + " m/s");
