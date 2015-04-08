@@ -1,4 +1,4 @@
-<project name="svetovid-lib" default="help">
+<project name="org.svetovid.lib" default="help">
 
 
     <!-- Load the environment variables -->
