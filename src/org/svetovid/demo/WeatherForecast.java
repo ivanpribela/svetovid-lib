@@ -1,6 +1,7 @@
 package org.svetovid.demo;
 
 import org.svetovid.Svetovid;
+import org.svetovid.util.JsonHelper;
 
 public class WeatherForecast {
 
@@ -13,6 +14,28 @@ public class WeatherForecast {
         String uri = "http://api.openweathermap.org/data/2.5/forecast?"
                 + "units=metric&mode.json&q=" + location;
         Object data = Svetovid.in(uri).readObject();
+
+        // Print the forecast
+        String name = JsonHelper.getString(data, "city.name");
+        Svetovid.out.println("Weather forecast for " + name + ":");
+        for (Object forecast : JsonHelper.getArray(data, "list")) {
+
+            // Extract the data
+            String weather =     JsonHelper.getString(forecast, "weather[0].main");
+            Number clouds =      JsonHelper.getNumber(forecast, "clouds.all");
+            Number temperature = JsonHelper.getNumber(forecast, "main.temp");
+            Number humidity =    JsonHelper.getNumber(forecast, "main.humidity");
+            Number wind =        JsonHelper.getNumber(forecast, "wind.speed");
+
+            // Print the weather information
+            Svetovid.out.print(weather + "\t");
+            Svetovid.out.print(clouds + "% clouds\t");
+            Svetovid.out.print(temperature + "�C,\t");
+            Svetovid.out.print(humidity + "% humidity,\t");
+            Svetovid.out.print("wind " + wind + " m/s");
+            Svetovid.out.println();
+
+        }
 
     }
 }
