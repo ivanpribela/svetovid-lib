@@ -15,6 +15,13 @@ public class WeatherForecast {
                 + "units=metric&mode.json&q=" + location;
         Object data = Svetovid.in(uri).readObject();
 
+        // Were there errors?
+        String code = JsonHelper.getString(data, "cod");
+        if (!"200".equals(code)) {
+            Svetovid.out.println("Error " + code);
+            return;
+        }
+
         // Print the forecast
         String name = JsonHelper.getString(data, "city.name");
         Svetovid.out.println("Weather forecast for " + name + ":");
