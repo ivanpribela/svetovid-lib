@@ -37,7 +37,7 @@ public class WeatherForecast {
             // Print the weather information
             Svetovid.out.print(weather + "\t");
             Svetovid.out.print(clouds + "% clouds\t");
-            Svetovid.out.print(temperature + "�C,\t");
+            Svetovid.out.print(temperature + "\u00b0C,\t");
             Svetovid.out.print(humidity + "% humidity,\t");
             Svetovid.out.print("wind " + wind + " m/s");
             Svetovid.out.println();
