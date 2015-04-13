@@ -28,6 +28,7 @@ public class WeatherForecast {
         for (Object forecast : JsonHelper.getArray(data, "list")) {
 
             // Extract the data
+            String time =        JsonHelper.getString(forecast, "dt_txt");
             String weather =     JsonHelper.getString(forecast, "weather[0].main");
             Number clouds =      JsonHelper.getNumber(forecast, "clouds.all");
             Number temperature = JsonHelper.getNumber(forecast, "main.temp");
@@ -35,7 +36,8 @@ public class WeatherForecast {
             Number wind =        JsonHelper.getNumber(forecast, "wind.speed");
 
             // Print the weather information
-            Svetovid.out.print(weather + "\t");
+            Svetovid.out.print(time);
+            Svetovid.out.print(" " + weather + "\t");
             Svetovid.out.print(clouds + "% clouds\t");
             Svetovid.out.print(temperature + "\u00b0C,\t");
             Svetovid.out.print(humidity + "% humidity,\t");
