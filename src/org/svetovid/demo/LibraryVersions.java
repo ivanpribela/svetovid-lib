@@ -10,7 +10,19 @@ public class LibraryVersions {
         // Get release info from GitHub
         String uri = "https://api.github.com/repos/ivanpribela/svetovid-lib/releases";
         Object data = Svetovid.in(uri).readObject();
-        Svetovid.err.printObject(data);
+
+        // Print available versions
+        for (Object version : JsonHelper.getArray(data, ".")) {
+
+            // Extract the data
+            String name = JsonHelper.getString(version, "name");
+            String url =  JsonHelper.getString(version, "html_url");
+
+            // Print the information
+            Svetovid.out.println(name);
+            Svetovid.out.println("URL:", url);
+
+        }
 
     }
 }
