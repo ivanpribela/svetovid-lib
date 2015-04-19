@@ -20,12 +20,14 @@ public class LibraryVersions {
 
             // Print the information
             Svetovid.out.println(name);
+            Svetovid.out.println(name.replaceAll(".", "="));
             Svetovid.out.println("URL:", url);
 
             // Print available files
             for (Object asset : JsonHelper.getArray(version, "assets")) {
                 String file = JsonHelper.getString(asset, "name");
-                Svetovid.out.println("(" + file + ")");
+                String download = JsonHelper.getString(asset, "browser_download_url");
+                Svetovid.out.println("(" + file + ")\t" + download);
             }
             Svetovid.out.println();
 
