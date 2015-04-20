@@ -11,6 +11,12 @@ public class LibraryVersions {
         String uri = "https://api.github.com/repos/ivanpribela/svetovid-lib/releases";
         Object data = Svetovid.in(uri).readObject();
 
+        // Print
+        String libraryName = "Svetovid library";
+        Svetovid.out.println(libraryName);
+        Svetovid.out.println(libraryName.replaceAll(".", "="));
+        Svetovid.out.println();
+
         // Print available versions
         for (Object version : JsonHelper.getArray(data, ".")) {
 
@@ -20,7 +26,7 @@ public class LibraryVersions {
 
             // Print the information
             Svetovid.out.println(name);
-            Svetovid.out.println(name.replaceAll(".", "="));
+            Svetovid.out.println(name.replaceAll(".", "-"));
             Svetovid.out.println("URL:", url);
 
             // Print available files
