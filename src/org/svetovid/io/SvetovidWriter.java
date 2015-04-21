@@ -829,6 +829,26 @@ public interface SvetovidWriter {
     public void println(Object[][] value) throws SvetovidIOException;
 
     /**
+     * Prints a formatted string using the specified format string and
+     * arguments. For details see {@link java.util.Formatter}.
+     *
+     * @param format
+     *            A format string as described in {@link java.util.Formatter}
+     *            string syntax.
+     * @param arguments
+     *            Arguments referenced by the format specifiers in the format
+     *            string. If there are more arguments than format specifiers,
+     *            the extra arguments are ignored. The number of arguments is
+     *            variable and may be zero. The behavior on a null argument
+     *            depends on the conversion.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public void printf(String format, Object... arguments)
+            throws SvetovidIOException;
+
+    /**
      * Prints the given object in JSON (JavaScript Object Notation) format.
      *
      * <p>
