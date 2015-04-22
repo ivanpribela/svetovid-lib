@@ -739,6 +739,17 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     }
 
     @Override
+    public void printf(String format, Object... arguments)
+            throws SvetovidIOException {
+        try {
+            String string = String.format(format, arguments);
+            print(string);
+        } catch (SvetovidIOException e) {
+            throw e;
+        }
+    }
+
+    @Override
     public void printObject(Object value) throws SvetovidIOException {
         StringBuilder builder = new StringBuilder();
         appendObject(builder, "", true, value);
