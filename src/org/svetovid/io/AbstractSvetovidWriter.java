@@ -17,6 +17,7 @@
 package org.svetovid.io;
 
 import java.io.IOException;
+import java.util.Formatter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -741,8 +742,13 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
     @Override
     public void printf(String format, Object... arguments)
             throws SvetovidIOException {
-        try {
-            String string = String.format(format, arguments);
+        if (format == null) {
+            print((String) null);
+            return;
+        }
+        try (Formatter formatter = new Formatter(Svetovid.LOCALE)) {
+            formatter.format(format, arguments);
+            String string = formatter.toString();
             print(string);
         } catch (SvetovidIOException e) {
             throw e;
