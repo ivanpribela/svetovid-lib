@@ -18,12 +18,14 @@ package org.svetovid.io;
 
 import java.io.IOException;
 import java.util.Formatter;
+import java.util.IllegalFormatException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.svetovid.Svetovid;
 import org.svetovid.SvetovidException;
+import org.svetovid.SvetovidFormatException;
 
 /**
  * This class provides default implementations for the {@link SvetovidWriter}
@@ -741,7 +743,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
 
     @Override
     public void printf(String format, Object... arguments)
-            throws SvetovidIOException {
+            throws SvetovidFormatException, SvetovidIOException {
         if (format == null) {
             print((String) null);
             return;
@@ -752,6 +754,8 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
             print(string);
         } catch (SvetovidIOException e) {
             throw e;
+        } catch (IllegalFormatException e) {
+            throw new SvetovidFormatException(e);
         }
     }
 

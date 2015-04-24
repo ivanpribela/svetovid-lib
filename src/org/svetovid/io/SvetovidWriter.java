@@ -16,6 +16,8 @@
 
 package org.svetovid.io;
 
+import org.svetovid.SvetovidFormatException;
+
 /**
  * This interface provides methods that simplify outputting data for beginner
  * programmers. Exception handling is not necessary as it can be turned on or
@@ -842,11 +844,19 @@ public interface SvetovidWriter {
      *            variable and may be zero. The behavior on a null argument
      *            depends on the conversion.
      *
+     * @throws SvetovidFormatException
+     *             If a format string is {@code null}, contains an illegal
+     *             syntax, a format specifier that is incompatible with the
+     *             given arguments, insufficient arguments given the format
+     *             string, or other illegal conditions. For specification of all
+     *             possible formatting errors, see the Details section of the
+     *             {@link java.util.Formatter} class specification.
+     *
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
     public void printf(String format, Object... arguments)
-            throws SvetovidIOException;
+            throws SvetovidFormatException, SvetovidIOException;
 
     /**
      * Prints the given object in JSON (JavaScript Object Notation) format.
