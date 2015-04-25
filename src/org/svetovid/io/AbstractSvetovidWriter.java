@@ -755,7 +755,7 @@ public abstract class AbstractSvetovidWriter implements SvetovidWriter {
         } catch (SvetovidIOException e) {
             throw e;
         } catch (IllegalFormatException e) {
-            throw new SvetovidFormatException(e);
+            throw new SvetovidFormatException(e, format);
         }
     }
 

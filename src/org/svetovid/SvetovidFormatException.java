@@ -16,6 +16,7 @@
 
 package org.svetovid;
 
+import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
@@ -103,5 +104,18 @@ public class SvetovidFormatException extends SvetovidException {
     public SvetovidFormatException(String messageKey, String string,
             Throwable cause) {
         super(messageKey, cause, string);
+    }
+
+    /**
+     * Constructs a {@code SvetovidFormatException} with the specified detail
+     * message and cause.
+     *
+     * @param string
+     *            The string that could not be parsed
+     * @param cause
+     *            The cause of the format exception
+     */
+    public SvetovidFormatException(IllegalFormatException cause, String string) {
+        super("PrintFormat." + cause.getClass().getSimpleName(), cause, string);
     }
 }
