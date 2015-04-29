@@ -25,6 +25,7 @@ public class WeatherForecast {
         // Print the forecast
         String name = JsonHelper.getString(data, "city.name");
         Svetovid.out.println("Weather forecast for " + name + ":");
+        String format = "%s %8s, %4d%% clouds, %5.2f\u00b0C,%4d%% humidity, wind %.2fm/s %n";
         for (Object forecast : JsonHelper.getArray(data, "list")) {
 
             // Extract the data
@@ -35,14 +36,7 @@ public class WeatherForecast {
             Number humidity =    JsonHelper.getNumber(forecast, "main.humidity");
             Number wind =        JsonHelper.getNumber(forecast, "wind.speed");
 
-            // Print the weather information
-            Svetovid.out.print(time);
-            Svetovid.out.print(" " + weather + "\t");
-            Svetovid.out.print(clouds + "% clouds\t");
-            Svetovid.out.print(temperature + "\u00b0C,\t");
-            Svetovid.out.print(humidity + "% humidity,\t");
-            Svetovid.out.print("wind " + wind + " m/s");
-            Svetovid.out.println();
+            Svetovid.out.printf(format, time, weather, clouds, temperature, humidity, wind);
 
         }
 
