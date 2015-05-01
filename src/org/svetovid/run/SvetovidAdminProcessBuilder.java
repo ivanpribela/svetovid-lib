@@ -15,6 +15,30 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
 
     private static final List<String> EXECUTABLE = new ArrayList<>(1);
 
+    private static Boolean isAdmin = null;
+
+    public static Boolean isAdmin() {
+        if (isAdmin != null) {
+            return isAdmin;
+        }
+        SvetovidTerminalProcessBuilder builder = new SvetovidTerminalProcessBuilder();
+        if (OperatingSystem.CURRENT.getFamily() == OperatingSystemFamily.WINDOWS) {
+            builder.command("NET FILE");
+        } else {
+            builder.command("if [[ $EUID -ne 0 ]]; then exit 1; fi");
+        }
+        try {
+            SvetovidProcess process = builder.start();
+            int code = process.waitFor();
+            isAdmin = code == 0;
+        } catch (IOException e) {
+            isAdmin = null;
+        } catch (InterruptedException e) {
+            isAdmin = null;
+        }
+        return isAdmin;
+    }
+
     private CompoundList<String> wholeCommand = new CompoundList<>(EXECUTABLE, null);
 
     public SvetovidAdminProcessBuilder() {
