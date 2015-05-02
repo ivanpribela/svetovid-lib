@@ -14,6 +14,13 @@ import org.svetovid.util.OperatingSystemFamily;
 public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
 
     private static final List<String> EXECUTABLE = new ArrayList<>(1);
+    static {
+        if (OperatingSystem.CURRENT.getFamily() == OperatingSystemFamily.WINDOWS) {
+            EXECUTABLE.add("elevate"); // Relies on elevate.exe being installed
+        } else {
+            EXECUTABLE.add("sudo"); // Relies on sudo being installed
+        }
+    }
 
     private static Boolean isAdmin = null;
 
