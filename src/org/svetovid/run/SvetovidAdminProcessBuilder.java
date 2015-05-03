@@ -48,6 +48,14 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
 
     private CompoundList<String> wholeCommand = new CompoundList<>(EXECUTABLE, null);
 
+    private void fixCommandIfAdmin() {
+    	if (isAdmin()) {
+    		wholeCommand.setSublist(0, null);
+    	} else {
+    		wholeCommand.setSublist(0, EXECUTABLE);
+    	}
+    }
+
     public SvetovidAdminProcessBuilder() {
         super();
         super.command(wholeCommand);
