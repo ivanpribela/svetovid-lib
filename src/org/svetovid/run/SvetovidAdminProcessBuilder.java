@@ -58,6 +58,7 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
 
     public SvetovidAdminProcessBuilder() {
         super();
+        fixCommandIfAdmin();
         super.command(wholeCommand);
     }
 
@@ -73,6 +74,7 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
 
     public SvetovidAdminProcessBuilder(Path directory) {
         super(directory);
+        fixCommandIfAdmin();
         super.command(wholeCommand);
     }
 
@@ -176,4 +178,10 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
         super.redirectErrorStream(redirectErrorStream);
         return this;
     }
+
+    @Override
+	public SvetovidProcess start() throws IOException {
+    	fixCommandIfAdmin();
+		return super.start();
+	}
 }
