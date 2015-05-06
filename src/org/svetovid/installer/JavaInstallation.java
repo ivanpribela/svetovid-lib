@@ -24,6 +24,32 @@ public final class JavaInstallation {
         initialize();
     }
 
+    @Override
+    public int hashCode() {
+        if (location == null) {
+            return 0;
+        }
+        return location.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof JavaInstallation)) {
+            return false;
+        }
+        Path thatLocation = ((JavaInstallation) obj).location;
+        if (this.location == thatLocation) {
+            return true;
+        }
+        if (this.location == null) {
+            return false;
+        }
+        return this.location.equals(thatLocation);
+    }
+
     private void initialize() {
         if (location == null) {
             return;
