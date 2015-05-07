@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public final class JavaInstallation {
+public final class JavaInstallation implements Comparable<JavaInstallation> {
 
     private Path location;
     private Path binLocation;
@@ -48,6 +48,20 @@ public final class JavaInstallation {
             return false;
         }
         return this.location.equals(thatLocation);
+    }
+
+    @Override
+    public int compareTo(JavaInstallation that) {
+        if ((this.location == null) && (that.location == null)) {
+            return 0;
+        }
+        if (this.location == null) {
+            return -1;
+        }
+        if (that.location == null) {
+            return 1;
+        }
+        return this.location.compareTo(that.location);
     }
 
     private void initialize() {
