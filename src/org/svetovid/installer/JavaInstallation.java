@@ -1,15 +1,28 @@
 package org.svetovid.installer;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Properties;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
+
+import org.svetovid.io.SvetovidProcess;
+import org.svetovid.run.SvetovidProcessBuilder;
 
 public final class JavaInstallation implements Comparable<JavaInstallation> {
 
     private Path location;
     private Path binLocation;
     private Path libLocation;
+
+    private String jdkVersion;
+    private String jreVersion;
+    private String libVersion;
 
     private JavaInstallation() {
         this.location = null;
@@ -69,6 +82,7 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
             return;
         }
         binLocation = libLocation = null;
+        jdkVersion = jreVersion = libVersion = null;
         if (!Files.isDirectory(location)) {
             return;
         }
@@ -76,12 +90,37 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         if (!Files.isDirectory(binLocation)) {
             return;
         }
+        Path binary = binLocation.resolve("javac");
+        SvetovidProcess process = exec(binLocation, binary.toString(), "-version");
+        if (process != null) {
+            jdkVersion = process.err.readLine();
+            jdkVersion = jdkVersion.substring(jdkVersion.indexOf(' ') + 1);
+        }
+        binary = binLocation.resolve("java");
+        process = exec(binLocation, binary.toString(), "-version");
+        if (process != null) {
+            jreVersion = process.err.readLine();
+            jreVersion = jreVersion.substring(jreVersion.indexOf('"') + 1, jreVersion.length() - 1);
+        }
         libLocation = location.resolve("jre/lib/ext");
         if (!Files.isDirectory(libLocation)) {
             libLocation = location.resolve("lib/ext");
         }
         if (!Files.isDirectory(libLocation)) {
             return;
+        }
+    }
+
+    protected static SvetovidProcess exec(String... command) {
+        return exec(null, command);
+    }
+
+    protected static SvetovidProcess exec(Path directory, String... command) {
+        SvetovidProcessBuilder builder = new SvetovidProcessBuilder(directory, command);
+        try {
+            return builder.start();
+        } catch (IOException e) {
+            return null;
         }
     }
 
@@ -95,5 +134,17 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
 
     public Path getLibLocation() {
         return libLocation;
+    }
+
+    public String getJdkVersion() {
+        return jdkVersion;
+    }
+
+    public String getJreVersion() {
+        return jreVersion;
+    }
+
+    public String getLibVersion() {
+        return libVersion;
     }
 }
