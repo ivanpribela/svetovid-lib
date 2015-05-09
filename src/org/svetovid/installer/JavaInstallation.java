@@ -16,6 +16,8 @@ import org.svetovid.run.SvetovidProcessBuilder;
 
 public final class JavaInstallation implements Comparable<JavaInstallation> {
 
+    public static final String LIB_FILE_NAME = "svetovid-lib.jar";
+
     private Path location;
     private Path binLocation;
     private Path libLocation;
@@ -108,6 +110,28 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         }
         if (!Files.isDirectory(libLocation)) {
             return;
+        }
+        Path libFile = libLocation.resolve(LIB_FILE_NAME);
+        if (!Files.isRegularFile(libFile)) {
+            return;
+        }
+        try {
+            ZipFile zip = new ZipFile(libFile.toString());
+            try {
+                ZipEntry entry = zip.getEntry("version.properties");
+                if (entry != null) {
+                    InputStream stream = zip.getInputStream(entry);
+                    Properties properties = new Properties();
+                    properties.load(stream);
+                    libVersion = properties.getProperty("version");
+                }
+            } finally {
+                zip.close();
+            }
+        } catch (ZipException e) {
+            // Do nothing
+        } catch (IOException e) {
+            // Do Nothing
         }
     }
 
