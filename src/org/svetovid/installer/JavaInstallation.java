@@ -79,6 +79,20 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         return this.location.compareTo(that.location);
     }
 
+    @Override
+    public String toString() {
+        if (location == null) {
+            return "";
+        }
+        if (jdkVersion != null) {
+            return "JDK " + jdkVersion;
+        }
+        if (jreVersion != null) {
+            return "JRE " + jreVersion;
+        }
+        return "???";
+    }
+
     private void initialize() {
         if (location == null) {
             return;
