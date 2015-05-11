@@ -185,4 +185,17 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
     public String getLibVersion() {
         return libVersion;
     }
+
+    public JavaInstallationType getType() {
+        if (location == null) {
+            return JavaInstallationType.ALL;
+        }
+        if (jdkVersion != null) {
+            return JavaInstallationType.JDK;
+        }
+        if (jreVersion != null) {
+            return JavaInstallationType.JRE;
+        }
+        return JavaInstallationType.UNKNOWN;
+    }
 }
