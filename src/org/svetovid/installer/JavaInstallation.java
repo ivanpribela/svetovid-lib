@@ -11,8 +11,10 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
+import org.svetovid.Svetovid;
 import org.svetovid.io.SvetovidProcess;
 import org.svetovid.run.SvetovidProcessBuilder;
+import org.svetovid.util.Version;
 
 public final class JavaInstallation implements Comparable<JavaInstallation> {
 
@@ -197,5 +199,22 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
             return JavaInstallationType.JRE;
         }
         return JavaInstallationType.UNKNOWN;
+    }
+
+    public JavaInstallationVersionType getVersionType() {
+        if (libVersion == null) {
+            return JavaInstallationVersionType.NONE;
+        }
+        Version current = Svetovid.getVersion();
+        Version version = new Version(libVersion);
+        int cmp = version.compareTo(current);
+        if (cmp == 0) {
+            return JavaInstallationVersionType.EQUAL;
+        }
+        if (cmp < 0) {
+            return JavaInstallationVersionType.OLDER;
+        } else {
+            return JavaInstallationVersionType.NEWER;
+        }
     }
 }
