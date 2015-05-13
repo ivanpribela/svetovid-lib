@@ -217,4 +217,8 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
             return JavaInstallationVersionType.NEWER;
         }
     }
+
+    public void refresh() {
+        initialize();
+    }
 }
