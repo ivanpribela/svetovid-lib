@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -220,5 +222,22 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
 
     public void refresh() {
         initialize();
+    }
+
+    private static Map<String, JavaInstallation> map = new HashMap<>();
+
+    private static JavaInstallation createJavaInstallation(String path) {
+        Path location = Paths.get(path);
+        return createJavaInstallation(location);
+    }
+
+    private static JavaInstallation createJavaInstallation(Path location) {
+        String path = location.normalize().toString();
+        JavaInstallation installation = map.get(path);
+        if (installation == null) {
+            installation = new JavaInstallation(location);
+            map.put(path, installation);
+        }
+        return installation;
     }
 }
