@@ -225,6 +225,7 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
     }
 
     private static Map<String, JavaInstallation> map = new HashMap<>();
+    private static JavaInstallation defaultInstallation = new JavaInstallation();
 
     private static JavaInstallation createJavaInstallation(String path) {
         Path location = Paths.get(path);
@@ -239,5 +240,9 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
             map.put(path, installation);
         }
         return installation;
+    }
+
+    public static JavaInstallation getDefault() {
+        return defaultInstallation;
     }
 }
