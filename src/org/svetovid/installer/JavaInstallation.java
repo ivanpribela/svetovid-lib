@@ -226,6 +226,8 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
 
     private static Map<String, JavaInstallation> map = new HashMap<>();
     private static JavaInstallation defaultInstallation = new JavaInstallation();
+    private static JavaInstallation javaHomeInstallation = null;
+    private static JavaInstallation jreHomeInstallation = null;
 
     private static JavaInstallation createJavaInstallation(String path) {
         Path location = Paths.get(path);
@@ -244,5 +246,24 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
 
     public static JavaInstallation getDefault() {
         return defaultInstallation;
+    }
+
+    public static void getFromEnvironment(Collector<JavaInstallation> collector) {
+        String javaHome = "JAVA_HOME";
+        String jreHome = "JRE_HOME";
+        javaHome = System.getenv(javaHome);
+        if (javaHome != null) {
+            javaHomeInstallation = createJavaInstallation(javaHome);
+            collector.collect(javaHomeInstallation);
+        } else {
+            javaHomeInstallation = null;
+        }
+        jreHome = System.getenv(jreHome);
+        if (jreHome != null) {
+            jreHomeInstallation = createJavaInstallation(jreHome);
+            collector.collect(jreHomeInstallation);
+        } else {
+            jreHomeInstallation = null;
+        }
     }
 }
