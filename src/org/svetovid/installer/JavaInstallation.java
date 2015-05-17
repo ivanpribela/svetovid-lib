@@ -228,6 +228,7 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
     private static JavaInstallation defaultInstallation = new JavaInstallation();
     private static JavaInstallation javaHomeInstallation = null;
     private static JavaInstallation jreHomeInstallation = null;
+    private static JavaInstallation pathInstallation = null;
 
     private static JavaInstallation createJavaInstallation(String path) {
         Path location = Paths.get(path);
@@ -265,5 +266,44 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         } else {
             jreHomeInstallation = null;
         }
+    }
+
+    public static void getFromPath(Collector<JavaInstallation> collector) {
+        String path = "PATH";
+        path = System.getenv(path);
+        if (path != null) {
+            String[] paths = path.split(File.pathSeparator);
+            boolean first = true;
+            for (String p : paths) {
+                Path dir = Paths.get(p);
+                if (testForJava(dir)) {
+                    JavaInstallation installation = createJavaInstallation(dir.getParent());
+                    if (first) {
+                        pathInstallation = installation;
+                    }
+                    collector.collect(installation);
+                    first = false;
+                }
+            }
+        }
+    }
+
+    private static boolean testForJava(Path dir) {
+        if (!dir.endsWith("bin")) {
+            return false;
+        }
+        if (Files.isRegularFile(dir.resolve("java"))) {
+            return true;
+        }
+        if (Files.isRegularFile(dir.resolve("java.exe"))) {
+            return true;
+        }
+        if (Files.isRegularFile(dir.resolve("javac"))) {
+            return true;
+        }
+        if (Files.isRegularFile(dir.resolve("javac.exe"))) {
+            return true;
+        }
+        return false;
     }
 }
