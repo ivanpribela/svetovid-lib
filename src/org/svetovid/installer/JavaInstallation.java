@@ -3,6 +3,7 @@ package org.svetovid.installer;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -284,6 +285,35 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
                     collector.collect(installation);
                     first = false;
                 }
+            }
+        }
+    }
+
+    public static void getFromRegistry(Collector<JavaInstallation> collector) {
+        String regKeyName = "HKEY_LOCAL_MACHINE\\Software\\JavaSoft\\";
+        String regKeyName32 = "HKEY_LOCAL_MACHINE\\Software\\Wow6432Node\\JavaSoft\\";
+        queryRegistry(regKeyName, collector);
+        queryRegistry(regKeyName32, collector);
+    }
+
+    private static void queryRegistry(String rootKeyName, Collector<JavaInstallation> collector) {
+        String regValueName = "JavaHome";
+        String regValueType = "REG_SZ";
+        SvetovidProcess process = exec("reg", "query", rootKeyName, "/s");
+        if (process != null) {
+            String line = process.out.readLine();
+            while (line != null) {
+                int index = line.indexOf(regValueName);
+                if (index != -1) {
+                    line = line.substring(index + regValueName.length()).trim();
+                    index = line.indexOf(regValueType);
+                    if (index != -1) {
+                        line = line.substring(index + regValueType.length()).trim();
+                        JavaInstallation installation = createJavaInstallation(line);
+                        collector.collect(installation);
+                    }
+                }
+                line = process.out.readLine();
             }
         }
     }
