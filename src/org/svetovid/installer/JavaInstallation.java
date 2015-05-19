@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -315,6 +319,28 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
                 }
                 line = process.out.readLine();
             }
+        }
+    }
+
+    private static void getFromFilesystemRecursive(Path dir, Collector<JavaInstallation> installationCollector, Collector<Path> pathCollector) {
+        try {
+            Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    Objects.requireNonNull(dir);
+                    Objects.requireNonNull(attrs);
+                    if (testForJava(dir)) {
+                        JavaInstallation installation = createJavaInstallation(dir.getParent());
+                        installationCollector.collect(installation);
+                    }
+                    if (pathCollector != null) {
+                        pathCollector.collect(dir);
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException e) {
+            // Do nothing
         }
     }
 
