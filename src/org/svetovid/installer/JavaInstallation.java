@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -319,6 +320,19 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
                 }
                 line = process.out.readLine();
             }
+        }
+    }
+
+    public static void getFromFilesystem(Collector<JavaInstallation> installationCollector, Collector<Path> pathCollector) {
+        Iterable<Path> roots = FileSystems.getDefault().getRootDirectories();
+        for (Path root : roots) {
+            getFromFilesystemRecursive(root, installationCollector, pathCollector);
+        }
+    }
+
+    public static void getFromFilesystem(Path root, Collector<JavaInstallation> installationCollector, Collector<Path> pathCollector) {
+        if (Files.isDirectory(root)) {
+            getFromFilesystemRecursive(root, installationCollector, pathCollector);
         }
     }
 
