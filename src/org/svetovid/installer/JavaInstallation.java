@@ -196,6 +196,23 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         return libVersion;
     }
 
+    public String getDetails() {
+        String details = "";
+        if (this == javaHomeInstallation) {
+            details = details + " JAVA_HOME";
+        }
+        if (this == jreHomeInstallation) {
+            details = details + " JRE_HOME";
+        }
+        if (this == pathInstallation) {
+            details = details + " PATH";
+        }
+        if (!"".equals(details)) {
+            details = details.substring(1);
+        }
+        return details;
+    }
+
     public JavaInstallationType getType() {
         if (location == null) {
             return JavaInstallationType.ALL;
