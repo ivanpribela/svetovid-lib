@@ -393,4 +393,12 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         }
         return false;
     }
+
+    public static void getFromAll(Collector<JavaInstallation> collector) {
+        getFromEnvironment(collector);
+        getFromPath(collector);
+        getFromRegistry(collector);
+        // TODO getFromRPM(collector);
+        // TODO getFromAptGet(collector);
+    }
 }
