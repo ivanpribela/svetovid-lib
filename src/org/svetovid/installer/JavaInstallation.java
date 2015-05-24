@@ -375,6 +375,11 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         }
     }
 
+    public static JavaInstallation getFromPath(String path) {
+        JavaInstallation installation = createJavaInstallation(path);
+        return installation;
+    }
+
     private static boolean testForJava(Path dir) {
         if (!dir.endsWith("bin")) {
             return false;
