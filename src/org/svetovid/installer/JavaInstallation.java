@@ -247,6 +247,18 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         initialize();
     }
 
+    public void addFile(String path, byte[] content) throws IOException {
+        Path file = libLocation.resolve(path);
+        Files.createDirectories(file.getParent());
+        Files.write(file, content);
+    }
+
+    public void addFile(String path, Path content) throws IOException {
+        Path file = libLocation.resolve(path);
+        Files.createDirectories(file.getParent());
+        Files.copy(content, file);
+    }
+
     private static Map<String, JavaInstallation> map = new HashMap<>();
     private static JavaInstallation defaultInstallation = new JavaInstallation();
     private static JavaInstallation javaHomeInstallation = null;
