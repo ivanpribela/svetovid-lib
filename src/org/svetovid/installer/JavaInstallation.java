@@ -259,6 +259,11 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         Files.copy(content, file);
     }
 
+    public void removeFile(String path) throws IOException {
+        Path file = libLocation.resolve(path);
+        Files.delete(file);
+    }
+
     private static Map<String, JavaInstallation> map = new HashMap<>();
     private static JavaInstallation defaultInstallation = new JavaInstallation();
     private static JavaInstallation javaHomeInstallation = null;
