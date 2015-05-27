@@ -264,6 +264,22 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         Files.delete(file);
     }
 
+    private static Path jarLocation;
+    static {
+        try {
+            jarLocation = Paths.get(JavaInstallation.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if (!Files.isRegularFile(jarLocation)) {
+                jarLocation = null;
+            }
+        } catch (URISyntaxException e) {
+            jarLocation = null;
+        }
+    }
+
+    public static Path getJarLocation() {
+        return jarLocation;
+    }
+
     private static Map<String, JavaInstallation> map = new HashMap<>();
     private static JavaInstallation defaultInstallation = new JavaInstallation();
     private static JavaInstallation javaHomeInstallation = null;
