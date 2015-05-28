@@ -264,6 +264,10 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         Files.delete(file);
     }
 
+    public void installThis() throws IOException {
+        addFile(LIB_FILE_NAME, jarLocation);
+    }
+
     private static Path jarLocation;
     static {
         try {
