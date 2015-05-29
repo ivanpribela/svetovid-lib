@@ -268,6 +268,10 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         addFile(LIB_FILE_NAME, jarLocation);
     }
 
+    public void uninstall() throws IOException {
+        removeFile(LIB_FILE_NAME);
+    }
+
     private static Path jarLocation;
     static {
         try {
