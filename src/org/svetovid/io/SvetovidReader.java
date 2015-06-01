@@ -219,7 +219,7 @@ public interface SvetovidReader {
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
-    public String readString() throws SvetovidFormatException,
+    public String readToken() throws SvetovidFormatException,
             SvetovidIOException;
 
     /**

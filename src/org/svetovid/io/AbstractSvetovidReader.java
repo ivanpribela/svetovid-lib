@@ -104,7 +104,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public boolean readBool() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -149,7 +149,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
 
     @Override
     public byte readByte() throws SvetovidFormatException, SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -172,7 +172,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public short readShort() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -194,7 +194,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
 
     @Override
     public int readInt() throws SvetovidFormatException, SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -216,7 +216,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
 
     @Override
     public long readLong() throws SvetovidFormatException, SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -239,7 +239,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public float readFloat() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -262,7 +262,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public double readDouble() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -284,7 +284,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
 
     @Override
     public char readChar() throws SvetovidFormatException, SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -351,7 +351,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public String readString() throws SvetovidIOException {
+    public String readToken() throws SvetovidIOException {
         String token = null;
         do {
             token = readLine();
@@ -374,7 +374,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Boolean readBoolBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -403,7 +403,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Byte readByteBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -432,7 +432,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Short readShortBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -461,7 +461,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Integer readIntBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -490,7 +490,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Long readLongBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -519,7 +519,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Float readFloatBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -548,7 +548,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Double readDoubleBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
@@ -577,7 +577,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Character readCharBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String token = readString();
+        String token = readToken();
         try {
             if (token == null) {
                 throw new NullPointerException();
