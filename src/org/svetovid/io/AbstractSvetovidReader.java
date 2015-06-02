@@ -606,7 +606,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public boolean[] readBoolArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -644,7 +644,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public byte[] readByteArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -682,7 +682,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public short[] readShortArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -720,7 +720,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public int[] readIntArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -758,7 +758,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public long[] readLongArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -796,7 +796,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public float[] readFloatArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -834,7 +834,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public double[] readDoubleArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -872,7 +872,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public char[] readCharArray() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -908,7 +908,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public String[] readStringArray() throws SvetovidFormatException,
+    public String[] readTokenArray() throws SvetovidFormatException,
             SvetovidIOException {
         String line = readLine();
         if (line == null) {
@@ -933,7 +933,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Boolean[] readBoolArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -978,7 +978,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Byte[] readByteArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1023,7 +1023,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Short[] readShortArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1068,7 +1068,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Integer[] readIntArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1113,7 +1113,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Long[] readLongArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1158,7 +1158,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Float[] readFloatArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1203,7 +1203,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Double[] readDoubleArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1248,7 +1248,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     @Override
     public Character[] readCharArrayBoxed() throws SvetovidFormatException,
             SvetovidIOException {
-        String[] tokens = readStringArray();
+        String[] tokens = readTokenArray();
         if (tokens == null) {
             return null;
         }
@@ -1928,7 +1928,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         List<Throwable> exceptions = new ArrayList<>();
         String[] row;
         try {
-            row = readStringArray();
+            row = readTokenArray();
             if (row.length == 0) {
                 row = null;
             }
@@ -1941,7 +1941,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         while (row != null) {
             rows.add(row);
             try {
-                row = readStringArray();
+                row = readTokenArray();
                 if (row.length == 0) {
                     row = null;
                 }

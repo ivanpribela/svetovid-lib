@@ -448,7 +448,7 @@ public interface SvetovidReader {
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
-    public String[] readStringArray() throws SvetovidIOException;
+    public String[] readTokenArray() throws SvetovidIOException;
 
     /**
      * Reads one line, separates it into tokens and converts them to boolean
