@@ -732,7 +732,7 @@ public interface SvetovidReader {
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
-    public String[][] readStringMatrix() throws SvetovidIOException;
+    public String[][] readTokenMatrix() throws SvetovidIOException;
 
     /**
      * Reads multiple lines and converts the data to a boolean matrix. The

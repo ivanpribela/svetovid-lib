@@ -1923,7 +1923,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
     }
 
     @Override
-    public String[][] readStringMatrix() throws SvetovidIOException {
+    public String[][] readTokenMatrix() throws SvetovidIOException {
         List<String[]> rows = new ArrayList<>();
         List<Throwable> exceptions = new ArrayList<>();
         String[] row;
