@@ -280,9 +280,9 @@ public class StandardSvetovidReader extends DefaultSvetovidReader {
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
-    public String readString(String prompt) throws SvetovidIOException {
+    public String readToken(String prompt) throws SvetovidIOException {
         prompt(prompt);
-        return readString();
+        return readToken();
     }
 
     /**
@@ -638,9 +638,9 @@ public class StandardSvetovidReader extends DefaultSvetovidReader {
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
-    public String[] readStringArray(String prompt) throws SvetovidIOException {
+    public String[] readTokenArray(String prompt) throws SvetovidIOException {
         prompt(prompt);
-        return readStringArray();
+        return readTokenArray();
     }
 
     /**
@@ -1073,10 +1073,10 @@ public class StandardSvetovidReader extends DefaultSvetovidReader {
      * @throws SvetovidIOException
      *             if an error occurred during the operation.
      */
-    public String[][] readStringMatrix(String prompt)
+    public String[][] readTokenMatrix(String prompt)
             throws SvetovidIOException {
         prompt(prompt);
-        return readStringMatrix();
+        return readTokenMatrix();
     }
 
     /**
