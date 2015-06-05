@@ -23,7 +23,7 @@ public class HelloWorld {
     public static void main(String[] args) {
 
         // Ask for a name
-        String name = Svetovid.in.readString("Please enter your name:");
+        String name = Svetovid.in.readLine("Please enter your name:");
 
         // Greet the user
         Svetovid.out.println("Hello " + name + "!");
