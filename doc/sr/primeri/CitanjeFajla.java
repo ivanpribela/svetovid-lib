@@ -39,7 +39,7 @@ public class CitanjeFajla {
     public static void main(String[] args) {
 
         // Pitamo korisnika za ime fajla koji korisitmo
-        String imeFajla = Svetovid.in.readString("Unesite ime fajla:");
+        String imeFajla = Svetovid.in.readLine("Unesite ime fajla:");
 
         // Poziv prvog nacina ispisivanja
         citajSveRedove(imeFajla);
