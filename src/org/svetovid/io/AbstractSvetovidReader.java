@@ -83,6 +83,24 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         }
     }
 
+	protected void handleFormatException(SvetovidFormatException exception)
+			throws SvetovidFormatException {
+		lastException = exception;
+		if (throwingExceptions) {
+		    throw exception;
+		}
+	}
+
+	protected void handleAnyException(Throwable exception)
+			throws RuntimeException {
+		lastException = exception;
+        if (throwingExceptions) {
+            if (exception instanceof RuntimeException) {
+                throw (RuntimeException) exception;
+            }
+        }
+	}
+
     @Override
     public boolean isEmpty() {
         line = readLine();
@@ -384,18 +402,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Boolean.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Boolean.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -413,18 +425,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Byte.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Byte.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -442,18 +448,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Short.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Short.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -471,18 +471,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Integer.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Integer.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -500,18 +494,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Long.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Long.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -529,18 +517,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Float.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Float.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -558,18 +540,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Double.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Double.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -587,18 +563,12 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } catch (NullPointerException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Character.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         } catch (NumberFormatException e) {
             SvetovidFormatException exception =
                     new SvetovidFormatException(Character.class, token, e);
-            lastException = exception;
-            if (throwingExceptions) {
-                throw exception;
-            }
+            handleFormatException(exception);
             return null;
         }
     }
@@ -968,10 +938,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1013,10 +980,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1058,10 +1022,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1103,10 +1064,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1148,10 +1106,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1193,10 +1148,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1238,10 +1190,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -1283,10 +1232,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            throw exception;
-        }
+        handleFormatException(exception);
         return values;
     }
 
@@ -2038,12 +1984,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Boolean[][] values = new Boolean[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2113,12 +2054,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Byte[][] values = new Byte[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2188,12 +2124,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Short[][] values = new Short[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2263,12 +2194,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Integer[][] values = new Integer[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2338,12 +2264,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Long[][] values = new Long[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2413,12 +2334,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Float[][] values = new Float[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2488,12 +2404,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Double[][] values = new Double[rows.size()][];
         values = rows.toArray(values);
         return values;
@@ -2563,12 +2474,7 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         } else {
             exception = new SvetovidFormatException(exceptions);
         }
-        lastException = exception;
-        if (throwingExceptions) {
-            if (exception instanceof RuntimeException) {
-                throw (RuntimeException) exception;
-            }
-        }
+        handleAnyException(exception);
         Character[][] values = new Character[rows.size()][];
         values = rows.toArray(values);
         return values;
