@@ -11,3 +11,4 @@ Export-Package: .;version="0.2.0",
  org.svetovid.io;version="0.2.0",
  org.svetovid.run;version="0.2.0",
  org.svetovid.util;version="0.2.0"
+Main-Class: Svetovid
