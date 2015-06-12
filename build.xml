@@ -125,28 +125,30 @@
     <target name="generate.htmldoc" depends=""
             description="Compile markdown documentation into HTML">
 
+        <!-- Prepare the destination folder -->
         <mkdir dir="${htmldoc.dir}" />
-        <!-- copy (almost) everything -->
+
+        <!-- Copy (almost) everything -->
         <copy todir="${htmldoc.dir}" includeemptydirs="true">
             <path>
-            <fileset dir='${docsrc.dir}'>
-                <exclude name="**/*.class"/>
-            </fileset>
+                <fileset dir='${docsrc.dir}'>
+                    <exclude name="**/*.class"/>
+                </fileset>
             </path>
         </copy>
-
         <copy tofile="${doc.dir}/index.html" file="fragments/html/index.html"/>
         <copy tofile="${doc.dir}/style.css" file="fragments/html/style.css"/>
 
         <!-- transform markdown to html -->
         <foreach param="htmldoc.singlefile" target="generate.htmldoc.single">
             <path>
-            <fileset dir='${htmldoc.dir}'>
-                <include name="**/*.md"/>
-                <include name="**/*.markdown"/>
-            </fileset>
+                <fileset dir='${htmldoc.dir}'>
+                    <include name="**/*.md"/>
+                    <include name="**/*.markdown"/>
+                </fileset>
             </path>
         </foreach>
+
         <!-- move README to be index -->
         <move todir="${htmldoc.dir}" includeemptydirs="false">
             <fileset dir="${htmldoc.dir}">
@@ -154,6 +156,7 @@
             </fileset>
             <mapper type="glob" from="*README.html" to="*index.html"/>
         </move>
+
         <!-- fix links between files -->
         <replaceregexp match='href="(.*)(md|markdown)"' replace='href="\1html"' byline="true">
             <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
@@ -161,13 +164,15 @@
         <replaceregexp match='href="(.*)README.html"' replace='href="\1index.html"' byline="true">
             <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
         </replaceregexp>
+
     </target>
 
     <target name="generate.htmldoc.single">
     <!-- helper task for a single markdown file conversion -->
+
         <property name="htmldoc.singlefile" value="README.md"/>
         <dirname property="htmldoc.currentdir" file="${htmldoc.singlefile}"/>
-        <property name="htmldoc.css" relative="true" 
+        <property name="htmldoc.css" relative="true"
             location="${doc.dir}/style.css" basedir="${htmldoc.currentdir}"/>
         <propertyregex property="htmldoc.genname"
             regexp="\.(md|markdown)$"
@@ -187,6 +192,7 @@
             <arg value="${htmldoc.genname}"/>
             <arg value="${htmldoc.singlefile}" />
         </exec>
+
     </target>
 
     <target name="pack.jar" depends="build"
@@ -307,9 +313,5 @@
         </exec>
 
     </target>
-
-    <!-- jedit specific flags; needs to be the first or the last 10 lines
-    :noTabs=true:
-    -->
 
 </project>
