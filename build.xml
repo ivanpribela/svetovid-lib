@@ -202,7 +202,6 @@
         <jar destfile="${dist.dir}/svetovid-lib.jar"
              includes="**" >
             <fileset dir="${bin.dir}"/>
-            <fileset dir="${res.dir}"/>
             <manifest>
                 <!-- Who is building this jar? -->
                 <attribute name="Built-By" value="${user.name}"/>
