@@ -102,9 +102,18 @@
     <target name="build" depends="compile, compile.res, update-version-string"
             description="Build the library into ${bin.dir}">
 
+        <!-- Copy resources -->
         <copy todir="${bin.dir}">
             <fileset dir="${res.dir}" />
         </copy>
+
+        <!-- Add attributes to the manifest -->
+        <manifest file="${bin.dir}/META-INF/MANIFEST.MF" mode="update">
+
+            <!-- Who is building this jar? -->
+            <attribute name="Built-By" value="${user.name}"/>
+
+        </manifest>
 
     </target>
 
@@ -199,20 +208,9 @@
             description="Packs the binaries in a jar and place it in ${dist.dir}">
 
         <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/svetovid-lib.jar"
-             includes="**" >
+        <jar destfile="${dist.dir}/svetovid-lib.jar" includes="**"
+            manifest="${bin.dir}/META-INF/MANIFEST.MF">
             <fileset dir="${bin.dir}"/>
-            <manifest>
-                <!-- Who is building this jar? -->
-                <attribute name="Built-By" value="${user.name}"/>
-                <!-- Information about the program itself -->
-                <attribute name="Implementation-Vendor"
-                           value="Svetovid dev team"/>
-                <attribute name="Implementation-Title"
-                           value="Svetovid helper library for input and output operations"/>
-                <attribute name="Implementation-Version"
-                           value="${version}"/>
-            </manifest>
         </jar>
 
     </target>
