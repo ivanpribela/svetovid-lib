@@ -61,7 +61,7 @@
             <equals arg1="n" arg2="${choice}"/>
         </condition>
         <fail if="abort">Build aborted by user.</fail>
-        <antcall target="pack"/>
+        <antcall target="pack.jar"/>
 
     </target>
 
