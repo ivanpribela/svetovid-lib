@@ -1,6 +1,6 @@
 # Svetovid-lib Documentation
 
-For documentation in English please refer to the 
+For documentation in English please refer to the
 ["en" subfolder](en/README.markdown).
 
 The files have "markdown" extensions for additional formating, but
@@ -13,5 +13,5 @@ Dokumentacija na srpskom jeziku je u [podfolderu "sr"](sr/README.markdown).
 
 Fajlovi imaju ekstenzije "markdown" jer imaju specijalne oznake
 koje se odnose na formatiranje, medjutim u pitanju su obicni tekstualni
-fajlovi koji se mogu otvoriti sa bilo koji editorom i citati takvi
+fajlovi koji se mogu otvoriti u bilo kojem editoru i citati takvi
 kakvi su.
