@@ -19,6 +19,18 @@
 <project name="org.svetovid.lib" default="help">
 
 
+<!--
+    Documentation for this project is written in markdown format.
+    In order to convert the documentation to a more widely supported html
+    format, this build uses Pandoc (http://pandoc.org/) and Ant-Contrib
+    tasks (http://ant-contrib.sourceforge.net/). This software should be
+    installed separately, before initiating the conversion.
+
+    Other targets in this build like, for example, compiling and packaging,
+    do not require any additional software.
+-->
+
+
     <!-- Load the environment variables -->
     <property environment="env" />
 
