@@ -5,8 +5,8 @@ Rad sa fajlovima
 ----------------
 
 Čitanje podataka iz tekstualnih fajlova je vrlo slično čitanju podataka sa
-standardnog ulaza, odnosno tastature. Jedina razlika je u tome što se navodi ime
-fajla iz kojeg se čitaju podaci:
+standardnog ulaza, [odnosno tastature](ucitavanje-i-ispisivanje.markdown).
+Jedina razlika je u tome što se navodi ime fajla iz kojeg se čitaju podaci:
 
     int broj1 = Svetovid.in("ulazni.txt").readInt();
     int broj2 = Svetovid.in("ulazni.txt").readInt();
@@ -43,8 +43,8 @@ Pisanje u fajl
 --------------
 
 Upisivanje podataka u tekstualni fajl je vrlo slično ispisivanju podataka na
-standardni izlaz, odnosno ekran. Jedina razlika je u tome što se navodi ime
-fajla u koji se podaci upisuju:
+standardni izlaz, [odnosno ekran](ucitavanje-i-ispisivanje.markdown). Jedina
+razlika je u tome što se navodi ime fajla u koji se podaci upisuju:
 
     Svetovid.out("izlazni.txt").println("Poruka");
 
