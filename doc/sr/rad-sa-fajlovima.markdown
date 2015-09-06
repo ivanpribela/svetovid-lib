@@ -50,7 +50,7 @@ razlika je u tome što se navodi ime fajla u koji se podaci upisuju:
 
 Ako navedeni fajl nije postojao, automatski će biti napravljen, a ako je fajl
 već postojao, sav njegov sadržaj će biti zamenjen ovim tekstom. Svako naredno
-pisanje u i isti fajl će zadržati njegov prethodni sadržaj, odnosno upisivaće
+pisanje u isti fajl će zadržati njegov prethodni sadržaj, odnosno upisivaće
 naredni podatak u nastavku.
 
     Svetovid.out("izlazni.txt").println("Malo duža poruka");
