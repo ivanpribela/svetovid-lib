@@ -240,7 +240,8 @@
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/svetovid-lib.jar" includes="**"
             manifest="${bin.dir}/META-INF/MANIFEST.MF">
-            <fileset dir="${bin.dir}"/>
+            <fileset dir="${bin.dir}"
+                     excludes="org/svetovid/demo/"/>
         </jar>
 
     </target>
