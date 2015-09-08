@@ -30,7 +30,7 @@ public class SumaBrojevaIzFajla {
             // Dodajemo ga na sumu
             suma = suma + broj;
 
-            // I citamo novi broj 
+            // I citamo novi broj
             broj = Svetovid.in(IME_FAJLA).readDoubleBoxed();
 
         }
