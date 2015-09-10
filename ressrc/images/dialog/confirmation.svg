@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0px" y="0px" width="48px" height="48px"
+     id="icon" version="1.1" viewBox="0 0 48 48">
+
+  <g id="background"
+     fill="hsl(0, 0%, 80%)"
+     stroke="hsl(0, 0%, 50%)"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <circle cx="23" cy="23" r="20"/>
+
+  </g>
+
+  <g id="foreground"
+     fill="hsl(0, 0%, 100%)"
+     stroke="hsl(60, 0%, 50%)"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+    <circle cx="23" cy="23" r="4"/>
+
+  </g>
+
+</svg>
