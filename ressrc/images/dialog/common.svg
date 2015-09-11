@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <defs>
+
+    <!-- Backgrounds -->
+
+    <symbol id="bg-circle" overflow="visible">
+      <circle cx="0" cy="0" r="20"/>
+    </symbol>
+
+    <!-- Foregrounds -->
+
+    <symbol id="fg-circle" overflow="visible">
+      <circle cx="0" cy="0" r="4"/>
+    </symbol>
+
+  </defs>
+
+</svg>
