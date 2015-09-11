@@ -1,0 +1,10 @@
+svg {
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gray {
+  fill:   hsl(  0,   0%,  55%);
+  stroke: hsl(  0,   0%,  35%);
+}
