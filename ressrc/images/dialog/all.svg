@@ -18,6 +18,6 @@
   <use x="96" y="96" xlink:href="password.svg#icon"/>
   <use x="168" y="96" xlink:href="login.svg#icon"/>
   <use x="240" y="96" xlink:href="exception.svg#icon"/>
-  <use x="312" y="96" xlink:href="time.svg#icon"/>
+  <use x="326" y="110" xlink:href="time.svg#icon"/>
 
 </svg>
