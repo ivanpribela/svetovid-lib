@@ -8,7 +8,19 @@ svg {
   fill:   hsl(  0,   0%, 100%);
 }
 
+/* Colors */
+
+.white {
+  fill:   hsl(  0,   0%,  90%);
+  stroke: hsl(  0,   0%,  70%);
+}
+
 .gray {
   fill:   hsl(  0,   0%,  55%);
   stroke: hsl(  0,   0%,  35%);
+}
+
+.black {
+  fill:   hsl(  0,   0%,  20%);
+  stroke: hsl(  0,   0%,   0%);
 }
