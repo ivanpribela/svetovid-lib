@@ -4,6 +4,10 @@ svg {
   stroke-linejoin: round;
 }
 
+#foreground {
+  fill:   hsl(  0,   0%, 100%);
+}
+
 .gray {
   fill:   hsl(  0,   0%,  55%);
   stroke: hsl(  0,   0%,  35%);
