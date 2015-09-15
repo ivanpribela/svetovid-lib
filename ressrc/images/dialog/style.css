@@ -1,7 +1,12 @@
+
 svg {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+#background {
+  filter: url(common.svg#shadow);
 }
 
 #foreground {

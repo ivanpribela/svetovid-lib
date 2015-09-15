@@ -17,6 +17,16 @@
       <circle cx="0" cy="0" r="4"/>
     </symbol>
 
+    <!-- Effects -->
+
+    <filter id="shadow" color-interpolation-filters="sRGB">
+      <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
+      <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>
+      <feGaussianBlur result="blur" in="cut-out" stdDeviation="1"/>
+      <feOffset       result="offset" dx="1" dy="1"/>
+      <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
+    </filter>
+
   </defs>
 
 </svg>
