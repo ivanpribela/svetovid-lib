@@ -1,3 +1,4 @@
+/* Styles */
 
 svg {
   stroke-width: 2;
@@ -14,6 +15,36 @@ svg {
 }
 
 /* Colors */
+
+.red {
+  fill:   hsl(  0,  60%,  50%);
+  stroke: hsl(  0,  60%,  40%);
+}
+
+.orange {
+  fill:   hsl( 30,  60%,  50%);
+  stroke: hsl( 30,  60%,  40%);
+}
+
+.yellow {
+  fill:   hsl( 60,  60%,  50%);
+  stroke: hsl( 60,  60%,  40%);
+}
+
+.green {
+  fill:   hsl(120,  60%,  50%);
+  stroke: hsl(120,  60%,  40%);
+}
+
+.teal {
+  fill:   hsl(180,  60%,  50%);
+  stroke: hsl(180,  60%,  40%);
+}
+
+.blue {
+  fill:   hsl(210,  60%,  50%);
+  stroke: hsl(210,  60%,  40%);
+}
 
 .white {
   fill:   hsl(  0,   0%,  90%);
