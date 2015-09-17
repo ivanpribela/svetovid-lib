@@ -27,6 +27,14 @@
       <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
     </filter>
 
+    <filter id="shadow-small" color-interpolation-filters="sRGB">
+      <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
+      <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>
+      <feGaussianBlur result="blur" in="cut-out" stdDeviation="0.5"/>
+      <feOffset       result="offset" dx="0.5" dy="0.5"/>
+      <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
+    </filter>
+
   </defs>
 
 </svg>

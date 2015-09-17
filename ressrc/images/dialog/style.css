@@ -6,8 +6,16 @@ svg {
   stroke-linejoin: round;
 }
 
+.small {
+  stroke-width: 1;
+}
+
 #background {
   filter: url(common.svg#shadow);
+}
+
+.small #background {
+  filter: url(common.svg#shadow-small);
 }
 
 #foreground {

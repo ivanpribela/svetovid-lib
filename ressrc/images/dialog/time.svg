@@ -6,7 +6,7 @@
      id="icon"
      width="20px" height="20px"
      viewBox="-9 -9 20 20"
-     class="gray">
+     class="gray small">
 
   <g id="background">
     <circle cx="0" cy="0" r="8"/>
