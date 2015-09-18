@@ -13,8 +13,18 @@
 
     <!-- Foregrounds -->
 
-    <symbol id="fg-circle" overflow="visible">
-      <circle cx="0" cy="0" r="4"/>
+    <symbol id="dot" overflow="visible">
+      <path d="M 0 0
+        m                                   -1.00  -4.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                           2.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                          -2.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
     </symbol>
 
     <!-- Effects -->
