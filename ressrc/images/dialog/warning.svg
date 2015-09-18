@@ -6,7 +6,7 @@
      id="icon"
      width="48px" height="48px"
      viewBox="-23 -23 48 48"
-     class="gray">
+     class="orange">
 
   <g id="background">
     <use x="0" y="0" xlink:href="common.svg#bg-circle"/>
