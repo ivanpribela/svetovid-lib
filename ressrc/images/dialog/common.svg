@@ -27,6 +27,20 @@
         z"/>
     </symbol>
 
+    <symbol id="v-line" overflow="visible">
+      <path d="M 0 0
+        m                                   -1.00 -10.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          14.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                         -14.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
     <!-- Effects -->
 
     <filter id="shadow" color-interpolation-filters="sRGB">
