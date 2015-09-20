@@ -87,7 +87,7 @@ public interface DialogFactory {
      *            exception which is used to build up the stack-trace
      *            information.
      */
-    public void showError(Component component, String text, Throwable ex);
+    public void showError(Component component, String text, Throwable th);
 
     /**
      * Displays error message box containing stack-trace of the supplied
@@ -100,7 +100,7 @@ public interface DialogFactory {
      *            exception which is used to build up the stack-trace
      *            information.
      */
-    public void showException(Component component, Throwable ex);
+    public void showException(Component component, Throwable th);
 
     /**
      * Displays confirmation message box containing desired message, and asking
