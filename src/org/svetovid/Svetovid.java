@@ -40,6 +40,7 @@ import org.svetovid.io.StandardSvetovidWriter;
 import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
+import org.svetovid.util.Version;
 
 /**
  * This is a utility class that serves as an easy access point to various
@@ -465,30 +466,29 @@ public final class Svetovid {
         }
     }
 
-    private static String versionFile = "version.properties";
+    private static final String VERSION_DATA_FILE = "version.properties";
     private static Properties versionData;
-
-    /**
-     * Returns the version of this library.
-     *
-     * @return the version of this library.
-     */
-    public static String getVersion() {
-        if (versionData == null) {
-            versionData = new Properties();
-            try {
-                versionData.load(Svetovid.class.getClassLoader()
-                        .getResourceAsStream(versionFile));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    private static String versionString;
+    private static Version versionObject;
+    static {
+        versionData = new Properties();
+        try {
+            versionData.load(Svetovid.class.getClassLoader().getResourceAsStream(VERSION_DATA_FILE));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        String ver = versionData.getProperty("version");
-        if (ver != null) {
-            return ver;
-        } else {
-            return "unknown";
+        versionString = versionData.getProperty("version");
+        if (versionString == null) {
+            versionString = "unknown";
         }
+        versionObject = new Version(versionString);
     }
 
+    public static String getVersionString() {
+        return versionString;
+    }
+
+    public static Version getVersion() {
+        return versionObject;
+    }
 }
