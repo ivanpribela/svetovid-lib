@@ -19,6 +19,7 @@ import org.svetovid.dialogs.Dialogs;
 import org.svetovid.io.StandardSvetovidErrorWriter;
 import org.svetovid.io.StandardSvetovidReader;
 import org.svetovid.io.StandardSvetovidWriter;
+import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
 
@@ -59,10 +60,65 @@ public class Svetovid {
      * By convention, this output stream is used to display error messages or
      * other information that should come to the immediate attention of a user
      * even if the principal output stream, the value of the variable
-     * {@link out}, has been redirected to a file or other destination that is
+     * {@link #out}, has been redirected to a file or other destination that is
      * typically not continuously monitored.
      */
     public static StandardSvetovidErrorWriter err = org.svetovid.Svetovid.err;
+
+    /**
+     * Checks whether the given source can be used for input.
+     *
+     * @param source
+     *            a string describing the source
+     *
+     * @return {@code true} if the given source can be read; {@code false}
+     *         otherwise.
+     */
+    public static boolean testIn(String source) {
+        return org.svetovid.Svetovid.testIn(source);
+    }
+
+    /**
+     * Checks whether the given target can be used for output.
+     *
+     * @param target
+     *            a string describing the target
+     *
+     * @return {@code true} if it is possible to write to the given target;
+     *         {@code false} otherwise.
+     */
+    public static boolean testOut(String target) {
+        return org.svetovid.Svetovid.testOut(target);
+    }
+
+    /**
+     * Checks whether the data can be appended to the given target.
+     *
+     * @param target
+     *            a string describing the target
+     *
+     * @return {@code true} if it is possible to append data to the given
+     *         target; {@code false} otherwise.
+     */
+    public static boolean testAppend(String target) {
+        return org.svetovid.Svetovid.testAppend(target);
+    }
+
+    /**
+     * Checks whether the given target can be used for output.
+     *
+     * @param target
+     *            a string describing the target
+     * @param append
+     *            {@code true} to check if the data can be appended to the
+     *            target; {@code false} to check if the data can be overwritten
+     *
+     * @return {@code true} if it is possible to write to the given target;
+     *         {@code false} otherwise.
+     */
+    public static boolean testOut(String target, boolean append) {
+        return org.svetovid.Svetovid.testOut(target, append);
+    }
 
     /**
      * The input reader for the given source. The returned reader is already
@@ -123,12 +179,46 @@ public class Svetovid {
      *
      * @param target
      *            a string describing the writter's target
+     * @param append
+     *            should the data be appended to the given target or not
      *
      * @return a {@link SvetovidWriter} that can be used to write to the desired
      *         target.
      */
     public static SvetovidWriter out(String target, boolean append) {
         return org.svetovid.Svetovid.out(target, append);
+    }
+
+    /**
+     * Closes the reader (if any) and releases any resources associated with the
+     * given source.
+     *
+     * @param source
+     *            the source for which to close the reader
+     * @return the closed reader.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public static SvetovidReader closeIn(String source)
+            throws SvetovidIOException {
+        return org.svetovid.Svetovid.closeIn(source);
+    }
+
+    /**
+     * Closes the writer (if any) and releases any resources associated with the
+     * given target.
+     *
+     * @param target
+     *            the target for which to close the writer
+     * @return the closed writer.
+     *
+     * @throws SvetovidIOException
+     *             if an error occurred during the operation.
+     */
+    public static SvetovidWriter closeOut(String target)
+            throws SvetovidIOException {
+        return org.svetovid.Svetovid.closeOut(target);
     }
 
     /**

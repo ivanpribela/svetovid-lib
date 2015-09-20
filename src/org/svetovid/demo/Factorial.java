@@ -24,7 +24,7 @@ public class Factorial {
     public static void main(String[] args) {
 
         // Ask for n
-        int n = Svetovid.in.readInt("Factorial of which number would you like me to calculate? ");
+        int n = Svetovid.in.readInt("Factorial of which number would you like me to calculate?");
 
         // Start the calculation timing
         Stopwatch stopwatch = new Stopwatch();
