@@ -75,6 +75,24 @@
       <use x="0" y="0" xlink:href="#plus" transform="rotate(45)"/>
     </symbol>
 
+    <symbol id="tick-mark" overflow="visible" transform="rotate(45)">
+      <path d="M 0 0
+        m                                    3.00 -14.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          22.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                  -10.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                          -2.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        h                                    2.00
+        c    1.65   0.00     3.00  -1.35     3.00  -3.00
+        v                                         -14.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
     <!-- Effects -->
 
     <filter id="shadow" color-interpolation-filters="sRGB">
