@@ -22,6 +22,8 @@ import org.svetovid.io.StandardSvetovidWriter;
 import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
+import org.svetovid.util.JsonHelper;
+import org.svetovid.util.Version;
 
 /**
  * This is a utility class that serves as an easy access point to various
@@ -235,6 +237,24 @@ public class Svetovid {
      *            this argument is just ignored
      */
     public static void main(String[] args) {
-        Svetovid.out.println("Svetovid: " + org.svetovid.Svetovid.getVersionString());
+
+    	// Show running version
+    	Version myVersion = org.svetovid.Svetovid.getVersion();
+        Svetovid.out.println("Svetovid: " + myVersion);
+        
+        // Fetch info on newer versions
+        String libraryUri = "https://api.github.com/repos/ivanpribela/svetovid-lib/releases";
+        Object libraryData = Svetovid.in(libraryUri).readObject();
+        for (Object release : JsonHelper.getArray(libraryData, ".")) {
+            String tag = JsonHelper.getString(release, "tag_name");
+            Version version = new Version(tag);
+            if (version.compareTo(myVersion) > 0) {
+                String url =  JsonHelper.getString(release, "html_url");
+                Svetovid.out.println();
+                Svetovid.out.println("Version " + version + " available from:");
+                Svetovid.out.println(url);
+            }
+        }
+
     }
 }
