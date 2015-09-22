@@ -84,17 +84,17 @@
     <target name="compile.res.properties" depends=""
             description="Compile .properties files from ${ressrc.dir} into ${res.dir}">
 
-        <property name="restmp.dir" value="${res.dir}-tmp" />
-        <mkdir dir="${restmp.dir}" />
+        <property name="tmpresprop.dir" value=".tmp/${res.dir}/properties" />
+        <mkdir dir="${tmpresprop.dir}" />
         <native2ascii encoding="utf-8"
                       src="${ressrc.dir}"
-                      dest="${restmp.dir}"
-                      includes="**/*" />
-        <fixcrlf srcdir="${restmp.dir}" eol="lf" />
+                      dest="${tmpresprop.dir}"
+                      includes="**/*.properties" />
+        <fixcrlf srcdir="${tmpresprop.dir}" eol="lf" />
         <copy todir="${res.dir}">
-            <fileset dir="${restmp.dir}" />
+            <fileset dir="${tmpresprop.dir}" />
         </copy>
-        <delete dir="${restmp.dir}" />
+        <delete dir="${tmpresprop.dir}" />
 
     </target>
 
