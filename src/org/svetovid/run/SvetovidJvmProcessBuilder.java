@@ -45,7 +45,7 @@ public class SvetovidJvmProcessBuilder extends SvetovidProcessBuilder {
     private List<String> commandLibraryDirs = new ArrayList<>();
     private Map<String, String> systemProperties = new HashMap<>();
     private List<String> commandSystemProperties = new ArrayList<>();
-    private CompoundList<String> wholeCommand = new CompoundList<>(executable, commandClasspath, commandExtDirs, commandEndorsedDirs, commandLibraryDirs, commandSystemProperties, new ArrayList<>(), null);
+    private CompoundList<String> wholeCommand = new CompoundList<String>(executable, commandClasspath, commandExtDirs, commandEndorsedDirs, commandLibraryDirs, commandSystemProperties, new ArrayList<String>(), null);
 
     public SvetovidJvmProcessBuilder() {
         super();

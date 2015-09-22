@@ -410,7 +410,7 @@ public final class JavaInstallation implements Comparable<JavaInstallation> {
         }
     }
 
-    private static void getFromFilesystemRecursive(Path dir, Collector<JavaInstallation> installationCollector, Collector<Path> pathCollector) {
+    private static void getFromFilesystemRecursive(Path dir, final Collector<JavaInstallation> installationCollector, final Collector<Path> pathCollector) {
         try {
             Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
                 @Override
