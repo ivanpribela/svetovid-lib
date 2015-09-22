@@ -81,8 +81,8 @@
     </target>
 
 
-    <target name="compile.res" depends=""
-            description="Compile the resources from ${ressrc.dir} into ${res.dir}">
+    <target name="compile.res.properties" depends=""
+            description="Compile .properties files from ${ressrc.dir} into ${res.dir}">
 
         <property name="restmp.dir" value="${res.dir}-tmp" />
         <mkdir dir="${restmp.dir}" />
@@ -95,6 +95,18 @@
             <fileset dir="${restmp.dir}" />
         </copy>
         <delete dir="${restmp.dir}" />
+
+    </target>
+
+
+    <target name="compile.res.images" depends=""
+            description="Convert svg to png images from ${ressrc.dir} into ${res.dir}">
+
+    </target>
+
+
+    <target name="compile.res" depends="compile.res.properties, compile.res.images"
+            description="Compile the resources from ${ressrc.dir} into ${res.dir}">
 
     </target>
 
