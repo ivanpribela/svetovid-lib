@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import java.util.List;
+
 import org.svetovid.dialogs.AutoCloseDialogFactory;
 import org.svetovid.dialogs.Dialogs;
 import org.svetovid.io.StandardSvetovidErrorWriter;
@@ -22,7 +24,7 @@ import org.svetovid.io.StandardSvetovidWriter;
 import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
-import org.svetovid.util.JsonHelper;
+import org.svetovid.util.Release;
 import org.svetovid.util.Version;
 
 /**
@@ -243,16 +245,12 @@ public class Svetovid {
         Svetovid.out.println("Svetovid: " + myVersion);
         
         // Fetch info on newer versions
-        String libraryUri = "https://api.github.com/repos/ivanpribela/svetovid-lib/releases";
-        Object libraryData = Svetovid.in(libraryUri).readObject();
-        for (Object release : JsonHelper.getArray(libraryData, ".")) {
-            String tag = JsonHelper.getString(release, "tag_name");
-            Version version = new Version(tag);
-            if (version.compareTo(myVersion) > 0) {
-                String url =  JsonHelper.getString(release, "html_url");
+        List<Release> releases = org.svetovid.Svetovid.getLibraryReleases();
+        for (Release release : releases) {
+            if (release.getVersion().compareTo(myVersion) > 0) {
                 Svetovid.out.println();
-                Svetovid.out.println("Version " + version + " available from:");
-                Svetovid.out.println(url);
+                Svetovid.out.println("Version " + release.getVersion() + " available from:");
+                Svetovid.out.println(release.getUrl());
             }
         }
 

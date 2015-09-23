@@ -20,9 +20,12 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,6 +43,8 @@ import org.svetovid.io.StandardSvetovidWriter;
 import org.svetovid.io.SvetovidIOException;
 import org.svetovid.io.SvetovidReader;
 import org.svetovid.io.SvetovidWriter;
+import org.svetovid.util.JsonHelper;
+import org.svetovid.util.Release;
 import org.svetovid.util.Version;
 
 /**
@@ -490,5 +495,24 @@ public final class Svetovid {
 
     public static Version getVersion() {
         return versionObject;
+    }
+
+    public static List<Release> getLibraryReleases() {
+        String libraryReleasesUrl = "https://api.github.com/repos/ivanpribela/svetovid-lib/releases";
+        Object libraryReleasesData = Svetovid.in(libraryReleasesUrl).readObject();
+        List<Release> releases = new ArrayList<>();
+        for (Object libraryReleaseData : JsonHelper.getArray(libraryReleasesData, ".")) {
+            try {
+                String tagName = JsonHelper.getString(libraryReleaseData, "tag_name");
+                Version version = new Version(tagName);
+                String htmlUrl =  JsonHelper.getString(libraryReleaseData, "html_url");
+				URL url = new URL(htmlUrl);
+				Release release = new Release(version, url);
+				releases.add(release);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+        }
+        return releases;
     }
 }
