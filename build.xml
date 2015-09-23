@@ -102,6 +102,32 @@
     <target name="compile.res.images" depends=""
             description="Convert svg to png images from ${ressrc.dir} into ${res.dir}">
 
+        <property name="tmpresimg.dir" value=".tmp/${res.dir}/images" />
+        <mkdir dir="${tmpresimg.dir}" />
+        <copy todir="${tmpresimg.dir}">
+            <fileset dir="${ressrc.dir}">
+                <include name="**/*.svg"/>
+                <include name="**/*.css"/>
+            </fileset>
+        </copy>
+        <apply executable="convert"
+                dir="${tmpresimg.dir}"
+                dest="${tmpresimg.dir}"
+                relative="yes">
+            <fileset dir="${tmpresimg.dir}">
+                <include name="**/*.svg"/>
+            </fileset>
+            <srcfile/>
+            <mapper type="glob" from="*.svg" to="*.png"/>
+            <targetfile/>
+        </apply>
+        <copy todir="${res.dir}">
+            <fileset dir="${tmpresimg.dir}">
+                <include name="**/*.png"/>
+            </fileset>
+        </copy>
+        <delete dir="${tmpresimg.dir}"/>
+
     </target>
 
 
