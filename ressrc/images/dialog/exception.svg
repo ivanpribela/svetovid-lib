@@ -9,7 +9,7 @@
      class="black">
 
   <g id="background">
-    <use x="0" y="0" xlink:href="common.svg#bg-circle"/>
+    <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
   </g>
 
   <g id="foreground">

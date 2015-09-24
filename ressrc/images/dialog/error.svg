@@ -9,11 +9,11 @@
      class="red">
 
   <g id="background">
-    <use x="0" y="0" xlink:href="common.svg#bg-circle"/>
+    <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
   </g>
 
   <g id="foreground">
-    <use x="0" y="0" xlink:href="common.svg#cross"/>
+    <use x="0" y="0" xlink:href=".common.svg#cross"/>
   </g>
 
 </svg>

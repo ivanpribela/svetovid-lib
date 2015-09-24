@@ -9,12 +9,12 @@
      class="blue">
 
   <g id="background">
-    <use x="0" y="0" xlink:href="common.svg#bg-circle"/>
+    <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
   </g>
 
   <g id="foreground">
-    <use x="0" y="-12" xlink:href="common.svg#dot"/>
-    <use x="0" y="6" xlink:href="common.svg#v-line"/>
+    <use x="0" y="-12" xlink:href=".common.svg#dot"/>
+    <use x="0" y="6" xlink:href=".common.svg#v-line"/>
   </g>
 
 </svg>
