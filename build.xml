@@ -116,6 +116,7 @@
                 relative="yes">
             <fileset dir="${tmpresimg.dir}">
                 <include name="**/*.svg"/>
+                <exclude name="**/.*.svg"/>
             </fileset>
             <srcfile/>
             <mapper type="glob" from="*.svg" to="*.png"/>
