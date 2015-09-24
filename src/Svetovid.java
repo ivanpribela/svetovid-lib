@@ -240,10 +240,17 @@ public class Svetovid {
      */
     public static void main(String[] args) {
 
-    	// Show running version
+    	// Get own version
     	Version myVersion = org.svetovid.Svetovid.getVersion();
+
+    	// Show running version
         Svetovid.out.println("Svetovid: " + myVersion);
-        
+
+    	// Show dialog if there is no console
+    	if (System.console() == null) {
+    		Dialogs.showInformation(null, "Svetovid: " + myVersion);
+    	}
+
         // Fetch info on newer versions
         List<Release> releases = org.svetovid.Svetovid.getLibraryReleases();
         for (Release release : releases) {
