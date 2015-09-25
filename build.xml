@@ -165,7 +165,7 @@
     </target>
 
 
-    <target name="generate.htmldoc" depends=""
+    <target name="generate.htmldoc" depends="test.ant-contrib.installed, test.pandoc.installed"
             description="Compile markdown documentation into HTML">
 
         <!-- Prepare the destination folder -->
@@ -325,9 +325,53 @@
     </target>
 
 
-    <!--
-        Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
-    -->
+<!--
+    Check whether required dependancies are installed
+-->
+
+
+    <target name="test.ant-contrib.installed" depends=""
+            description="Checks whether Ant-Contrib is installed">
+
+        <available resource="net/sf/antcontrib/antlib.xml"
+                   property="ant-contrib.installed"/>
+        <fail unless="ant-contrib.installed"
+              message="Ant-Contrib in not installed"/>
+
+    </target>
+
+    <target name="test.pandoc.installed" depends=""
+            description="Checks whether Pandoc is installed">
+
+        <exec executable="pandoc"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="pandoc.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="pandoc.installed"
+              message="Pandoc in not installed"/>
+
+    </target>
+
+    <target name="test.git.installed" depends=""
+            description="Checks whether Git is installed">
+
+        <exec executable="git"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="git.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="git.installed"
+              message="Git in not installed"/>
+
+    </target>
+
+
+<!--
+    Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
+-->
 
     <!-- Location of the file holding the version information -->
     <property name="version.file" value="${res.dir}/version.properties" />
