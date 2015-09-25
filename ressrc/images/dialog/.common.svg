@@ -95,6 +95,107 @@
 
     <!-- Effects -->
 
+    <radialGradient id="standard-fill"
+                    fx="25%"
+                    fy="25%"
+                    r="50%"
+                    spreadMethod="pad"/>
+
+    <radialGradient id="red-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(  0,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl(  0,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="orange-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl( 30,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl( 30,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="yellow-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl( 60,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl( 60,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="green-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(120,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl(120,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="cyan-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(180,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl(180,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="blue-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(210,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl(210,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="magenta-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(300,  60%,  60%)"/>
+      <stop offset="100%" stop-color="hsl(300,  60%,  50%)"/>
+    </radialGradient>
+
+    <radialGradient id="white-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(  0,   0%, 100%)"/>
+      <stop offset="100%" stop-color="hsl(  0,   0%,  90%)"/>
+    </radialGradient>
+
+    <radialGradient id="gray-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(  0,   0%,  65%)"/>
+      <stop offset="100%" stop-color="hsl(  0,   0%,  55%)"/>
+    </radialGradient>
+
+    <radialGradient id="black-fill" xlink:href="#standard-fill">
+      <stop offset="0%"   stop-color="hsl(  0,   0%,  30%)"/>
+      <stop offset="100%" stop-color="hsl(  0,   0%,  20%)"/>
+    </radialGradient>
+
+    <linearGradient id="symbol-fill">
+      <stop stop-color="hsl(  0,   0%, 100%)"/>
+    </linearGradient>
+
+
+    <linearGradient id="red-stroke">
+      <stop stop-color="hsl(  0,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="orange-stroke">
+      <stop stop-color="hsl( 30,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="yellow-stroke">
+      <stop stop-color="hsl( 60,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="green-stroke">
+      <stop stop-color="hsl(120,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="cyan-stroke">
+      <stop stop-color="hsl(180,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="blue-stroke">
+      <stop stop-color="hsl(210,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="magenta-stroke">
+      <stop stop-color="hsl(300,  60%,  40%)"/>
+    </linearGradient>
+
+    <linearGradient id="white-stroke">
+      <stop stop-color="hsl(  0,   0%,  70%)"/>
+    </linearGradient>
+
+    <linearGradient id="gray-stroke">
+      <stop stop-color="hsl(  0,   0%,  35%)"/>
+    </linearGradient>
+
+    <linearGradient id="black-stroke">
+      <stop stop-color="hsl(  0,   0%,   0%)"/>
+    </linearGradient>
+
     <filter id="shadow" color-interpolation-filters="sRGB">
       <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
       <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>

@@ -107,7 +107,6 @@
         <copy todir="${tmpresimg.dir}">
             <fileset dir="${ressrc.dir}">
                 <include name="**/*.svg"/>
-                <include name="**/*.css"/>
             </fileset>
         </copy>
         <apply executable="convert"
