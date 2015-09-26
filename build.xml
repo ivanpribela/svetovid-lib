@@ -34,9 +34,6 @@
     <!-- Load the environment variables -->
     <property environment="env" />
 
-    <!-- link to use antcontrib -->
-    <taskdef resource="net/sf/antcontrib/antlib.xml" />
-
     <!-- Version of Java to use -->
     <property name="java.source.version" value="1.7" />
     <property name="java.target.version" value="1.7" />
@@ -339,6 +336,7 @@
                    property="ant-contrib.installed"/>
         <fail unless="ant-contrib.installed"
               message="Ant-Contrib in not installed"/>
+        <taskdef resource="net/sf/antcontrib/antlib.xml" />
 
     </target>
 
