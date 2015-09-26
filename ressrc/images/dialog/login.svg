@@ -12,17 +12,35 @@
      stroke-linecap="round"
      stroke-linejoin="round">
 
+  <defs>
+
+    <symbol id="dot" overflow="visible">
+      <path d="M 0 0
+        m                                   -1.00  -4.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                           2.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                          -2.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
+  </defs>
+
   <g id="background"
      filter="url(.common.svg#shadow)">
 
-    <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
+    <circle cx="0" cy="0" r="20"/>
 
   </g>
 
   <g id="foreground"
      fill="hsl(0, 0%, 100%)">
 
-    <use x="0" y="0" xlink:href=".common.svg#dot"/>
+    <use x="0" y="0" xlink:href="#dot"/>
 
   </g>
 

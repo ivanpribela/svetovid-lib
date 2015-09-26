@@ -12,17 +12,21 @@
      stroke-linecap="round"
      stroke-linejoin="round">
 
+  <defs>
+
+
+  </defs>
+
   <g id="background"
      filter="url(.common.svg#shadow)">
 
-    <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
+    <circle cx="0" cy="0" r="20"/>
     <circle cx="8" cy="-8" r="6"/>
 
   </g>
 
   <g id="foreground">
 
-    <use x="0" y="0" xlink:href="common.svg#dot"/>
 
   </g>
 

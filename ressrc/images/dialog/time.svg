@@ -12,6 +12,11 @@
      stroke-linecap="round"
      stroke-linejoin="round">
 
+  <defs>
+
+
+  </defs>
+
   <g id="background"
      filter="url(.common.svg#shadow-small)">
 

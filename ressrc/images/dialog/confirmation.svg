@@ -12,17 +12,39 @@
      stroke-linecap="round"
      stroke-linejoin="round">
 
+  <defs>
+
+    <symbol id="tick-mark" overflow="visible" transform="rotate(45)">
+      <path d="M 0 0
+        m                                    3.00 -14.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          22.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                  -10.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                          -2.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        h                                    2.00
+        c    1.65   0.00     3.00  -1.35     3.00  -3.00
+        v                                         -14.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
+  </defs>
+
   <g id="background"
      filter="url(.common.svg#shadow)">
 
-    <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
+    <circle cx="0" cy="0" r="20"/>
 
   </g>
 
   <g id="foreground"
      fill="hsl(0, 0%, 100%)">
 
-    <use x="0" y="0" xlink:href=".common.svg#tick-mark"/>
+    <use x="0" y="0" xlink:href="#tick-mark"/>
 
   </g>
 
