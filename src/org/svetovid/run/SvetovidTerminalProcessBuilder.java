@@ -38,7 +38,7 @@ public class SvetovidTerminalProcessBuilder extends SvetovidProcessBuilder {
         }
     }
 
-    private CompoundList<String> wholeCommand = new CompoundList<>(SHELL, null);
+    private CompoundList<String> wholeCommand = new CompoundList<String>(SHELL, null);
 
     public SvetovidTerminalProcessBuilder() {
         super();

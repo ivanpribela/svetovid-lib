@@ -62,7 +62,7 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
         return isAdmin;
     }
 
-    private CompoundList<String> wholeCommand = new CompoundList<>(EXECUTABLE, null);
+    private CompoundList<String> wholeCommand = new CompoundList<String>(EXECUTABLE, null);
 
     private void fixCommandIfAdmin() {
     	if (isAdmin()) {

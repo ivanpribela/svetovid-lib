@@ -476,6 +476,11 @@ public class JsonHelper {
         public Boolean next() {
             return array[pos++];
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
+        }
     }
 
     private static class ByteArrayIterator implements Iterator<Byte> {
@@ -496,6 +501,11 @@ public class JsonHelper {
         @Override
         public Byte next() {
             return array[pos++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
         }
     }
 
@@ -518,6 +528,11 @@ public class JsonHelper {
         public Short next() {
             return array[pos++];
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
+        }
     }
 
     private static class IntegerArrayIterator implements Iterator<Integer> {
@@ -538,6 +553,11 @@ public class JsonHelper {
         @Override
         public Integer next() {
             return array[pos++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
         }
     }
 
@@ -560,6 +580,11 @@ public class JsonHelper {
         public Long next() {
             return array[pos++];
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
+        }
     }
 
     private static class FloatArrayIterator implements Iterator<Float> {
@@ -580,6 +605,11 @@ public class JsonHelper {
         @Override
         public Float next() {
             return array[pos++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
         }
     }
 
@@ -602,6 +632,11 @@ public class JsonHelper {
         public Double next() {
             return array[pos++];
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
+        }
     }
 
     private static class CharacterArrayIterator implements Iterator<Character> {
@@ -623,6 +658,11 @@ public class JsonHelper {
         public Character next() {
             return array[pos++];
         }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
+        }
     }
 
     private static class ObjectArrayIterator implements Iterator<Object> {
@@ -643,6 +683,11 @@ public class JsonHelper {
         @Override
         public Object next() {
             return array[pos++];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("remove");
         }
     }
 
