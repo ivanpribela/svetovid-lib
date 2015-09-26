@@ -106,7 +106,9 @@
                source="${java.source.version}"
                target="${java.target.version}"
                bootclasspath="${java.bootstrap.classpath}"
-               includeAntRuntime="no" />
+               includeAntRuntime="no" >
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
 
     </target>
 
