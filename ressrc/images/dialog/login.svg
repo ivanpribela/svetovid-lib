@@ -5,21 +5,25 @@
      id="icon"
      width="48px" height="48px"
      viewBox="-23 -23 48 48"
+
+     fill=  "hsl( 60,  60%,  50%)"
+     stroke="hsl( 60,  60%,  40%)"
      stroke-width="2"
      stroke-linecap="round"
      stroke-linejoin="round">
 
   <g id="background"
-     fill="url(.common.svg#yellow-fill)"
-     stroke="url(.common.svg#yellow-stroke)"
      filter="url(.common.svg#shadow)">
+
     <use x="0" y="0" xlink:href=".common.svg#bg-circle"/>
+
   </g>
 
   <g id="foreground"
-     fill="url(.common.svg#symbol-fill)"
-     stroke="url(.common.svg#yellow-stroke)">
+     fill="hsl(0, 0%, 100%)">
+
     <use x="0" y="0" xlink:href=".common.svg#dot"/>
+
   </g>
 
 </svg>
