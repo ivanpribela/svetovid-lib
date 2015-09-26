@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
      xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -13,6 +13,14 @@
      stroke-linejoin="round">
 
   <defs>
+
+    <filter id="shadow" color-interpolation-filters="sRGB">
+      <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
+      <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>
+      <feGaussianBlur result="blur" in="cut-out" stdDeviation="1"/>
+      <feOffset       result="offset" dx="1" dy="1"/>
+      <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
+    </filter>
 
     <symbol id="dot" overflow="visible">
       <path d="M 0 0
@@ -45,7 +53,7 @@
   </defs>
 
   <g id="background"
-     filter="url(.common.svg#shadow)">
+     filter="url(#shadow)">
 
     <circle cx="0" cy="0" r="20"/>
 
