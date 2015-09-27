@@ -506,12 +506,12 @@ public final class Svetovid {
                 String tagName = JsonHelper.getString(libraryReleaseData, "tag_name");
                 Version version = new Version(tagName);
                 String htmlUrl =  JsonHelper.getString(libraryReleaseData, "html_url");
-				URL url = new URL(htmlUrl);
-				Release release = new Release(version, url);
-				releases.add(release);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			}
+                URL url = new URL(htmlUrl);
+                Release release = new Release(version, url);
+                releases.add(release);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
         return releases;
     }

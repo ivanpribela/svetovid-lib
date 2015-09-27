@@ -85,7 +85,7 @@ public class DialogsDemo {
             throw new IllegalArgumentException("b", e);
         }
     }
-    
+
     private static boolean method2(String b) {
         try {
             return b.equals(method3());

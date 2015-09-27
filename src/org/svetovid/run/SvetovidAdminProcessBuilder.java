@@ -65,11 +65,11 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
     private CompoundList<String> wholeCommand = new CompoundList<String>(EXECUTABLE, null);
 
     private void fixCommandIfAdmin() {
-    	if (isAdmin()) {
-    		wholeCommand.setSublist(0, null);
-    	} else {
-    		wholeCommand.setSublist(0, EXECUTABLE);
-    	}
+        if (isAdmin()) {
+            wholeCommand.setSublist(0, null);
+        } else {
+            wholeCommand.setSublist(0, EXECUTABLE);
+        }
     }
 
     public SvetovidAdminProcessBuilder() {
@@ -196,8 +196,8 @@ public class SvetovidAdminProcessBuilder extends SvetovidProcessBuilder {
     }
 
     @Override
-	public SvetovidProcess start() throws IOException {
-    	fixCommandIfAdmin();
-		return super.start();
-	}
+    public SvetovidProcess start() throws IOException {
+        fixCommandIfAdmin();
+        return super.start();
+    }
 }

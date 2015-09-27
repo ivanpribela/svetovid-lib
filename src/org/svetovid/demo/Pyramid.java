@@ -28,12 +28,12 @@ public class Pyramid {
         // Draw the pyramid layer by layer
         for (int i = 1; i <= size; i++) {
 
-        	// Add some space to center the pyramid
+            // Add some space to center the pyramid
             for (int j = 0; j < size - i; j++) {
                 Svetovid.out.print(" ");
             }
 
-        	// Draw the pyramid layer
+            // Draw the pyramid layer
             for (int j = 0; j < i; j++) {
                 Svetovid.out.print(" *");
             }

@@ -83,23 +83,23 @@ public abstract class AbstractSvetovidReader implements SvetovidReader {
         }
     }
 
-	protected void handleFormatException(SvetovidFormatException exception)
-			throws SvetovidFormatException {
-		lastException = exception;
-		if (throwingExceptions) {
-		    throw exception;
-		}
-	}
+    protected void handleFormatException(SvetovidFormatException exception)
+            throws SvetovidFormatException {
+        lastException = exception;
+        if (throwingExceptions) {
+            throw exception;
+        }
+    }
 
-	protected void handleAnyException(Throwable exception)
-			throws RuntimeException {
-		lastException = exception;
+    protected void handleAnyException(Throwable exception)
+            throws RuntimeException {
+        lastException = exception;
         if (throwingExceptions) {
             if (exception instanceof RuntimeException) {
                 throw (RuntimeException) exception;
             }
         }
-	}
+    }
 
     @Override
     public boolean isEmpty() {

@@ -31,7 +31,7 @@ public class Calculator {
     }
 
     @SuppressWarnings("unused")
-	private double add(double a, double b) {
+    private double add(double a, double b) {
         return a + b;
     }
 

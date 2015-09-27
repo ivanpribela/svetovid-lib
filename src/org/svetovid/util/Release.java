@@ -20,29 +20,29 @@ import java.net.URL;
 
 public class Release implements Comparable<Release> {
 
-	private Version version;
-	private URL url;
+    private Version version;
+    private URL url;
 
-	public Release(Version version, URL url) {
-		if (version == null) {
-			throw new IllegalArgumentException("version");
-		}
-		this.version = version;
-		if (url == null) {
-			throw new IllegalArgumentException("url");
-		}
-		this.url = url;
-	}
+    public Release(Version version, URL url) {
+        if (version == null) {
+            throw new IllegalArgumentException("version");
+        }
+        this.version = version;
+        if (url == null) {
+            throw new IllegalArgumentException("url");
+        }
+        this.url = url;
+    }
 
-	public Version getVersion() {
-		return version;
-	}
+    public Version getVersion() {
+        return version;
+    }
 
-	public URL getUrl() {
-		return url;
-	}
+    public URL getUrl() {
+        return url;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return version + " [" + url + "]";
     }
