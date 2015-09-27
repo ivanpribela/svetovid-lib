@@ -34,6 +34,9 @@
     <!-- Folder to hold packed library and documantation ready to be distriuted to users -->
     <property name="dist.dir" value="dist" />
 
+    <!-- Folder to hold temporary files -->
+    <property name="tmp.dir" value=".tmp" />
+
 
     <target name="help" depends=""
             description="Shows the list of supported tasks">
@@ -84,7 +87,7 @@
     <target name="compile.res.properties" depends=""
             description="Compile .properties files from ${ressrc.dir} into ${res.dir}">
 
-        <property name="tmpresprop.dir" value=".tmp/${res.dir}/properties" />
+        <property name="tmpresprop.dir" value="${tmp.dir}/res/properties" />
         <mkdir dir="${tmpresprop.dir}" />
         <native2ascii encoding="utf-8"
                       src="${ressrc.dir}"
@@ -102,7 +105,7 @@
     <target name="compile.res.images" depends=""
             description="Convert svg to png images from ${ressrc.dir} into ${res.dir}">
 
-        <property name="tmpresimg.dir" value=".tmp/${res.dir}/images" />
+        <property name="tmpresimg.dir" value="${tmp.dir}/res/images" />
         <mkdir dir="${tmpresimg.dir}" />
         <copy todir="${tmpresimg.dir}">
             <fileset dir="${ressrc.dir}">
@@ -307,6 +310,7 @@
         <delete dir="${apidoc.dir}" />
         <delete dir="${htmldoc.dir}" />
         <delete dir="${dist.dir}" />
+        <delete dir="${tmp.dir}" />
 
     </target>
 
