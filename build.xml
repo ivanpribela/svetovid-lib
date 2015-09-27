@@ -109,7 +109,7 @@
                 <include name="**/*.svg"/>
             </fileset>
         </copy>
-        <apply executable="convert"
+        <apply executable="inkscape"
                 dir="${tmpresimg.dir}"
                 dest="${tmpresimg.dir}"
                 relative="yes">
@@ -117,9 +117,10 @@
                 <include name="**/*.svg"/>
                 <exclude name="**/.*.svg"/>
             </fileset>
+            <arg value="-e"/>
+            <targetfile/>
             <srcfile/>
             <mapper type="glob" from="*.svg" to="*.png"/>
-            <targetfile/>
         </apply>
         <copy todir="${res.dir}">
             <fileset dir="${tmpresimg.dir}">
