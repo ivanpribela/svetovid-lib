@@ -72,7 +72,6 @@
     <target name="compile" depends=""
             description="Compile the source code from ${src.dir} into ${bin.dir}">
 
-        <delete dir="${bin.dir}" />
         <mkdir dir="${bin.dir}" />
         <javac srcdir="${src.dir}"
                destdir="${bin.dir}"
@@ -97,7 +96,6 @@
         <copy todir="${res.dir}">
             <fileset dir="${tmpresprop.dir}" />
         </copy>
-        <delete dir="${tmpresprop.dir}" />
 
     </target>
 
@@ -130,7 +128,6 @@
                 <include name="**/*.png"/>
             </fileset>
         </copy>
-        <delete dir="${tmpresimg.dir}"/>
 
     </target>
 
