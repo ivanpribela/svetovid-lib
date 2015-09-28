@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Supplement Library for Introductory Programming Courses
 Bundle-SymbolicName: org.svetovid.lib
-Bundle-Version: 0.2.0
+Bundle-Version: 0.3.0
 Bundle-Vendor: Ivan Pribela
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: .;version="0.2.0",
- org.svetovid;version="0.2.0";uses:="org.svetovid.io,org.svetovid.dialogs",
- org.svetovid.dialogs;version="0.2.0";uses:="javax.swing",
- org.svetovid.io;version="0.2.0",
- org.svetovid.run;version="0.2.0",
- org.svetovid.util;version="0.2.0"
+Export-Package: .;version="0.3.0",
+ org.svetovid;version="0.3.0";uses:="org.svetovid.io,org.svetovid.dialogs",
+ org.svetovid.dialogs;version="0.3.0";uses:="javax.swing",
+ org.svetovid.io;version="0.3.0",
+ org.svetovid.run;version="0.3.0",
+ org.svetovid.util;version="0.3.0"
 Main-Class: Svetovid
