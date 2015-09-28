@@ -154,9 +154,12 @@
             description="Generate the api documentation into ${apidoc.dir}">
 
         <mkdir dir="${apidoc.dir}" />
-        <javadoc sourcepath="${src.dir}"
-                 destdir="${apidoc.dir}"
-                 windowtitle="Svetovid-Lib API">
+        <javadoc windowtitle="Svetovid-Lib API"
+                 destdir="${apidoc.dir}">
+            <packageset dir="${src.dir}" defaultexcludes="yes">
+                <include name="**"/>
+                <exclude name="org/svetovid/demo/**"/>
+            </packageset>
             <link href="${java.api.link}"/>
             <doctitle><![CDATA[<h1>Svetovid-Lib API</h1>]]></doctitle>
         </javadoc>
