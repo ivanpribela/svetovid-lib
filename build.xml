@@ -32,34 +32,34 @@
 
 
     <!-- Load the environment variables -->
-    <property environment="env" />
+    <property environment="env"/>
 
     <!-- Version of Java to use -->
-    <property name="java.source.version" value="1.7" />
-    <property name="java.target.version" value="1.7" />
-    <property name="java.bootstrap.classpath" location="${env.JAVA_HOME}/lib/rt.jar" />
-    <property name="java.api.link" value="http://download.oracle.com/javase/8/docs/api/" />
+    <property name="java.source.version" value="1.7"/>
+    <property name="java.target.version" value="1.7"/>
+    <property name="java.bootstrap.classpath" location="${env.JAVA_HOME}/lib/rt.jar"/>
+    <property name="java.api.link" value="http://download.oracle.com/javase/8/docs/api/"/>
 
     <!-- Folders where the source files reside -->
-    <property name="src.dir" value="src" />
-    <property name="res.dir" value="res" />
-    <property name="ressrc.dir" value="ressrc" />
-    <property name="docsrc.dir" value="doc" />
+    <property name="src.dir" value="src"/>
+    <property name="res.dir" value="res"/>
+    <property name="ressrc.dir" value="ressrc"/>
+    <property name="docsrc.dir" value="doc"/>
 
     <!-- Folder where the compiled binaries should be placed -->
-    <property name="bin.dir" value="bin" />
+    <property name="bin.dir" value="bin"/>
 
     <!-- Folder where the documentation is collected -->
-    <property name="doc.dir" value="gendoc" />
+    <property name="doc.dir" value="gendoc"/>
 
     <!-- Folder where the generated Java documentation should be placed -->
-    <property name="apidoc.dir" value="${doc.dir}/api" />
+    <property name="apidoc.dir" value="${doc.dir}/api"/>
 
     <!-- Folder where the generated Java documentation should be placed -->
-    <property name="htmldoc.dir" value="${doc.dir}/html" />
+    <property name="htmldoc.dir" value="${doc.dir}/html"/>
 
     <!-- Folder to hold packed library and documantation ready to be distriuted to users -->
-    <property name="dist.dir" value="dist" />
+    <property name="dist.dir" value="dist"/>
 
 
     <target name="help" depends=""
@@ -83,7 +83,7 @@
         <input message="Would you like to build and pack the project?"
                validargs="y,n"
                defaultvalue="y"
-               addproperty="choice" />
+               addproperty="choice"/>
         <condition property="abort">
             <equals arg1="n" arg2="${choice}"/>
         </condition>
@@ -96,14 +96,14 @@
     <target name="compile" depends=""
             description="Compile the source code from ${src.dir} into ${bin.dir}">
 
-        <delete dir="${bin.dir}" />
-        <mkdir dir="${bin.dir}" />
+        <delete dir="${bin.dir}"/>
+        <mkdir dir="${bin.dir}"/>
         <javac srcdir="${src.dir}"
                destdir="${bin.dir}"
                source="${java.source.version}"
                target="${java.target.version}"
                bootclasspath="${java.bootstrap.classpath}"
-               includeAntRuntime="no" >
+               includeAntRuntime="no">
             <compilerarg value="-Xlint:unchecked"/>
         </javac>
 
@@ -113,18 +113,18 @@
     <target name="compile.res" depends=""
             description="Compile the resources from ${ressrc.dir} into ${res.dir}">
 
-        <property name="restmp.dir" value="${res.dir}-tmp" />
-        <mkdir dir="${restmp.dir}" />
+        <property name="restmp.dir" value="${res.dir}-tmp"/>
+        <mkdir dir="${restmp.dir}"/>
         <native2ascii encoding="utf-8"
                       src="${ressrc.dir}"
                       dest="${restmp.dir}"
-                      includes="**/*" />
+                      includes="**/*"/>
         <fixcrlf srcdir="${restmp.dir}"
-                 eol="lf" />
+                 eol="lf"/>
         <copy todir="${res.dir}">
-            <fileset dir="${restmp.dir}" />
+            <fileset dir="${restmp.dir}"/>
         </copy>
-        <delete dir="${restmp.dir}" />
+        <delete dir="${restmp.dir}"/>
 
     </target>
 
@@ -134,7 +134,7 @@
 
         <!-- Copy resources -->
         <copy todir="${bin.dir}">
-            <fileset dir="${res.dir}" />
+            <fileset dir="${res.dir}"/>
         </copy>
 
         <!-- Add attributes to the manifest -->
@@ -153,7 +153,7 @@
     <target name="generate.apidoc" depends=""
             description="Generate the api documentation into ${apidoc.dir}">
 
-        <mkdir dir="${apidoc.dir}" />
+        <mkdir dir="${apidoc.dir}"/>
         <javadoc sourcepath="${src.dir}"
                  destdir="${apidoc.dir}"
                  windowtitle="Svetovid-Lib API">
@@ -168,7 +168,7 @@
             description="Compile markdown documentation into HTML">
 
         <!-- Prepare the destination folder -->
-        <mkdir dir="${htmldoc.dir}" />
+        <mkdir dir="${htmldoc.dir}"/>
 
         <!-- Copy (almost) everything -->
         <copy todir="${htmldoc.dir}"
@@ -248,7 +248,7 @@
             <arg value="--title-prefix=Svetovid-lib"/>
             <arg value="-o"/>
             <arg value="${htmldoc.genname}"/>
-            <arg value="${htmldoc.singlefile}" />
+            <arg value="${htmldoc.singlefile}"/>
         </exec>
 
     </target>
@@ -294,7 +294,7 @@
                  tab="remove"
                  tablength="4"
                  eof="remove"
-                 fixlast="true" />
+                 fixlast="true"/>
 
     </target>
 
@@ -308,7 +308,7 @@
                  tab="remove"
                  tablength="4"
                  eof="remove"
-                 fixlast="true" />
+                 fixlast="true"/>
 
     </target>
 
@@ -316,10 +316,10 @@
     <target name="clean" depends=""
             description="Clean all build products">
 
-        <delete dir="${bin.dir}" />
-        <delete dir="${apidoc.dir}" />
-        <delete dir="${htmldoc.dir}" />
-        <delete dir="${dist.dir}" />
+        <delete dir="${bin.dir}"/>
+        <delete dir="${apidoc.dir}"/>
+        <delete dir="${htmldoc.dir}"/>
+        <delete dir="${dist.dir}"/>
 
     </target>
 
@@ -336,7 +336,7 @@
                    property="ant-contrib.installed"/>
         <fail unless="ant-contrib.installed"
               message="Ant-Contrib in not installed"/>
-        <taskdef resource="net/sf/antcontrib/antlib.xml" />
+        <taskdef resource="net/sf/antcontrib/antlib.xml"/>
 
     </target>
 
@@ -374,7 +374,7 @@
 -->
 
     <!-- Location of the file holding the version information -->
-    <property name="version.file" value="${res.dir}/version.properties" />
+    <property name="version.file" value="${res.dir}/version.properties"/>
 
 
     <!-- This target is only run if the 'version' property is undefined -->
