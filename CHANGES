@@ -1,3 +1,23 @@
+Changes from 0.1 to 0.2
+=======================
+
+Changes that could break compatibility:
+---------------------------------------
+
+* Renamed all writeXxx() methods to printXxx() to be interchangable with
+  standard Java IO library.
+
+Other changes:
+--------------
+
+* The library is now Java 1.7 compliant.
+
+* All files now use UTF-8 encoding.
+
+* Added HTML documentation
+
+
+
 Changes from 0.0 to 0.1
 =======================
 
