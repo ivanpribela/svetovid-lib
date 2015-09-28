@@ -1,0 +1,27 @@
+Changes from 0.0 to 0.1
+=======================
+
+New features:
+-------------
+
+* Library for simplifying textual input and output.
+
+* Support for time measurement.
+
+* Support for running any method or class, even without main() a method.
+
+* Shorthand access to IO library from default package.
+
+* Dialogs library for display of multilingual dialogs.
+
+* Demos for IO library, stopwatch and start.
+
+Other changes:
+--------------
+
+* Added documentation for the libraries.
+
+Fixed bugs:
+-----------
+
+* Null reference problem in IO library.
