@@ -69,13 +69,13 @@ public class AutoCloseDialogFactory extends DefaultDialogFactory {
     }
 
     @Override
-    public void showError(Component component, String text, Throwable ex, int timeout) {
-        super.showError(component, text, ex, timeout);
+    public void showError(Component component, String text, Throwable th, int timeout) {
+        super.showError(component, text, th, timeout);
     }
 
     @Override
-    public void showException(Component component, Throwable ex, int timeout) {
-        super.showException(component, ex, timeout);
+    public void showException(Component component, Throwable th, int timeout) {
+        super.showException(component, th, timeout);
     }
 
     @Override

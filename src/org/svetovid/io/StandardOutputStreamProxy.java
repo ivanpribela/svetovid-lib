@@ -19,6 +19,19 @@ package org.svetovid.io;
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * Instances of this class serve as proxies for the currently set-up standard
+ * output stream (see {@link System#out}). If the standard output stream changes
+ * (through {@link System#setOut(java.io.PrintStream)}) instances of this class
+ * will forward the output to the new stream.
+ *
+ * <p>
+ * All instances of this class are considered equal.
+ *
+ * @author Ivan Pribela
+ *
+ * @see System#out
+ */
 public class StandardOutputStreamProxy extends OutputStream {
 
     public void write(int b) throws IOException {

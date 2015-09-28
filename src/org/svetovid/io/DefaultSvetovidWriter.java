@@ -21,13 +21,55 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 
 import org.svetovid.Svetovid;
 
+/**
+ * This class provides a most commonly used implementation for the
+ * SvetovidWriter interface.
+ *
+ * @author Ivan Pribela
+ *
+ * @see AbstractSvetovidWriter
+ * @see SvetovidWriter
+ */
 public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
 
     protected BufferedWriter writer;
 
+    /**
+     * Creates a new {@link SvetovidWriter} that outputs to the specified
+     * writer.
+     *
+     * @param out
+     *            the writer to use for output
+     */
+    public DefaultSvetovidWriter(BufferedWriter out) {
+        if (out == null) {
+            throw new IllegalArgumentException("out");
+        }
+        writer = out;
+    }
+
+    /**
+     * Creates a new {@link SvetovidWriter} that outputs to the specified
+     * writer.
+     *
+     * @param out
+     *            the writer to use for output
+     */
+    public DefaultSvetovidWriter(Writer out) {
+        writer = new BufferedWriter(out);
+    }
+
+    /**
+     * Creates a new {@link SvetovidWriter} that outputs to the specified output
+     * stream.
+     *
+     * @param out
+     *            the output stream to use for output
+     */
     public DefaultSvetovidWriter(OutputStream out) {
         try {
             writer = new BufferedWriter(new OutputStreamWriter(out, Svetovid.CHARSET_NAME));
@@ -37,24 +79,24 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
     }
 
     @Override
-    public void close() {
+    public void close() throws SvetovidIOException {
         super.close();
         try {
             writer.flush();
         } catch (IOException e) {
-            // Do nothing
+            wrapUpIOException(e);
         }
         try {
             writer.close();
         } catch (IOException e) {
-            // Do nothing
+            wrapUpIOException(e);
         }
     }
 
     @Override
     public void doPrint(String value) throws IOException {
         if (value == null) {
-            value = "null";
+            value = Svetovid.NULL_STRING;
         }
         writer.write(value, 0, value.length());
     }
@@ -65,7 +107,7 @@ public class DefaultSvetovidWriter extends AbstractSvetovidWriter {
     }
 
     @Override
-    public void doWriteln(String value) throws IOException {
+    public void doPrintln(String value) throws IOException {
         doPrint(value);
         writer.newLine();
     }

@@ -142,8 +142,8 @@ public final class Dialogs {
      *            exception which is used to build up the stack-trace
      *            information.
      */
-    public static void showError(Component component, String text, Throwable ex) {
-        factory.showError(component, text, ex);
+    public static void showError(Component component, String text, Throwable th) {
+        factory.showError(component, text, th);
     }
 
     /**
@@ -157,8 +157,8 @@ public final class Dialogs {
      *            exception which is used to build up the stack-trace
      *            information.
      */
-    public static void showException(Component component, Throwable ex) {
-        factory.showException(component, ex);
+    public static void showException(Component component, Throwable th) {
+        factory.showException(component, th);
     }
 
     /**

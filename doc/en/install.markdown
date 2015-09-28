@@ -40,3 +40,39 @@ while Linux machines use:
   `/usr/java/packages/lib/ext`
 
 [More details about the ext folder](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
+
+### Using the library in DrJava editor
+
+To be able to use the library to run programs in the Interactions
+panel of DrJava, the jar file must be added to the editors classpath.
+
+The settings can be found here:
+
+ - Edit->Preferences->ResourceLocations->Extra Classpath->Add 
+
+Alternatively the following line can be added to the `.drjava` file in the
+users home directory to achieve the same effect:
+
+ ```
+ extra.classpath=path/svetovid-lib.jar
+ ```
+
+To use this method administrative privileges are not needed since the
+jar file can located at any directory.
+
+If the library is added system-wide, programs will compile
+successfully in DrJava, but the interactions panel will report an
+error, since DrJava doesn't seem to use this ext directory.
+
+## Testing the installation
+
+To simplify the testing whether the installation was successful, the
+main method of the class `Svetovid` will print out the version of
+the currently installed of the library. 
+
+Running
+
+`java Svetovid`
+
+will either display the version if the current JVM sees the library,
+or will report an error otherwise.

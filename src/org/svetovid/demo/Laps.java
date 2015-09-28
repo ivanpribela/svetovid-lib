@@ -29,7 +29,7 @@ public class Laps {
         // Ask for numbers
         Double number;
         do {
-            number = Svetovid.in.readDoubleBoxed("Enter a number [ENTER to stop]: ");
+            number = Svetovid.in.readDoubleBoxed("Enter a number [ENTER to stop]:");
             stopwatch.lap();
         } while (number != null);
 

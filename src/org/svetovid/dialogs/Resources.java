@@ -43,7 +43,7 @@ public class Resources {
     /**
      * Returns icon from the resource named {@code name}. Icon is cached in
      * internal map for faster access.
-     * 
+     *
      * @param name
      *            name of the icon to be retrieved
      * @return icon associated with specified name

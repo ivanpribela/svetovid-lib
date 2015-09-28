@@ -1,11 +1,38 @@
-<project name="svetovid-lib" default="help">
+<?xml version="1.0"?>
+
+<!--
+   Copyright 2015 Ivan Pribela
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<project name="org.svetovid.lib" default="help">
+
+
+<!--
+    Documentation for this project is written in markdown format.
+    In order to convert the documentation to a more widely supported html
+    format, this build uses Pandoc (http://pandoc.org/) and Ant-Contrib
+    tasks (http://ant-contrib.sourceforge.net/). This software should be
+    installed separately, before initiating the conversion.
+
+    Other targets in this build like, for example, compiling and packaging,
+    do not require any additional software.
+-->
 
 
     <!-- Load the environment variables -->
     <property environment="env" />
-
-    <!-- link to use antcontrib -->
-    <taskdef resource="net/sf/antcontrib/antlib.xml" />
 
     <!-- Version of Java to use -->
     <property name="java.source.version" value="1.7" />
@@ -61,7 +88,7 @@
             <equals arg1="n" arg2="${choice}"/>
         </condition>
         <fail if="abort">Build aborted by user.</fail>
-        <antcall target="pack"/>
+        <antcall target="pack.jar"/>
 
     </target>
 
@@ -76,7 +103,9 @@
                source="${java.source.version}"
                target="${java.target.version}"
                bootclasspath="${java.bootstrap.classpath}"
-               includeAntRuntime="no" />
+               includeAntRuntime="no" >
+            <compilerarg value="-Xlint:unchecked"/>
+        </javac>
 
     </target>
 
@@ -90,7 +119,8 @@
                       src="${ressrc.dir}"
                       dest="${restmp.dir}"
                       includes="**/*" />
-        <fixcrlf srcdir="${restmp.dir}" eol="lf" />
+        <fixcrlf srcdir="${restmp.dir}"
+                 eol="lf" />
         <copy todir="${res.dir}">
             <fileset dir="${restmp.dir}" />
         </copy>
@@ -102,9 +132,20 @@
     <target name="build" depends="compile, compile.res, update-version-string"
             description="Build the library into ${bin.dir}">
 
+        <!-- Copy resources -->
         <copy todir="${bin.dir}">
             <fileset dir="${res.dir}" />
         </copy>
+
+        <!-- Add attributes to the manifest -->
+        <manifest file="${bin.dir}/META-INF/MANIFEST.MF"
+                  mode="update">
+
+            <!-- Who is building this jar? -->
+            <attribute name="Built-By"
+                       value="${user.name}"/>
+
+        </manifest>
 
     </target>
 
@@ -113,8 +154,12 @@
             description="Generate the api documentation into ${apidoc.dir}">
 
         <mkdir dir="${apidoc.dir}" />
-        <javadoc sourcepath="${src.dir}" destdir="${apidoc.dir}"
-                 windowtitle="Svetovid-Lib API">
+        <javadoc windowtitle="Svetovid-Lib API"
+                 destdir="${apidoc.dir}">
+            <packageset dir="${src.dir}" defaultexcludes="yes">
+                <include name="**"/>
+                <exclude name="org/svetovid/demo/**"/>
+            </packageset>
             <link href="${java.api.link}"/>
             <doctitle><![CDATA[<h1>Svetovid-Lib API</h1>]]></doctitle>
         </javadoc>
@@ -122,59 +167,80 @@
     </target>
 
 
-    <target name="generate.htmldoc" depends=""
+    <target name="generate.htmldoc" depends="test.ant-contrib.installed, test.pandoc.installed"
             description="Compile markdown documentation into HTML">
 
+        <!-- Prepare the destination folder -->
         <mkdir dir="${htmldoc.dir}" />
-        <!-- copy (almost) everything -->
-        <copy todir="${htmldoc.dir}" includeemptydirs="true">
+
+        <!-- Copy (almost) everything -->
+        <copy todir="${htmldoc.dir}"
+              includeemptydirs="true">
             <path>
-            <fileset dir='${docsrc.dir}'>
-                <exclude name="**/*.class"/>
-            </fileset>
+                <fileset dir='${docsrc.dir}'>
+                    <exclude name="**/*.class"/>
+                </fileset>
             </path>
         </copy>
-
-        <copy tofile="${doc.dir}/index.html" file="fragments/html/index.html"/>
-        <copy tofile="${doc.dir}/style.css" file="fragments/html/style.css"/>
+        <copy tofile="${doc.dir}/index.html"
+              file="fragments/html/index.html"/>
+        <copy tofile="${doc.dir}/style.css"
+              file="fragments/html/style.css"/>
 
         <!-- transform markdown to html -->
-        <foreach param="htmldoc.singlefile" target="generate.htmldoc.single">
+        <foreach param="htmldoc.singlefile"
+                 target="generate.htmldoc.single">
             <path>
-            <fileset dir='${htmldoc.dir}'>
-                <include name="**/*.md"/>
-                <include name="**/*.markdown"/>
-            </fileset>
+                <fileset dir='${htmldoc.dir}'>
+                    <include name="**/*.md"/>
+                    <include name="**/*.markdown"/>
+                </fileset>
             </path>
         </foreach>
+
         <!-- move README to be index -->
-        <move todir="${htmldoc.dir}" includeemptydirs="false">
+        <move todir="${htmldoc.dir}"
+              includeemptydirs="false">
             <fileset dir="${htmldoc.dir}">
                 <include name="**/README.html"/>
             </fileset>
-            <mapper type="glob" from="*README.html" to="*index.html"/>
+            <mapper type="glob"
+                    from="*README.html"
+                    to="*index.html"/>
         </move>
+
         <!-- fix links between files -->
-        <replaceregexp match='href="(.*)(md|markdown)"' replace='href="\1html"' byline="true">
-            <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
+        <replaceregexp match='href="(.*)(md|markdown)"'
+                       replace='href="\1html"'
+                       byline="true">
+            <fileset dir="${htmldoc.dir}"
+                     includes="**/*.html"/>
         </replaceregexp>
-        <replaceregexp match='href="(.*)README.html"' replace='href="\1index.html"' byline="true">
-            <fileset dir="${htmldoc.dir}" includes="**/*.html"/>
+        <replaceregexp match='href="(.*)README.html"'
+                       replace='href="\1index.html"'
+                       byline="true">
+            <fileset dir="${htmldoc.dir}"
+                     includes="**/*.html"/>
         </replaceregexp>
+
     </target>
 
     <target name="generate.htmldoc.single">
     <!-- helper task for a single markdown file conversion -->
+
         <property name="htmldoc.singlefile" value="README.md"/>
         <dirname property="htmldoc.currentdir" file="${htmldoc.singlefile}"/>
-        <property name="htmldoc.css" relative="true" 
-            location="${doc.dir}/style.css" basedir="${htmldoc.currentdir}"/>
+        <property name="htmldoc.css"
+                  relative="true"
+                  location="${doc.dir}/style.css"
+                  basedir="${htmldoc.currentdir}"/>
         <propertyregex property="htmldoc.genname"
-            regexp="\.(md|markdown)$"
-            replace=".html"
-            input="${htmldoc.singlefile}"/>
+                       regexp="\.(md|markdown)$"
+                       replace=".html"
+                       input="${htmldoc.singlefile}"/>
             <echo message="${htmldoc.genname}"/>
-        <exec executable="pandoc" failifexecutionfails="false">
+        <exec executable="pandoc"
+              failifexecutionfails="false">
             <arg value="--standalone"/>
             <arg value="--include-in-header=fragments/html/htmldoc-headend.html"/>
             <arg value="--include-before-body=fragments/html/htmldoc-start.html"/>
@@ -187,6 +253,7 @@
             <arg value="${htmldoc.genname}"/>
             <arg value="${htmldoc.singlefile}" />
         </exec>
+
     </target>
 
     <target name="pack.jar" depends="build"
@@ -194,20 +261,10 @@
 
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/svetovid-lib.jar"
-             includes="**" >
-            <fileset dir="${bin.dir}"/>
-            <fileset dir="${res.dir}"/>
-            <manifest>
-                <!-- Who is building this jar? -->
-                <attribute name="Built-By" value="${user.name}"/>
-                <!-- Information about the program itself -->
-                <attribute name="Implementation-Vendor"
-                           value="Svetovid dev team"/>
-                <attribute name="Implementation-Title"
-                           value="Svetovid helper library for input and output operations"/>
-                <attribute name="Implementation-Version"
-                           value="${version}"/>
-            </manifest>
+             includes="**"
+             manifest="${bin.dir}/META-INF/MANIFEST.MF">
+            <fileset dir="${bin.dir}"
+                     excludes="org/svetovid/demo/"/>
         </jar>
 
     </target>
@@ -218,7 +275,8 @@
 
         <mkdir dir="${dist.dir}"/>
         <zip destfile="${dist.dir}/svetovid-docs.zip">
-            <zipfileset dir="${doc.dir}" prefix="svetovid-doc"/>
+            <zipfileset dir="${doc.dir}"
+                        prefix="svetovid-doc"/>
         </zip>
 
     </target>
@@ -269,9 +327,54 @@
     </target>
 
 
-    <!--
-        Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
-    -->
+<!--
+    Check whether required dependancies are installed
+-->
+
+
+    <target name="test.ant-contrib.installed" depends=""
+            description="Checks whether Ant-Contrib is installed">
+
+        <available resource="net/sf/antcontrib/antlib.xml"
+                   property="ant-contrib.installed"/>
+        <fail unless="ant-contrib.installed"
+              message="Ant-Contrib in not installed"/>
+        <taskdef resource="net/sf/antcontrib/antlib.xml" />
+
+    </target>
+
+    <target name="test.pandoc.installed" depends=""
+            description="Checks whether Pandoc is installed">
+
+        <exec executable="pandoc"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="pandoc.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="pandoc.installed"
+              message="Pandoc in not installed"/>
+
+    </target>
+
+    <target name="test.git.installed" depends=""
+            description="Checks whether Git is installed">
+
+        <exec executable="git"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="git.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="git.installed"
+              message="Git in not installed"/>
+
+    </target>
+
+
+<!--
+    Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
+-->
 
     <!-- Location of the file holding the version information -->
     <property name="version.file" value="${res.dir}/version.properties" />
@@ -281,12 +384,15 @@
     <target name="update-version-string" unless="version"
             description="Get a new version string using git describe if possible">
 
+        <!-- Try to acquire a version using 'git describe' -->
         <echo message="Updating version string..."/>
-        <exec executable="git" outputproperty="version"
+        <exec executable="git"
+              outputproperty="version"
               failifexecutionfails="false">
             <arg value="describe"/>
         </exec>
         <antcall target="-store-version-string"/>
+
         <!-- Ensure version is defined even if git was not available -->
         <property file="${version.file}"/>
 
@@ -298,18 +404,16 @@
 
         <echo message="version=${version}"/>
         <propertyfile file="${version.file}">
-            <entry key="version" value="${version}"/>
+            <entry key="version"
+                   value="${version}"/>
         </propertyfile>
-        <exec executable="git" failifexecutionfails="false">
+        <exec executable="git"
+              failifexecutionfails="false">
             <arg value="update-index"/>
             <arg value="--assume-unchanged"/>
             <arg value="${version.file}"/>
         </exec>
 
     </target>
-
-    <!-- jedit specific flags; needs to be the first or the last 10 lines
-    :noTabs=true:
-    -->
 
 </project>

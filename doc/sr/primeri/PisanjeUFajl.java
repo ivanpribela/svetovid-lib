@@ -1,4 +1,4 @@
-/** 
+/**
  * Ovaj primer demonstrira pisanje u novi fajl. Ako fajl ne postoji bice
  * napravljen, a ako fajl postoji bice zamenjen sa ovim sadrzajem. Na kraju
  * rada programa ce u fajlu sa imenom "novi.txt" biti upisana dva reda.

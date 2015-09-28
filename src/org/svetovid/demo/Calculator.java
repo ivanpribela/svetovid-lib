@@ -30,6 +30,7 @@ public class Calculator {
         throw new RuntimeException("Missing an argument");
     }
 
+    @SuppressWarnings("unused")
     private double add(double a, double b) {
         return a + b;
     }

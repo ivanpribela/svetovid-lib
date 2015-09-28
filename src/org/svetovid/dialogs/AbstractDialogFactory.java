@@ -196,11 +196,11 @@ public abstract class AbstractDialogFactory implements DialogFactory {
     }
 
     @Override
-    public void showError(Component component, String text, Throwable ex) {
-        showError(component, text, ex, defaultAutoCloseTimeout);
+    public void showError(Component component, String text, Throwable th) {
+        showError(component, text, th, defaultAutoCloseTimeout);
     }
 
-    protected void showError(Component component, String text, Throwable ex, int timeout) {
+    protected void showError(Component component, String text, Throwable th, int timeout) {
         JOptionPane pane = new JOptionPane(text, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION, errorIcon);
         pane.setOptions(okWithDetailsOptions);
         pane.setInitialValue(okWithDetailsOptions[0]);
@@ -209,17 +209,17 @@ public abstract class AbstractDialogFactory implements DialogFactory {
         Object selected = pane.getValue();
         destroyDialog(dialog, pane);
         if (okWithDetailsOptions[1].equals(selected)) {
-            showException(component, ex);
+            showException(component, th);
         }
     }
 
     @Override
-    public void showException(Component component, Throwable ex) {
-        showException(component, ex, defaultAutoCloseTimeout);
+    public void showException(Component component, Throwable th) {
+        showException(component, th, defaultAutoCloseTimeout);
     }
 
-    protected void showException(Component component, Throwable ex, int timeout) {
-        String message = constructStackTrace(ex);
+    protected void showException(Component component, Throwable th, int timeout) {
+        String message = constructStackTrace(th);
         JOptionPane pane = new JOptionPane(message, JOptionPane.ERROR_MESSAGE, JOptionPane.DEFAULT_OPTION, exceptionIcon);
         pane.setOptions(okOptions);
         pane.setInitialValue(okOptions[0]);

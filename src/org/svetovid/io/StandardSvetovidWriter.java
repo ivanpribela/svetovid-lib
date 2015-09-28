@@ -16,8 +16,20 @@
 
 package org.svetovid.io;
 
+/**
+ * This class provides an implementation of the {@link SvetovidWriter} interface
+ * that writes all the output to the "standard" output (see {@link System#out}).
+ *
+ * @author Ivan Pribela
+ *
+ * @see System#out
+ * @see SvetovidWriter
+ */
 public class StandardSvetovidWriter extends DefaultSvetovidWriter {
 
+    /**
+     * Creates a new writer that writes all the output to the "standard" output.
+     */
     public StandardSvetovidWriter() {
         super(new StandardOutputStreamProxy());
         autoFlush = true;

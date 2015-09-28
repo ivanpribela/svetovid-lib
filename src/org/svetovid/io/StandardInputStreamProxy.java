@@ -19,6 +19,19 @@ package org.svetovid.io;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Instances of this class serve as proxies for the currently set-up standard
+ * input stream (see {@link System#in}). If the standard input stream changes
+ * (through {@link System#setIn(java.io.InputStream)}) instances of this class
+ * will request the input from the new stream.
+ *
+ * <p>
+ * All instances of this class are considered equal.
+ *
+ * @author Ivan Pribela
+ *
+ * @see System#in
+ */
 public class StandardInputStreamProxy extends InputStream {
 
     public int read() throws IOException {

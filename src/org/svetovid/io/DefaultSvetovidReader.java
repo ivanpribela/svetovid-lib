@@ -20,14 +20,57 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 
 import org.svetovid.Svetovid;
 
+/**
+ * This class provides a most commonly used implementation for the
+ * SvetovidReader interface.
+ *
+ * @author Ivan Pribela
+ *
+ * @see AbstractSvetovidReader
+ * @see SvetovidReader
+ */
 public class DefaultSvetovidReader extends AbstractSvetovidReader {
 
     protected BufferedReader reader;
 
+    /**
+     * Creates a new {@link SvetovidReader} that uses the specified reader for
+     * input.
+     *
+     * @param in
+     *            the reader to use for input
+     */
+    public DefaultSvetovidReader(BufferedReader in) {
+        if (in == null) {
+            throw new IllegalArgumentException("in");
+        }
+        reader = in;
+    }
+
+    /**
+     * Creates a new {@link SvetovidReader} that uses the specified reader for
+     * input.
+     *
+     * @param in
+     *            the reader to use for input
+     */
+    public DefaultSvetovidReader(Reader in) {
+        reader = new BufferedReader(in);
+    }
+
+    /**
+     * Creates a new {@link SvetovidReader} that uses the specified input stream
+     * for input.
+     *
+     * @param in
+     *            the input stream to use for input
+     */
     public DefaultSvetovidReader(InputStream in) {
         try {
             reader = new BufferedReader(new InputStreamReader(in, Svetovid.CHARSET_NAME));
@@ -36,14 +79,25 @@ public class DefaultSvetovidReader extends AbstractSvetovidReader {
         }
     }
 
+    /**
+     * Creates a new {@link SvetovidReader} that uses the specified string for
+     * input.
+     *
+     * @param in
+     *            the string to use for input
+     */
+    public DefaultSvetovidReader(String in) {
+        reader = new BufferedReader(new StringReader(in));
+    }
+
     @Override
-    public void close() {
+    public void close() throws SvetovidIOException {
         super.close();
         try {
             reader.close();
-            exception = null;
+            lastException = null;
         } catch (IOException e) {
-            exception = e;
+            wrapUpIOException(e);
         }
     }
 

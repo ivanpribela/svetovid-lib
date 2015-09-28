@@ -56,12 +56,12 @@ Build dependencies
 
 The library itself should compile successfully with any java
 compiler version 7 and up, without any additional
-dependencies. It was tested with openjdk7, as well as 
+dependencies. It was tested with openjdk7, as well as
 Oracle's JDK 8.
 
 The ant build has an additional dependency on ant-contrib,
 but only for the generation of the HTML documentation, all
-the other task will perform as expected with a potential 
+the other task will perform as expected with a potential
 warning message.
 
 The conversion of the user documentation from markdown to

@@ -36,7 +36,7 @@ public class LoginData {
 
     /**
      * Creates a new object that holds specified user name and password.
-     * 
+     *
      * @param name user name.
      * @param password password.
      */
