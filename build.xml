@@ -129,7 +129,7 @@
     </target>
 
 
-    <target name="build" depends="compile, compile.res, update-version-string"
+    <target name="build" depends="compile, compile.res"
             description="Build the library into ${bin.dir}">
 
         <!-- Copy resources -->
@@ -374,6 +374,8 @@
 
 <!--
     Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
+
+    Use with caution as '--assume-unchanged' interferes with 'git checkout' !!!
 -->
 
     <!-- Location of the file holding the version information -->
