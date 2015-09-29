@@ -375,7 +375,7 @@
 <!--
     Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
 
-    Use with caution as '--assume-unchanged' interferes with 'git checkout' !!!
+    Use with caution as 'assume-unchanged' interferes with 'git checkout' !!!
 -->
 
     <!-- Location of the file holding the version information -->
