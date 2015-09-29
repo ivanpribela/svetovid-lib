@@ -274,7 +274,7 @@
             description="Pack the documentation in a zip file and place it in ${dist.dir}">
 
         <mkdir dir="${dist.dir}"/>
-        <zip destfile="${dist.dir}/svetovid-docs.zip">
+        <zip destfile="${dist.dir}/svetovid-lib-docs.zip">
             <zipfileset dir="${doc.dir}"
                         prefix="svetovid-doc"/>
         </zip>
