@@ -30,6 +30,11 @@ dok je na Linux operativnim sistemima to
 
 [Više detalja o ext direktorijumu](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
 
+**Napomena:** Ako je biblioteka instalirana na sistemskom nivou, ta
+verzija će biti učitana i koristiće se uvek. Ako se pokušaju korisiti
+drugi metodi kao što je navođenje jar-a pri kompajliranju i
+otpakivanje u trenutni direktorijum oni će biti ignorisani.
+
 ### Otpakivanje u trenutni direktorijum
 
 Još jedan jednostavan način da se omogući korišćenje biblioteke u jednom
@@ -40,9 +45,17 @@ direktorijumu, a i kompajliranje se tada obavlja na isti način kao i uvek.
 ### Dodavanje u editor DrJava
 
 Da bi se u editoru DrJava omogućilo kompajliranje i pokretanje
-programa iz panela Interactions, najjednostavnije je eksplicitno dodati
-`svetovid-lib.jar` u `Classpath` editora, ili otpakovati jar u
-trenutni direktorijum kao što je gore navedeno.
+programa iz panela Interactions, neophodno je nekako obavestiti
+editor o postojanju ove dodatne biblioteke.
+
+Najjednostavnija varijanta je nabavljanje verzije editora u kojoj
+je već intergrisana biblioteka "svetovid-lib". Na [sajtu biblioteke](http://svetovid.org/lib/)
+se mogu naći ovako pripremljeni jar fajlovi sa najnovijom stabilnom
+verzijom biblioteke.
+
+Naravno moguće je koristiti i neizmenjeni editor. Tada je potrebno
+eksplicitno dodati `svetovid-lib.jar` u `Classpath` editora, ili
+otpakovati jar u trenutni direktorijum kao što je gore navedeno.
 
 U okviru editora se ovo postiže na sledeći način:
 
@@ -77,3 +90,10 @@ Najjednostavnije se može izvršiti sledećim pozivom:
 Ako je jar dodat negde gde ga JVM vidi, biće ispisana poruka o verziji
 Svetovid biblioteke, a ako nije ispisaće se greška da klasa nije
 nađena.
+
+Prilikom ispisa verzije biće urađena i provera da li postoji novija verzija
+biblioteke i ako ona postoji korisnik će o tome biti obavešten.
+
+Pokretanje `jar` fajla direktno iz nekog grafičkog okruženja (tipično
+dupli klik u nekom upravljaču fajlovima) će otvoriti mali dijalog sa
+ispisom verzije.
