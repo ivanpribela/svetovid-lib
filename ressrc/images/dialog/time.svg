@@ -50,12 +50,14 @@
   <g id="hands"
      fill="hsl(210, 60%, 40%)"
      stroke="none">
+    <use x="0" y="0" xlink:href="#hand"/>
+    <use x="0" y="0" xlink:href="#hand" transform="rotate(120)"/>
   </g>
 
   <g id="face"
      fill="hsl(0, 0%, 100%)">
 
-    <circle cx="0" cy="0" r="2"/>
+    <use x="0" y="0" xlink:href="#center"/>
 
   </g>
 
