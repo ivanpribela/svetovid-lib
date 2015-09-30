@@ -34,6 +34,10 @@
         z"/>
     </symbol>
 
+    <symbol id="center" overflow="visible">
+      <circle cx="0" cy="0" r="2"/>
+    </symbol>
+
   </defs>
 
   <g id="background"
