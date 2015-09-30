@@ -22,6 +22,18 @@
       <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
     </filter>
 
+    <symbol id="hand" overflow="visible">
+      <path d="M 0 0
+        m                                    0.00  -6.00
+        c    0.55   0.00     1.00   0.45     1.00   1.00
+        v                                           4.00
+        c    0.00   0.55    -0.45   1.00    -1.00   1.00
+        c   -0.55   0.00    -1.00  -0.45    -1.00  -1.00
+        v                                          -4.00
+        c    0.00  -0.55     0.45  -1.00     1.00  -1.00
+        z"/>
+    </symbol>
+
   </defs>
 
   <g id="background"
