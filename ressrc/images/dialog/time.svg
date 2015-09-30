@@ -31,7 +31,12 @@
 
   </g>
 
-  <g id="foreground"
+  <g id="hands"
+     fill="hsl(210, 60%, 40%)"
+     stroke="none">
+  </g>
+
+  <g id="face"
      fill="hsl(0, 0%, 100%)">
 
     <circle cx="0" cy="0" r="2"/>
