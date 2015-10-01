@@ -32,8 +32,11 @@
 
   </g>
 
-  <g id="foreground">
+  <g id="foreground"
+     fill="none"
+     stroke="hsl(0, 0%, 70%)">
 
+    <path d="M 8 -8 c 8 -8 8 8 12 0"/>
 
   </g>
 
