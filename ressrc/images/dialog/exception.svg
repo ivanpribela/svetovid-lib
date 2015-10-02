@@ -36,7 +36,7 @@
      fill="none"
      stroke="hsl(0, 0%, 70%)">
 
-    <path d="M 8 -8 c 8 -8 8 8 12 0"/>
+    <path d="M 8 -8 c 8 -8 12 8 0 16"/>
 
   </g>
 
@@ -45,7 +45,7 @@
      stroke="hsl( 0, 60%, 50%)"
      stroke-width="1.5">
 
-    <circle cx="20" cy="-8" r="2.5"/>
+    <circle cx="8" cy="8" r="2.5"/>
 
   </g>
 
