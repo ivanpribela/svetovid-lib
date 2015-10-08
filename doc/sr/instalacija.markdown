@@ -1,5 +1,6 @@
 # Instalacija Svetovid-lib biblioteke
 
+
 ## Konfigurisanje
 
 Budući da biblioteka nije deo standardne Java Virtualne Mašine,
@@ -9,6 +10,7 @@ i dodatne napomene za editor *DrJava* i *Eclipse*, a na kraju je
 naveden i jednostavan način za testiranje da li je biblioteka
 adekvatno instalirana.
 
+
 ### Eksplicitno navodjenje jar-a pri kompajliranju
 
 Najjednostavniji način da se omogući korišćenje biblioteke je staviti
@@ -16,6 +18,7 @@ odgovarajući "jar" fajl u radni direktorijum i pri kompajliranju ga
 dodati u putanju klasa:
 
 `javac -cp svetovid-lib.jar Program.java`
+
 
 ### Dodavanje na sistemskom nivou u JVM
 
@@ -39,12 +42,14 @@ verzija će biti učitana i koristiće se uvek. Ako se pokušaju korisiti
 drugi metodi kao što je navođenje jar-a pri kompajliranju i
 otpakivanje u trenutni direktorijum oni će biti ignorisani.
 
+
 ### Otpakivanje u trenutni direktorijum
 
 Još jedan jednostavan način da se omogući korišćenje biblioteke u jednom
 direktorijumu je da se otpakuju svi njeni fajlovi u taj direktorijum.
 Ovo je nešto što je uvek moguće ukoliko imamo prava pisanja u tom
 direktorijumu, a i kompajliranje se tada obavlja na isti način kao i uvek.
+
 
 ### Dodavanje u editor *DrJava*
 
@@ -82,12 +87,13 @@ koriste Svetovid-lib će se kompajlirati uspešno u editoru, ali panel
 Interactions će prijavljivati grešku, pošto DrJava, nažalost, ne uzima u
 obzir deljeni ext direktorijum pri pokretanju.
 
+
 ### Dodavanje u *Eclipse* razvojno okruženje
 
 Korišćenje biblioteke u okviru razvojnog okruženja Eclipse bi trebalo
 da funkcioniše bez ikakvih dodatnih podešavanja ako je biblioteka
-instalirana na nivou sistema, međutim nekad su ipak potrebne dodatne
-intervencije.
+instalirana na nivou sistema. Alternativno se biblioteka može dodati u
+`classpath` pojedinačnog projekta.
 
 Ukoliko okruženje prijavljuje greške da ne može da nađe klasu Svetovid
 (ili neku drugu iz biblioteke) potrebno je naterati ga da osveži svoj
