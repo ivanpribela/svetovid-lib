@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import java.awt.GraphicsEnvironment;
 import java.util.List;
 
 import org.svetovid.dialogs.AutoCloseDialogFactory;
@@ -247,7 +248,7 @@ public class Svetovid {
         Svetovid.out.println("Svetovid: " + myVersion);
 
         // Show dialog if there is no console
-        if (System.console() == null) {
+        if (System.console() == null && !GraphicsEnvironment.isHeadless()) {
             Dialogs.showInformation(null, "Svetovid: " + myVersion);
         }
 
