@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     id="icon"
+     width="48px" height="48px"
+     viewBox="-23 -23 48 48"
+
+     fill=  "hsl(210,  60%,  50%)"
+     stroke="hsl(210,  60%,  40%)"
+     stroke-width="2"
+     stroke-linecap="round"
+     stroke-linejoin="round">
+
+  <defs>
+
+    <filter id="shadow" color-interpolation-filters="sRGB">
+      <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
+      <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>
+      <feGaussianBlur result="blur" in="cut-out" stdDeviation="1"/>
+      <feOffset       result="offset" dx="1" dy="1"/>
+      <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
+    </filter>
+
+    <symbol id="dot" overflow="visible">
+      <path d="M 0 0
+        m                                   -1.00  -4.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                           2.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                          -2.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
+    <symbol id="line" overflow="visible">
+      <path d="M 0 0
+        m                                   -1.00 -10.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          14.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                         -14.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
+  </defs>
+
+  <g id="background"
+     filter="url(#shadow)">
+
+    <circle cx="0" cy="0" r="20"/>
+
+  </g>
+
+  <g id="foreground"
+     fill="hsl(0, 0%, 100%)">
+
+    <use x="0" y="-12" xlink:href="#dot"/>
+    <use x="0" y="6" xlink:href="#line"/>
+
+  </g>
+
+</svg>
