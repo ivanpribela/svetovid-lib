@@ -23,9 +23,11 @@ error output.
 How to install and use
 ----------------------
 
-The easiest way to use the library is to copy the jar file to the `lib/ext/`
-folder of the installed JRE or JDK. Another way is to add all the files to the
-working folder or to the classpath. For more details take a look at the
+The easiest way to use the library is to copy the jar file to the
+`lib/ext/` folder of the installed JRE or JDK. There is also a system
+wide `lib/ext` folder that can be used. Another way is to add all the
+files to the working folder or to the classpath. For more details and
+notes about some specific editors and IDEs take a look at the
 [documentation folder](doc).
 
 For usage information checkout the [documentation folder](doc). Some usage
@@ -50,22 +52,25 @@ Build dependencies
 ------------------
 
 * Java compiler version 7 and up
-* ant
-* ant-contrib for HTML documentation generation
-* pandoc for HTML documentation generation
+* `ant` for the supplied build files.
+* `ant-contrib` for HTML documentation generation
+* `pandoc` for HTML documentation generation
 
 The library itself should compile successfully with any java
 compiler version 7 and up, without any additional
 dependencies. It was tested with openjdk7, as well as
 Oracle's JDK 8.
 
-The ant build has an additional dependency on ant-contrib,
-but only for the generation of the HTML documentation, all
-the other task will perform as expected with a potential
-warning message.
+There is a supplied `build.xml` file for `ant`, but the library can
+also be compiled directly without any additional tools, or using
+alternative tools.
 
-The conversion of the user documentation from markdown to
-HTML is done with the "pandoc" software, which should be
-installed on the system and accessable from the system PATH.
+The ant build has an additional dependency on `ant-contrib`, but only
+for the generation of the HTML documentation, all the other task will
+perform as expected with a potential warning message.
 
-[Pandoc website](http://johnmacfarlane.net/pandoc/index.html)
+The conversion of the user documentation from markdown to HTML is done
+with the `pandoc` software, which should be installed on the system
+and accessable from the system PATH. For more information about the
+software and instalation options check out [Pandoc
+website](http://johnmacfarlane.net/pandoc/index.html)
