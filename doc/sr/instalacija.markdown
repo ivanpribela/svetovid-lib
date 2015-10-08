@@ -3,7 +3,11 @@
 ## Konfigurisanje
 
 Budući da biblioteka nije deo standardne Java Virtualne Mašine,
-neophodno je nekako uputiti kompajler da je koristi.
+neophodno je nekako uputiti kompajler da je koristi. Dalje je navedeno
+nekoliko načina da se biblioteka koristi direktno sa kompajlerom, kao
+i dodatne napomene za editor *DrJava* i *Eclipse*, a na kraju je
+naveden i jednostavan način za testiranje da li je biblioteka
+adekvatno instalirana.
 
 ### Eksplicitno navodjenje jar-a pri kompajliranju
 
@@ -42,7 +46,7 @@ direktorijumu je da se otpakuju svi njeni fajlovi u taj direktorijum.
 Ovo je nešto što je uvek moguće ukoliko imamo prava pisanja u tom
 direktorijumu, a i kompajliranje se tada obavlja na isti način kao i uvek.
 
-### Dodavanje u editor DrJava
+### Dodavanje u editor *DrJava*
 
 Da bi se u editoru DrJava omogućilo kompajliranje i pokretanje
 programa iz panela Interactions, neophodno je nekako obavestiti
