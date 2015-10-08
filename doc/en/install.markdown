@@ -1,15 +1,10 @@
 # Svetovid-lib Installation
 
 Since the library is not a part of the standard Java Virtual Machine
-it is necessary to direct the compiler to use it.
-
-### Unpacking into the current directory
-
-The simplest way to enable the usage of Svetovid in programs is to
-extract all the class files into the current directory. This is also
-very convenient since it doesn't need any administrative or elevated
-privileges on the computer and it therefore always applicable.
-
+it is necessary to direct the compiler to use it. Following are
+several ways to use the library directly with a java compiler, notes
+about it's usage in the editors DrJava and Eclipse, as well as a
+simple way to test if the installation was successful.
 
 ### Adding the `jar` explicitly to the compilation
 
@@ -41,10 +36,27 @@ while Linux machines use:
 
 [More details about the ext folder](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
 
-### Using the library in DrJava editor
+
+### Unpacking into the current directory
+
+The simplest way to enable the usage of Svetovid in programs is to
+extract all the class files into the current directory. This is also
+very convenient since it doesn't need any administrative or elevated
+privileges on the computer and it therefore always applicable.
+
+
+### Using the library in *DrJava* editor
 
 To be able to use the library to run programs in the Interactions
 panel of DrJava, the jar file must be added to the editors classpath.
+
+The simplest way to achieve this is to obrain a modified version of
+the editor that has *svetovid/lib* already integrated in it. Jar
+files with the latest stable version of the library are available
+on [the official website](http://svetovid.org/lib).
+
+Of course it is possible to use an unmodified editor and to configure
+it adequately by hand.
 
 The settings can be found here:
 
@@ -63,6 +75,42 @@ jar file can located at any directory.
 If the library is added system-wide, programs will compile
 successfully in DrJava, but the interactions panel will report an
 error, since DrJava doesn't seem to use this ext directory.
+
+
+### Using the library with the *Eclipse* IDE
+
+Using the library in Eclipse should work without additional
+konfiguration if the library was already added to the adequate
+JDK/JRE. Alternatively the library can be added to the classpath of a
+specific project.
+
+However, sometimes there is a need for additional interventions, since
+the IDE will be reporting errors that the class Svetovid (or some
+other from the library) can not be found, or can not be used.
+
+The root of the problem seems to be that Eclipse is caching the list
+of libraries when detecting Java Virtual Machines. This can lead to a
+confusing situation where the library is listed in the side panel in
+the classpath, while not being actually used by the internal compiler.
+
+There are several methods that can help with this problem, listed
+below from the simplest.
+
+- open `project->properties->java build path->libraries` and
+explicitly add the jar for the library. This is of course a project
+specific setting.
+
+- in the same menu there is an option to remove the currently used JRE,
+which should then be added back with "Add library"->"Add system JRE".
+This is a project specific option as well, but it can also refresh
+the main list of libraries.
+
+- open `Winow->preferences->java->installed JREs`, find the
+problematic JRE, remember it's location, remove it from the list, add
+it back again with the "Search" options using the previously
+remembered location. This should be a reliable method of refreshing
+the libraries for a JRE/JDK.
+
 
 ## Testing the installation
 

@@ -9,4 +9,5 @@ which can be quite hard for novice programmers.
 The documentation is split into separate files that cover certain
 topics:
 
-[Installation](install.markdown)
+[Installation (JDK, DrJava, Eclipse), testing the
+install](install.markdown)
