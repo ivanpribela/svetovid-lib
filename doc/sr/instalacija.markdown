@@ -78,6 +78,40 @@ koriste Svetovid-lib će se kompajlirati uspešno u editoru, ali panel
 Interactions će prijavljivati grešku, pošto DrJava, nažalost, ne uzima u
 obzir deljeni ext direktorijum pri pokretanju.
 
+### Dodavanje u *Eclipse* razvojno okruženje
+
+Korišćenje biblioteke u okviru razvojnog okruženja Eclipse bi trebalo
+da funkcioniše bez ikakvih dodatnih podešavanja ako je biblioteka
+instalirana na nivou sistema, međutim nekad su ipak potrebne dodatne
+intervencije.
+
+Ukoliko okruženje prijavljuje greške da ne može da nađe klasu Svetovid
+(ili neku drugu iz biblioteke) potrebno je naterati ga da osveži svoj
+spisak biblioteka. Naime čini se da Eclipse pri dodavanju Java
+virtuelnih mašina zapamti sve bibilioteke koje su bile na raspolaganju
+da ne bi svaki put ponovo tražio. Zbog ovoga može da dođe do situacija
+da se biblioteka `svetovid-lib` čak i nalazi u spisku biblioteka koje
+Eclipse izlistava sa strane, a da se ne koristi od strane ugrađenog
+kompajlera.
+
+Postoji nekoliko metoda koji mogu ovo popraviti, izlistane su od
+najjednostavnijih do složenijih.
+
+- otvoriti `project->properties->java build path->libraries` i tu
+eksplicitno dodati odgovarajući jar. Ovaj metod naravno radi samo
+za pojedinačan projekat.
+
+- slično se u istom meniju može ukloniti JRE koji je već prisutan
+("remove") i potom odabrati opcije "Add library"->"Add system JRE", te
+ponovo odaberati odgovarajući JRE. Ovo je isto na nivou projekta, ali
+može osvežiti i glavni spisak biblioteka.
+
+- otvoriti `Winow->preferences->java->installed JREs` naći trenutni
+problematično prepoznati JRE, zapamtiti njegovu lokaciju, obrisati ga
+sa spiska, a nakon toga ga ponovo dodati sa "search" koristeći
+prethodno zapamćenu lokaciju. Ovo bi trebalo da sigurno osveži sve
+bibilotetke vezane za konkretni JRE.
+
 ## Testiranje instalacije
 
 Za jednostavno testiranje da li je bibloteka ispravno instalirana i da
