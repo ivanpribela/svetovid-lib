@@ -13,9 +13,11 @@
 *.tar.gz
 *.tgz
 
-# Backups
+# Backups & temporary
 *~
 *.bak
+*.tmp
+/.tmp
 
 # Windows specific
 Thumbs.db

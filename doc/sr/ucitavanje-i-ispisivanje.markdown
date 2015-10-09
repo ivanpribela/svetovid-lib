@@ -24,12 +24,21 @@ korisniku:
     Svetovid.out.println("Zbir je:", a + b);
 
 Prilikom učitavanja podataka potrebno je koristiti `read` metod koji odgovara
-tipu podataka koji se traži od korisnika. Na primer `readLong` za long integer,
-`readBool` za boolean, i sl.
+tipu podataka koji se traži od korisnika. Na primer
+
+ - `readInt` za `int` (cele brojeve)
+ - `readDouble` za realne brojeve duple preciznosti
+ - `readBool` za `boolean`,
+ - `readLong` za `longint` (celi brojevi u većem opsegu vrednosti),
 
 
-Prilikom ispisivanja ovo nije potrebno, pošto postoji po jedan `print` metod za
-svaki od osnovnih tipova podataka.
+Za tip `String` (niz znakova) se najčešće koristi sledeći metod:
+
+    String ceoRed = Svetovid.in.readLine();
+
+Prilikom ispisivanja nije potrebno uzimati tip podatka za ime metoda,
+pošto postoji po jedan `print` metod za svaki od osnovnih tipova
+podataka.
 
 Analogne komande za učitavanje i ispisivanje se mogu naći u okviru klase
 `System`, a mogu se koristiti naizmenično sa onima iz klase `Svetovid` bez

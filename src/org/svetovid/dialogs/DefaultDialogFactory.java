@@ -16,6 +16,7 @@
 
 package org.svetovid.dialogs;
 
+import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.util.Locale;
@@ -31,7 +32,7 @@ public class DefaultDialogFactory extends AbstractDialogFactory {
     }
 
     public DefaultDialogFactory(Locale locale) {
-        this(locale, Toolkit.getDefaultToolkit().getSystemClipboard());
+        this(locale, GraphicsEnvironment.isHeadless() ? null : Toolkit.getDefaultToolkit().getSystemClipboard());
     }
 
     public DefaultDialogFactory(Locale locale, Clipboard clipboard) {
