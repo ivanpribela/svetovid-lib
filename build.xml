@@ -26,6 +26,11 @@
     tasks (http://ant-contrib.sourceforge.net/). This software should be
     installed separately, before initiating the conversion.
 
+    Icons for the library are realized as vector svg images.
+    In order to convert these svg files to a more usable png icons, this build
+    uses Inkscape (http://inkscape.org/) which should be installed separately,
+    before initiating the conversion.
+
     Other targets in this build like, for example, compiling and packaging,
     do not require any additional software.
 -->
