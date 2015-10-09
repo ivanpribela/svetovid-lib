@@ -1,3 +1,18 @@
+Changes from 0.3 to 0.4
+=======================
+
+Changes:
+--------
+
+* Replaced icons for dialogs with new custom created ones.
+
+Fixed bugs:
+-----------
+
+* Unexpected headless exceptions when running in headless environments.
+
+
+
 Changes from 0.2 to 0.3
 =======================
 
