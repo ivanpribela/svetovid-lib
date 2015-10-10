@@ -179,7 +179,13 @@
     </target>
 
 
-    <target name="build" depends="compile, compile.res"
+    <target name="compile" depends="compile.src, compile.res"
+            description="Compile the source code and resources">
+
+    </target>
+
+
+    <target name="build" depends="compile"
             description="Build the library into ${bin.dir}">
 
         <!-- Copy resources -->
