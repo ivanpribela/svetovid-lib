@@ -141,7 +141,7 @@
     </target>
 
 
-    <target name="compile.res.images" depends=""
+    <target name="compile.res.images" depends="test.inkscape.installed"
             description="Convert svg to png images from ${ressrc.dir} into ${res.dir}">
 
         <property name="tmpresimg.dir" value="${tmp.dir}/res/images"/>
@@ -411,6 +411,20 @@
         </exec>
         <fail unless="pandoc.installed"
               message="Pandoc in not installed"/>
+
+    </target>
+
+    <target name="test.inkscape.installed" depends=""
+            description="Checks whether Inkscape is installed">
+
+        <exec executable="inkscape"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="inkscape.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="inkscape.installed"
+              message="Inkscape in not installed"/>
 
     </target>
 
