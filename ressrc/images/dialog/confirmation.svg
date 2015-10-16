@@ -22,6 +22,16 @@
       <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
     </filter>
 
+    <symbol id="bg-shield" overflow="visible">
+      <path d="M 0 0
+        m                                    0.00 -20.00
+        c   11.00   0.00    20.00   1.00    20.00  12.00
+        c    0.00  11.00    -9.00  28.00   -20.00  28.00
+        c  -11.00   0.00   -20.00 -17.00   -20.00 -28.00
+        c    0.00 -11.00     9.00 -12.00    20.00 -12.00
+        z"/>
+    </symbol>
+
     <symbol id="tick-mark" overflow="visible" transform="rotate(45)">
       <path d="M 0 0
         m                                    3.00 -14.00
@@ -45,14 +55,14 @@
   <g id="background"
      filter="url(#shadow)">
 
-    <circle cx="0" cy="0" r="20"/>
+    <use cx="0" cy="0" xlink:href="#bg-shield"/>
 
   </g>
 
   <g id="foreground"
      fill="hsl(0, 0%, 100%)">
 
-    <use x="0" y="0" xlink:href="#tick-mark"/>
+    <use x="1" y="-3" xlink:href="#tick-mark"/>
 
   </g>
 
