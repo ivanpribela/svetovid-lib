@@ -22,6 +22,20 @@
       <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
     </filter>
 
+    <symbol id="bg-rect" overflow="visible">
+      <path d="M 0 0
+        m                                  -17.00 -20.00
+        h                                   34.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          34.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                  -34.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                         -34.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z"/>
+    </symbol>
+
     <symbol id="question-mark" overflow="visible">
       <path d="M 0 0
         m                                    0.00 -10.00
@@ -66,7 +80,7 @@
   <g id="background"
      filter="url(#shadow)">
 
-    <circle cx="0" cy="0" r="20"/>
+    <use cx="0" cy="0" xlink:href="#bg-rect"/>
 
   </g>
 
