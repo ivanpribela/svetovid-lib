@@ -19,6 +19,10 @@ dodati u putanju klasa:
 
 `javac -cp svetovid-lib.jar Program.java`
 
+Slično je potrebno navoditi jar i pri pokretanju programa:
+
+`java -cp svetovid-lib.jar Program`
+
 
 ### Otpakivanje u trenutni direktorijum
 
@@ -30,6 +34,62 @@ direktorijumu, a i kompajliranje se tada obavlja na isti način kao i uvek.
 Mana ovog pristupa je što se "zagađuje" radno okruženje izvornim
 fajlovima koji nisu striktno deo trenutnog programa, ali je za neka
 brza isprobavanja funkcionalno rešenje.
+
+
+### Dodavanje u `CLASSPATH`
+
+Java koristi sistemsku promenljivu `CLASSPATH` da nalazi sve
+biblioteke.  Ona se može promeniti za trenutnog korisnika, ili za sve
+korisnike. Ukoliko se u ovaj spisak doda putanja do "jar" fajla, tada
+će svi pozivi i za kompajliranje i za pokretanje Java programa
+koristiti ovu biblioteku kad je potrebno. U suštini je ekvivaletno sa
+gore pomenutim metodom koji koristi `-cp` parametar, odnosno efekat je
+kao da se uvek navodi i ova biblioteka.
+
+Ova opcija je jako dobra jer nije neophodno pojedinačno nameštanje
+različitih editora da koriste biblioteku.
+
+Preporučujemo traženje adekvatnih uputstva za korisnikov operativni
+sistem za detalje kako se ovo može najbolje uraditi.
+
+Takođe preporučujemo da se biblioteka drži na nekom stalnom i logičnom
+mestu, na primer direktno u korenu korisničkog foldera, ili u nekom
+podfolderu tipa `lib`.
+
+
+### Podešavanje editora *Geany*
+
+Editor Geany ima podršku za kompajliranje Java fajlova koja je aktivna
+čim se otvori neki fajl sa `.java` ekstenzijom. Podrazumevano se
+koristi već instalirana Java, tj alati `java` i `javac`. Ukoliko u
+njima već nekako nije podešeno da se koristi biblioteka (npr preko
+`CLASSPATH`), moguće je modifikovati pozive da koriste `-cp` parametar
+kao što je već ranije opisano.
+
+Za promene kako se radi sa Java fajlovima potrebno je otvoriti odgovarajući
+konfiguracioni fajl:
+
+- meni `Tools->Configuration Files->Filetype configuration->Programming Languages->filetypes.java`
+
+- na kraju fajla postoje dve stavke, jedna za kompajliranje, a druga
+za pokretanje, potrebno je u obe dodati putanju do biblioteke.
+
+Na primer, ako smo pod Linux-om i bibloteka je u korisničkom "home"
+folderu (tipično `/home/korisnik/`), prepraviti komande ovako nekako:
+
+```
+compiler=javac -cp .:$HOME/svetovid-lib.jar "%f"
+run_cmd=java -cp .:$HOME/svetovid-lib.jar "%e"
+```
+
+Slično, ako smo pod Windows-om i ostavili smo fajl u svom korisničkom
+folderu (tipično `C:\Users\korisnik\`) onda komande treba da su ovako
+nešto
+
+```
+compiler=javac -cp .;%HOMEPATH%/svetovid-lib.jar "%f"
+run_cmd=java -cp .;%HOMEPATH%/svetovid-lib.jar "%e"
+```
 
 
 ### Dodavanje u *Eclipse* razvojno okruženje
