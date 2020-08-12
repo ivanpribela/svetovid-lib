@@ -43,7 +43,7 @@ public class StandardSvetovidReader extends DefaultSvetovidReader {
         super(new StandardInputStreamProxy());
     }
 
-    protected boolean readFromNewLine = false;
+    protected boolean readFromNewLine = System.getProperty("svetovid.readFromNewLine") != null;
 
     /**
      * Returns the indicator whether this reader will read input data from a new
