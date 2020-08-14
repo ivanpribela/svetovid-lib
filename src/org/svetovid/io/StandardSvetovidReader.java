@@ -43,7 +43,7 @@ public class StandardSvetovidReader extends DefaultSvetovidReader {
         super(new StandardInputStreamProxy());
     }
 
-    protected boolean readFromNewLine = false;
+    protected boolean readFromNewLine = System.getProperty("svetovid.readFromNewLine") != null;
 
     /**
      * Returns the indicator whether this reader will read input data from a new
@@ -833,6 +833,33 @@ public class StandardSvetovidReader extends DefaultSvetovidReader {
     public String readLine(String prompt) throws SvetovidIOException {
         prompt(prompt);
         return readLine();
+    }
+
+    /**
+	 * Reads a line of text and returns it as a string. Before reading any data the
+	 * specified prompt message is displayed to the user on the "standard" output
+	 * using {@link Svetovid#out}. If an empty string is read, the
+	 * {@code defaultValue} is returned.
+	 *
+	 * @param prompt
+	 *            the message to prompt to the user
+	 * @param defaultValue
+	 *            the value to return if nothing is entered
+	 *
+	 * @return A {@code String} containing the contents of the line, not including
+	 *         any line-termination characters, null if the end of the source has
+	 *         been reached, or {@code defaultValue} if the line was empty.
+	 *
+	 * @throws SvetovidIOException
+	 *             if an error occurred during the operation.
+	 */
+    public String readLine(String prompt, String defaultValue) throws SvetovidIOException {
+        prompt(prompt);
+        String value = readLine();
+        if (value != null && value.isEmpty()) {
+        	value = defaultValue;
+        }
+        return value;
     }
 
     /**

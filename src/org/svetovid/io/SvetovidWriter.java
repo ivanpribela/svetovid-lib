@@ -16,6 +16,8 @@
 
 package org.svetovid.io;
 
+import java.io.Closeable;
+
 import org.svetovid.SvetovidFormatException;
 
 /**
@@ -25,7 +27,7 @@ import org.svetovid.SvetovidFormatException;
  * throwing is turned off, if necessary, the last raised exception can be
  * retrieved using {@link #getLastException()} method.
  */
-public interface SvetovidWriter {
+public interface SvetovidWriter extends Closeable {
 
     /**
      * Returns the currently used whitespace. This whitespace is written by
