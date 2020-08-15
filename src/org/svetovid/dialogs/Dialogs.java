@@ -339,6 +339,8 @@ public final class Dialogs {
      *            title of the dialog
      * @param icon
      *            icon to display on the dialog
+     * @param <T>
+     *            type of dialog content
      *
      * @return The object retrieved from the content component if user answered
      *         {@code ok}; {@code null} otherwise.

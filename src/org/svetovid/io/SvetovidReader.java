@@ -16,6 +16,7 @@
 
 package org.svetovid.io;
 
+import java.io.Closeable;
 import java.util.regex.Pattern;
 
 import org.svetovid.SvetovidFormatException;
@@ -27,7 +28,7 @@ import org.svetovid.SvetovidFormatException;
  * returning default values on any errors. If necessary, the last raised
  * exception can be retrieved using {@link #getLastException()} method.
  */
-public interface SvetovidReader {
+public interface SvetovidReader extends Closeable {
 
     /**
      * Returns the currently used pattern for recognizing whitespace. This

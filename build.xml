@@ -75,7 +75,7 @@
 
         <echo>You should specify the task to be executed:</echo>
         <echo/>
-        <echo>  compile          - Compile the source code into '${bin.dir}'</echo>
+        <echo>  compile.src      - Compile the source code into '${bin.dir}'</echo>
         <echo>  compile.res      - Compile the resources into '${res.dir}'</echo>
         <echo>  build            - Build the library into '${bin.dir}'</echo>
         <echo>  generate.apidoc  - Generate the API documentation into '${apidoc.dir}'</echo>
@@ -101,8 +101,8 @@
     </target>
 
 
-    <target name="compile" depends=""
-            description="Compile the source code from ${src.dir} into ${bin.dir}">
+    <target name="compile.src.java" depends=""
+            description="Compile the Java source code from ${src.dir} into ${bin.dir}">
 
         <mkdir dir="${bin.dir}"/>
         <javac srcdir="${src.dir}"
@@ -113,6 +113,12 @@
                includeAntRuntime="no">
             <compilerarg value="-Xlint:unchecked"/>
         </javac>
+
+    </target>
+
+
+    <target name="compile.src" depends="compile.src.java"
+            description="Compile the source code from ${src.dir} into ${bin.dir}">
 
     </target>
 
@@ -135,7 +141,7 @@
     </target>
 
 
-    <target name="compile.res.images" depends=""
+    <target name="compile.res.images" depends="test.inkscape.installed"
             description="Convert svg to png images from ${ressrc.dir} into ${res.dir}">
 
         <property name="tmpresimg.dir" value="${tmp.dir}/res/images"/>
@@ -173,7 +179,13 @@
     </target>
 
 
-    <target name="build" depends="compile, compile.res"
+    <target name="compile" depends="compile.src, compile.res"
+            description="Compile the source code and resources">
+
+    </target>
+
+
+    <target name="build" depends="compile"
             description="Build the library into ${bin.dir}">
 
         <!-- Copy resources -->
@@ -399,6 +411,20 @@
         </exec>
         <fail unless="pandoc.installed"
               message="Pandoc in not installed"/>
+
+    </target>
+
+    <target name="test.inkscape.installed" depends=""
+            description="Checks whether Inkscape is installed">
+
+        <exec executable="inkscape"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="inkscape.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="inkscape.installed"
+              message="Inkscape in not installed"/>
 
     </target>
 

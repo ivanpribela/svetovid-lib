@@ -1,3 +1,20 @@
+Changes from 0.4 to 0.4.1
+=========================
+
+Changes:
+--------
+
+* SvetovidReader and SvetovidWriter can now be used in try-with-resources
+* IO library, added readLine() method to StandardSvetovidReader
+  that prompts some text and returns a default value on empty string
+* IO library, when searching for files to open, they are first searched
+  relative to the calling class, and only if not found relative to the
+  working direcctory
+* IO library, Option readFromNewLine is now setup according to the environment
+  variable 'svetovid.readFromNewLine'
+
+
+
 Changes from 0.3 to 0.4
 =======================
 

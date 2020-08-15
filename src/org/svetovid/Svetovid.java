@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -151,6 +152,19 @@ public final class Svetovid {
                 } catch (IOException e) {
                     ex = e;
                 }
+            }
+            if (reader == null) {
+				try {
+	            	StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+	            	String className = stack[stack.length - 1].getClassName();
+	            	InputStream stream = Class.forName(className).getResourceAsStream(source);
+	            	if (stream != null) {
+	            		reader = new DefaultSvetovidReader(stream);
+	            		readers.put(source, reader);
+	            	}
+				} catch (ClassNotFoundException e) {
+					// Don't report, try other options
+				}
             }
             if (reader == null) {
                 try {
