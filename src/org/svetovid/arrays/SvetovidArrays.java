@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class SvetovidArrays {
@@ -1049,7 +1050,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static boolean[] remove(boolean[] array, int... indices) throws IndexOutOfBoundsException {
+    public static boolean[] removeIndices(boolean[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1073,7 +1074,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static byte[] remove(byte[] array, int... indices) throws IndexOutOfBoundsException {
+    public static byte[] removeIndices(byte[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1097,7 +1098,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static short[] remove(short[] array, int... indices) throws IndexOutOfBoundsException {
+    public static short[] removeIndices(short[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1121,7 +1122,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static int[] remove(int[] array, int... indices) throws IndexOutOfBoundsException {
+    public static int[] removeIndices(int[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1145,7 +1146,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static long[] remove(long[] array, int... indices) throws IndexOutOfBoundsException {
+    public static long[] removeIndices(long[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1169,7 +1170,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static float[] remove(float[] array, int... indices) throws IndexOutOfBoundsException {
+    public static float[] removeIndices(float[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1193,7 +1194,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static double[] remove(double[] array, int... indices) throws IndexOutOfBoundsException {
+    public static double[] removeIndices(double[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1217,7 +1218,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static char[] remove(char[] array, int... indices) throws IndexOutOfBoundsException {
+    public static char[] removeIndices(char[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1241,7 +1242,7 @@ public class SvetovidArrays {
         return result;
     }
 
-    public static <T> T[] remove(T[] array, int... indices) throws IndexOutOfBoundsException {
+    public static <T> T[] removeIndices(T[] array, int... indices) throws IndexOutOfBoundsException {
         if (array == null) {
             return null;
         }
@@ -1449,7 +1450,207 @@ public class SvetovidArrays {
         return result;
     }
 
-    // TODO remove(array, elements...)
+	public static boolean[] remove(boolean[] array, boolean... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        boolean[] temp = new boolean[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        boolean[] result = new boolean[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static byte[] remove(byte[] array, byte... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        byte[] temp = new byte[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        byte[] result = new byte[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static short[] remove(short[] array, short... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        short[] temp = new short[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        short[] result = new short[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static int[] remove(int[] array, int... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        int[] temp = new int[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        int[] result = new int[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static long[] remove(long[] array, long... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        long[] temp = new long[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        long[] result = new long[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static float[] remove(float[] array, float... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        float[] temp = new float[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        float[] result = new float[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static double[] remove(double[] array, double... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        double[] temp = new double[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        double[] result = new double[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+	public static char[] remove(char[] array, char... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        char[] temp = new char[length];
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || array[i] == elements[k];
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        char[] result = new char[j];
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
+
+    @SafeVarargs
+	public static <T> T[] remove(T[] array, T... elements) throws IndexOutOfBoundsException {
+        if (array == null) {
+            return null;
+        }
+        int length = array.length;
+        Class<?> type = array.getClass().getComponentType();
+        @SuppressWarnings("unchecked")
+        T[] temp = (T[]) Array.newInstance(type, length);
+        int j = 0;
+        for (int i = 0; i < length; i++) {
+        	boolean remove = false;
+        	for (int k = 0; k < elements.length; k++) {
+        		remove = remove || Objects.equals(array[i], elements[k]);
+        	}
+        	if (!remove) {
+        		temp[j] = array[i];
+                j++;
+            }
+        }
+        @SuppressWarnings("unchecked")
+        T[] result = (T[]) Array.newInstance(type, j);
+        System.arraycopy(temp, 0, result, 0, j);
+        return result;
+    }
 
     public static boolean[] resize(boolean[] array, int size, boolean value) throws IndexOutOfBoundsException {
         if (array == null) {
