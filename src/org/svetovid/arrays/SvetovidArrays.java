@@ -487,7 +487,8 @@ public class SvetovidArrays {
         return items;
     }
 
-    public static <T> T[] toArray(Collection<T> items) {
+    @SuppressWarnings("unchecked")
+	public static <T> T[] toArray(Collection<T> items) {
         if (items == null) {
             return null;
         }
@@ -535,7 +536,8 @@ public class SvetovidArrays {
         return Arrays.asList(boxed);
     }
 
-    public static <T> List<T> toList(T... items) {
+    @SafeVarargs
+	public static <T> List<T> toList(T... items) {
         return Arrays.asList(items);
     }
 
