@@ -21,14 +21,18 @@ import org.svetovid.util.JsonHelper;
 
 public class WeatherConditions {
 
+    public static final String API_KEY = "";
+
     public static void main(String[] args) {
 
         // Ask for location
         String location = Svetovid.in.readLine("Display current weather conditions for:");
 
         // Get the weather info from Open Weather Map
+        // WARNING: since 2016 openweathermap.org requires an API key,
+        // please register and acquire one, then set it in the API_KEY constant 
         String uri = "http://api.openweathermap.org/data/2.5/weather?"
-                + "units=metric&mode.json&q=" + location;
+                + "units=metric&mode.json&q=" + location + "&appid=" + API_KEY;
         Object data = Svetovid.in(uri).readObject();
 
         // Were there errors?
