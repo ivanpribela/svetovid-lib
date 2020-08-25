@@ -6,8 +6,8 @@
      width="20px" height="20px"
      viewBox="-9 -9 20 20"
 
-     fill=  "hsl(  0,   0%,  90%)"
-     stroke="hsl(210,  60%,  40%)"
+     fill=  "#EBEBEB"
+     stroke="#175C91"
      stroke-width="1"
      stroke-linecap="round"
      stroke-linejoin="round">
@@ -52,14 +52,14 @@
   </g>
 
   <g id="hands"
-     fill="hsl(210, 60%, 40%)"
+     fill="#175C91"
      stroke="none">
     <use x="0" y="0" xlink:href="#hand"/>
     <use x="0" y="0" xlink:href="#hand" transform="rotate(120)"/>
   </g>
 
   <g id="face"
-     fill="hsl(0, 0%, 100%)">
+     fill="#FFFFFF">
 
     <use x="0" y="0" xlink:href="#center"/>
 

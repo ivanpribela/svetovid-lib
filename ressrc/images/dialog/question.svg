@@ -6,8 +6,8 @@
      width="48px" height="48px"
      viewBox="-23 -23 48 48"
 
-     fill=  "hsl( 60,  60%,  50%)"
-     stroke="hsl( 60,  60%,  40%)"
+     fill=  "#FFE640"
+     stroke="#CCB833"
      stroke-width="2"
      stroke-linecap="round"
      stroke-linejoin="round">
@@ -85,7 +85,7 @@
   </g>
 
   <g id="foreground"
-     fill="hsl(0, 0%, 100%)">
+     fill="#FFFFFF">
 
     <use x="0" y="-6" xlink:href="#question-mark"/>
     <use x="0" y="12" xlink:href="#dot"/>

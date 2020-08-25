@@ -6,8 +6,8 @@
      width="48px" height="48px"
      viewBox="-23 -23 48 48"
 
-     fill=  "hsl(  0,   0%,  20%)"
-     stroke="hsl(  0,   0%,   0%)"
+     fill=  "#3D3D3D"
+     stroke="#000000"
      stroke-width="2"
      stroke-linecap="round"
      stroke-linejoin="round">
@@ -34,7 +34,7 @@
 
   <g id="fuse"
      fill="none"
-     stroke="hsl(0, 0%, 70%)">
+     stroke="#C2C2C2">
 
     <path d="M 8 -8 c 8 -8 12 8 0 16"/>
 
@@ -42,8 +42,8 @@
 
 <!--
   <g id="fire"
-     fill=  "hsl(60, 60%, 50%)"
-     stroke="hsl( 0, 60%, 50%)"
+     fill=  "#FF9900"
+     stroke="#F24033"
      stroke-width="1.5">
 
     <circle cx="8" cy="8" r="2.5"/>

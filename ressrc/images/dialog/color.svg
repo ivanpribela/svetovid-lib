@@ -6,8 +6,8 @@
      width="48px" height="48px"
      viewBox="-23 -23 48 48"
 
-     fill=  "hsl(  0,   0%,  75%)"
-     stroke="hsl(  0,   0%,  50%)"
+     fill=  "#999999"
+     stroke="#7A7A7A"
      stroke-width="2"
      stroke-linecap="round"
      stroke-linejoin="round">
@@ -55,14 +55,15 @@
 
   </g>
 
-  <g id="foreground">
+  <g id="foreground"
+     fill="#FFFFFF">
 
-    <circle fill="hsl(0, 60%, 70%)" cx="0" cy="-12" r="4"/>
-    <circle fill="hsl(60, 60%, 70%)" cx="10.4" cy="-6" r="4"/>
-    <circle fill="hsl(120, 60%, 70%)" cx="10.4" cy="6" r="4"/>
-    <circle fill="hsl(180, 60%, 70%)" cx="0" cy="12" r="4"/>
-    <circle fill="hsl(240, 60%, 70%)" cx="-10.4" cy="6" r="4"/>
-    <circle fill="hsl(300, 60%, 70%)" cx="-10.4" cy="-6" r="4"/>
+    <circle fill="#F78C85" cx="0" cy="-12" r="4"/>
+    <circle fill="#FFF08C" cx="10.4" cy="-6" r="4"/>
+    <circle fill="#94D194" cx="10.4" cy="6" r="4"/>
+    <circle fill="#66D9E8" cx="0" cy="12" r="4"/>
+    <circle fill="#8C94D1" cx="-10.4" cy="6" r="4"/>
+    <circle fill="#C27DD1" cx="-10.4" cy="-6" r="4"/>
 
   </g>
 
