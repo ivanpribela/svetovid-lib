@@ -58,12 +58,12 @@
   <g id="foreground"
      fill="#FFFFFF">
 
-    <circle fill="#F78C85" cx="0" cy="-12" r="4"/>
-    <circle fill="#FFF08C" cx="10.4" cy="-6" r="4"/>
-    <circle fill="#94D194" cx="10.4" cy="6" r="4"/>
-    <circle fill="#66D9E8" cx="0" cy="12" r="4"/>
-    <circle fill="#8C94D1" cx="-10.4" cy="6" r="4"/>
-    <circle fill="#C27DD1" cx="-10.4" cy="-6" r="4"/>
+    <circle fill="#D94F5F" cx="0" cy="-12" r="4"/>
+    <circle fill="#FFD05B" cx="10.4" cy="-6" r="4"/>
+    <circle fill="#55B685" cx="10.4" cy="6" r="4"/>
+    <circle fill="#58AFBA" cx="0" cy="12" r="4"/>
+    <circle fill="#5A9FCC" cx="-10.4" cy="6" r="4"/>
+    <circle fill="#AE77BE" cx="-10.4" cy="-6" r="4"/>
 
   </g>
 
