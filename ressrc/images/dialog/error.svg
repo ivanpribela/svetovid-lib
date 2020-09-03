@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     id="icon"
-     width="48px" height="48px"
-     viewBox="-23 -23 48 48"
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     id='icon'
+     width='48px' height='48px'
+     viewBox='-23 -23 48 48'
 
-     fill=  "#C40233"
-     stroke="#9C0C31"
-     stroke-width="2"
-     stroke-linecap="round"
-     stroke-linejoin="round">
+     fill=  '#C40233'
+     stroke='#9C0C31'
+     stroke-width='2'
+     stroke-linecap='round'
+     stroke-linejoin='round'>
 
   <defs>
 
-    <filter id="shadow" color-interpolation-filters="sRGB">
-      <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
-      <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>
-      <feGaussianBlur result="blur" in="cut-out" stdDeviation="1"/>
-      <feOffset       result="offset" dx="1" dy="1"/>
-      <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='1'/>
+      <feOffset       result='offset' dx='1' dy='1'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
     </filter>
 
-    <symbol id="bg-octangle" overflow="visible">
-      <path d="M 0 0
+    <symbol id='bg-octangle' overflow='visible'>
+      <path d='M 0 0
         m                                   -5.50 -20.00
         h                                   11.00
         c    1.65   0.00     3.94   0.94     5.10   2.10
@@ -41,11 +41,11 @@
         c    0.00  -1.65     0.94  -3.94     2.10  -5.10
         l                                    7.30  -7.30
         c    1.16  -1.16     3.45  -2.10     5.10  -2.10
-        z"/>
+        z'/>
     </symbol>
 
-    <symbol id="cross" overflow="visible" transform="rotate(45)">
-      <path d="M 0 0
+    <symbol id='cross' overflow='visible' transform='rotate(45)'>
+      <path d='M 0 0
         m                                   -1.00 -16.00
         h                                    2.00
         c    1.65   0.00     3.00   1.35     3.00   3.00
@@ -71,22 +71,22 @@
         c    1.65   0.00     3.00  -1.35     3.00  -3.00
         v                                          -6.00
         c    0.00  -1.65     1.35  -3.00     3.00  -3.00
-        z"/>
+        z'/>
     </symbol>
 
   </defs>
 
-  <g id="background"
-     filter="url(#shadow)">
+  <g id='background'
+     filter='url(#shadow)'>
 
-    <use cx="0" cy="0" xlink:href="#bg-octangle"/>
+    <use cx='0' cy='0' xlink:href='#bg-octangle'/>
 
   </g>
 
-  <g id="foreground"
-     fill="#FFFFFF">
+  <g id='foreground'
+     fill='#FFFFFF'>
 
-    <use x="0" y="0" xlink:href="#cross"/>
+    <use x='0' y='0' xlink:href='#cross'/>
 
   </g>
 

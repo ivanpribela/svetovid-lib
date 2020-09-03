@@ -1,43 +1,43 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     id="icons"
-     x="0px" y="0px" width="384px" height="240px">
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     id='icons'
+     x='0px' y='0px' width='384px' height='240px'>
 
-  <rect x="0" y="0" width="384" height="240" fill="#ffffcc" stroke="#cccccc" stroke-width="1"/>
+  <rect x='0' y='0' width='384' height='240' fill='#ffffcc' stroke='#cccccc' stroke-width='1'/>
 
   <image x='24' y='24' width='48' height='48' xlink:href='message.svg' />
-  <text x="48" y="84" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Message</text>
+  <text x='48' y='84' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Message</text>
   <image x='96' y='24' width='48' height='48' xlink:href='information.svg' />
-  <text x="120" y="84" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Information</text>
+  <text x='120' y='84' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Information</text>
   <image x='168' y='24' width='48' height='48' xlink:href='warning.svg' />
-  <text x="192" y="84" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Warning</text>
+  <text x='192' y='84' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Warning</text>
   <image x='240' y='24' width='48' height='48' xlink:href='error.svg' />
-  <text x="264" y="84" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Error</text>
+  <text x='264' y='84' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Error</text>
   <image x='312' y='24' width='48' height='48' xlink:href='confirmation.svg' />
-  <text x="336" y="84" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Confirmation</text>
+  <text x='336' y='84' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Confirmation</text>
 
   <image x='24' y='96' width='48' height='48' xlink:href='question.svg' />
-  <text x="48" y="156" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Question</text>
+  <text x='48' y='156' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Question</text>
   <image x='96' y='96' width='48' height='48' xlink:href='password.svg' />
-  <text x="120" y="156" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Password</text>
+  <text x='120' y='156' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Password</text>
   <image x='168' y='96' width='48' height='48' xlink:href='login.svg' />
-  <text x="192" y="156" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Login</text>
+  <text x='192' y='156' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Login</text>
   <image x='240' y='96' width='48' height='48' xlink:href='exception.svg' />
-  <text x="264" y="156" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Exception</text>
+  <text x='264' y='156' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Exception</text>
   <image x='326' y='110' width='20' height='20' xlink:href='time.svg' />
-  <text x="336" y="156" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Time</text>
+  <text x='336' y='156' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Time</text>
 
   <image x='24' y='168' width='48' height='48' xlink:href='find.svg' />
-  <text x="48" y="228" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Find</text>
+  <text x='48' y='228' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Find</text>
   <image x='96' y='168' width='48' height='48' xlink:href='replace.svg' />
-  <text x="120" y="228" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Replace</text>
+  <text x='120' y='228' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Replace</text>
   <image x='168' y='168' width='48' height='48' xlink:href='font.svg' />
-  <text x="192" y="228" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Font</text>
+  <text x='192' y='228' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Font</text>
   <image x='240' y='168' width='48' height='48' xlink:href='color.svg' />
-  <text x="264" y="228" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">Color</text>
+  <text x='264' y='228' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>Color</text>
   <image x='312' y='168' width='48' height='48' xlink:href='file.svg' />
-  <text x="336" y="228" text-anchor="middle" font-family="Arial" font-size="12" fill="#cccc88">File</text>
+  <text x='336' y='228' text-anchor='middle' font-family='Arial' font-size='12' fill='#cccc88'>File</text>
 
 </svg>

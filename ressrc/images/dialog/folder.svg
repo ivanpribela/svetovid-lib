@@ -1,29 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     id="icon"
-     width="48px" height="48px"
-     viewBox="-23 -23 48 48"
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     id='icon'
+     width='48px' height='48px'
+     viewBox='-23 -23 48 48'
 
-     fill=  "#999999"
-     stroke="#7A7A7A"
-     stroke-width="2"
-     stroke-linecap="round"
-     stroke-linejoin="round">
+     fill=  '#999999'
+     stroke='#7A7A7A'
+     stroke-width='2'
+     stroke-linecap='round'
+     stroke-linejoin='round'>
 
   <defs>
 
-    <filter id="shadow" color-interpolation-filters="sRGB">
-      <feFlood        result="black" flood-color="hsl(0, 0%, 0%)" flood-opacity="0.5"/>
-      <feComposite    result="cut-out" in="black" in2="SourceGraphic" operator="in"/>
-      <feGaussianBlur result="blur" in="cut-out" stdDeviation="1"/>
-      <feOffset       result="offset" dx="1" dy="1"/>
-      <feComposite    result="final" in="SourceGraphic" in2="offset" operator="over"/>
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='1'/>
+      <feOffset       result='offset' dx='1' dy='1'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
     </filter>
 
-    <symbol id="bg-rect" overflow="visible">
-      <path d="M 0 0
+    <symbol id='bg-rect' overflow='visible'>
+      <path d='M 0 0
         m                                  -17.00 -20.00
         h                                   12.00
         c    1.65   0.00     3.00   1.35     3.00   3.00
@@ -38,20 +38,20 @@
         c    0.00  -1.65     1.35  -3.00     3.00  -3.00
         z
         m                                    1.00  10.00
-        h                                   32.00"/>
+        h                                   32.00'/>
     </symbol>
 
   </defs>
 
-  <g id="background"
-     filter="url(#shadow)">
+  <g id='background'
+     filter='url(#shadow)'>
 
-    <use cx="0" cy="0" xlink:href="#bg-rect"/>
+    <use cx='0' cy='0' xlink:href='#bg-rect'/>
 
   </g>
 
-  <g id="foreground"
-     fill="#FFFFFF">
+  <g id='foreground'
+     fill='#FFFFFF'>
 
 
   </g>
