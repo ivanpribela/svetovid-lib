@@ -1,16 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
      xmlns:xlink='http://www.w3.org/1999/xlink'
-     id='icon'
-     width='48px' height='48px'
-     viewBox='-23 -23 48 48'
-
-     fill=  '#F37715'
-     stroke='#d55f26'
-     stroke-width='2'
-     stroke-linecap='round'
-     stroke-linejoin='round'>
+     width='48px' height='48px' viewBox='-23 -23 48 48' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
 
   <defs>
 
@@ -62,19 +55,8 @@
 
   </defs>
 
-  <g id='background'
-     filter='url(#shadow)'>
-
-    <use cx='0' cy='0' xlink:href='#bg-triangle'/>
-
-  </g>
-
-  <g id='foreground'
-     fill='#FFFFFF'>
-
-    <use x='0' y='-6' xlink:href='#line'/>
-    <use x='0' y='12' xlink:href='#dot'/>
-
-  </g>
+  <use id='background'      fill='#F37715' stroke='#D55F26' stroke-width='2' xlink:href='#bg-triangle' x='0' y= '0' filter='url(#shadow)'/>
+  <use id='foreground-line' fill='#FFFFFF' stroke='#D55F26' stroke-width='2' xlink:href='#line'        x='0' y='-6' />
+  <use id='foreground-dot'  fill='#FFFFFF' stroke='#D55F26' stroke-width='2' xlink:href='#dot'         x='0' y='12' />
 
 </svg>

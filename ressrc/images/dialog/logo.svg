@@ -1,16 +1,9 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-
 <svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
      xmlns:xlink='http://www.w3.org/1999/xlink'
-     id='icon'
-     width='48px' height='48px'
-     viewBox='-23 -23 48 48'
-
-     fill=  '#0088BF'
-     stroke='#166B96'
-     stroke-width='2'
-     stroke-linecap='round'
-     stroke-linejoin='round'>
+     width='48px' height='48px' viewBox='-23 -23 48 48' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
 
   <defs>
 
@@ -67,14 +60,10 @@
     </symbol>
 
   </defs>
-
-  <g id='symbol'
-     filter='url(#shadow)'>
-
-    <use cx='0' cy='0' xlink:href='#top'/>
-    <use cx='0' cy='0' xlink:href='#bottom'/>
-    <use cx='0' cy='0' xlink:href='#center'/>
-
-  </g>
+  <g filter='url(#shadow)'>
+  <use id='foreground-top'    fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#top'    x='0' y='0'/>
+  <use id='foreground-bottom' fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#bottom' x='0' y='0'/>
+  <use id='foreground-center' fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#center' x='0' y='0'/>
+</g>
 
 </svg>
