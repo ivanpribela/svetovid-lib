@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     width='48px' height='48px' viewBox='-23 -23 48 48' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
+
+  <defs>
+
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='1'/>
+      <feOffset       result='offset' dx='1' dy='1'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
+    </filter>
+
+    <symbol id='bg-printer' overflow='visible'>
+      <path d='M 0 0
+        m                                  -17.00  -2.00
+        h                                   34.00
+        a    3.00   3.00     0 0    1        3.00   3.00
+        v                                          16.00
+        a    3.00   3.00     0 0    1       -3.00   3.00
+        h                                  -34.00
+        a    3.00   3.00     0 0    1       -3.00  -3.00
+        v                                         -16.00
+        a    3.00   3.00     0 0    1        3.00  -3.00
+        z'/>
+      <path d='M 0 0
+        m                                  -12.00  15.00
+        h                                   24.00'/>
+    </symbol>
+
+    <symbol id='paper' overflow='visible'>
+      <path d='M 0 0
+        m                                   -7.00 -20.00
+        h                                   14.00
+        a    3.00   3.00     0 0    1        3.00   3.00
+        v                                          16.00
+        a    3.00   3.00     0 0    1       -3.00   3.00
+        h                                  -14.00
+        a    3.00   3.00     0 0    1       -3.00  -3.00
+        v                                         -16.00
+        a    3.00   3.00     0 0    1        3.00  -3.00
+        z'/>
+    </symbol>
+
+  </defs>
+
+  <g filter='url(#shadow)'>
+    <use id='foreground-paper' fill='#FFFFFF' stroke='#7A7A7A' stroke-width='2' xlink:href='#paper'      x='0' y='0'/>
+    <use id='background'       fill='#999999' stroke='#7A7A7A' stroke-width='2' xlink:href='#bg-printer' x='0' y='0'/>
+  </g>
+  <circle id='foreground-button' fill='#FFFFFF' stroke='#7A7A7A' stroke-width='2' xlink:href='#button' cx='15' cy='3' r='2' />
+
+</svg>
+
