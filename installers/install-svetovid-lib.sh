@@ -1,6 +1,6 @@
 #!/bin/sh
 
-url='https://github.com/ivanpribela/svetovid-lib/releases/download/v0.4/svetovid-lib.jar'
+url="http://svetovid.org/lib/svetovid-lib.jar"
 folder='/opt/svetovid-lib'
 file='svetovid-lib.jar'
 config='/etc/environment'
