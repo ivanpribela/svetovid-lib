@@ -1,7 +1,7 @@
 #!/bin/sh
 
 url="http://svetovid.org/lib/svetovid-lib.jar"
-folder='/opt/svetovid-lib'
+folder='/usr/local/lib'
 file='svetovid-lib.jar'
 config='/etc/environment'
 variable='CLASSPATH'

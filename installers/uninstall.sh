@@ -1,6 +1,7 @@
 #!/bin/sh
 
-folder='/opt/svetovid-lib'
+folder='/usr/local/lib'
+file='svetovid-lib.jar'
 config='/etc/environment'
 variable='CLASSPATH'
 
@@ -17,8 +18,16 @@ if [ $? -ne 0 ]; then
   exit
 fi
 
-# Remove the folder
-rm -rf "$folder"
+# Remove the file
+rm -rf "$folder/$file"
+
+if [ $? -e 0 ]; then
+    echo "File $file removed from system"
+else
+    echo "Problem with removing the file $folder/$file"
+fi
+
+
 
 # Unset the class path
 if grep -q "$variable" "$config" 2>/dev/null; then
