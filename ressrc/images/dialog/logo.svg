@@ -60,10 +60,11 @@
     </symbol>
 
   </defs>
+
   <g filter='url(#shadow)'>
-  <use id='foreground-top'    fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#top'    x='0' y='0'/>
-  <use id='foreground-bottom' fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#bottom' x='0' y='0'/>
-  <use id='foreground-center' fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#center' x='0' y='0'/>
-</g>
+    <use id='foreground-top'    fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#top'    x='0' y='0'/>
+    <use id='foreground-bottom' fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#bottom' x='0' y='0'/>
+    <use id='foreground-center' fill='#0088BF' stroke='#166B96' stroke-width='2' xlink:href='#center' x='0' y='0'/>
+  </g>
 
 </svg>
