@@ -24,7 +24,7 @@ import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 
 import org.svetovid.Svetovid;
 
-public class DialogsDemo {
+public class Dialogs {
 
     public static void main(String[] args) {
 
