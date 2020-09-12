@@ -29,7 +29,7 @@
         z'/>
     </symbol>
 
-    <symbol id='key' overflow='visible' transform='rotate(45)'>
+    <symbol id='key' overflow='visible'>
       <path d='M 0 0
         m                                    0.00 -16.00
         c    4.42   0.00     8.00   3.58     8.00   8.00
@@ -56,6 +56,6 @@
   </defs>
 
   <use id='background' fill='#FFD300' stroke='#E9AA1A' stroke-width='2' xlink:href='#bg-rect' x='0' y='0' filter='url(#shadow)'/>
-  <use id='foreground' fill='#FFFFFF' stroke='#E9AA1A' stroke-width='2' xlink:href='#key'     x='0' y='0'/>
+  <use id='foreground' fill='#FFFFFF' stroke='#E9AA1A' stroke-width='2' xlink:href='#key'     x='0' y='0' transform='rotate(45)'/>
 
 </svg>

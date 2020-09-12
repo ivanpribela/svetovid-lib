@@ -37,7 +37,7 @@
         z'/>
     </symbol>
 
-    <symbol id='cross' overflow='visible' transform='rotate(45)'>
+    <symbol id='cross' overflow='visible'>
       <path d='M 0 0
         m                                   -1.00 -16.00
         h                                    2.00
@@ -70,6 +70,6 @@
   </defs>
 
   <use id='background' fill='#C40233' stroke='#9C0C31' stroke-width='2' xlink:href='#bg-octangle' x='0' y='0' filter='url(#shadow)'/>
-  <use id='foreground' fill='#FFFFFF' stroke='#9C0C31' stroke-width='2' xlink:href='#cross'       x='0' y='0'/>
+  <use id='foreground' fill='#FFFFFF' stroke='#9C0C31' stroke-width='2' xlink:href='#cross'       x='0' y='0' transform='rotate(45)'/>
 
 </svg>

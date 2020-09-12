@@ -29,7 +29,7 @@
         z'/>
     </symbol>
 
-    <symbol id='magnifier' overflow='visible' transform='rotate(-45)'>
+    <symbol id='magnifier' overflow='visible'>
       <path d='M 0 0
         m                                    0.00 -18.00
         c    6.63   0.00    12.00   5.37    12.00  12.00
@@ -51,6 +51,6 @@
   </defs>
 
   <use id='background' fill='#FFD300' stroke='#E9AA1A' stroke-width='2' xlink:href='#bg-rect'   x='0' y='0' filter='url(#shadow)'/>
-  <use id='foreground' fill='#FFFFFF' stroke='#E9AA1A' stroke-width='2' xlink:href='#magnifier' x='0' y='0'/>
+  <use id='foreground' fill='#FFFFFF' stroke='#E9AA1A' stroke-width='2' xlink:href='#magnifier' x='0' y='0' transform='rotate(-45)'/>
 
 </svg>
