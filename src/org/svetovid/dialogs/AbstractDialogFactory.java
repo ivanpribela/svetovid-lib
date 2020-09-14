@@ -100,7 +100,6 @@ public abstract class AbstractDialogFactory implements DialogFactory {
     protected Icon dateIcon;
     protected Icon timeIcon;
     protected Icon logoIcon;
-    protected Icon logobwIcon;
 
     protected AbstractDialogFactory(Locale locale, Clipboard clipboard) {
         setLocale(locale);
@@ -155,7 +154,6 @@ public abstract class AbstractDialogFactory implements DialogFactory {
         dateIcon = Resources.getIcon(bundle.getString("icondate"));
         timeIcon = Resources.getIcon(bundle.getString("icontime"));
         logoIcon = Resources.getIcon(bundle.getString("iconlogo"));
-        logobwIcon = Resources.getIcon(bundle.getString("iconlogobw"));
 
     }
 
