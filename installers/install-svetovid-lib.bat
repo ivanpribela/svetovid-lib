@@ -17,7 +17,7 @@ rem Create the folder
 mkdir "%folder%" >nul 2>&1
 
 rem Copy the library
-copy "%file%" "%folder%\%file%" >nul 2>&1
+copy "%~dp0%file%" "%folder%\%file%" >nul 2>&1
 
 rem Set the class path
 setx "%variable%" "%folder%\%file%;." /m >nul 2>&1
