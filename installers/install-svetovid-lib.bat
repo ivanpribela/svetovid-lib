@@ -1,7 +1,7 @@
 @echo off
 setlocal enableextensions
 
-set url=https://github.com/ivanpribela/svetovid-lib/releases/download/v0.4/svetovid-lib.jar
+set url=https://svetovid.org/lib/svetovid-lib.jar
 set folder=%ProgramFiles%\svetovid-lib
 set file=svetovid-lib.jar
 set variable=CLASSPATH
@@ -11,6 +11,11 @@ net session >nul 2>&1
 if errorLevel 1 (
   echo Please run as administrator
   exit /b
+)
+
+if not exist %file% (
+   echo Please download %file% to this folder from %url%
+   exit /b
 )
 
 rem Create the folder
