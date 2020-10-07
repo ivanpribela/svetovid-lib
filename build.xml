@@ -50,6 +50,7 @@
     <property name="res.dir" value="res"/>
     <property name="ressrc.dir" value="ressrc"/>
     <property name="docsrc.dir" value="doc"/>
+    <property name="installer.dir" value="installers"/>
 
     <!-- Folder where the compiled binaries should be placed -->
     <property name="bin.dir" value="bin"/>
@@ -82,6 +83,7 @@
         <echo>  generate.htmldoc - Compile the documentation into '${htmldoc.dir}'</echo>
         <echo>  pack.jar         - Pack binaries in a jar file into '${dist.dir}'</echo>
         <echo>  pack.doc         - Pack documentation in a zip file into '${dist.dir}'</echo>
+        <echo>  pack.install     - Pack binaries, documentation and installers in a zip file into '${dist.dir}'</echo>
         <echo>  pack             - Pack binaries and documentation into '${dist.dir}'</echo>
         <echo>  fix.src          - Fix tabs and line endings in source files</echo>
         <echo>  fix.res          - Fix tabs and line endings in resource sources</echo>
@@ -337,7 +339,18 @@
 
     </target>
 
-    <target name="pack" depends="pack.jar, pack.doc"
+    <target name="pack.install" depends="pack.jar"
+            description="Pack the binaries along with installers and place it in ${dist.dir}">
+
+        <zip destfile="${dist.dir}/svetovid-lib-install.zip">
+          <fileset file="${dist.dir}/svetovid-lib.jar"/>
+          <fileset dir="${installer.dir}"/>
+          <zipfileset dir="${doc.dir}" prefix="docs"/>
+        </zip>
+
+    </target>
+
+    <target name="pack" depends="pack.jar, pack.doc, pack.install"
             description="Pack the biraries and documentation into ${dist.dir}">
 
     </target>
