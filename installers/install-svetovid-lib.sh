@@ -12,14 +12,14 @@ if [ $(id -u) -ne 0 ]; then
   exit
 fi
 
-# Check if curl is available
-curl -V >/dev/null 2>&1
-if [ $? -ne 0 ]; then
-    echo "Curl is not available, can not download svetovid-lib.jar"
-    if [ -f "./$file" ]; then
-	echo "Found $file in current folder, will use that"
-	localfile=1
-    else
+if [ -f "./$file" ]; then
+    echo "Found $file in current folder, will use that"
+    localfile=1
+else
+    # Check if curl is available
+    curl -V >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+	echo "Curl is not available, can not download svetovid-lib.jar"
 	echo "You can either install curl, or put $file in this folder."
 	exit
     fi
@@ -40,12 +40,12 @@ if [ -z $localfile ]; then
     echo "Downloading library from $url"
     curl -fsL "$url" -o "$folder/$file"
     if [ $? -ne 0 ]; then
-	echo "Failed to download Svetovid library"
+	echo "Failed to download Svetovid library; please check url"
 	exit
     fi
 else
-    # move local file
-    mv "./$file" "$folder/$file"
+    # copy local file
+    cp "./$file" "$folder/$file"
     echo "Moved local file $file to $folder"
 fi
 
@@ -57,4 +57,4 @@ else
   echo "$variable=\"$value\"" >> "$config"
 fi
 
-echo "CLASSPATH set to use svetovid-lib; please re-login for the changes to be applied"
+echo "CLASSPATH set to use svetovid-lib; please re-login for the changes to be applied."
