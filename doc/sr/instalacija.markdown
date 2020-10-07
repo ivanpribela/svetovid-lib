@@ -10,6 +10,22 @@ i dodatne napomene za neke editore, a na kraju je naveden i
 jednostavan način za testiranje da li je biblioteka adekvatno
 instalirana.
 
+### Korišćenje skriptova za instalaciju
+
+U okviru arhive na sajtu bi trebalo da se nalazi `jar` fajl koji je
+sama biblioteka, kao i skriptovi koji služe za instaliranje na nekim
+operativnim sistemima. Oni će instalirati biblioteku tako da se može
+koristiti bilo gde na sistemu, i trebalo bi da samo radi u većini
+alata koji služe za pisanje Java programa.
+
+Zainteresovani za detalje kako ovo funkcioniše mogu potražiti niže
+objašnjenja koja se tiču `CLASSPATH`-a.
+
+Neki od kompleksnijih alata, kao što je Eclipse, koji insistiraju na
+korišćenju projekata za pisanje programa često ne koriste sistemska
+podešavanja već su neophodna ručna doterivanja. Za to preporučujemo da
+pogledate sekcije niže.
+
 
 ### Eksplicitno navodjenje jar-a pri kompajliranju
 
@@ -49,12 +65,17 @@ kao da se uvek navodi i ova biblioteka.
 Ova opcija je jako dobra jer nije neophodno pojedinačno nameštanje
 različitih editora da koriste biblioteku.
 
-Preporučujemo traženje adekvatnih uputstva za korisnikov operativni
-sistem za detalje kako se ovo može najbolje uraditi.
+U okviru zipa koji se može skinuti sa sajta su stavljeni skriptovi
+za upravo ovakvu instalaciju, pa se preporučuje njihova upotreba.
 
-Takođe preporučujemo da se biblioteka drži na nekom stalnom i logičnom
-mestu, na primer direktno u korenu korisničkog foldera, ili u nekom
-podfolderu tipa `lib`.
+Naravno, napradni korisnici možda žele da još prilagode kako se
+skriptovi ponašanju. Njima preporučujemo traženje adekvatnih uputstava
+za korisnikov operativni sistem za detalje kako se ovo može najbolje
+uraditi.
+
+Takođe u tom slučaju preporučujemo da se biblioteka drži na nekom
+stalnom i logičnom mestu, na primer direktno u korenu korisničkog
+foldera, ili u nekom podfolderu tipa `lib`.
 
 
 ### Podešavanje editora *Geany*
