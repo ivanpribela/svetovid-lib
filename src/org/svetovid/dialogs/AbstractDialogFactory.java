@@ -557,7 +557,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
         if (!newStackTraceStyle && (common != 0)) {
             b.append("    ");
             MessageFormat formatter = new MessageFormat(bundle.getString("stackTraceMore"), locale);
-            b.append(formatter.format(new Object[]{new Integer(common)}));
+            b.append(formatter.format(new Object[]{ Integer.valueOf(common) }));
             b.append('\n');
         }
         Throwable cause = t.getCause();
@@ -723,7 +723,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
         public void actionPerformed(ActionEvent e) {
             long time = timeout - System.currentTimeMillis();
             if (time > resolution) {
-                label.setText(formatter.format(new Object[]{new Long(time / 1000)}));
+                label.setText(formatter.format(new Object[] { Long.valueOf(time / 1000) }));
             } else {
                 component.setVisible(false);
             }
