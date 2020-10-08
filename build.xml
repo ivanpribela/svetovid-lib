@@ -114,6 +114,7 @@
                bootclasspath="${java.bootstrap.classpath}"
                includeAntRuntime="no">
             <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
         </javac>
 
     </target>
