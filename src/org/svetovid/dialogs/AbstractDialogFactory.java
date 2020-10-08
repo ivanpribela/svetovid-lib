@@ -90,7 +90,16 @@ public abstract class AbstractDialogFactory implements DialogFactory {
     protected Icon passwordIcon;
     protected Icon loginIcon;
     protected Icon exceptionIcon;
+    protected Icon timeoutIcon;
+    protected Icon findIcon;
+    protected Icon replaceIcon;
+    protected Icon fontIcon;
+    protected Icon colorIcon;
+    protected Icon folderIcon;
+    protected Icon fileIcon;
+    protected Icon dateIcon;
     protected Icon timeIcon;
+    protected Icon logoIcon;
 
     protected AbstractDialogFactory(Locale locale, Clipboard clipboard) {
         setLocale(locale);
@@ -135,7 +144,16 @@ public abstract class AbstractDialogFactory implements DialogFactory {
         passwordIcon = Resources.getIcon(bundle.getString("iconpassword"));
         loginIcon = Resources.getIcon(bundle.getString("iconlogin"));
         exceptionIcon = Resources.getIcon(bundle.getString("iconexception"));
+        timeoutIcon = Resources.getIcon(bundle.getString("icontimeout"));
+        findIcon = Resources.getIcon(bundle.getString("iconfind"));
+        replaceIcon = Resources.getIcon(bundle.getString("iconreplace"));
+        fontIcon = Resources.getIcon(bundle.getString("iconfont"));
+        colorIcon = Resources.getIcon(bundle.getString("iconcolor"));
+        folderIcon = Resources.getIcon(bundle.getString("iconfolder"));
+        fileIcon = Resources.getIcon(bundle.getString("iconfile"));
+        dateIcon = Resources.getIcon(bundle.getString("icondate"));
         timeIcon = Resources.getIcon(bundle.getString("icontime"));
+        logoIcon = Resources.getIcon(bundle.getString("iconlogo"));
 
     }
 
@@ -481,7 +499,7 @@ public abstract class AbstractDialogFactory implements DialogFactory {
         if (timeout <= 0) {
             return;
         }
-        JLabel timeoutLabel = new JLabel(timeIcon);
+        JLabel timeoutLabel = new JLabel(timeoutIcon);
         timeoutLabel.setToolTipText(bundle.getString("timeoutTip"));
         try {
             JPanel buttonPanel = (JPanel) pane.getComponent(pane.getComponentCount() - 1);

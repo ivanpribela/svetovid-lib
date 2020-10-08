@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     width='20px' height='20px' viewBox='-9 -9 20 20' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
+
+  <defs>
+
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='0.5'/>
+      <feOffset       result='offset' dx='0.5' dy='0.5'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
+    </filter>
+
+    <symbol id='bg-circle' overflow='visible'>
+      <circle cx='0' cy='0' r='8'/>
+    </symbol>
+
+    <symbol id='hand' overflow='visible'>
+      <path d='M 0 0
+        m                                    0.00  -6.00
+        c    0.55   0.00     1.00   0.45     1.00   1.00
+        v                                           4.00
+        c    0.00   0.55    -0.45   1.00    -1.00   1.00
+        c   -0.55   0.00    -1.00  -0.45    -1.00  -1.00
+        v                                          -4.00
+        c    0.00  -0.55     0.45  -1.00     1.00  -1.00
+        z'/>
+    </symbol>
+
+    <symbol id='center' overflow='visible'>
+      <circle cx='0' cy='0' r='2'/>
+    </symbol>
+
+  </defs>
+
+  <use id='background'         fill='#EBEBEB' stroke='#175C91' stroke-width='1' xlink:href='#bg-circle' x='0' y='0' filter='url(#shadow)' />
+  <use id='foreground-minutes' fill='#175C91' stroke='none'                     xlink:href='#hand'      x='0' y='0'/>
+  <use id='foreground-hours'   fill='#175C91' stroke='none'                     xlink:href='#hand'      x='0' y='0' transform='rotate(120)'/>
+  <use id='foreground-center'  fill='#FFFFFF' stroke='#175C91' stroke-width='1' xlink:href='#center'    x='0' y='0'/>
+
+</svg>
