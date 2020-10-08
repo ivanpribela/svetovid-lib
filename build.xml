@@ -409,7 +409,7 @@
         <available resource="net/sf/antcontrib/antlib.xml"
                    property="ant-contrib.installed"/>
         <fail unless="ant-contrib.installed"
-              message="Ant-Contrib in not installed"/>
+              message="Ant-Contrib is not installed"/>
         <taskdef resource="net/sf/antcontrib/antlib.xml"/>
 
     </target>
@@ -424,7 +424,7 @@
             <arg value="--version"/>
         </exec>
         <fail unless="pandoc.installed"
-              message="Pandoc in not installed"/>
+              message="Pandoc is not installed"/>
 
     </target>
 
@@ -438,7 +438,7 @@
             <arg value="--version"/>
         </exec>
         <fail unless="inkscape.installed"
-              message="Inkscape in not installed"/>
+              message="Inkscape is not installed"/>
 
     </target>
 
@@ -452,7 +452,7 @@
             <arg value="--version"/>
         </exec>
         <fail unless="git.installed"
-              message="Git in not installed"/>
+              message="Git is not installed"/>
 
     </target>
 
