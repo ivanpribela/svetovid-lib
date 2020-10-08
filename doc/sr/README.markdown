@@ -12,7 +12,7 @@ tipovima, kao i rad sa dijalozima.
 
 Dokumentacija je podeljena na više malih fajlova koji se bave određenim temama.
 
-[O instalaciji biblioteke (JDK, DrJava, Eclipse), testiranju instalacije](instalacija.markdown)
+[O instalaciji biblioteke i testiranju instalacije](instalacija.markdown)
 
 [Učitavanje i ispisivanje](ucitavanje-i-ispisivanje.markdown)
 
