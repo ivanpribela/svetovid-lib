@@ -114,6 +114,7 @@
                bootclasspath="${java.bootstrap.classpath}"
                includeAntRuntime="no">
             <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
         </javac>
 
     </target>
@@ -214,10 +215,9 @@
         <mkdir dir="${apidoc.dir}"/>
         <javadoc windowtitle="Svetovid-Lib API"
                  destdir="${apidoc.dir}">
-            <packageset dir="${src.dir}" defaultexcludes="yes">
-                <include name="**"/>
+            <fileset dir="${src.dir}">
                 <exclude name="org/svetovid/demo/**"/>
-            </packageset>
+            </fileset>
             <link href="${java.api.link}"/>
             <doctitle><![CDATA[<h1>Svetovid-Lib API</h1>]]></doctitle>
         </javadoc>
@@ -334,7 +334,7 @@
         <mkdir dir="${dist.dir}"/>
         <zip destfile="${dist.dir}/svetovid-lib-docs.zip">
             <zipfileset dir="${doc.dir}"
-                        prefix="svetovid-doc"/>
+                        prefix="docs"/>
         </zip>
 
     </target>
@@ -408,7 +408,7 @@
         <available resource="net/sf/antcontrib/antlib.xml"
                    property="ant-contrib.installed"/>
         <fail unless="ant-contrib.installed"
-              message="Ant-Contrib in not installed"/>
+              message="Ant-Contrib is not installed"/>
         <taskdef resource="net/sf/antcontrib/antlib.xml"/>
 
     </target>
@@ -423,7 +423,7 @@
             <arg value="--version"/>
         </exec>
         <fail unless="pandoc.installed"
-              message="Pandoc in not installed"/>
+              message="Pandoc is not installed"/>
 
     </target>
 
@@ -437,7 +437,7 @@
             <arg value="--version"/>
         </exec>
         <fail unless="inkscape.installed"
-              message="Inkscape in not installed"/>
+              message="Inkscape is not installed"/>
 
     </target>
 
@@ -451,7 +451,7 @@
             <arg value="--version"/>
         </exec>
         <fail unless="git.installed"
-              message="Git in not installed"/>
+              message="Git is not installed"/>
 
     </target>
 
