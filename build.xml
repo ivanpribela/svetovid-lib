@@ -1,0 +1,505 @@
+<?xml version="1.0"?>
+
+<!--
+   Copyright 2015 Ivan Pribela
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<project name="org.svetovid.lib" default="help">
+
+
+<!--
+    Documentation for this project is written in markdown format.
+    In order to convert the documentation to a more widely supported html
+    format, this build uses Pandoc (http://pandoc.org/) and Ant-Contrib
+    tasks (http://ant-contrib.sourceforge.net/). This software should be
+    installed separately, before initiating the conversion.
+
+    Icons for the library are realized as vector svg images.
+    In order to convert these svg files to a more usable png icons, this build
+    uses Inkscape (http://inkscape.org/) which should be installed separately,
+    before initiating the conversion.
+
+    Other targets in this build like, for example, compiling and packaging,
+    do not require any additional software.
+-->
+
+
+    <!-- Load the environment variables -->
+    <property environment="env"/>
+
+    <!-- Version of Java to use -->
+    <property name="java.source.version" value="1.7"/>
+    <property name="java.target.version" value="1.7"/>
+    <property name="java.bootstrap.classpath" location="${env.JAVA_HOME}/lib/rt.jar"/>
+    <property name="java.api.link" value="http://download.oracle.com/javase/8/docs/api/"/>
+
+    <!-- Folders where the source files reside -->
+    <property name="src.dir" value="src"/>
+    <property name="res.dir" value="res"/>
+    <property name="ressrc.dir" value="ressrc"/>
+    <property name="docsrc.dir" value="doc"/>
+    <property name="installer.dir" value="installers"/>
+
+    <!-- Folder where the compiled binaries should be placed -->
+    <property name="bin.dir" value="bin"/>
+
+    <!-- Folder where the documentation is collected -->
+    <property name="doc.dir" value="gendoc"/>
+
+    <!-- Folder where the generated Java documentation should be placed -->
+    <property name="apidoc.dir" value="${doc.dir}/api"/>
+
+    <!-- Folder where the generated Java documentation should be placed -->
+    <property name="htmldoc.dir" value="${doc.dir}/html"/>
+
+    <!-- Folder to hold packed library and documantation ready to be distriuted to users -->
+    <property name="dist.dir" value="dist"/>
+
+    <!-- Folder to hold temporary files -->
+    <property name="tmp.dir" value=".tmp"/>
+
+
+    <target name="help" depends=""
+            description="Shows the list of supported tasks">
+
+        <echo>You should specify the task to be executed:</echo>
+        <echo/>
+        <echo>  compile.src      - Compile the source code into '${bin.dir}'</echo>
+        <echo>  compile.res      - Compile the resources into '${res.dir}'</echo>
+        <echo>  build            - Build the library into '${bin.dir}'</echo>
+        <echo>  generate.apidoc  - Generate the API documentation into '${apidoc.dir}'</echo>
+        <echo>  generate.htmldoc - Compile the documentation into '${htmldoc.dir}'</echo>
+        <echo>  pack.jar         - Pack binaries in a jar file into '${dist.dir}'</echo>
+        <echo>  pack.doc         - Pack documentation in a zip file into '${dist.dir}'</echo>
+        <echo>  pack.install     - Pack binaries, documentation and installers in a zip file into '${dist.dir}'</echo>
+        <echo>  pack             - Pack binaries and documentation into '${dist.dir}'</echo>
+        <echo>  fix.src          - Fix tabs and line endings in source files</echo>
+        <echo>  fix.res          - Fix tabs and line endings in resource sources</echo>
+        <echo>  clean            - Delete all generated files and folders</echo>
+        <echo/>
+
+        <input message="Would you like to build and pack the project?"
+               validargs="y,n"
+               defaultvalue="y"
+               addproperty="choice"/>
+        <condition property="abort">
+            <equals arg1="n" arg2="${choice}"/>
+        </condition>
+        <fail if="abort">Build aborted by user.</fail>
+        <antcall target="pack.jar"/>
+
+    </target>
+
+
+    <target name="compile.src.java" depends=""
+            description="Compile the Java source code from ${src.dir} into ${bin.dir}">
+
+        <mkdir dir="${bin.dir}"/>
+        <javac srcdir="${src.dir}"
+               destdir="${bin.dir}"
+               source="${java.source.version}"
+               target="${java.target.version}"
+               bootclasspath="${java.bootstrap.classpath}"
+               includeAntRuntime="no">
+            <compilerarg value="-Xlint:unchecked"/>
+            <compilerarg value="-Xlint:deprecation"/>
+        </javac>
+
+    </target>
+
+
+    <target name="compile.src" depends="compile.src.java"
+            description="Compile the source code from ${src.dir} into ${bin.dir}">
+
+    </target>
+
+
+    <target name="compile.res.properties" depends=""
+            description="Compile .properties files from ${ressrc.dir} into ${res.dir}">
+
+        <property name="tmpresprop.dir" value="${tmp.dir}/res/properties"/>
+        <mkdir dir="${tmpresprop.dir}"/>
+        <native2ascii encoding="utf-8"
+                      src="${ressrc.dir}"
+                      dest="${tmpresprop.dir}"
+                      includes="**/*.properties"/>
+        <fixcrlf srcdir="${tmpresprop.dir}"
+                 eol="lf"/>
+        <copy todir="${res.dir}">
+            <fileset dir="${tmpresprop.dir}"/>
+        </copy>
+
+    </target>
+
+
+    <target name="compile.res.images" depends="test.inkscape.installed"
+            description="Convert svg to png images from ${ressrc.dir} into ${res.dir}">
+
+        <property name="tmpresimg.dir" value="${tmp.dir}/res/images"/>
+        <mkdir dir="${tmpresimg.dir}"/>
+        <copy todir="${tmpresimg.dir}">
+            <fileset dir="${ressrc.dir}">
+                <include name="**/*.svg"/>
+            </fileset>
+        </copy>
+        <apply executable="inkscape"
+                dir="${tmpresimg.dir}"
+                dest="${tmpresimg.dir}"
+                relative="yes">
+            <fileset dir="${tmpresimg.dir}">
+                <include name="**/*.svg"/>
+                <exclude name="**/.*.svg"/>
+            </fileset>
+            <arg value="-e"/>
+            <targetfile/>
+            <srcfile/>
+            <mapper type="glob" from="*.svg" to="*.png"/>
+        </apply>
+        <copy todir="${res.dir}">
+            <fileset dir="${tmpresimg.dir}">
+                <include name="**/*.png"/>
+            </fileset>
+        </copy>
+
+    </target>
+
+
+    <target name="compile.res" depends="compile.res.properties, compile.res.images"
+            description="Compile the resources from ${ressrc.dir} into ${res.dir}">
+
+    </target>
+
+
+    <target name="compile" depends="compile.src, compile.res"
+            description="Compile the source code and resources">
+
+    </target>
+
+
+    <target name="build" depends="compile"
+            description="Build the library into ${bin.dir}">
+
+        <!-- Copy resources -->
+        <copy todir="${bin.dir}">
+            <fileset dir="${res.dir}"/>
+        </copy>
+
+        <!-- Add attributes to the manifest -->
+        <manifest file="${bin.dir}/META-INF/MANIFEST.MF"
+                  mode="update">
+
+            <!-- Who is building this jar? -->
+            <attribute name="Built-By"
+                       value="${user.name}"/>
+
+        </manifest>
+
+    </target>
+
+
+    <target name="generate.apidoc" depends=""
+            description="Generate the api documentation into ${apidoc.dir}">
+
+        <mkdir dir="${apidoc.dir}"/>
+        <javadoc windowtitle="Svetovid-Lib API"
+                 destdir="${apidoc.dir}">
+            <fileset dir="${src.dir}">
+                <exclude name="org/svetovid/demo/**"/>
+            </fileset>
+            <link href="${java.api.link}"/>
+            <doctitle><![CDATA[<h1>Svetovid-Lib API</h1>]]></doctitle>
+        </javadoc>
+
+    </target>
+
+
+    <target name="generate.htmldoc" depends="test.ant-contrib.installed, test.pandoc.installed"
+            description="Compile markdown documentation into HTML">
+
+        <!-- Prepare the destination folder -->
+        <mkdir dir="${htmldoc.dir}"/>
+
+        <!-- Copy (almost) everything -->
+        <copy todir="${htmldoc.dir}"
+              includeemptydirs="true">
+            <path>
+                <fileset dir='${docsrc.dir}'>
+                    <exclude name="**/*.class"/>
+                </fileset>
+            </path>
+        </copy>
+        <copy tofile="${doc.dir}/index.html"
+              file="fragments/html/index.html"/>
+        <copy tofile="${doc.dir}/style.css"
+              file="fragments/html/style.css"/>
+
+        <!-- transform markdown to html -->
+        <foreach param="htmldoc.singlefile"
+                 target="generate.htmldoc.single">
+            <path>
+                <fileset dir='${htmldoc.dir}'>
+                    <include name="**/*.md"/>
+                    <include name="**/*.markdown"/>
+                </fileset>
+            </path>
+        </foreach>
+
+        <!-- move README to be index -->
+        <move todir="${htmldoc.dir}"
+              includeemptydirs="false">
+            <fileset dir="${htmldoc.dir}">
+                <include name="**/README.html"/>
+            </fileset>
+            <mapper type="glob"
+                    from="*README.html"
+                    to="*index.html"/>
+        </move>
+
+        <!-- fix links between files -->
+        <replaceregexp match='href="(.*)(md|markdown)"'
+                       replace='href="\1html"'
+                       byline="true">
+            <fileset dir="${htmldoc.dir}"
+                     includes="**/*.html"/>
+        </replaceregexp>
+        <replaceregexp match='href="(.*)README.html"'
+                       replace='href="\1index.html"'
+                       byline="true">
+            <fileset dir="${htmldoc.dir}"
+                     includes="**/*.html"/>
+        </replaceregexp>
+
+    </target>
+
+    <target name="generate.htmldoc.single">
+    <!-- helper task for a single markdown file conversion -->
+
+        <property name="htmldoc.singlefile" value="README.md"/>
+        <dirname property="htmldoc.currentdir" file="${htmldoc.singlefile}"/>
+        <property name="htmldoc.css"
+                  relative="true"
+                  location="${doc.dir}/style.css"
+                  basedir="${htmldoc.currentdir}"/>
+        <propertyregex property="htmldoc.genname"
+                       regexp="\.(md|markdown)$"
+                       replace=".html"
+                       input="${htmldoc.singlefile}"/>
+            <echo message="${htmldoc.genname}"/>
+        <exec executable="pandoc"
+              failifexecutionfails="false">
+            <arg value="--standalone"/>
+            <arg value="--include-in-header=fragments/html/htmldoc-headend.html"/>
+            <arg value="--include-before-body=fragments/html/htmldoc-start.html"/>
+            <arg value="--include-before-body=fragments/html/htmldoc-menu.html"/>
+            <arg value="--include-after-body=fragments/html/htmldoc-menu.html"/>
+            <arg value="--include-after-body=fragments/html/htmldoc-end.html"/>
+            <arg value="--css=${htmldoc.css}"/>
+            <arg value="--title-prefix=Svetovid-lib"/>
+            <arg value="-o"/>
+            <arg value="${htmldoc.genname}"/>
+            <arg value="${htmldoc.singlefile}"/>
+        </exec>
+
+    </target>
+
+    <target name="pack.jar" depends="build"
+            description="Packs the binaries in a jar and place it in ${dist.dir}">
+
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/svetovid-lib.jar"
+             includes="**"
+             manifest="${bin.dir}/META-INF/MANIFEST.MF">
+            <fileset dir="${bin.dir}"
+                     excludes="org/svetovid/demo/"/>
+        </jar>
+
+    </target>
+
+
+    <target name="pack.doc" depends="generate.apidoc, generate.htmldoc"
+            description="Pack the documentation in a zip file and place it in ${dist.dir}">
+
+        <mkdir dir="${dist.dir}"/>
+        <zip destfile="${dist.dir}/svetovid-lib-docs.zip">
+            <zipfileset dir="${doc.dir}"
+                        prefix="docs"/>
+        </zip>
+
+    </target>
+
+    <target name="pack.install" depends="pack.jar"
+            description="Pack the binaries along with installers and place it in ${dist.dir}">
+
+        <zip destfile="${dist.dir}/svetovid-lib-install.zip">
+          <fileset file="${dist.dir}/svetovid-lib.jar"/>
+          <fileset dir="${installer.dir}"/>
+          <zipfileset dir="${doc.dir}" prefix="docs"/>
+        </zip>
+
+    </target>
+
+    <target name="pack" depends="pack.jar, pack.doc, pack.install"
+            description="Pack the biraries and documentation into ${dist.dir}">
+
+    </target>
+
+
+    <target name="fix.src" depends=""
+            description="Fix line and file endings in all source files">
+
+        <fixcrlf srcdir="${src.dir}"
+                 encoding="utf-8"
+                 eol="lf"
+                 includes="**/*"
+                 tab="remove"
+                 tablength="4"
+                 eof="remove"
+                 fixlast="true"/>
+
+    </target>
+
+    <target name="fix.res" depends=""
+            description="Fix line and file endings in all resource sources">
+
+        <fixcrlf srcdir="${ressrc.dir}"
+                 encoding="utf-8"
+                 eol="lf"
+                 includes="**/*"
+                 tab="remove"
+                 tablength="4"
+                 eof="remove"
+                 fixlast="true"/>
+
+    </target>
+
+
+    <target name="clean" depends=""
+            description="Clean all build products">
+
+        <delete dir="${bin.dir}"/>
+        <delete dir="${apidoc.dir}"/>
+        <delete dir="${htmldoc.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${tmp.dir}"/>
+
+    </target>
+
+
+<!--
+    Check whether required dependancies are installed
+-->
+
+
+    <target name="test.ant-contrib.installed" depends=""
+            description="Checks whether Ant-Contrib is installed">
+
+        <available resource="net/sf/antcontrib/antlib.xml"
+                   property="ant-contrib.installed"/>
+        <fail unless="ant-contrib.installed"
+              message="Ant-Contrib is not installed"/>
+        <taskdef resource="net/sf/antcontrib/antlib.xml"/>
+
+    </target>
+
+    <target name="test.pandoc.installed" depends=""
+            description="Checks whether Pandoc is installed">
+
+        <exec executable="pandoc"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="pandoc.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="pandoc.installed"
+              message="Pandoc is not installed"/>
+
+    </target>
+
+    <target name="test.inkscape.installed" depends=""
+            description="Checks whether Inkscape is installed">
+
+        <exec executable="inkscape"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="inkscape.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="inkscape.installed"
+              message="Inkscape is not installed"/>
+
+    </target>
+
+    <target name="test.git.installed" depends=""
+            description="Checks whether Git is installed">
+
+        <exec executable="git"
+              failonerror="false"
+              failifexecutionfails="false"
+              resultproperty="git.installed">
+            <arg value="--version"/>
+        </exec>
+        <fail unless="git.installed"
+              message="Git is not installed"/>
+
+    </target>
+
+
+<!--
+    Version tasks based on ideas by Jesper Öqvist http://llbit.se/?p=1876
+
+    Use with caution as 'assume-unchanged' interferes with 'git checkout' !!!
+-->
+
+    <!-- Location of the file holding the version information -->
+    <property name="version.file" value="${res.dir}/version.properties"/>
+
+
+    <!-- This target is only run if the 'version' property is undefined -->
+    <target name="update-version-string" unless="version"
+            description="Get a new version string using git describe if possible">
+
+        <!-- Try to acquire a version using 'git describe' -->
+        <echo message="Updating version string..."/>
+        <exec executable="git"
+              outputproperty="version"
+              failifexecutionfails="false">
+            <arg value="describe"/>
+        </exec>
+        <antcall target="-store-version-string"/>
+
+        <!-- Ensure version is defined even if git was not available -->
+        <property file="${version.file}"/>
+
+    </target>
+
+
+    <target name="-store-version-string" if="version">
+    <!-- Store the new version string in the correct property file -->
+
+        <echo message="version=${version}"/>
+        <propertyfile file="${version.file}">
+            <entry key="version"
+                   value="${version}"/>
+        </propertyfile>
+        <exec executable="git"
+              failifexecutionfails="false">
+            <arg value="update-index"/>
+            <arg value="--assume-unchanged"/>
+            <arg value="${version.file}"/>
+        </exec>
+
+    </target>
+
+</project>

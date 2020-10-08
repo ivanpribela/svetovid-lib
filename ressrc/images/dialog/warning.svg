@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     width='48px' height='48px' viewBox='-23 -23 48 48' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
+
+  <defs>
+
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='1'/>
+      <feOffset       result='offset' dx='1' dy='1'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
+    </filter>
+
+    <symbol id='bg-triangle' overflow='visible'>
+      <path d='M 0 0
+        m                                    0.00 -20.00
+        c   11.00   0.00    20.00  17.00    20.00  28.00
+        c    0.00  11.00    -9.00  12.00   -20.00  12.00
+        c  -11.00   0.00   -20.00  -1.00   -20.00 -12.00
+        c    0.00 -11.00     9.00 -28.00    20.00 -28.00
+        z'/>
+    </symbol>
+
+    <symbol id='line' overflow='visible'>
+      <path d='M 0 0
+        m                                   -1.00 -10.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          14.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                         -14.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z'/>
+    </symbol>
+
+    <symbol id='dot' overflow='visible'>
+      <path d='M 0 0
+        m                                   -1.00  -4.00
+        h                                    2.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                           2.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -2.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                          -2.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z'/>
+    </symbol>
+
+  </defs>
+
+  <use id='background'      fill='#F37715' stroke='#D55F26' stroke-width='2' xlink:href='#bg-triangle' x='0' y= '0' filter='url(#shadow)'/>
+  <use id='foreground-line' fill='#FFFFFF' stroke='#D55F26' stroke-width='2' xlink:href='#line'        x='0' y='-6' />
+  <use id='foreground-dot'  fill='#FFFFFF' stroke='#D55F26' stroke-width='2' xlink:href='#dot'         x='0' y='12' />
+
+</svg>

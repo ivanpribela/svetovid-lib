@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     width='48px' height='48px' viewBox='-23 -23 48 48' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
+
+  <defs>
+
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='1'/>
+      <feOffset       result='offset' dx='1' dy='1'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
+    </filter>
+
+    <symbol id='bg-rect' overflow='visible'>
+      <path d='M 0 0
+        m                                  -17.00 -20.00
+        h                                   34.00
+        c    1.65   0.00     3.00   1.35     3.00   3.00
+        v                                          34.00
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                  -34.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                         -34.00
+        c    0.00  -1.65     1.35  -3.00     3.00  -3.00
+        z'/>
+    </symbol>
+
+    <symbol id='magnifier' overflow='visible'>
+      <path d='M 0 0
+        m                                    0.00 -18.00
+        c    6.63   0.00    12.00   5.37    12.00  12.00
+        c    0.00   5.04    -3.00   9.33    -7.50  11.13
+        v                                          10.37
+        c    0.00   1.65    -1.35   3.00    -3.00   3.00
+        h                                   -3.00
+        c   -1.65   0.00    -3.00  -1.35    -3.00  -3.00
+        v                                         -10.37
+        c   -4.50  -1.80    -7.50  -6.09    -7.50 -11.13
+        c    0.00  -6.63     5.37 -12.00    12.00 -12.00
+        z
+        m                                    0.00   6.00
+        a    6.00   6.00    0 0 0            0.00  12.00
+        a    6.00   6.00    0 0 0            0.00 -12.00
+        z'/>
+    </symbol>
+
+  </defs>
+
+  <use id='background' fill='#FFD300' stroke='#E9AA1A' stroke-width='2' xlink:href='#bg-rect'   x='0' y='0' filter='url(#shadow)'/>
+  <use id='foreground' fill='#FFFFFF' stroke='#E9AA1A' stroke-width='2' xlink:href='#magnifier' x='0' y='0' transform='rotate(-45)'/>
+
+</svg>

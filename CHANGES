@@ -1,0 +1,154 @@
+Changes from 0.4.1 to 0.5
+=========================
+
+Changes:
+--------
+
+* Added installer and uninstaller scripts
+
+* Revamped icons for dialogs.
+
+* Updated weather demos.
+
+
+
+Changes from 0.4 to 0.4.1
+=========================
+
+Changes:
+--------
+
+* SvetovidReader and SvetovidWriter can now be used in try-with-resources
+
+* IO library, added readLine() method to StandardSvetovidReader
+  that prompts some text and returns a default value on empty string
+
+* IO library, when searching for files to open, they are first searched
+  relative to the calling class, and only if not found relative to the
+  working direcctory
+
+* IO library, Option readFromNewLine is now setup according to the environment
+  variable 'svetovid.readFromNewLine'
+
+
+
+Changes from 0.3 to 0.4
+=======================
+
+Changes:
+--------
+
+* Replaced icons for dialogs with new custom created ones.
+
+Fixed bugs:
+-----------
+
+* Unexpected headless exceptions when running in headless environments.
+
+
+
+Changes from 0.2 to 0.3
+=======================
+
+Changes that could break compatibility:
+---------------------------------------
+
+* Significant changes to IO library, both interfaces and implementations.
+
+New features:
+-------------
+
+* IO library, added printf() method similar to standard Java
+  PrintStream.printf() method.
+
+* IO library, support for reading and writting JSON.
+
+* IO library, Added methods to check whether readers and writers can be
+  successfully created.
+
+* IO library, spawn new processes and comunicate with them using IO library
+  readers and writers.
+
+* Version class for parsing of version strings and vesion comparison.
+
+* Currently running operating system discovery.
+
+* Discovery of Java installations currently present on the operating system.
+
+* The library is now an OSGi bundle.
+
+Other changes:
+--------------
+
+* Internationalized exceptions and messages across the whole library.
+
+* IO library, exception throwing is now optional and configurable via
+  the throwingExceptions property on readers and writers.
+
+* IO library, customized null string rendering.
+
+* IO library, reimplemented various parts to be more efficient.
+
+* IO library, auto flush is now deafult setting for standard writers.
+
+* Main class now prints out the currently installed version and checks for any
+  newer versions.
+
+* Added demos for JSON reading.
+
+* Added more demos for IO library.
+
+Fixed bugs:
+-----------
+
+* IO library, various bug fixes.
+
+
+
+Changes from 0.1 to 0.2
+=======================
+
+Changes that could break compatibility:
+---------------------------------------
+
+* Renamed all writeXxx() methods to printXxx() to be interchangable with
+  standard Java IO library.
+
+Other changes:
+--------------
+
+* The library is now Java 1.7 compliant.
+
+* All files now use UTF-8 encoding.
+
+* Added HTML documentation
+
+
+
+Changes from 0.0 to 0.1
+=======================
+
+New features:
+-------------
+
+* Library for simplifying textual input and output.
+
+* Support for time measurement.
+
+* Support for running any method or class, even without main() a method.
+
+* Shorthand access to IO library from default package.
+
+* Dialogs library for display of multilingual dialogs.
+
+* Demos for IO library, stopwatch and start.
+
+Other changes:
+--------------
+
+* Added documentation for the libraries.
+
+Fixed bugs:
+-----------
+
+* Null reference problem in IO library.

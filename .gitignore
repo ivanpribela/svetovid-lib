@@ -1,1 +1,23 @@
+
+# Compiled binaries
 /bin
+*.class
+
+# Generated documentation
+/gendoc
+
+# Packed distributables
+/dist
+*.jar
+*.zip
+*.tar.gz
+*.tgz
+
+# Backups & temporary
+*~
+*.bak
+*.tmp
+/.tmp
+
+# Windows specific
+Thumbs.db

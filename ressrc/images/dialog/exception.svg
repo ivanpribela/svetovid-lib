@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xml:space='preserve'
+     xmlns:xlink='http://www.w3.org/1999/xlink'
+     width='48px' height='48px' viewBox='-23 -23 48 48' preserveAspectRatio='xMidYMid'
+     stroke-linejoin='round' stroke-linecap='round'
+     id='icon'>
+
+  <defs>
+
+    <filter id='shadow' color-interpolation-filters='sRGB'>
+      <feFlood        result='black' flood-color='hsl(0, 0%, 0%)' flood-opacity='0.5'/>
+      <feComposite    result='cut-out' in='black' in2='SourceGraphic' operator='in'/>
+      <feGaussianBlur result='blur' in='cut-out' stdDeviation='1'/>
+      <feOffset       result='offset' dx='1' dy='1'/>
+      <feComposite    result='final' in='SourceGraphic' in2='offset' operator='over'/>
+    </filter>
+
+  </defs>
+
+  <circle id='background'         fill='#3D3D3D' stroke='#000000' stroke-width='2' cx='0' cy= '0' r='20' filter='url(#shadow)'/>
+  <circle id='foreground-minutes' fill='#3D3D3D' stroke='#000000' stroke-width='2' cx='8' cy='-8' r= '6'/>
+  <path   id='foreground-fuse'    fill='none'    stroke='#C2C2C2' stroke-width='2' d='M 8 -8 c 8 -8 12 8 0 16'/>
+<!--  <circle id='foreground-fire'    fill='#F37715' stroke='#9C0C31' stroke-width='2' cx='8' cy='8' r='2.5'/> -->
+
+</svg>
