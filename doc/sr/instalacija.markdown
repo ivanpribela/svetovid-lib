@@ -1,14 +1,39 @@
 # Instalacija Svetovid-lib biblioteke
 
 
-## Konfigurisanje
-
 Budući da biblioteka nije deo standardne Java Virtualne Mašine,
-neophodno je nekako uputiti kompajler da je koristi. Dalje je navedeno
-nekoliko načina da se biblioteka koristi direktno sa kompajlerom, kao
-i dodatne napomene za neke editore, a na kraju je naveden i
-jednostavan način za testiranje da li je biblioteka adekvatno
-instalirana.
+neophodno je nekako uputiti kompajler da je koristi. Ovo se može
+uraditi na više načina. Ako već znate kako da dodajete bilbioteke
+možete to iskoristiti i ovde.
+
+Ovde će biti dato nekoliko najverovatnijih scenarija koje korisnici
+imaju, pa na osnovu toga treba da odaberu šta će raditi.
+
+- [Instalacija na sistemskom nivou, vezivanje direktno za JDK.](#instalacija-na-nivou-sistema)
+  - Preporučuje se korisnicima koji su administratori (glavni
+  korisnici) svojih mašina i koristiće Svetovid-lib u programima na
+  razne načine na računaru.
+  - Ovo omogućava korišćenje iz komandne
+  linije, kao i bilo kakvog editora koji direktno poziva Java
+  kompajler (kao što su Geany, Gedit, Kate, Emacs, Vim, ...)
+  - Na kraju dokumenta je naveden i jednostavan način za testiranje da
+    li je biblioteka adekvatno instalirana.
+
+
+- [Dodavanje biblioteke u pojedinačne pozive kompajliranja i pokretanja](#direktno-dodavanje-biblioteke-u-pojedinačnim-pozivima)
+  - Preporučuje se za korisnike koji iz bilo kog razloga ne mogu ili
+  ne žele da dodaju biblioteku na ceo sistem
+  - Dato je nekoliko načina da se ovo postigne, uključujući
+  rad iz komandne linije, kao i pristup za editor Geany
+
+- [Dodavanje biblioteke u Eclipse ili neko drugo razvojno okruženje](#dodavanje-u-razvojna-okruženja)
+  - Eclipse (ali i mnogi drugi) ignorišu neka od sistemskih podešavanja
+  - Tipično je neophodno da se u svaki projekat doda biblioteka,
+  nezavisno od toga da li je dodata na sistemskom nivou
+
+
+
+## Instalacija na nivou sistema
 
 ### Korišćenje skriptova za instalaciju
 
@@ -26,18 +51,83 @@ korišćenju projekata za pisanje programa često ne koriste sistemska
 podešavanja već su neophodna ručna doterivanja. Za to preporučujemo da
 pogledate sekcije niže.
 
+### Dodavanje u `CLASSPATH`
+
+Java koristi sistemsku promenljivu `CLASSPATH` da nalazi sve
+biblioteke.  Ona se može promeniti za trenutnog korisnika, ili za sve
+korisnike. Ukoliko se u ovaj spisak doda putanja do "jar" fajla, tada
+će svi pozivi i za kompajliranje i za pokretanje Java programa
+koristiti ovu biblioteku kad je potrebno. U suštini je ekvivaletno sa
+niže pomenutim metodom koji koristi `-cp` parametar, odnosno efekat je
+kao da se uvek navodi i ova biblioteka.
+
+Ova opcija je jako dobra jer nije neophodno pojedinačno nameštanje
+različitih editora da koriste biblioteku.
+
+U okviru zipa koji se može skinuti sa sajta su stavljeni skriptovi
+za upravo ovakvu instalaciju, pa se preporučuje njihova upotreba.
+
+Naravno, napredni korisnici možda žele da još prilagode kako se
+skriptovi ponašanju.
+
+Ako ne možete ili ne želite da koristite skriptove, preporučujemo
+traženje adekvatnih uputstava za korisnikov operativni sistem za
+detalje kako se biblioteke dodaju u `CLASSPATH` i primeniti to na
+konkretan slučaj ove biblioteke.
+
+Takođe, u slučaju ručnog dodavanja preporučujemo da se biblioteka drži
+na nekom stalnom i logičnom mestu, na primer direktno u korenu
+korisničkog foldera, ili u nekom podfolderu tipa `lib`.
+
+
+### Testiranje instalacije
+
+Za jednostavno testiranje da li je bibloteka ispravno instalirana i da
+li se ispravno vidi od strane java kompajlera, napravljen je glavni
+metod u klasi `Svetovid` koji ispisuje trenutnu instaliranu verziju.
+Najjednostavnije se može izvršiti sledećim pozivom:
+
+`java Svetovid`
+
+Ako je jar dodat negde gde ga JVM vidi, biće ispisana poruka o verziji
+Svetovid biblioteke, a ako nije ispisaće se greška da klasa nije
+nađena.
+
+Prilikom ispisa verzije biće urađena i provera da li postoji novija verzija
+biblioteke i ako ona postoji korisnik će o tome biti obavešten.
+
+Pokretanje `jar` fajla direktno iz nekog grafičkog okruženja (tipično
+dupli klik u nekom upravljaču fajlovima) će otvoriti mali dijalog sa
+ispisom verzije.
+
+
+## Direktno dodavanje biblioteke u pojedinačnim pozivima
 
 ### Eksplicitno navodjenje jar-a pri kompajliranju
 
 Najjednostavniji način da se omogući korišćenje biblioteke je staviti
 odgovarajući "jar" fajl u radni direktorijum i pri kompajliranju ga
-dodati u putanju klasa:
+dodati u putanju klasa.
 
-`javac -cp svetovid-lib.jar Program.java`
+Pod Linuxom i drugim srodnim sistemima se to radi na sledeći način:
+
+`javac -cp .:svetovid-lib.jar Program.java`
 
 Slično je potrebno navoditi jar i pri pokretanju programa:
 
-`java -cp svetovid-lib.jar Program`
+`java -cp .:svetovid-lib.jar Program`
+
+Bitno je koristiti i "." za trenutni direktorijum za mnoge slučajeve. Simbol ":"
+služi za razdvajanje delova putanje i može se koristi proizvoljan
+broj puta ako hoćemo da dodajemo još biblioteka iza.
+
+Ako se koristi Windows operativni sistem onda je jedina razlika
+da se koristi ";" umesto ":" kod razdvajanja delova putanje:
+
+`javac -cp .;svetovid-lib.jar Program.java`
+
+`java -cp .;svetovid-lib.jar Program`
+
 
 
 ### Otpakivanje u trenutni direktorijum
@@ -52,40 +142,22 @@ fajlovima koji nisu striktno deo trenutnog programa, ali je za neka
 brza isprobavanja funkcionalno rešenje.
 
 
-### Dodavanje u `CLASSPATH`
-
-Java koristi sistemsku promenljivu `CLASSPATH` da nalazi sve
-biblioteke.  Ona se može promeniti za trenutnog korisnika, ili za sve
-korisnike. Ukoliko se u ovaj spisak doda putanja do "jar" fajla, tada
-će svi pozivi i za kompajliranje i za pokretanje Java programa
-koristiti ovu biblioteku kad je potrebno. U suštini je ekvivaletno sa
-gore pomenutim metodom koji koristi `-cp` parametar, odnosno efekat je
-kao da se uvek navodi i ova biblioteka.
-
-Ova opcija je jako dobra jer nije neophodno pojedinačno nameštanje
-različitih editora da koriste biblioteku.
-
-U okviru zipa koji se može skinuti sa sajta su stavljeni skriptovi
-za upravo ovakvu instalaciju, pa se preporučuje njihova upotreba.
-
-Naravno, napradni korisnici možda žele da još prilagode kako se
-skriptovi ponašanju. Njima preporučujemo traženje adekvatnih uputstava
-za korisnikov operativni sistem za detalje kako se ovo može najbolje
-uraditi.
-
-Takođe u tom slučaju preporučujemo da se biblioteka drži na nekom
-stalnom i logičnom mestu, na primer direktno u korenu korisničkog
-foldera, ili u nekom podfolderu tipa `lib`.
-
-
 ### Podešavanje editora *Geany*
 
 Editor Geany ima podršku za kompajliranje Java fajlova koja je aktivna
 čim se otvori neki fajl sa `.java` ekstenzijom. Podrazumevano se
-koristi već instalirana Java, tj alati `java` i `javac`. Ukoliko u
-njima već nekako nije podešeno da se koristi biblioteka (npr preko
-`CLASSPATH`), moguće je modifikovati pozive da koriste `-cp` parametar
-kao što je već ranije opisano.
+koristi već instalirana Java, tj alati `java` i `javac`.
+
+*Preporučujemo da se biblioteka instalira na sistemskom nivou ako
+je moguće, i tada nije potrebno menjati ništa od opcija izlistanih niže.*
+
+Ukoliko u njima već nekako nije podešeno da se koristi biblioteka (npr
+preko `CLASSPATH`), moguće je modifikovati pozive da koriste `-cp`
+parametar (što je već opisano par sekcija iznad).
+
+Promene se mogu uraditi na nekoliko načina.
+
+#### Direktno menjanje konfiguracionih fajlova
 
 Za promene kako se radi sa Java fajlovima potrebno je otvoriti odgovarajući
 konfiguracioni fajl:
@@ -112,6 +184,30 @@ compiler=javac -cp .;%HOMEPATH%/svetovid-lib.jar "%f"
 run_cmd=java -cp .;%HOMEPATH%/svetovid-lib.jar "%e"
 ```
 
+#### Promene kroz vizuelne dijaloge
+
+Ako je trenutno otvoren Java fajl, onda se podešavanja za
+kompajliranje i pokretanje mogu otvoriti preko `Build->Set Build
+Commands`. Dijalog se menja u zavisnosti od toga sa kakvim sadržajem
+se radi. Nije bitno kakav Java fajl je otvoren, bitno je da bude bilo
+šta sa odgovarajućom ekstenzijom. Alternativno se može promeniti
+kako Geany tretira trenutni fajl preko `Document` menija.
+
+Jednom kad je otvoren dijalog sa odgovarajućim opcijama, potrebno je
+da se i `javac` i `java` preprave slično kao što je izlistano iznad
+dodavanjem opcije `-cp` do odgovarajuće putanje biblioteke.
+
+
+## Dodavanje u razvojna okruženja
+
+Razvojna okruženja često ignorišu neka od sistemskih podešavanja,
+uglavnom sa ciljem da daju konzistentnije ponašanje projekata. To
+uglavnom znači da iako ste možda namestili biblioteku na nivou
+sistema, da se ona ne vidi u projektu u okruženju.
+
+Niže su data objašnjenja za nameštanje okruženja *Eclipse*, ali slično
+se nameštaju i mnoga druga, za šta preporučujemo konsultovanje
+odgovarajuće dokumentacije za dodavanje biblioteka u projekta.
 
 ### Dodavanje u *Eclipse* razvojno okruženje
 
@@ -147,89 +243,7 @@ sa spiska, a nakon toga ga ponovo dodati sa "search" koristeći
 prethodno zapamćenu lokaciju. Ovo bi trebalo da sigurno osveži sve
 bibilotetke vezane za konkretni JRE.
 
-## Testiranje instalacije
-
-Za jednostavno testiranje da li je bibloteka ispravno instalirana i da
-li se ispravno vidi od strane java kompajlera, napravljen je glavni
-metod u klasi `Svetovid` koji ispisuje trenutnu instaliranu verziju.
-Najjednostavnije se može izvršiti sledećim pozivom:
-
-`java Svetovid`
-
-Ako je jar dodat negde gde ga JVM vidi, biće ispisana poruka o verziji
-Svetovid biblioteke, a ako nije ispisaće se greška da klasa nije
-nađena.
-
-Prilikom ispisa verzije biće urađena i provera da li postoji novija verzija
-biblioteke i ako ona postoji korisnik će o tome biti obavešten.
-
-Pokretanje `jar` fajla direktno iz nekog grafičkog okruženja (tipično
-dupli klik u nekom upravljaču fajlovima) će otvoriti mali dijalog sa
-ispisom verzije.
 
 ## Stara uputstva
 
-### Dodavanje na sistemskom nivou u JVM (do verzije 8)
-
-*Ova mogućnost je dostupna samo na verzijama Jave do i
-uključujući 8. Na kasnijima je izbačen ovaj folder za biblioteke iz
-standarda.*
-
-No verovatno najbolje rešenje je dodavanjem u spisak biblioteka Java
-Virtuelne Mašine, pošto će onda biblioteka biti upotrebljiva u svim
-direktorijumima bez dodatnih izmena ili posebnih poziva pri
-kompajliranju. Potrebno je samo dodati “svetovid-lib.jar” u `lib/ext`
-deljeni direktorijum Java Radnih Okruženja. Ove izmene naravno
-zahtevaju da imamo administrativni pristup na konkretnom računaru.
-
-Na Windows operativnom sistemu je to sledeći direktorijum:
- `%SystemRoot%\Sun\Java\lib\ext`
-
-dok je na Linux operativnim sistemima to
-  `/usr/java/packages/lib/ext`
-
-[Više detalja o ext direktorijumu](http://docs.oracle.com/javase/tutorial/ext/basics/install.html)
-
-**Napomena:** Ako je biblioteka instalirana na sistemskom nivou, ta
-verzija će biti učitana i koristiće se uvek. Ako se pokušaju korisiti
-drugi metodi kao što je navođenje jar-a pri kompajliranju i
-otpakivanje u trenutni direktorijum oni će biti ignorisani.
-
-### Dodavanje u editor *DrJava*
-
-*Ovaj editor ne radi ispravno ukoliko nema kompajler za Javu verzije 8
-ili ranije, pa više nije među preporučenim izborima.*
-
-Da bi se u editoru DrJava omogućilo kompajliranje i pokretanje
-programa iz panela Interactions, neophodno je nekako obavestiti
-editor o postojanju ove dodatne biblioteke.
-
-Najjednostavnija varijanta je nabavljanje verzije editora u kojoj
-je već intergrisana biblioteka "svetovid-lib". Na [sajtu biblioteke](http://svetovid.org/lib/)
-se mogu naći ovako pripremljeni jar fajlovi sa najnovijom stabilnom
-verzijom biblioteke.
-
-Naravno moguće je koristiti i neizmenjeni editor. Tada je potrebno
-eksplicitno dodati `svetovid-lib.jar` u `Classpath` editora, ili
-otpakovati jar u trenutni direktorijum kao što je gore navedeno.
-
-U okviru editora se ovo postiže na sledeći način:
-
- - Edit->Preferences->ResourceLocations->Extra Classpath->Add
-
-Alternativno se radi istog efekta u fajl `.drjava` u korisničkom
-direktorijumu može dodati polje
-
- ```
- extra.classpath=putanja/svetovid-lib.jar
- ```
-
-Jednom kad se ovo postavi u editoru, podešavanja će važiti za sve
-programe koji se pokreću u njemu. Ovo je vrlo pogodno rešenje pošto ne
-zahteva administrativne privilegije, jer jar fajl može biti bilo gde
-na sistemu.
-
-Ako se koriti metod za dodavanje na sistemskom nivou, programi koji
-koriste Svetovid-lib će se kompajlirati uspešno u editoru, ali panel
-Interactions će prijavljivati grešku, pošto DrJava, nažalost, ne uzima u
-obzir deljeni ext direktorijum pri pokretanju.
+[Uputstva koja se ne mogu primeniti na najnovije instalacije](instalacija-staro.markdown)
