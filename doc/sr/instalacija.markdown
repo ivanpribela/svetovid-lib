@@ -49,17 +49,17 @@ preporučujemo proveru kako se odgovarajuća podešavanja vrše tamo.
 
 ### Korišćenje skriptova za instalaciju
 
-U okviru arhive na sajtu bi trebalo da se nalazi `jar` fajl koji je
-sama biblioteka, kao i skriptovi koji služe za instaliranje na nekim
-operativnim sistemima. Oni će instalirati biblioteku tako da se može
-koristiti bilo gde na sistemu, i trebalo bi da samo radi u većini
+Na sajtu se može naći arhiva u kojoj se nalaze skriptovi koji služe za
+instaliranje na nekim operativnim sistemima zajedno sa samom
+bibliotekom u `jar` fajlu. Oni će instalirati biblioteku tako da se
+može koristiti bilo gde na sistemu, i trebalo bi da samo radi u većini
 alata koji služe za pisanje Java programa.
 
 U opštem slučaju, ovi skriptovi se mogu pokrenuti iz komandne linije
 uz administratorska prava, a moguće je da će raditi i ako se duplo
 klikne na njih. Preporučujemo korisnicima da potraže uputstva kako se
 najbolje pokreću skriptovi pod njihovim konkretnim operativnim
-sistemom.
+sistemom ako uputstva niže nisu dovoljna.
 
 Pod Linux sistemima, to će obično značiti da se otvori konzola u
 folderu gde je raspakovan zip (iz upravljača fajlovima ako postoji
