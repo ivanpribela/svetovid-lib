@@ -8,7 +8,7 @@ the installation was successful.
 
 ### Install scripts
 
-The library arhive should come with scripts for the installations.
+The library archive should come with scripts for the installations.
 They are also available in the source tree on github. These should
 enable the library system-wide, using the `CLASSPATH` method described
 below.
